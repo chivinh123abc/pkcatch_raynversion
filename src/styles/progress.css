@@ -1,0 +1,82 @@
+/* R01: live shell geometry and React adapters for the Progress screen. */
+html { overflow-y:scroll; scrollbar-gutter:stable; scrollbar-width:auto!important; }
+html::-webkit-scrollbar { display:block!important; width:10px!important; }
+html::-webkit-scrollbar-track { background:#10131f; }
+html::-webkit-scrollbar-thumb { border-radius:8px; background:#333a52; }
+.game-shell > main { min-width:0; }
+.game-shell .adventure-view { grid-template-columns:minmax(0,1fr) 320px; }
+.game-shell > main > aside.game-sidebar { position:sticky; top:60px; width:264px; height:calc(100dvh - 60px); max-height:calc(100dvh - 60px); margin:-12px 0 0 -16px; padding:12px; transform:none; gap:12px; background:linear-gradient(180deg,#1c2030,#10131f); border-right:2px solid #333a52; }
+.game-shell .battle-timeline { height:28px; min-height:28px; padding:0 12px; }
+.game-shell .battle-news { margin-top:4px; }
+.game-shell .progress-page { min-width:0; color:var(--text); font:400 20px/1.2 var(--font); }
+.game-shell .progress-page h2,.game-shell .progress-page h3 { font-family:var(--font-title); }
+.game-shell .progress-page .map-region { overflow:hidden; }
+.game-shell .progress-page .map-head { height:52px; min-height:52px; }
+.game-shell .progress-page .map-head h2 { margin:0; font:700 28px/1 var(--font-title); }
+.game-shell .progress-page .map-head > img { width:28px; height:28px; object-fit:contain; image-rendering:pixelated; }
+.game-shell .progress-page .map-sum { display:flex; align-items:center; gap:4px; margin-left:auto; font-size:16px; }
+.game-shell .progress-page .pg-cols { grid-template-columns:minmax(280px,400px) minmax(0,1fr); align-items:start; }
+.game-shell .progress-page .pg-regions { max-width:100%; height:90px; overflow-x:auto; }
+.game-shell .progress-page .rg { text-align:left; }
+.game-shell .progress-page .rg-badges { display:flex; gap:2px; }
+.game-shell .progress-page .rg-badges img { width:16px; height:16px; object-fit:contain; image-rendering:pixelated; }
+.game-shell .progress-page .rg-badges img.off { filter:brightness(0); opacity:.45; }
+.game-shell .progress-page .rg-caught > img { width:14px; height:14px; object-fit:contain; }
+.game-shell .progress-page .mp-list { min-width:0; }
+.game-shell .progress-page .mp-row { width:100%; min-width:0; cursor:pointer; font:inherit; text-align:left; }
+.game-shell .progress-page .mp-row .t { min-width:0; }
+.game-shell .progress-page .mp-row .t b { display:block; overflow:hidden; text-overflow:ellipsis; }
+.game-shell .progress-page .mp-row .t small { display:block; }
+.game-shell .progress-page .ch-av { position:relative; display:block; width:40px; height:40px; }
+.game-shell .progress-page .progress-leader-thumb { display:block; width:36px; height:40px; object-fit:contain; image-rendering:pixelated; }
+.game-shell .progress-page .ch-av.sil .progress-leader-thumb,.game-shell .progress-page .faces.sil img { filter:brightness(0); }
+.game-shell .progress-page .progress-chapter-badge { position:absolute; bottom:-3px; right:-3px; width:16px; height:16px; object-fit:contain; image-rendering:pixelated; }
+.game-shell .progress-page .progress-completed { color:#4cc96a; padding:0 8px; }
+.game-shell .progress-page .pg-info { min-width:0; }
+.game-shell .progress-page .pg-info > h4 { margin:0 0 8px; color:var(--muted); text-transform:uppercase; font:700 16px/18px var(--font); }
+.game-shell .progress-page .mp-hero { height:200px; background-position:center; background-size:cover; }
+.game-shell .progress-page .mp-hero .faces img { max-height:180px; width:auto; image-rendering:pixelated; }
+.game-shell .progress-page .progress-detail-badge { width:48px; height:48px; object-fit:contain; image-rendering:pixelated; }
+.game-shell .progress-page .mp-in .ttl h3 { margin:0; }
+.game-shell .progress-page .mp-chips .ty { color:#141826; }
+.game-shell .progress-page .mp-items .mp-it { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; }
+.game-shell .progress-page .mp-items .mp-it img { width:28px; height:28px; object-fit:contain; image-rendering:pixelated; }
+.game-shell .progress-page .mp-pk h5 { display:flex; align-items:center; gap:8px; }
+.game-shell .progress-page .progress-species-grid { display:flex; flex-wrap:wrap; gap:6px; }
+.game-shell .progress-page .progress-species { position:relative; display:flex; align-items:center; justify-content:center; width:50px; height:50px; overflow:hidden; border:1px solid #333a52; border-radius:10px; background:var(--mon-frame),#171d2e; cursor:pointer; }
+.game-shell .progress-page .progress-species.caught { border-color:#4cc96a80; background-color:#20332b; }
+.game-shell .progress-page .progress-species:hover { border-color:#a3b1d5; }
+.game-shell .progress-page .progress-species .replica-sprite { max-width:48px; max-height:48px; }
+.game-shell .progress-page .progress-owned { position:absolute; top:2px; right:2px; width:12px; height:12px; }
+.game-shell .progress-page .zone-cond { display:flex; align-items:center; gap:8px; margin:16px 0 8px; padding-top:12px; border-top:2px solid var(--line); text-transform:uppercase; color:var(--muted); font-weight:700; font-size:16px; }
+.game-shell .progress-page .zone-cond.now { color:var(--text); }
+.game-shell .progress-page .zone-cond-now { margin-left:auto; padding:2px 8px; border-radius:99px; background:#ffcb05; color:#1b1b22; font-size:14px; }
+.game-shell .progress-page .progress-lock-reason { padding:10px 12px; margin:12px 0; border:1px solid #b6a14b66; border-radius:8px; color:#ffe066; background:#ffcb050d; }
+.game-shell .progress-page .progress-actions { position:sticky; bottom:0; padding:12px 24px 16px; background:#1c2030f5; border-top:1px solid #333a52; }
+.game-shell .progress-page .progress-continue { position:relative; isolation:isolate; width:100%; min-height:44px; font:700 20px var(--font-title); text-transform:uppercase; }
+.game-shell .progress-page button:focus-visible { outline:2px solid #ffcb05; outline-offset:3px; }
+@media (min-width:801px) {
+  .game-shell .progress-page .pg-info { position:sticky; top:72px; }
+  .game-shell .progress-page .pg-info > .mp-det { height:max(300px,calc(100dvh - 290px)); min-height:0; flex:0 0 auto; overflow:hidden; }
+  .game-shell .progress-page .mp-hero { flex:none; }
+  .game-shell .progress-page .mp-in { min-height:0; overflow-y:auto; }
+  .game-shell .progress-page .pg-info .mp-in > .mp-pk { flex:0 0 auto; overflow:visible; }
+  .game-shell .progress-page .progress-actions { position:static; flex:none; }
+}
+@media (max-width:1100px) and (min-width:801px) {
+  .game-shell .adventure-view { grid-template-columns:minmax(0,1fr) 260px; }
+  .game-shell .progress-page .pg-cols { grid-template-columns:minmax(220px, .8fr) minmax(0,1fr); }
+  .game-shell .progress-page .mp-chips { flex-wrap:wrap; }
+}
+@media (max-width:800px) {
+  html { scrollbar-gutter:auto; scrollbar-width:none!important; }
+  html::-webkit-scrollbar { display:none!important; width:0!important; }
+  .game-shell .progress-page .map-head { padding:10px 12px; }
+  .game-shell .progress-page .map-body.pg-3 { padding:12px; gap:12px; }
+  .game-shell .progress-page .pg-cols { grid-template-columns:minmax(0,1fr); gap:20px; }
+  .game-shell .progress-page .mp-hero { height:170px; }
+  .game-shell .progress-page .mp-in { padding:12px; }
+  .game-shell .progress-page .mp-chips { flex-wrap:wrap; }
+  .game-shell .progress-page .progress-actions { bottom:80px; padding:12px; }
+  .game-shell.mobile-menu-open > main > .game-sidebar { margin:0; width:264px; height:auto; max-height:none; }
+}

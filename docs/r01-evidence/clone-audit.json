@@ -1,0 +1,726 @@
+{
+  "capturedAt": "2026-11-14T12:35:46.334Z",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "fixture": "one Charmander Lv.5, caught/seen #4; no buffs; battle paused; seeded only in an isolated browser",
+  "errors": [],
+  "sources": [
+    {
+      "file": "src/App.tsx",
+      "sha256": "27dd93d5b9ad4e55d6729e1c1220b8517f1053b40aa735e268a622012020022a"
+    },
+    {
+      "file": "src/main.tsx",
+      "sha256": "1aedcf9a893a1aa2accb7cc3d9beaa5963ddbcc4d87478f1efccd6422c9b6fc7"
+    },
+    {
+      "file": "src/components/AdventurePage.tsx",
+      "sha256": "ac1974d7aeab9e29c19a0c4bcc7cf9c04690fa60ad73766454a310544e3e639b"
+    },
+    {
+      "file": "src/styles/progress.css",
+      "sha256": "c6b190640e716e131c3234af099ac69c74cb9366773e7b399a00e500504f24cd"
+    },
+    {
+      "file": "src/styles/progress-reference.css",
+      "sha256": "7cd1e2de65def0a947f92c8ae6dd9147549847a120b0cecc86201e5f8b8ce9ef"
+    },
+    {
+      "file": "src/components/Arena.tsx",
+      "sha256": "cadfe2a095dc332c55921340aa445a9cfead6a74528fec7f8a730a259ddc0683"
+    },
+    {
+      "file": "src/components/TopBar.tsx",
+      "sha256": "6a0b7b815c4ebcb38eecb6674f69fc8dc0d924aa014cf0d315b0705fe3cb5a23"
+    },
+    {
+      "file": "src/components/LeftSidebar.tsx",
+      "sha256": "a26f07d1f6437fdd99aa930784c906b08366851c1683f84ac113bf1448a4181c"
+    },
+    {
+      "file": "src/components/CollectionPage.tsx",
+      "sha256": "a0f8894c2f171c8a03454a2c0cbc2730af3b71f5bfa2c2041822e97aa1e57157"
+    },
+    {
+      "file": "src/components/PokemonDetails.tsx",
+      "sha256": "67fd10d204587c4adb3e5c57c49a72f47336ed48d735e7aeb64393e9838cfd5e"
+    },
+    {
+      "file": "src/components/AdventureModal.tsx",
+      "sha256": "b9c3e334b685ee84e1bba3bc63b3e37e334d11432e82af66be37b3299a71a3d7"
+    },
+    {
+      "file": "src/store/useGameStore.ts",
+      "sha256": "3fd6d05146e344c3c385e116dde3a3aa57fc8daf933d3928e8e78a8df330ecde"
+    },
+    {
+      "file": "src/data/chaptersData.ts",
+      "sha256": "c6939e9f012167d148185ab88087ef51cb02ea7cc06553d2d5925bdf1b6912e9"
+    },
+    {
+      "file": "src/styles/replica-ui.css",
+      "sha256": "b9af3cc587fda0070a433d4cf614b7947c0f26de77e3b28fd8fb3c782789a1e8"
+    },
+    {
+      "file": "src/styles/reference-layout.css",
+      "sha256": "af09848c7c67cd18e575717f3cbd2f977138549b674adcfa70cbc629711b6ec0"
+    }
+  ],
+  "screens": {
+    "adventure": {
+      "text": "Audit#TEST\nPokédex 1 / 151\n0 ₽\n0\nSave\n⚙\nKanto · Chapter 1\nBoulder Badge\nStep 1 / 20 · 0 %\nLv. 14-20\nProgress\nTeam/PC\nPokédex\nActivities\n▸\nSocial\n▸\nShop\nAchievements\nRoute 1\n[\n]\n?\n?\n?\n?\n?\n1/20\n🌙\n19:35\n⛅\nClear skies\nLv.5\n+4 XP ×1.1\nLv.5\nLv.2\nA wild Rattata appeared!\nx1\nx2\nx3\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×0\n×0\n×0\n×0\nFound here\ni\nRoute 1\n0/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n55%\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%",
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1430,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        ".battle-stage": {
+          "x": 280,
+          "y": 108,
+          "width": 798,
+          "height": 448.875
+        },
+        ".battle-bottom": {
+          "x": 363,
+          "y": 496.875,
+          "width": 702,
+          "height": 47
+        },
+        ".battle-log": {
+          "x": 363,
+          "y": 496.875,
+          "width": 566,
+          "height": 47
+        },
+        ".replica-detail": null,
+        ".team-panel": null,
+        ".dex-hero": null,
+        ".progress-page": null,
+        ".progress-page .map-head": null,
+        ".pg-regions": null,
+        ".pg-cols": null,
+        ".pg-info": null,
+        ".mp-hero": null
+      }
+    },
+    "team": {
+      "text": "Audit#TEST\nPokédex 1 / 151\n0 ₽\n0\nSave\n⚙\nKanto · Chapter 1\nBoulder Badge\nStep 1 / 20 · 0 %\nLv. 14-20\nProgress\nTEAM/PC\nPokédex\nActivities\n▸\nSocial\n▸\nShop\nAchievements\nRoute 1\n[\n]\n?\n?\n?\n?\n?\n1/20\n🌙\n19:35\n⛅\nClear skies\nLv.5\n+4 XP ×1.1\nLv.5\nLv.2\nA wild Rattata appeared!\nx1\nx2\nx3\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×0\n×0\n×0\n×0\nFound here\ni\nRoute 1\n0/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n55%\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%\nTeam\n?\n1\nAverage level\n5\nFire\nCharmander\nLv. 5\n+\nEmpty slot\n+\nEmpty slot\n+\nEmpty slot\n+\nEmpty slot\n+\nEmpty slot\nTypes ▾\nNormal\nFire\nWater\nElectric\nGrass\nIce\nFighting\nPoison\nGround\nFlying\nPsychic\nBug\nRock\nGhost\nDragon\nSteel\nFairy\n✦ SHINIES\nCAN EVOLVE\nRecent\nPokédex No.\nName\nLevel\n↓\n\nYour PC is empty. New catches go here when your team is full.",
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1430,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        ".battle-stage": {
+          "x": 280,
+          "y": 108,
+          "width": 798,
+          "height": 448.875
+        },
+        ".battle-bottom": {
+          "x": 363,
+          "y": 496.875,
+          "width": 702,
+          "height": 47
+        },
+        ".battle-log": {
+          "x": 363,
+          "y": 496.875,
+          "width": 566,
+          "height": 47
+        },
+        ".replica-detail": null,
+        ".team-panel": {
+          "x": 280,
+          "y": 72,
+          "width": 1134,
+          "height": 306
+        },
+        ".dex-hero": null,
+        ".progress-page": null,
+        ".progress-page .map-head": null,
+        ".pg-regions": null,
+        ".pg-cols": null,
+        ".pg-info": null,
+        ".mp-hero": null
+      }
+    },
+    "pokedex": {
+      "text": "Audit#TEST\nPokédex 1 / 151\n0 ₽\n0\nSave\n⚙\nKanto · Chapter 1\nBoulder Badge\nStep 1 / 20 · 0 %\nLv. 14-20\nProgress\nTeam/PC\nPOKÉDEX\nActivities\n▸\nSocial\n▸\nShop\nAchievements\nRoute 1\n[\n]\n?\n?\n?\n?\n?\n1/20\n🌙\n19:35\n⛅\nClear skies\nLv.5\n+4 XP ×1.1\nLv.5\nLv.2\nA wild Rattata appeared!\nx1\nx2\nx3\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×0\n×0\n×0\n×0\nFound here\ni\nRoute 1\n0/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n55%\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%\nPokédex\n?\nSeen\n1\n✦ Shinies 0\nRegions complete 0/9\n1 %\n1 / 151\nKanto\n1 / 151\nJohto\nHoenn\nSinnoh\nUnova\nKalos\nAlola\nGalar\nPaldea\nLATEST CATCHES\nStatus ▾\nCaught\nSeen, not caught\nUnknown\nTypes ▾\nNormal\nFire\nWater\nElectric\nGrass\nIce\nFighting\nPoison\nGround\nFlying\nPsychic\nBug\nRock\nGhost\nDragon\nSteel\nFairy\nKanto\n✦ SHINIES\nKanto\n1 / 151\n▾\nNo. 001\n???\nNo. 002\n???\nNo. 003\n???\nNo. 004\nCharmander\nNo. 005\n???\nNo. 006\n???\nNo. 007\n???\nNo. 008\n???\nNo. 009\n???\nNo. 010\n???\nNo. 011\n???\nNo. 012\n???\nNo. 013\n???\nNo. 014\n???\nNo. 015\n???\nNo. 016\n???\nNo. 017\n???\nNo. 018\n???\nNo. 019\n???\nNo. 020\n???\nNo. 021\n???\nNo. 022\n???\nNo. 023\n???\nNo. 024\n???\nNo. 025\n???\nNo. 026\n???\nNo. 027\n???\nNo. 028\n???\nNo. 029\n???\nNo. 030\n???\nNo. 031\n???\nNo. 032\n???\nNo. 033\n???\nNo. 034\n???\nNo. 035\n???\nNo. 036\n???\nNo. 037\n???\nNo. 038\n???\nNo. 039\n???\nNo. 040\n???\nNo. 041\n???\nNo. 042\n???\nNo. 043\n???\nNo. 044\n???\nNo. 045\n???\nNo. 046\n???\nNo. 047\n???\nNo. 048\n???\nNo. 049\n???\nNo. 050\n???\nNo. 051\n???\nNo. 052\n???\nNo. 053\n???\nNo. 054\n???\nNo. 055\n???\nNo. 056\n???\nNo. 057\n???\nNo. 058\n???\nNo. 059\n???\nNo. 060\n???\nNo. 061\n???\nNo. 062\n???\nNo. 063\n???\nNo. 064\n???\nNo. 065\n???\nNo. 066\n???\nNo. 067\n???\nNo. 068\n???\nNo. 069\n???\nNo. 070\n???\nNo. 071\n???\nNo. 072\n???\nNo. 073\n???\nNo. 074\n???\nNo. 075\n???\nNo. 076\n???\nNo. 077\n???\nNo. 078\n???\nNo. 079\n???\nNo. 080\n???\nNo. 081\n???\nNo. 082\n???\nNo. 083\n???\nNo. 084\n???\nNo. 085\n???\nNo. 086\n???\nNo. 087\n???\nNo. 088\n???\nNo. 089\n???\nNo. 090\n???\nNo. 091\n???\nNo. 092\n???\nNo. 093\n???\nNo. 094\n???\nNo. 095\n???\nNo. 096\n???\nNo. 097\n???\nNo. 098\n???\nNo. 099\n???\nNo. 100\n???\nNo. 101\n???\nNo. 102\n???\nNo. 103\n???\nNo. 104\n???\nNo. 105\n???\nNo. 106\n???\nNo. 107\n???\nNo. 108\n???\nNo. 109\n???\nNo. 110\n???\nNo. 111\n???\nNo. 112\n???\nNo. 113\n???\nNo. 114\n???\nNo. 115\n???\nNo. 116\n???\nNo. 117\n???\nNo. 118\n???\nNo. 119\n???\nNo. 120\n???\nNo. 121\n???\nNo. 122\n???\nNo. 123\n???\nNo. 124\n???\nNo. 125\n???\nNo. 126\n???\nNo. 127\n???\nNo. 128\n???\nNo. 129\n???\nNo. 130\n???\nNo. 131\n???\nNo. 132\n???\nNo. 133\n???\nNo. 134\n???\nNo. 135\n???\nNo. 136\n???\nNo. 137\n???\nNo. 138\n???\nNo. 139\n???\nNo. 140\n???\nNo. 141\n???\nNo. 142\n???\nNo. 143\n???\nNo. 144\n???\nNo. 145\n???\nNo. 146\n???\nNo. 147\n???\nNo. 148\n???\nNo. 149\n???\nNo. 150\n???\nNo. 151\n???",
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1430,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        ".battle-stage": {
+          "x": 280,
+          "y": 108,
+          "width": 798,
+          "height": 448.875
+        },
+        ".battle-bottom": {
+          "x": 363,
+          "y": 496.875,
+          "width": 702,
+          "height": 47
+        },
+        ".battle-log": {
+          "x": 363,
+          "y": 496.875,
+          "width": 566,
+          "height": 47
+        },
+        ".replica-detail": null,
+        ".team-panel": null,
+        ".dex-hero": {
+          "x": 280,
+          "y": 72,
+          "width": 1134,
+          "height": 408.6875
+        },
+        ".progress-page": null,
+        ".progress-page .map-head": null,
+        ".pg-regions": null,
+        ".pg-cols": null,
+        ".pg-info": null,
+        ".mp-hero": null
+      }
+    },
+    "map": {
+      "text": "Audit#TEST\nPokédex 1 / 151\n0 ₽\n0\nSave\n⚙\nKanto · Chapter 1\nBoulder Badge\nStep 1 / 20 · 0 %\nLv. 14-20\nPROGRESS\nTeam/PC\nPokédex\nActivities\n▸\nSocial\n▸\nShop\nAchievements\nRoute 1\n[\n]\n?\n?\n?\n?\n?\n1/20\n🌙\n19:35\n⛅\nClear skies\nLv.5\n+4 XP ×1.1\nLv.5\nLv.2\nA wild Rattata appeared!\nx1\nx2\nx3\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×0\n×0\n×0\n×0\nFound here\ni\nRoute 1\n0/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n55%\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%\nAdventure\n?\nRegions\n1/9\nKanto\n1/151 caught\nJohto\nFinish Kanto to unlock\nHoenn\nFinish Johto to unlock\nSinnoh\nFinish Hoenn to unlock\nUnova\nComing soon…\nKalos\nComing soon…\nAlola\nComing soon…\nGalar\nComing soon…\nPaldea\nComing soon…\nGYMS\n01\nBoulder Badge\nRecommended Lv. 14-20\n02\nCascade Badge\nLocked\nCerulean Cave\nBeat the Pokémon League\n03\nThunder Badge\nLocked\n04\nRainbow Badge\nLocked\n05\nSoul Badge\nLocked\n06\nMarsh Badge\nLocked\n07\nVolcano Badge\nLocked\nPower Plant\nCatch every Electric-type Pokémon · 0/9\nSeafoam Islands\nCatch every Ice-type Pokémon · 0/5\n08\nEarth Badge\nLocked\n09\nVictory Road\nLocked\nBlazing Cave\nCatch every Fire-type Pokémon · 1/12\nINFO\n▶ In progress\nBrock\nRock\nBoulder Badge\nRecommended \nLv. 14-20\nLv. \n20\n cap\nReward \n400-2,400 ₽\n🌙 Night\nITEMS FOUND HERE\n6 items\nPOKÉMON FOUND HERE\n0/13 caught\n☀️\nDAY\n🌙\nNIGHT\nNOW\n🌧️\nRAIN\nCONTINUE",
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1430,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        ".battle-stage": {
+          "x": 280,
+          "y": 108,
+          "width": 798,
+          "height": 448.875
+        },
+        ".battle-bottom": {
+          "x": 363,
+          "y": 496.875,
+          "width": 702,
+          "height": 47
+        },
+        ".battle-log": {
+          "x": 363,
+          "y": 496.875,
+          "width": 566,
+          "height": 47
+        },
+        ".replica-detail": null,
+        ".team-panel": null,
+        ".dex-hero": null,
+        ".progress-page": {
+          "x": 280,
+          "y": 72,
+          "width": 1134,
+          "height": 1094.625
+        },
+        ".progress-page .map-head": {
+          "x": 282,
+          "y": 74,
+          "width": 1130,
+          "height": 52
+        },
+        ".pg-regions": {
+          "x": 298,
+          "y": 142,
+          "width": 1098,
+          "height": 90
+        },
+        ".pg-cols": {
+          "x": 298,
+          "y": 248,
+          "width": 1098,
+          "height": 900.625
+        },
+        ".pg-info": {
+          "x": 714,
+          "y": 248,
+          "width": 682,
+          "height": 636
+        },
+        ".mp-hero": {
+          "x": 716,
+          "y": 276,
+          "width": 678,
+          "height": 200
+        }
+      }
+    },
+    "new-catch": {
+      "text": "Audit#TEST\nPokédex 1 / 151\n0 ₽\n0\nSave\n⚙\nKanto · Chapter 1\nBoulder Badge\nStep 1 / 20 · 0 %\nLv. 14-20\nProgress\nTeam/PC\nPokédex\nActivities\n▸\nSocial\n▸\nShop\nAchievements\nRoute 1\n[\n]\n?\n?\n?\n?\n?\n1/20\n🌙\n19:35\n⛅\nClear skies\nLv.5\n+4 XP ×1.1\nLv.5\nLv.2\nA wild Rattata appeared!\nx1\nx2\nx3\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×0\n×0\n×0\n×0\nFound here\ni\nRoute 1\n0/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n55%\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%\nCharmander\nNEW\nNo. 004\nKanto 1/151\nLizard Pokémon\nFire\n● Rare\nLevel\n5\nHeight\n0.6 m\nWeight\n8.5 kg\nCaught\n1\n\nFrom the time it is born, a flame burns at the tip of its tail. Its life would end if the flame were to go out.\n\nCONTINUE",
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1430,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        ".battle-stage": {
+          "x": 280,
+          "y": 108,
+          "width": 798,
+          "height": 448.875
+        },
+        ".battle-bottom": {
+          "x": 363,
+          "y": 496.875,
+          "width": 702,
+          "height": 47
+        },
+        ".battle-log": {
+          "x": 363,
+          "y": 496.875,
+          "width": 566,
+          "height": 47
+        },
+        ".replica-detail": {
+          "x": 485,
+          "y": 241.796875,
+          "width": 460,
+          "height": 416.390625
+        },
+        ".team-panel": null,
+        ".dex-hero": null,
+        ".progress-page": null,
+        ".progress-page .map-head": null,
+        ".pg-regions": null,
+        ".pg-cols": null,
+        ".pg-info": null,
+        ".mp-hero": null
+      }
+    },
+    "shop-click": {
+      "text": "Audit#TEST\nPokédex 1 / 151\n0 ₽\n0\nSave\n⚙\nKanto · Chapter 1\nBoulder Badge\nStep 2 / 20 · 5 %\nLv. 14-20\nProgress\nTeam/PC\nPokédex\nActivities\n▸\nSocial\n▸\nSHOP\nAchievements\nRoute 1\n[\n?\n]\n?\n?\n?\n?\n2/20\n🌙\n19:35\n⛅\nClear skies\nLv.5\n🎁 Found an item along the path!\nx1\nx2\nx3\nFound 1x Razz Berry!\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×1\n×0\n×0\n×0\nFound here\ni\nRoute 1\n0/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n55%\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%",
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1430,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        ".battle-stage": {
+          "x": 280,
+          "y": 108,
+          "width": 798,
+          "height": 448.875
+        },
+        ".battle-bottom": {
+          "x": 363,
+          "y": 496.875,
+          "width": 702,
+          "height": 47
+        },
+        ".battle-log": {
+          "x": 363,
+          "y": 496.875,
+          "width": 566,
+          "height": 47
+        },
+        ".replica-detail": null,
+        ".team-panel": null,
+        ".dex-hero": null,
+        ".progress-page": null,
+        ".progress-page .map-head": null,
+        ".pg-regions": null,
+        ".pg-cols": null,
+        ".pg-info": null,
+        ".mp-hero": null
+      }
+    },
+    "achievements-click": {
+      "text": "Audit#TEST\nPokédex 1 / 151\n0 ₽\n0\nSave\n⚙\nKanto · Chapter 1\nBoulder Badge\nStep 2 / 20 · 5 %\nLv. 14-20\nProgress\nTeam/PC\nPokédex\nActivities\n▸\nSocial\n▸\nShop\nACHIEVEMENTS\nRoute 1\n[\n?\n]\n?\n?\n?\n?\n2/20\n🌙\n19:35\n⛅\nClear skies\nLv.5\n🎁 Found an item along the path!\nx1\nx2\nx3\nFound 1x Razz Berry!\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×1\n×0\n×0\n×0\nFound here\ni\nRoute 1\n0/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n55%\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%",
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1430,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        ".battle-stage": {
+          "x": 280,
+          "y": 108,
+          "width": 798,
+          "height": 448.875
+        },
+        ".battle-bottom": {
+          "x": 363,
+          "y": 496.875,
+          "width": 702,
+          "height": 47
+        },
+        ".battle-log": {
+          "x": 363,
+          "y": 496.875,
+          "width": 566,
+          "height": 47
+        },
+        ".replica-detail": null,
+        ".team-panel": null,
+        ".dex-hero": null,
+        ".progress-page": null,
+        ".progress-page .map-head": null,
+        ".pg-regions": null,
+        ".pg-cols": null,
+        ".pg-info": null,
+        ".mp-hero": null
+      }
+    },
+    "settings-click": {
+      "text": "Audit#TEST\nPokédex 1 / 151\n0 ₽\n0\nSave\n⚙\nKanto · Chapter 1\nBoulder Badge\nStep 2 / 20 · 5 %\nLv. 14-20\nProgress\nTeam/PC\nPokédex\nActivities\n▸\nSocial\n▸\nShop\nACHIEVEMENTS\nRoute 1\n[\n?\n]\n?\n?\n?\n?\n2/20\n🌙\n19:35\n⛅\nClear skies\nLv.5\n🎁 Found an item along the path!\nx1\nx2\nx3\nFound 1x Razz Berry!\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×1\n×0\n×0\n×0\nFound here\ni\nRoute 1\n0/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n55%\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%",
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1430,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        ".battle-stage": {
+          "x": 280,
+          "y": 108,
+          "width": 798,
+          "height": 448.875
+        },
+        ".battle-bottom": {
+          "x": 363,
+          "y": 496.875,
+          "width": 702,
+          "height": 47
+        },
+        ".battle-log": {
+          "x": 363,
+          "y": 496.875,
+          "width": 566,
+          "height": 47
+        },
+        ".replica-detail": null,
+        ".team-panel": null,
+        ".dex-hero": null,
+        ".progress-page": null,
+        ".progress-page .map-head": null,
+        ".pg-regions": null,
+        ".pg-cols": null,
+        ".pg-info": null,
+        ".mp-hero": null
+      }
+    },
+    "team-mobile": {
+      "text": "Pokédex 1 / 151\n0 ₽\n⚙\nRoute 1\n[\n?\n]\n?\n?\n?\n?\n2/20\n🌙\n19:35\n⛅\nLv.5\n🎁 Found an item along the path!\nx1\nx2\nx3\nFound 1x Razz Berry!\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×1\n×0\n×0\n×0\nFound here\ni\nRoute 1\n0/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n55%\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%\nTeam\n?\n1\nAverage level\n5\nFire\nCharmander\nLv. 5\n+\nEmpty slot\n+\nEmpty slot\n+\nEmpty slot\n+\nEmpty slot\n+\nEmpty slot\nTypes ▾\nNormal\nFire\nWater\nElectric\nGrass\nIce\nFighting\nPoison\nGround\nFlying\nPsychic\nBug\nRock\nGhost\nDragon\nSteel\nFairy\n✦ SHINIES\nCAN EVOLVE\nRecent\nPokédex No.\nName\nLevel\n↓\n\nYour PC is empty. New catches go here when your team is full.\n\nProgress\nTeam/PC\nPokédex\n☰\nMenu",
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        ".battle-stage": {
+          "x": 16,
+          "y": 112,
+          "width": 358,
+          "height": 268.5
+        },
+        ".battle-bottom": {
+          "x": 73,
+          "y": 335.5,
+          "width": 292,
+          "height": 36
+        },
+        ".battle-log": {
+          "x": 73,
+          "y": 335.5,
+          "width": 198,
+          "height": 36
+        },
+        ".replica-detail": null,
+        ".team-panel": {
+          "x": 16,
+          "y": 76,
+          "width": 358,
+          "height": 559.59375
+        },
+        ".dex-hero": null,
+        ".progress-page": null,
+        ".progress-page .map-head": null,
+        ".pg-regions": null,
+        ".pg-cols": null,
+        ".pg-info": null,
+        ".mp-hero": null
+      }
+    },
+    "map-mobile": {
+      "text": "Pokédex 1 / 151\n0 ₽\n⚙\nRoute 1\n[\n?\n]\n?\n?\n?\n?\n2/20\n🌙\n19:35\n⛅\nLv.5\n🎁 Found an item along the path!\nx1\nx2\nx3\nFound 1x Razz Berry!\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×1\n×0\n×0\n×0\nFound here\ni\nRoute 1\n0/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n55%\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%\nAdventure\n?\nRegions\n1/9\nKanto\n1/151 caught\nJohto\nFinish Kanto to unlock\nHoenn\nFinish Johto to unlock\nSinnoh\nFinish Hoenn to unlock\nUnova\nComing soon…\nKalos\nComing soon…\nAlola\nComing soon…\nGalar\nComing soon…\nPaldea\nComing soon…\nGYMS\n01\nBoulder Badge\nRecommended Lv. 14-20\n02\nCascade Badge\nLocked\nCerulean Cave\nBeat the Pokémon League\n03\nThunder Badge\nLocked\n04\nRainbow Badge\nLocked\n05\nSoul Badge\nLocked\n06\nMarsh Badge\nLocked\n07\nVolcano Badge\nLocked\nPower Plant\nCatch every Electric-type Pokémon · 0/9\nSeafoam Islands\nCatch every Ice-type Pokémon · 0/5\n08\nEarth Badge\nLocked\n09\nVictory Road\nLocked\nBlazing Cave\nCatch every Fire-type Pokémon · 1/12\nINFO\n▶ In progress\nBrock\nRock\nBoulder Badge\nRecommended \nLv. 14-20\nLv. \n20\n cap\nReward \n400-2,400 ₽\n🌙 Night\nITEMS FOUND HERE\n6 items\nPOKÉMON FOUND HERE\n0/13 caught\n☀️\nDAY\n🌙\nNIGHT\nNOW\n🌧️\nRAIN\nCONTINUE\nProgress\nTeam/PC\nPokédex\n☰\nMenu",
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        ".battle-stage": {
+          "x": 16,
+          "y": 112,
+          "width": 358,
+          "height": 268.5
+        },
+        ".battle-bottom": {
+          "x": 73,
+          "y": 335.5,
+          "width": 292,
+          "height": 36
+        },
+        ".battle-log": {
+          "x": 73,
+          "y": 335.5,
+          "width": 198,
+          "height": 36
+        },
+        ".replica-detail": null,
+        ".team-panel": null,
+        ".dex-hero": null,
+        ".progress-page": {
+          "x": 16,
+          "y": 76,
+          "width": 358,
+          "height": 2130.03125
+        },
+        ".progress-page .map-head": {
+          "x": 18,
+          "y": 78,
+          "width": 354,
+          "height": 52
+        },
+        ".pg-regions": {
+          "x": 30,
+          "y": 142,
+          "width": 330,
+          "height": 90
+        },
+        ".pg-cols": {
+          "x": 30,
+          "y": 244,
+          "width": 330,
+          "height": 1948.03125
+        },
+        ".pg-info": {
+          "x": 30,
+          "y": 1183.8125,
+          "width": 330,
+          "height": 1008.21875
+        },
+        ".mp-hero": {
+          "x": 32,
+          "y": 1211.8125,
+          "width": 326,
+          "height": 170
+        }
+      }
+    }
+  },
+  "data": {
+    "chapters": [
+      {
+        "id": "kanto-1",
+        "name": "Boulder Badge",
+        "totalSteps": 20,
+        "actualSteps": 20,
+        "reusesLegacyChapter1": false
+      },
+      {
+        "id": "kanto-2",
+        "name": "Cascade Badge",
+        "totalSteps": 20,
+        "actualSteps": 19,
+        "reusesLegacyChapter1": true
+      },
+      {
+        "id": "special-mewtwo",
+        "name": "Mewtwo",
+        "totalSteps": 10,
+        "actualSteps": 10,
+        "reusesLegacyChapter1": false
+      },
+      {
+        "id": "kanto-3",
+        "name": "Thunder Badge",
+        "totalSteps": 22,
+        "actualSteps": 19,
+        "reusesLegacyChapter1": true
+      },
+      {
+        "id": "kanto-4",
+        "name": "Rainbow Badge",
+        "totalSteps": 24,
+        "actualSteps": 19,
+        "reusesLegacyChapter1": true
+      },
+      {
+        "id": "kanto-5",
+        "name": "Soul Badge",
+        "totalSteps": 25,
+        "actualSteps": 19,
+        "reusesLegacyChapter1": true
+      },
+      {
+        "id": "kanto-6",
+        "name": "Marsh Badge",
+        "totalSteps": 26,
+        "actualSteps": 19,
+        "reusesLegacyChapter1": true
+      },
+      {
+        "id": "kanto-7",
+        "name": "Volcano Badge",
+        "totalSteps": 30,
+        "actualSteps": 30,
+        "reusesLegacyChapter1": false
+      },
+      {
+        "id": "special-power-plant",
+        "name": "Power Plant",
+        "totalSteps": 15,
+        "actualSteps": 19,
+        "reusesLegacyChapter1": true
+      },
+      {
+        "id": "special-seafoam",
+        "name": "Seafoam Islands",
+        "totalSteps": 15,
+        "actualSteps": 19,
+        "reusesLegacyChapter1": true
+      },
+      {
+        "id": "kanto-8",
+        "name": "Earth Badge",
+        "totalSteps": 30,
+        "actualSteps": 19,
+        "reusesLegacyChapter1": true
+      },
+      {
+        "id": "kanto-9",
+        "name": "Victory Road",
+        "totalSteps": 35,
+        "actualSteps": 19,
+        "reusesLegacyChapter1": true
+      },
+      {
+        "id": "special-blazing-cave",
+        "name": "Blazing Cave",
+        "totalSteps": 15,
+        "actualSteps": 19,
+        "reusesLegacyChapter1": true
+      }
+    ],
+    "actions": [
+      "setGameSpeed",
+      "setSelectedBall",
+      "toggleAutoCatch",
+      "setActivePartyIndex",
+      "movePartyMember",
+      "depositPokemon",
+      "withdrawPokemon",
+      "openAdventureModal",
+      "closeAdventureModal",
+      "selectChapter",
+      "loadStepNode",
+      "tickBerryBuffs",
+      "useBerry",
+      "triggerRandomGift",
+      "advanceStep",
+      "skipHeal",
+      "finishHealPresentation",
+      "finishItemDrop",
+      "catchEnemy",
+      "dismissNewCatchCard",
+      "finishCapturePresentation",
+      "resolveCombatImpact",
+      "finishCombatEffect",
+      "tickCombat",
+      "saveGame",
+      "loadGame"
+    ]
+  }
+}

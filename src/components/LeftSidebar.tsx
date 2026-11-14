@@ -2,39 +2,52 @@ import React, { useState } from 'react';
 import { useGameStore } from '../store/useGameStore';
 import { ALL_CHAPTERS, DEFAULT_CHAPTER } from '../data/chaptersData';
 
-export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex') => void }> = ({ onOpenCollection }) => {
+export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex') => void; activeView: 'adventure' | 'progress' | 'team' | 'pokedex'; onShowAdventure: () => void; onResumeAdventure: () => void }> = ({ onOpenCollection, activeView, onShowAdventure, onResumeAdventure }) => {
   const {
     currentChapterId,
     currentStep,
-    openAdventureModal,
     sidebarExpPopup,
+    pokedexCaught,
+    dexNotifiedSpecies,
+    teamReviewedUids,
+    party,
+    pcBox,
   } = useGameStore();
 
   const currentChapter =
     ALL_CHAPTERS.find((c) => c.id === currentChapterId) || DEFAULT_CHAPTER;
   const [activeTab, setActiveTab] = useState<'progress' | 'team' | 'pokedex' | 'shop' | 'achievements'>('progress');
-  const [activitiesOpen, setActivitiesOpen] = useState(true);
-  const [socialOpen, setSocialOpen] = useState(true);
+  const [activitiesOpen, setActivitiesOpen] = useState(false);
+  const [socialOpen, setSocialOpen] = useState(false);
 
-  const pct = Math.round((currentStep / currentChapter.totalSteps) * 100);
+  const pct = Math.max(0, Math.round(((currentStep - 1) / currentChapter.totalSteps) * 100));
+  const teamNew = new Set([...party, ...pcBox].filter(mon => !teamReviewedUids.includes(mon.uid)).map(mon => mon.uid)).size;
+  const dexNew = new Set(pokedexCaught.filter(id => !dexNotifiedSpecies.includes(id))).size;
 
   const handleOpenProgress = () => {
     setActiveTab('progress');
-    openAdventureModal();
+    onShowAdventure();
+  };
+  const handleOpenMap = () => {
+    onResumeAdventure();
   };
 
   return (
-    <aside className="w-56 shrink-0 flex flex-col gap-2 select-none font-game">
-      {/* Chapter Progress Card (Clickable to open Adventure screen) */}
+    <aside className="game-sidebar w-56 shrink-0 flex flex-col gap-2 select-none font-game">
+      {/* Resume the current encounter without reloading the selected chapter. */}
       <div
-        onClick={handleOpenProgress}
+        onClick={handleOpenMap}
+        role="button"
+        aria-label="Resume current adventure"
+        tabIndex={0}
+        onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); handleOpenMap(); } }}
         className="rounded-2xl border-2 border-[#e3353b] bg-gradient-to-b from-[#241723] to-[#14131d] p-3 shadow-lg cursor-pointer hover:border-rose-400 transition"
       >
         <div className="flex items-center gap-2.5">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#3b2d3c] bg-[#1a1522] p-1">
             <img
               src={`/assets/badges/${currentChapter.badgeSprite}.png`}
-              alt="Badge"
+              alt=""
               className="pixel-art max-h-8 max-w-8 object-contain"
             />
           </div>
@@ -70,12 +83,12 @@ export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex')
         {/* 1. Progress -> Opens Adventure Modal */}
         <button
           onClick={handleOpenProgress}
-          className={`side-nav-btn ${activeTab === 'progress' ? 'active' : ''}`}
+          className={`side-nav-btn ${activeView === 'progress' ? 'active' : ''}`}
         >
           <div className="w-8 h-8 flex items-center justify-center shrink-0">
             <img
               src="/assets/sidebar/progress.png"
-              alt="Progress"
+              alt=""
               className="max-w-[28px] max-h-[28px] object-contain pixel-art"
             />
           </div>
@@ -91,32 +104,36 @@ export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex')
           )}
           <button
             onClick={() => { setActiveTab('team'); onOpenCollection('team'); }}
-            className={`side-nav-btn w-full ${activeTab === 'team' ? 'active' : ''}`}
+            aria-label="Team/PC"
+            className={`side-nav-btn w-full ${activeView === 'team' ? 'active' : ''}`}
           >
             <div className="w-8 h-8 flex items-center justify-center shrink-0">
               <img
                 src="/assets/sidebar/team_pc.png"
-                alt="Team/PC"
+                alt=""
                 className="max-w-[28px] max-h-[28px] object-contain pixel-art"
               />
             </div>
             <span className="truncate">Team/PC</span>
+            {activeView !== 'team' && teamNew > 0 && <span className="sidebar-collection-unread" aria-hidden="true">{teamNew}</span>}
           </button>
         </div>
 
         {/* 3. Pokédex */}
         <button
           onClick={() => { setActiveTab('pokedex'); onOpenCollection('pokedex'); }}
-          className={`side-nav-btn ${activeTab === 'pokedex' ? 'active' : ''}`}
+          aria-label="Pokédex"
+          className={`side-nav-btn ${activeView === 'pokedex' ? 'active' : ''}`}
         >
           <div className="w-8 h-8 flex items-center justify-center shrink-0">
             <img
               src="/assets/sidebar/pok_dex.png"
-              alt="Pokédex"
+              alt=""
               className="max-w-[28px] max-h-[28px] object-contain pixel-art"
             />
           </div>
           <span className="truncate">Pokédex</span>
+          {activeView !== 'pokedex' && dexNew > 0 && <span className="sidebar-collection-unread" aria-hidden="true">{dexNew}</span>}
         </button>
 
         {/* 4. Activities Accordion */}
@@ -128,7 +145,7 @@ export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex')
             <div className="w-8 h-8 flex items-center justify-center shrink-0">
               <img
                 src="/assets/sidebar/activities.png"
-                alt="Activities"
+                alt=""
                 className="max-w-[28px] max-h-[28px] object-contain pixel-art"
               />
             </div>
@@ -143,7 +160,7 @@ export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex')
               <button className="side-nav-sub-btn">
                 <img
                   src="/assets/sidebar/day_care.png"
-                  alt="Day Care"
+                  alt=""
                   className="w-5 h-5 object-contain pixel-art shrink-0"
                 />
                 <span className="truncate">Day Care</span>
@@ -152,7 +169,7 @@ export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex')
               <button className="side-nav-sub-btn">
                 <img
                   src="/assets/sidebar/game_corner.png"
-                  alt="Game Corner"
+                  alt=""
                   className="w-5 h-5 object-contain pixel-art shrink-0"
                 />
                 <span className="truncate">Game Corner</span>
@@ -161,7 +178,7 @@ export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex')
               <button className="side-nav-sub-btn">
                 <img
                   src="/assets/sidebar/raids.png"
-                  alt="Raids"
+                  alt=""
                   className="w-5 h-5 object-contain pixel-art shrink-0"
                 />
                 <span className="truncate">Raids</span>
@@ -170,13 +187,13 @@ export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex')
               <button disabled className="side-nav-sub-btn locked opacity-60 cursor-not-allowed">
                 <img
                   src="/assets/sidebar/battle_tower.png"
-                  alt="Battle Tower"
+                  alt=""
                   className="w-5 h-5 object-contain pixel-art shrink-0 grayscale"
                 />
                 <span className="flex-1 text-left truncate text-slate-400">Battle Tower</span>
                 <img
                   src="/assets/sidebar/padlock_pixel.svg"
-                  alt="Locked"
+                  alt=""
                   className="w-3.5 h-3.5 pixel-art"
                 />
               </button>
@@ -184,13 +201,13 @@ export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex')
               <button disabled className="side-nav-sub-btn locked opacity-60 cursor-not-allowed">
                 <img
                   src="/assets/sidebar/underground.png"
-                  alt="Underground"
+                  alt=""
                   className="w-5 h-5 object-contain pixel-art shrink-0 grayscale"
                 />
                 <span className="flex-1 text-left truncate text-slate-400">Underground</span>
                 <img
                   src="/assets/sidebar/padlock_pixel.svg"
-                  alt="Locked"
+                  alt=""
                   className="w-3.5 h-3.5 pixel-art"
                 />
               </button>
@@ -207,7 +224,7 @@ export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex')
             <div className="w-8 h-8 flex items-center justify-center shrink-0">
               <img
                 src="/assets/sidebar/social.png"
-                alt="Social"
+                alt=""
                 className="max-w-[28px] max-h-[28px] object-contain pixel-art"
               />
             </div>
@@ -222,7 +239,7 @@ export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex')
               <button className="side-nav-sub-btn">
                 <img
                   src="/assets/sidebar/friends.png"
-                  alt="Friends"
+                  alt=""
                   className="w-5 h-5 object-contain pixel-art shrink-0"
                 />
                 <span className="truncate">Friends</span>
@@ -231,7 +248,7 @@ export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex')
               <button className="side-nav-sub-btn">
                 <img
                   src="/assets/sidebar/trades.svg"
-                  alt="Trades"
+                  alt=""
                   className="w-5 h-5 object-contain pixel-art shrink-0"
                 />
                 <span className="truncate">Trades</span>
@@ -240,7 +257,7 @@ export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex')
               <button className="side-nav-sub-btn">
                 <img
                   src="/assets/sidebar/black_market.svg"
-                  alt="Black Market"
+                  alt=""
                   className="w-5 h-5 object-contain pixel-art shrink-0"
                 />
                 <span className="truncate">Black Market</span>
@@ -257,7 +274,7 @@ export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex')
           <div className="w-8 h-8 flex items-center justify-center shrink-0">
             <img
               src="/assets/sidebar/shop.png"
-              alt="Shop"
+              alt=""
               className="max-w-[28px] max-h-[28px] object-contain pixel-art"
             />
           </div>
@@ -272,7 +289,7 @@ export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex')
           <div className="w-8 h-8 flex items-center justify-center shrink-0">
             <img
               src="/assets/sidebar/achievements.png"
-              alt="Achievements"
+              alt=""
               className="max-w-[28px] max-h-[28px] object-contain pixel-art"
             />
           </div>

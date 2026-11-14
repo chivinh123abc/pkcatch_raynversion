@@ -1,0 +1,226 @@
+/* Remaining layout adapters between the React shell and archived UI selectors. */
+.game-shell { --font:"Jersey 10",sans-serif; --font-title:"Jersey 15",sans-serif; --font-pixel:"Jersey 15",sans-serif; --line:#333a52; --panel:#1c2030; --panel-2:#252a3d; --text:#eef1f8; --muted:#9aa3bb; --red:#e3353b; --blue:#3d6fd8; --green:#4cc96a; --yellow:#ffcb05; --radius:14px; --topbar-h:60px; --s1:4px; --s2:8px; --s3:12px; --s4:16px; --fs-micro:14px; --fs-caption:16px; --fs-sm:18px; --fs-body:20px; --fs-title-sm:24px; --fs-title:28px; color:var(--text); font-synthesis:none; }
+.game-shell > main { position:relative; grid-template-columns:248px minmax(0,1fr); }
+.game-shell .replica-topbar { height:60px; min-height:60px; margin:0; padding:0 16px; gap:12px; background:#1c2030; border-bottom:2px solid #333a52; font:400 20px var(--font); }
+.game-shell .replica-topbar .tb-prof { flex:none; position:relative; display:flex; height:50px; align-items:center; gap:10px; padding:0 4px; background:none; border:0; }
+.game-shell .replica-topbar .tr-face { display:block; position:relative; width:44px; height:44px; border:2px solid #333a52; border-radius:8px; background:#252a3d; }
+.game-shell .replica-topbar .tr-win { display:block; position:absolute; inset:0; overflow:hidden; border-radius:6px; }
+.game-shell .replica-topbar .tr-win img { position:absolute; left:4px; top:-5px; width:32px; height:55px; max-width:none; image-rendering:pixelated; }
+.game-shell .replica-topbar .tb-who { display:flex; flex-direction:column; line-height:1.15; }
+.game-shell .replica-topbar .tb-who > b { font:700 24px/1 var(--font-title); }
+.game-shell .replica-topbar .tb-who .tag { color:#9aa3bb; font:700 18px var(--font); }
+.game-shell .replica-topbar .tb-who > small { color:#9aa3bb; font-size:16px; }
+.game-shell .replica-topbar .tb-who em { color:#eef1f8; font-style:normal; }
+.game-shell .replica-topbar .tc-new { position:absolute; top:0; left:30px; padding:2px 5px; border-radius:99px; background:#ffcb05; color:#12141c; font:700 12px var(--font); }
+.game-shell .replica-topbar .side-wallet { display:flex; align-items:center; gap:6px; margin-left:12px; }
+.game-shell .replica-topbar .side-money { display:flex; align-items:center; gap:8px; height:38px; padding:0 12px; border-radius:10px; background:#131723; }
+.game-shell .replica-topbar .side-money b { font-size:20px; }
+.game-shell .replica-topbar .wallet-reg { color:#e3353b; font-size:14px; font-weight:700; }
+.game-shell .replica-topbar .side-money img { width:24px; height:24px; object-fit:contain; image-rendering:pixelated; }
+.game-shell .replica-topbar .tb-sep { flex:1; }
+.game-shell .replica-topbar .tb-acts { display:flex; align-items:center; gap:8px; }
+.game-shell .replica-topbar .tb-online { display:inline-flex; align-items:center; gap:5px; height:38px; border:2px solid #333a52; border-radius:99px; padding:0 12px; font-size:16px; }
+.game-shell .replica-topbar .tb-online .dot { width:7px; height:7px; border-radius:50%; background:#4cc96a; box-shadow:0 0 8px #4cc96a80; }
+.game-shell .replica-topbar .tb-save,.game-shell .replica-topbar .tb-opt,.game-shell .replica-topbar .tb-sleep { display:flex; position:relative; align-items:center; justify-content:center; gap:8px; min-width:40px; height:40px; padding:0 10px; border:2px solid #333a52; border-radius:10px; background:none; color:#eef1f8; font:700 18px var(--font); }
+.game-shell .replica-topbar .tb-save img { width:20px; height:20px; image-rendering:pixelated; }
+.game-shell .replica-save-dot { position:absolute; right:0; top:-4px; width:8px; height:8px; border-radius:50%; background:#4cc96a; }
+.game-shell .replica-toast { position:absolute; z-index:50; top:64px; left:50%; translate:-50% 0; display:flex; align-items:center; gap:10px; max-width:90vw; padding:10px 16px; border:2px solid #333a52; border-radius:12px; background:#1c2030; font-size:20px; box-shadow:0 8px 20px #0006; }
+.game-shell .replica-toast img { width:48px; height:40px; object-fit:contain; image-rendering:pixelated; }
+.game-shell .adventure-view .battle-column { min-height:calc(100dvh - 88px); }
+.game-shell .adventure-view { min-width:0; display:grid; grid-template-columns:minmax(0,1fr) 300px; align-items:start; gap:16px; }
+.game-shell .adventure-view[hidden] { display:grid; position:absolute; left:280px; right:16px; top:12px; opacity:0; pointer-events:none; }
+.game-shell .side-nav-btn.active { background:#e3353b; border-color:#ffcb05; color:#fff; text-transform:uppercase; text-shadow:0 2px #8e202a; box-shadow:3px 3px 0 #791d38; }
+.game-shell .side-nav-btn { font-weight:700; }
+.game-shell .side-nav-sub-btn { border-radius:10px; }
+.game-shell > main > aside:first-child { scrollbar-width:thin; scrollbar-color:#54596c transparent; transform:translateX(-4px); }
+.game-shell > main > aside:first-child > div:first-child { min-height:104px; }
+.game-shell .game-sidebar > div:first-child { padding:12px; height:104px; min-height:104px; flex:none; }
+.game-shell .game-sidebar > div:first-child .text-\[13px\] { font-size:14px; line-height:16px; }
+.game-shell .game-sidebar > div:first-child .text-\[17px\] { font-size:22px; line-height:24px; }
+.game-shell .collection-page { min-width:0; font:400 20px/1.2 var(--font); }
+.game-shell .collection-page h2 { margin:0; font-family:var(--font-title); }
+.game-shell .collection-page button,.game-shell .replica-detail button { cursor:pointer; }
+.game-shell .collection-page .btn,.game-shell .replica-detail .btn { position:relative; isolation:isolate; }
+.game-shell .collection-page .map-region { overflow:hidden; }
+.game-shell .collection-page .map-head { min-height:54px; }
+.game-shell .collection-page .map-head > img { width:28px; height:28px; object-fit:contain; image-rendering:pixelated; }
+.game-shell .collection-page .map-sum { margin-left:auto; display:flex; align-items:center; gap:14px; font-size:16px; }
+.game-shell .replica-help { display:inline-flex; flex:none; align-items:center; justify-content:center; width:24px; height:24px; border:2px solid #333a52; border-radius:50%; background:#172033; color:#9aa3bb; font:700 18px var(--font); }
+.game-shell .team-sets { margin-left:14px; }
+.game-shell .collection-page .team-slots { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; padding:16px; }
+.game-shell .collection-page .slot { display:flex; min-width:0; flex-direction:column; align-items:center; position:relative; aspect-ratio:auto; padding:8px 8px 12px; color:var(--text); background:var(--mon-lines),#182039; border:1px solid transparent; border-radius:10px; overflow:hidden; font:inherit; }
+.game-shell .collection-page .slot:hover { border-color:#687baf; background-color:#222d48; }
+.game-shell .collection-page .team-slots .slot { height:208px; min-height:208px; }
+.game-shell .slot-types { position:absolute; top:8px; left:8px; z-index:2; display:flex; flex-direction:column; align-items:flex-start; gap:3px; }
+.game-shell .replica-team-art { height:132px; width:100%; display:flex; align-items:center; justify-content:center; }
+.game-shell .collection-page .slot .name { font:700 20px var(--font-title); margin-top:8px; }
+.game-shell .collection-page .slot .lv { font:400 16px var(--font); margin:0 0 8px; color:var(--muted); }
+.game-shell .collection-page .slot .xpbar { width:86%; height:8px; background:#0c1224; overflow:hidden; border-radius:99px; }
+.game-shell .collection-page .slot .xpbar > div { height:100%; background:linear-gradient(90deg,#2fae4f,#7fd63a 60%,#c8ec3c); }
+.game-shell .slot.empty { justify-content:center; min-height:214px; color:var(--muted); border:2px dashed #333a52; background:#141a2e; }
+.game-shell .slot.empty > span { font-size:40px; }
+.game-shell .collection-page .slot.empty > span::before { content:none; }
+.game-shell .collection-page .team-slots .slot.empty::before,.game-shell .collection-page .team-slots .slot.empty::after { content:none; }
+.game-shell .pc-sticky { position:sticky; top:60px; z-index:10; padding:16px 0 10px; background:#121623f5; }
+.game-shell .collection-page .pc-filters { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:0; }
+.game-shell .collection-page input[type=search] { flex:1; min-width:180px; height:40px; padding:6px 12px; border:2px solid #333a52; border-radius:10px; background:#252a3d; color:var(--text); font:400 18px var(--font); }
+.game-shell .collection-page .replica-filter,.game-shell .replica-sort { height:40px; padding:6px 10px; background:#252a3d; color:var(--text); border:2px solid #333a52; border-radius:8px; font:400 18px var(--font); }
+.game-shell .collection-page .btn.small { min-height:40px; font-size:16px; }
+.game-shell .collection-page .pc-grid { margin-bottom:12px; grid-template-columns:repeat(auto-fill,minmax(108px,1fr)); }
+.game-shell .collection-page .pc-cell { display:flex; position:relative; flex-direction:column; align-items:center; justify-content:flex-end; height:116px; min-width:0; background:none; color:white; padding:6px 2px 16px; border:1px solid transparent; border-radius:10px; overflow:hidden; }
+.game-shell .collection-page .pc-cell:hover { background:#252f4c99; border-color:#687baf; }
+.game-shell .replica-pc-art { display:flex; align-items:center; justify-content:center; height:76px; width:100%; }
+.game-shell .collection-page .pc-cell .lvl { font:700 14px var(--font); }
+.game-shell .pc-xp { position:absolute; left:0; right:0; bottom:0; height:5px; background:#080e22; }
+.game-shell .pc-xp > div { height:100%; background:linear-gradient(90deg,#2fae4f,#7fd63a 60%,#c8ec3c); }
+.game-shell .replica-empty { grid-column:1/-1; color:var(--muted); text-align:center; padding:36px 12px; }
+.game-shell .replica-pagination { display:flex; align-items:center; justify-content:center; gap:12px; }
+.game-shell .replica-collection-notice { min-height:24px; color:#ffe066; font-size:16px; margin:8px 0; }
+.game-shell .replica-swap-hint { display:flex; align-items:center; justify-content:space-between; padding:10px 16px; border:2px solid #ffcb05; border-radius:10px; background:#2f2a16; margin-top:12px; }
+.game-shell .awaiting-swap .slot { border-color:#ffcb05; }
+.game-shell .dex-hero-body { display:flex; align-items:center; gap:16px; padding:16px; }
+.game-shell .dex-ring { display:flex; align-items:center; justify-content:center; width:128px; height:128px; flex:none; padding:14px; border-radius:50%; }
+.game-shell .dex-ring > div { width:100%; height:100%; border-radius:50%; background:#161c2c; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.game-shell .dex-ring b { font:700 24px var(--font-title); }
+.game-shell .dex-ring small { margin-top:4px; font-size:14px; color:var(--muted); }
+.game-shell .dex-hero-side { min-width:0; flex:1; }
+.game-shell .dex-reg-bars { display:flex; flex-direction:column; gap:8px; }
+.game-shell .replica-region-progress { display:grid; grid-template-columns:72px minmax(0,1fr) 64px; align-items:center; gap:10px; min-height:18px; font-size:16px; }
+.game-shell .replica-region-progress.locked { opacity:.45; }
+.game-shell .replica-region-progress > div { height:8px; border-radius:99px; background:#333a52; overflow:hidden; }
+.game-shell .replica-region-progress i { display:block; height:100%; border-radius:99px; background:#e3353b; }
+.game-shell .replica-region-progress small { text-align:right; font-size:13px; }
+.game-shell .replica-region-progress img { width:12px; height:12px; margin-left:auto; image-rendering:pixelated; }
+.game-shell .dex-last { display:flex; align-items:center; gap:14px; margin-top:20px; }
+.game-shell .dex-last > span { flex:none; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); font:700 14px var(--font); }
+.game-shell .dex-last > div { display:flex; min-width:0; align-items:center; gap:12px; }
+.game-shell .dex-last button { width:44px; height:48px; display:flex; align-items:center; justify-content:center; border:0; background:none; }
+.game-shell .replica-dex-region { margin-top:16px; }
+.game-shell .replica-region-heading { width:100%; text-align:left; color:var(--text); font:inherit; }
+.game-shell .replica-region-meter { width:160px; height:7px; border-radius:99px; overflow:hidden; background:#333a52; }
+.game-shell .replica-region-meter > i { display:block; height:100%; background:#e3353b; }
+.game-shell .collection-page .dex-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(124px,1fr)); gap:8px; padding:12px; }
+.game-shell .collection-page .dex-cell { display:flex; position:relative; flex-direction:column; align-items:center; min-width:0; min-height:145px; padding:8px; color:var(--text); border:1px solid transparent; border-radius:10px; background:#0000000d; font:inherit; }
+.game-shell .collection-page .dex-cell:hover { background:#ffffff08; border-color:#65708c; }
+.game-shell .replica-dex-owned { height:18px; margin-left:auto; }
+.game-shell .replica-dex-owned img { width:18px; height:18px; image-rendering:pixelated; }
+.game-shell .replica-dex-art { height:80px; width:100%; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.game-shell .dex-cell .num { margin-top:4px; font:400 14px var(--font); color:var(--muted); }
+.game-shell .dex-cell .nm { font:700 18px var(--font-title); }
+.game-shell .replica-sprite { display:inline-block; position:relative; flex:none; overflow:hidden; vertical-align:middle; }
+.game-shell .replica-sprite img { position:absolute; display:block; max-width:none; image-rendering:pixelated; }
+.game-shell .replica-sprite.unknown { filter:brightness(0); opacity:.35; }
+.game-shell .replica-modal-backdrop { position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center; padding:20px; background:#060810b8; backdrop-filter:blur(4px); font:400 20px/1.2 var(--font); }
+.game-shell .replica-detail { width:min(460px,100%); max-height:calc(100dvh - 40px); margin:0; overflow-y:auto; background:#1c2030; color:var(--text); border:2px solid color-mix(in srgb,var(--c) 55%,#333a52); border-radius:18px; box-shadow:0 16px 40px #0009; outline:none; animation:replica-dialog-in 180ms ease-out; }
+.game-shell .replica-detail .modal-body { padding:16px; }
+.game-shell .replica-detail .dc-head { margin:-16px -16px 16px; min-height:52px; padding:10px 14px; }
+.game-shell .replica-detail .dc-head h2 { font:700 28px/1 var(--font-title); }
+.game-shell .replica-detail .dc-sum { font-size:14px; gap:10px; }
+.game-shell .replica-detail .dc-top { display:grid; grid-template-columns:148px minmax(0,1fr); gap:16px; }
+.game-shell .replica-detail .dc-hero { display:flex; position:relative; align-items:center; justify-content:center; min-height:148px; overflow:hidden; }
+.game-shell .replica-detail .capture-pokemon-idle { display:flex; transform:scale(.78); transform-origin:50% 85%; animation:capture-pokemon-idle 2.4s ease-in-out infinite; }
+@keyframes capture-pokemon-idle { 0%,100% { transform:translateY(0) scale(.78); } 50% { transform:translateY(-2px) scale(.81,.75); } }
+@media (prefers-reduced-motion:reduce) { .game-shell .replica-detail .capture-pokemon-idle { animation:none; } }
+.game-shell .replica-detail .dc-ball { position:absolute; top:10px; right:10px; width:24px; height:24px; image-rendering:pixelated; }
+.game-shell .replica-detail .genus { font:700 18px var(--font-title); margin-bottom:8px; }
+.game-shell .replica-detail .badges { display:flex; flex-wrap:wrap; gap:4px; }
+.game-shell .replica-detail .type { font-size:14px; }
+.game-shell .replica-detail .rarity { color:#9aa4b1; font-size:14px; }
+.game-shell .replica-detail .dc-facts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; margin-top:10px; }
+.game-shell .replica-detail .dc-fact { padding:5px 7px; border-radius:8px; background:#252a3d; color:var(--muted); font:400 14px var(--font); }
+.game-shell .replica-detail .dc-fact b { display:flex; align-items:center; gap:3px; color:var(--text); font-weight:700; font-size:16px; }
+.game-shell .replica-detail .dc-fact img { width:18px; height:18px; image-rendering:pixelated; }
+.game-shell .replica-detail .flavor { font:400 18px/1.45 var(--font); color:var(--text); margin:16px 0 4px; }
+.game-shell .replica-detail .modal-actions { padding:16px; border-top:0; }
+.game-shell .replica-detail .modal-actions .btn { width:100%; min-height:44px; font:700 20px var(--font-title); text-transform:uppercase; letter-spacing:.06em; }
+.game-shell .replica-stat-details { margin-top:16px; border:1px solid #333a52; border-radius:8px; padding:10px; }
+.game-shell .replica-stat-details summary { cursor:pointer; display:flex; align-items:center; justify-content:space-between; font-family:var(--font-title); }
+.game-shell .replica-stat-details summary span { font-size:16px; color:var(--muted); }
+.game-shell .replica-stats { display:flex; flex-direction:column; gap:6px; margin-top:12px; }
+.game-shell .replica-stats > div { display:grid; grid-template-columns:34px 30px 1fr; align-items:center; gap:8px; font-size:16px; }
+.game-shell .replica-stats i { height:7px; background:#333a52; border-radius:5px; overflow:hidden; }
+.game-shell .replica-stats i span { display:block; height:100%; }
+.game-shell .replica-mon-actions { margin-top:16px; display:flex; justify-content:flex-end; flex-wrap:wrap; gap:8px; }
+.game-shell .replica-mon-actions .btn { font-size:16px; }
+.game-shell .mobile-navigation,.game-shell .mobile-menu-backdrop { display:none; }
+@keyframes replica-dialog-in { from { opacity:0; transform:translateY(8px) scale(.97); } to { opacity:1; transform:none; } }
+@media (min-width:1600px) { .game-shell > main { grid-template-columns:248px minmax(0,1fr); } .game-shell .adventure-view { grid-template-columns:minmax(0,1fr) 320px; } }
+@media (max-width:700px) { .game-shell .collection-page .team-slots { grid-template-columns:repeat(3,minmax(0,1fr)); } .game-shell .replica-detail .dc-top { grid-template-columns:120px minmax(0,1fr); gap:12px; } .game-shell .replica-detail .dc-sum { flex-wrap:wrap; justify-content:flex-end; } }
+@media (max-width:800px) {
+  .game-shell > main { display:block; min-width:0; width:100%; padding:16px 16px 88px; }
+  .game-shell > main > .game-sidebar { display:none; }
+  .game-shell .adventure-view { display:flex; flex-direction:column; min-width:0; gap:16px; }
+  .game-shell .adventure-view > * { width:100%; }
+  .game-shell .adventure-view[hidden] { display:flex; left:16px; right:16px; top:16px; }
+  .game-shell .adventure-view .battle-column { min-height:0; }
+  .game-shell .battle-news { min-height:140px; }
+  .game-shell .battle-stage { aspect-ratio:4/3; }
+  .game-shell .battle-weather { font-size:14px; height:26px; padding:0 6px; }
+  .game-shell .battle-weather > span:nth-child(3),.game-shell .battle-weather > span:last-child { display:none; }
+  .game-shell .battle-team-slot > span { font-size:10px; }
+  .game-shell .battle-bottom { left:54px; right:6px; bottom:6px; gap:6px; height:36px; }
+  .game-shell .capture-result { bottom:58px; }
+  .game-shell .battle-bottom .battle-log { height:36px; min-height:0; padding:5px 8px; font-size:14px; }
+  .game-shell .battle-speed { min-width:88px; width:88px; height:34px; padding:2px; }
+  .game-shell .battle-speed button { padding:4px; font-size:14px; }
+  .game-shell .replica-topbar { padding:0 8px; gap:6px; width:100%; }
+  .game-shell .replica-topbar .tb-prof { gap:6px; padding:0; }
+  .game-shell .replica-topbar .tb-who > b { display:none; }
+  .game-shell .replica-topbar .tb-who > small { font-size:0; }
+  .game-shell .replica-topbar .tb-who em { font-size:14px; white-space:nowrap; }
+  .game-shell .replica-topbar .side-wallet { margin-left:0; gap:0; }
+  .game-shell .replica-topbar .side-money { padding:0 8px; height:36px; }
+  .game-shell .replica-topbar .side-money b { font-size:18px; white-space:nowrap; }
+  .game-shell .replica-topbar .tb-cur,.game-shell .replica-topbar .wallet-reg,.game-shell .replica-topbar .tb-online,.game-shell .replica-topbar .tb-save > span { display:none; }
+  .game-shell .replica-topbar .tb-acts { gap:5px; }
+  .game-shell .replica-topbar .tb-acts > button { min-width:36px; width:36px; padding:0; }
+  .game-shell .replica-topbar .tc-new { display:none; }
+  .game-shell .collection-page .map-head { gap:8px; padding:10px 12px; }
+  .game-shell .collection-page .map-sum { font-size:14px; gap:8px; }
+  .game-shell .collection-page .team-slots { grid-template-columns:repeat(3,minmax(0,1fr)); padding:10px; gap:8px; }
+  .game-shell .collection-page .slot { padding:6px 3px 10px; }
+  .game-shell .replica-team-art { height:106px; }
+  .game-shell .replica-team-art .replica-sprite { --sprite-k:2!important; }
+  .game-shell .collection-page .slot .name { font-size:16px; }
+  .game-shell .collection-page .slot.empty { min-height:160px; }
+  .game-shell .slot-types { top:4px; left:4px; gap:2px; }
+  .game-shell .slot-types .type { font-size:10px; padding:1px 3px; }
+  .game-shell .team-avg { margin-left:auto; }
+  .game-shell .team-sets { margin-left:0; }
+  .game-shell .pc-sticky { top:60px; padding-top:12px; }
+  .game-shell .collection-page .pc-filters { gap:6px; }
+  .game-shell .collection-page input[type=search] { flex-basis:100%; }
+  .game-shell .collection-page .btn.small,.game-shell .collection-page .replica-filter,.game-shell .collection-page .replica-sort { min-height:36px; height:36px; font-size:14px; padding:4px 8px; }
+  .game-shell .collection-page .pc-grid { grid-template-columns:repeat(auto-fill,minmax(82px,1fr)); padding:8px; gap:4px; }
+  .game-shell .collection-page .pc-cell { height:104px; }
+  .game-shell .dex-hero > .map-head .map-sum { flex-basis:100%; justify-content:flex-start; }
+  .game-shell .dex-hero-body { flex-direction:column; align-items:stretch; padding:16px 14px; }
+  .game-shell .dex-ring { align-self:center; }
+  .game-shell .replica-region-progress { grid-template-columns:70px minmax(0,1fr) 54px; gap:8px; }
+  .game-shell .dex-last { flex-direction:column; gap:12px; margin-top:20px; }
+  .game-shell .dex-last > div { flex-wrap:wrap; justify-content:center; gap:8px; }
+  .game-shell .collection-page .dex-grid { grid-template-columns:repeat(auto-fill,minmax(74px,1fr)); padding:8px; gap:4px; }
+  .game-shell .collection-page .dex-cell { min-height:120px; padding:4px; }
+  .game-shell .replica-dex-art { height:72px; }
+  .game-shell .replica-dex-art .replica-sprite { --sprite-k:1!important; }
+  .game-shell .dex-cell .nm { font-size:14px; }
+  .game-shell .replica-region-meter { width:68px; }
+  .game-shell .replica-modal-backdrop { padding:16px; }
+  .game-shell .replica-detail { max-height:calc(100dvh - 32px); }
+  .game-shell .replica-detail .dc-top { grid-template-columns:120px minmax(0,1fr); gap:12px; }
+  .game-shell .replica-detail .dc-id { display:contents; }
+  .game-shell .replica-detail .dc-hero { grid-column:1; grid-row:1; }
+  .game-shell .replica-detail .genus { grid-column:2; grid-row:1; align-self:start; font-size:16px; }
+  .game-shell .replica-detail .badges { grid-column:2; grid-row:1; align-self:start; margin-top:32px; }
+  .game-shell .replica-detail .dc-facts { grid-column:1/-1; grid-row:2; margin-top:0; }
+  .game-shell .replica-detail .dc-head h2 { font-size:26px; }
+  .game-shell .replica-detail .dc-sum { font-size:12px; gap:5px; }
+  .game-shell .replica-detail .flavor { font-size:16px; }
+  .game-shell .mobile-navigation { display:grid; position:fixed; z-index:80; left:8px; right:8px; bottom:8px; grid-template-columns:repeat(4,1fr); height:64px; padding:4px 4px max(4px,env(safe-area-inset-bottom)); border:2px solid #333a52; border-radius:14px; background:#1c2030f5; box-shadow:0 4px 18px #0006; }
+  .game-shell .mobile-navigation button { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; border-radius:8px; color:#c3c9d8; font:700 14px var(--font); }
+  .game-shell .mobile-navigation button[aria-current=page] { background:#e3353b; color:white; }
+  .game-shell .mobile-navigation img { width:26px; height:24px; object-fit:contain; image-rendering:pixelated; }
+  .game-shell .mobile-menu-icon { font-size:24px; line-height:24px; }
+  .game-shell.mobile-menu-open > main > .game-sidebar { display:flex; position:fixed; z-index:100; top:60px; bottom:80px; left:0; height:auto; max-height:none; width:264px; padding:12px; transform:none; background:#171b2a; border-right:2px solid #333a52; overflow-y:auto; }
+  .game-shell .mobile-menu-backdrop { display:block; position:fixed; z-index:90; inset:60px 0 80px; background:#060810a6; }
+}

@@ -1,0 +1,220 @@
+{
+  "text": "Audit#6563\nPokédex 1 / 151\n3,000 ₽\n0\nSave\n⚙\nKanto · Chapter 1\nBoulder Badge\n▾\nStep 2 / 21 · 5 %\nLv. 14–20\nProgress\nTeam/PC\nPokédex\nActivities\nDay Care\nGame Corner\nRaids\nUnderground\nSocial\nFriends\nTrades\nShop\nACHIEVEMENTS\nGUIDE\nDISCORD\nAchievements\ni\n0 / 160 unlocked\nLooks\n0 / 87\nFrames\n0 / 33\n▶\nCutscenes\n0 / 40\nTO UNLOCK\n21\nLOOK\nCatch every Kanto Pokémon, Legendary and Mythical Pokémon included.\n1 / 151\nLOOK\nWin 10 battles.\n0 / 10\nLOOK\nCatch 10 Pokémon.\n0 / 10\nLOOK\nEarn the Boulder Badge.\nLOOK\nEarn the Cascade Badge.\nLOOK\nCatch 10 Water-type species.\n0 / 10\nLOOK\nCatch 10 Rock- or Ground-type species.\n0 / 10\nLOOK\nEarn the Rainbow Badge.\nLOOK\nEarn the Marsh Badge.\nLOOK\nEarn the 8 Kanto Badges.\n0 / 8\nLOOK\nEvolve 30 Pokémon.\n0 / 30\nLOOK\nBeat Blue at the League to unlock it.\nLOOK\nCatch 500 Pokémon, duplicates included.\n0 / 500\nLOOK\nCatch every Water-type Pokémon from Kanto.\n0 / 32\nLOOK\nRevive the three Kanto fossils.\n0 / 3\nLOOK\nHatch 50 Eggs.\n0 / 50\nLOOK\nGet Vaporeon, Jolteon and Flareon.\n0 / 3\nLOOK\nComplete 20 trades.\n0 / 20\nLOOK\nWin 25 shiny raids.\n0 / 25\nLOOK\nBeat Giovanni in Viridian City without any of your Pokémon fainting.\nLOOK\nOwn 10 shiny Pokémon.\n0 / 10\n??? · Keep going on your adventure to discover more achievements\n⚙\nOptions\n✕\nGAME\nGeneral\nLanguage\nDISPLAY\nGraphics\nPerformance\nACCOUNT\nSave\nHELP\nWhat's new\nNEW\nAdvanced\nGeneral\nNew Pokémon card\nShows the Pokédex card for every new catch. A shiny always gets its card\nAuto switch\nSends out the best Pokémon against the opponent\nShow me in the feed\nYour feats show up for other trainers (signed-in account)\nAutosave · 0 s ago\nPoke'Catch v0.4.103",
+  "buttons": [
+    {
+      "id": "trainer-btn",
+      "text": "Audit#6563Pokédex 1 / 151\n      NEW",
+      "disabled": false
+    },
+    {
+      "id": "save-btn",
+      "text": "Save",
+      "disabled": false
+    },
+    {
+      "id": "options-btn",
+      "text": "⚙",
+      "disabled": false
+    },
+    {
+      "id": "side-chapter",
+      "text": "Kanto · Chapter 1Boulder Badge▾\n      \n      Step 2 / 21 · 5 %Lv. 14–20",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Progress",
+      "screen": "map",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Team/PC",
+      "screen": "team",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Pokédex",
+      "screen": "pokedex",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Activities",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Day Care",
+      "screen": "pension",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Game Corner",
+      "screen": "casino",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "RaidsRaidsRaids open once you've beaten the Kanto League.",
+      "screen": "raid",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "UndergroundUndergroundFurther along in the adventure",
+      "screen": "underground",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Social",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Friends",
+      "screen": "friends",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Trades",
+      "screen": "trade",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Shop",
+      "screen": "shop",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Achievements",
+      "screen": "achievements",
+      "disabled": false
+    },
+    {
+      "id": "guide-btn",
+      "text": "Guide",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "iAchievementsYour feats unlock looks and frames for your Trainer Card, on their own as soon as the goal is met. Tap \"Wear\" to show them off; \"Almost there!\" lists the ones within reach. Legendaries you catch and some Champions you beat also unlock their cutscene, to watch again here.",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "LooksLooks0 / 87",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "FramesFrames0 / 33",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "▶\n        CutscenesCutscenes0 / 40",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "✕",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "General",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Language",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Graphics",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Performance",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Save",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "What's newNEW",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Advanced",
+      "disabled": false
+    }
+  ],
+  "geometry": {
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1430,
+      "height": 60
+    },
+    ".sidebar": null,
+    "#arena": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".arena": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".scene-bar": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".capture-result": null,
+    ".dexcard-modal": {
+      "x": 175,
+      "y": 110,
+      "width": 1080,
+      "height": 680
+    },
+    ".team-slots": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".dex-hero": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".lab-fx": null,
+    ".hatch-fx.gift": null,
+    "#modal-root": {
+      "x": 0,
+      "y": 0,
+      "width": 1430,
+      "height": 900
+    }
+  }
+}

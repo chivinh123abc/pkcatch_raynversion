@@ -1,0 +1,84 @@
+import { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
+import { getPokemonSpecies, getPokemonSpriteUrl } from '../data/pokemonData';
+import { TYPE_COLORS } from '../data/typeChart';
+import DETAILS from '../data/pokemonDetails.json';
+import BOUNDS from '../data/spriteBounds.json';
+import { useGameStore } from '../store/useGameStore';
+import { PokemonInstance } from '../types/game';
+import { collectionMove } from './collectionUtils';
+
+export function PokemonSprite({ id, shiny = false, size = 132, scale: fixedScale, unknown = false }: { id: number; shiny?: boolean; size?: number; scale?: number; unknown?: boolean }) {
+  const bounds = BOUNDS[`assets/pokemon/${id}.png`] || [0, 0, 68, 56];
+  const width = bounds[2] - bounds[0], height = bounds[3] - bounds[1];
+  const scale = fixedScale || Math.max(1, Math.floor(size / Math.max(width, height)));
+  return <span className={`replica-sprite ${unknown ? 'unknown' : ''}`} style={{ '--sprite-k': scale, width: `calc(${width}px * var(--sprite-k))`, height: `calc(${height}px * var(--sprite-k))` } as React.CSSProperties}>
+    <img src={getPokemonSpriteUrl(id, shiny)} alt="" draggable={false} style={{ width: 'calc(68px * var(--sprite-k))', height: 'calc(56px * var(--sprite-k))', left: `calc(${-bounds[0]}px * var(--sprite-k))`, top: `calc(${-bounds[1]}px * var(--sprite-k))` }} />
+  </span>;
+}
+
+export function PokemonDetails({ speciesId, level, shiny = false, isNew = false, capture = false, onClose, actions, mon, notice }: {
+  speciesId: number; level?: number; shiny?: boolean; isNew?: boolean; capture?: boolean; onClose: () => void; actions?: React.ReactNode; mon?: PokemonInstance; notice?: string;
+}) {
+  const dialog = useRef<HTMLDivElement>(null);
+  const close = useRef(onClose); close.current = onClose;
+  const caught = useGameStore(s => s.pokedexCaught);
+  const seen = useGameStore(s => s.pokedexSeen);
+  const ownedCount = useGameStore(s => [...s.party, ...s.pcBox].filter(mon => mon.speciesId === speciesId).length);
+  const species = getPokemonSpecies(speciesId);
+  const known = isNew || caught.includes(speciesId) || seen.includes(speciesId);
+  const info = DETAILS[speciesId];
+  const color = TYPE_COLORS[species.types[0]];
+  const stats = mon?.stats || species.baseStats;
+  useEffect(() => {
+    const previous = document.activeElement as HTMLElement | null;
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const background = [...(document.querySelector('.game-shell')?.children || [])].filter(element => !element.classList.contains('replica-modal-backdrop')).map(element => ({ element: element as HTMLElement, inert: (element as HTMLElement).inert }));
+    background.forEach(({ element }) => { element.inert = true; });
+    dialog.current?.focus();
+    const keydown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { event.preventDefault(); if (!capture) close.current(); }
+      if (event.key !== 'Tab') return;
+      const elements = [...(dialog.current?.querySelectorAll<HTMLElement>('button:not(:disabled), summary, [tabindex="0"]') || [])];
+      const first = elements[0], last = elements[elements.length - 1];
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === dialog.current)) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && (document.activeElement === last || document.activeElement === dialog.current)) { event.preventDefault(); first?.focus(); }
+    };
+    document.addEventListener('keydown', keydown);
+    return () => { document.body.style.overflow = overflow; background.forEach(({ element, inert }) => { element.inert = inert; }); document.removeEventListener('keydown', keydown); if (previous?.isConnected) previous.focus(); };
+  }, [capture]);
+  return createPortal(<div className="replica-modal-backdrop" onMouseDown={event => { if (!capture && event.target === event.currentTarget) onClose(); }}>
+    <div ref={dialog} className="modal dexcard-modal replica-detail" role="dialog" aria-modal="true" aria-labelledby="pokemon-detail-name" tabIndex={-1} style={{ '--c': color } as React.CSSProperties}>
+      <div className="modal-body"><div className="dexcard v2">
+        <div className="dc-head"><h2 id="pokemon-detail-name">{known ? species.name : '???'}</h2>{isNew && <span className="dc-new">New</span>}{shiny && <span className="dc-new">Shiny</span>}
+          <div className="dc-sum"><span>No. <b>{String(speciesId).padStart(3, '0')}</b></span><span>Kanto <b>{new Set(caught).size}</b>/151</span>{!capture && <button className="dc-x" aria-label="Close Pokémon details" onClick={onClose}>✕</button>}</div>
+        </div>
+        <div className="dc-top">
+          <div className={`dc-hero ${caught.includes(speciesId) ? 'caught' : 'not-caught'}`}>
+            {caught.includes(speciesId) && <img className="dc-ball" src="/assets/items/poke-ball.png" alt="Caught" />}
+            <span className={capture ? 'capture-pokemon-idle' : undefined}>
+              <PokemonSprite id={speciesId} shiny={shiny} size={128} unknown={!known} />
+            </span>
+          </div>
+          <div className="dc-id"><div className="genus">{known ? info?.genus || 'Pokémon' : 'Unknown Pokémon'}</div>
+            {known && <div className="badges">{species.types.map(type => <span className="type" key={type} style={{ '--tc': TYPE_COLORS[type], background: TYPE_COLORS[type] } as React.CSSProperties}>{type}</span>)}<span className="rarity">● {species.catchRate > 120 ? 'Common' : species.catchRate > 45 ? 'Uncommon' : 'Rare'}</span></div>}
+          </div>
+            <div className="dc-facts">
+              {level !== undefined && <div className="dc-fact">Level<b>{level}</b></div>}
+              {known && <><div className="dc-fact">Height<b>{info?.height ?? '—'} m</b></div><div className="dc-fact">Weight<b>{info?.weight ?? '—'} kg</b></div></>}
+              <div className="dc-fact">Caught<b><img src="/assets/items/poke-ball.png" alt="" />{Math.max(ownedCount, caught.includes(speciesId) ? 1 : 0)}</b></div>
+              {mon && !capture && <><div className="dc-fact">HP<b>{mon.currentHp} / {mon.maxHp}</b></div><div className="dc-fact replica-move-fact">Move<b>{collectionMove(mon)}</b></div></>}
+            </div>
+        </div>
+        <p className={`flavor ${known ? '' : 'muted'}`}>{known ? info?.flavor || species.name : 'Never encountered… for now!'}</p>
+        {known && !capture && <details className="replica-stat-details"><summary>Stats <span>Total {Object.values(stats).reduce((a, b) => a + b, 0)}</span></summary>
+          <div className="replica-stats">{Object.entries(stats).map(([key, value]) => <div key={key}><span>{({hp:'HP',attack:'ATK',defense:'DEF',spAttack:'SPA',spDefense:'SPD',speed:'SPE'})[key]}</span><b>{value}</b><i><span style={{ width: `${Math.min(100, value / 180 * 100)}%`, background: color }} /></i></div>)}</div>
+        </details>}
+        {actions && <div className="replica-mon-actions">{actions}</div>}
+        {notice && <p className="replica-action-status" role="status">{notice}</p>}
+      </div></div>
+      {capture && <div className="modal-actions solo"><button className="btn gold" onClick={onClose}>Continue</button></div>}
+    </div>
+  </div>, document.querySelector('.game-shell') || document.body);
+}

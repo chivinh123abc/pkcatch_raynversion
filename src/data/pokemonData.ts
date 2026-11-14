@@ -1,4 +1,5 @@
 import { CombatEffect, PokemonSpecies, PokemonStats, PokemonType } from '../types/game';
+import { getTypeMultiplier } from './typeChart';
 
 export const POKEMON_SPECIES_MAP: Record<number, PokemonSpecies> = {
   1: {
@@ -1305,8 +1306,8 @@ const POKESPRITE_SPECIAL_SLUGS: Record<number, string> = {
 
 export function getPokemonSpriteUrl(speciesId: number, isShiny: boolean = false): string {
   // Ưu tiên tải trực tiếp từ bộ sprite cục bộ trích xuất từ APK game gốc (1-556)
-  if (speciesId >= 1 && speciesId <= 556) {
-    return isShiny ? `/assets/shiny/${speciesId}.png` : `/assets/pokemon/${speciesId}.png`;
+  if (speciesId >= 1 && speciesId <= 556 && !isShiny) {
+    return `/assets/pokemon/${speciesId}.png`;
   }
 
   const sub = isShiny ? 'shiny' : 'regular';
@@ -1417,8 +1418,18 @@ export const TYPE_MOVES_MAP: Record<PokemonType, MoveData[]> = {
   Fairy: [move('Moonblast', 'moonblast', 'Fairy', 'special', 'fairy'), move('Dazzling Gleam', 'dazzling-gleam', 'Fairy', 'special', 'fairy')],
 };
 
-export function getPokemonMove(types: PokemonType[]): MoveData {
-  const primaryType = types[0] || 'Normal';
-  const movePool = TYPE_MOVES_MAP[primaryType] || TYPE_MOVES_MAP['Normal'];
-  return movePool[Math.floor(Math.random() * movePool.length)];
+export function getPokemonMove(types: PokemonType[], enemyTypes?: PokemonType[], random: () => number = Math.random): MoveData {
+  let chosenType: PokemonType = types[0] || 'Normal';
+  if (enemyTypes && enemyTypes.length > 0 && types.length > 1) {
+    let bestMult = -1;
+    for (const t of types) {
+      const mult = getTypeMultiplier([t], enemyTypes);
+      if (mult > bestMult) {
+        bestMult = mult;
+        chosenType = t;
+      }
+    }
+  }
+  const movePool = TYPE_MOVES_MAP[chosenType] || TYPE_MOVES_MAP['Normal'];
+  return movePool[Math.floor(random() * movePool.length)];
 }

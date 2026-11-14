@@ -1,0 +1,203 @@
+{
+  "capturedAt": "2026-11-14T12:18:15.422Z",
+  "url": "https://pokecatch-online.netlify.app/",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "deviceScaleFactor": 1,
+  "profile": "fresh isolated context; no user account or save",
+  "sources": [
+    {
+      "url": "https://pokecatch-online.netlify.app/",
+      "file": "scratch/visual-parity/reference-2026-11-14/index.html",
+      "sha256": "c316581f008ed52c54007b4c20bbf1945134aeb4c47c5644642847238296ef3d"
+    },
+    {
+      "url": "https://pokecatch-online.pages.dev/boot.js",
+      "httpStatus": 200,
+      "file": "scratch/visual-parity/reference-2026-11-14/boot.js",
+      "bytes": 48986,
+      "sha256": "597c8b762bf397b85e38a9afe20eeb094b2cefd13e13bfd66f575fff979a3ae5"
+    },
+    {
+      "url": "https://pokecatch-online.pages.dev/bundle/app.7130b4d937.css",
+      "httpStatus": 200,
+      "file": "scratch/visual-parity/reference-2026-11-14/app.7130b4d937.css",
+      "bytes": 671506,
+      "sha256": "7130b4d937e06bcbbb9c6dee9faf6ca3325aefe12c68a3f1d849ea4b6d2f3c20"
+    },
+    {
+      "url": "https://pokecatch-online.pages.dev/bundle/vendor-supabase.8596965fe9.js",
+      "httpStatus": 200,
+      "file": "scratch/visual-parity/reference-2026-11-14/vendor-supabase.8596965fe9.js",
+      "bytes": 110797,
+      "sha256": "8596965fe918e656600a1b568d3a168f5c0d3d22a600886bb6f44a6555db01e7"
+    },
+    {
+      "url": "https://pokecatch-online.pages.dev/bundle/lang-en.8974090e4d.js",
+      "httpStatus": 200,
+      "file": "scratch/visual-parity/reference-2026-11-14/lang-en.8974090e4d.js",
+      "bytes": 314246,
+      "sha256": "8974090e4db6c9d5931571cc05778f02ba5835bd40ad263422d90d17473a876a"
+    },
+    {
+      "url": "https://pokecatch-online.pages.dev/bundle/app.c0c995f8f9.js",
+      "httpStatus": 200,
+      "file": "scratch/visual-parity/reference-2026-11-14/app.c0c995f8f9.js",
+      "bytes": 2700388,
+      "sha256": "c0c995f8f99702b2af8e19a46a386cd6a04165c66537adb76b2a732b94a66f54"
+    }
+  ],
+  "errors": [],
+  "failures": [],
+  "httpStatus": 200,
+  "initial": {
+    "title": "Poke'Catch",
+    "text": "Red\nPokédex\n0 ₽\nSave\n⚙\nProgress\nTeam/PC\nPokédex\nActivities\nDay Care\nGame Corner\nRaids\nUnderground\nSocial\nFriends\nTrades\nBlack Market\nShop\nAchievements\nGUIDE\nDISCORD\nOff on an adventure!\n×1\n×2\n×3\nPoke'Catch\nNEW GAME\nHOW TO PLAY\nCHANGELOGS\nNEW\nSIGN IN WITH DISCORD\nSIGN IN WITH GOOGLE\n\nPersonal, non-commercial fan project. Pokémon and related names are trademarks of Nintendo, Game Freak and Creatures.\nSprites: Pokémon Showdown, PokéSprite.",
+    "buttons": [
+      {
+        "id": "trainer-btn",
+        "text": "RedPokédex"
+      },
+      {
+        "id": "save-btn",
+        "text": "Save"
+      },
+      {
+        "id": "options-btn",
+        "text": "⚙"
+      },
+      {
+        "id": "side-chapter",
+        "text": ""
+      },
+      {
+        "id": "",
+        "text": "Progress",
+        "screen": "map"
+      },
+      {
+        "id": "",
+        "text": "Team/PC",
+        "screen": "team"
+      },
+      {
+        "id": "",
+        "text": "Pokédex",
+        "screen": "pokedex"
+      },
+      {
+        "id": "",
+        "text": "Activities"
+      },
+      {
+        "id": "",
+        "text": "Day Care",
+        "screen": "pension"
+      },
+      {
+        "id": "",
+        "text": "Game Corner",
+        "screen": "casino"
+      },
+      {
+        "id": "",
+        "text": "Raids",
+        "screen": "raid"
+      },
+      {
+        "id": "",
+        "text": "Underground",
+        "screen": "underground"
+      },
+      {
+        "id": "",
+        "text": "Social"
+      },
+      {
+        "id": "",
+        "text": "Friends",
+        "screen": "friends"
+      },
+      {
+        "id": "",
+        "text": "Trades",
+        "screen": "trade"
+      },
+      {
+        "id": "",
+        "text": "Black Market",
+        "screen": "market"
+      },
+      {
+        "id": "",
+        "text": "Shop",
+        "screen": "shop"
+      },
+      {
+        "id": "",
+        "text": "Achievements",
+        "screen": "achievements"
+      },
+      {
+        "id": "guide-btn",
+        "text": "Guide"
+      },
+      {
+        "id": "",
+        "text": "×1"
+      },
+      {
+        "id": "",
+        "text": "×2"
+      },
+      {
+        "id": "",
+        "text": "×3"
+      },
+      {
+        "id": "",
+        "text": "New game"
+      },
+      {
+        "id": "",
+        "text": "How to play"
+      },
+      {
+        "id": "",
+        "text": "ChangelogsNEW"
+      },
+      {
+        "id": "",
+        "text": "Sign in with Discord"
+      },
+      {
+        "id": "",
+        "text": "Sign in with Google"
+      }
+    ]
+  },
+  "screens": [
+    "onboarding",
+    "before-starter",
+    "starter",
+    "starter-card",
+    "adventure",
+    "map",
+    "team",
+    "pokedex",
+    "shop",
+    "achievements",
+    "settings",
+    "pension",
+    "casino",
+    "raid:disabled",
+    "raid-locked-menu",
+    "underground:disabled",
+    "underground-locked-menu",
+    "friends",
+    "trade",
+    "market:hidden"
+  ]
+}

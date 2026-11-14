@@ -1,3 +1,4 @@
+import { useArenaEffects } from '../game/presentation/useArenaEffects';
 import React, { useState, useEffect, useRef } from 'react';
 import { useGameStore } from '../store/useGameStore';
 import {
@@ -8,8 +9,6 @@ import {
 } from '../data/pokemonData';
 import { ALL_CHAPTERS, DEFAULT_CHAPTER } from '../data/chaptersData';
 import { runDitherTransition } from '../utils/ditherTransition';
-import { BattleFX } from '../utils/battleFxEngine';
-import { CaptureFX } from '../utils/captureFxEngine';
 import SPRITE_BOUNDS from '../data/spriteBounds.json';
 
 // Animated pixel rain canvas matching Poke'Catch
@@ -67,160 +66,10 @@ const RainEffect: React.FC = () => {
   );
 };
 
-// Authentic Poke'Catch Pokemon Center Heal Stage with Canvas Pads
-const PokemonCenterHealStage: React.FC<{
-  chapterName: string;
-  party: any[];
-  healProgress: number;
-  onSkip: () => void;
-}> = ({ chapterName, party, healProgress, onSkip }) => {
-  const padsCanvasRef = useRef<HTMLCanvasElement | null>(null);
-  const trayRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const canvas = padsCanvasRef.current;
-    const tray = trayRef.current;
-    if (!canvas || !tray) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animId = 0;
-    const ce = 2; // pixel scale
-    const pinkPal = ['#ffffff', '#ffe0e8', '#ffb3c7', '#ff8fb1', '#d85a80', '#8c2a48'];
-    const darkBase = ['#2a2440', '#1a1628', '#0d0b16'];
-
-    const putPixel = (x: number, y: number, color: string, alpha: number = 1) => {
-      x = Math.round(x);
-      y = Math.round(y);
-      if (alpha < 1 && (alpha <= 0 || (((x + y) & 3) / 4 >= alpha * 1.2 && (x ^ y) % 2))) return;
-      ctx.fillStyle = color;
-      ctx.fillRect(x, y, 1, 1);
-    };
-
-    const drawEllipse = (
-      cx: number,
-      cy: number,
-      rx: number,
-      ry: number,
-      color: string,
-      alpha: number = 1,
-      innerCut: number = 0
-    ) => {
-      for (let dy = -Math.ceil(ry); dy <= ry; dy++) {
-        for (let dx = -Math.ceil(rx); dx <= rx; dx++) {
-          const dist = (dx * dx) / (rx * rx) + (dy * dy) / (ry * ry);
-          if (dist <= 1 && dist >= innerCut * innerCut) {
-            putPixel(cx + dx, cy + dy, color, alpha);
-          }
-        }
-      }
-    };
-
-    const render = (now: number) => {
-      const machineEl = canvas.parentElement;
-      if (!machineEl) return;
-      const mRect = machineEl.getBoundingClientRect();
-      const targetW = Math.ceil(mRect.width / ce);
-      const targetH = Math.ceil(mRect.height / ce);
-      if (canvas.width !== targetW || canvas.height !== targetH) {
-        canvas.width = targetW;
-        canvas.height = targetH;
-      }
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      const isHealing = healProgress < 100;
-      const j = 0.5 + 0.5 * Math.sin(now / (isHealing ? 100 : 300));
-      const slots = tray.querySelectorAll('.hm-slot');
-
-      slots.forEach((slot) => {
-        const sRect = slot.getBoundingClientRect();
-        const cx = Math.round((sRect.left + sRect.width / 2 - mRect.left) / ce);
-        const cy = Math.round((sRect.bottom - sRect.height * 0.16 - mRect.top) / ce);
-        const rx = Math.round((sRect.width * 0.42) / ce);
-        const ry = Math.max(3, Math.round(rx * 0.32));
-
-        // Ground shadow
-        drawEllipse(cx, cy + ry + 4, rx * 0.8, ry * 0.6, '#000000', 0.45);
-        // Dark bevels
-        drawEllipse(cx, cy + 2, rx, ry, darkBase[2]);
-        drawEllipse(cx, cy + 1, rx, ry, darkBase[1]);
-        drawEllipse(cx, cy, rx, ry, isHealing ? pinkPal[4] : darkBase[0]);
-        drawEllipse(cx, cy, rx, ry, isHealing ? pinkPal[2] : '#5d6788', 1, 0.82);
-
-        if (isHealing) {
-          drawEllipse(cx, cy, rx * (0.5 + 0.08 * j), ry * (0.5 + 0.08 * j), pinkPal[3], 0.9);
-          drawEllipse(cx, cy, rx * 0.25, ry * 0.25, pinkPal[1], 0.8);
-        }
-
-        // Top rim highlight
-        for (let dx = -rx * 0.55; dx <= rx * 0.55; dx++) {
-          const topDy = -ry * Math.sqrt(Math.max(0, 1 - (dx / rx) ** 2));
-          putPixel(cx + dx, cy + topDy, isHealing ? pinkPal[0] : '#c9d2e6');
-        }
-      });
-
-      animId = requestAnimationFrame(render);
-    };
-
-    animId = requestAnimationFrame(render);
-    return () => cancelAnimationFrame(animId);
-  }, [healProgress]);
-
-  return (
-    <div className="heal-fx select-none relative">
-      <div className="hm-stage -translate-y-2">
-        <div className="hm-title font-pixel text-lg sm:text-xl">
-          {chapterName} Pokémon Center
-        </div>
-
-        <div className="hm-machine">
-          <canvas ref={padsCanvasRef} className="hm-pads" />
-          <div ref={trayRef} className="hm-tray">
-            {party.map((mon, slotIdx) => (
-              <div key={mon.uid || slotIdx} className="hm-slot on">
-                <div
-                  className="absolute -top-7 text-emerald-400 font-black text-sm drop-shadow-[0_0_8px_#34d399] animate-heal-cross select-none pointer-events-none"
-                  style={{ animationDelay: `${(slotIdx % 3) * 350}ms` }}
-                >
-                  ✚
-                </div>
-
-                <img
-                  src="/assets/items/poke-ball.png"
-                  alt="Pokéball"
-                  className={`w-9 h-9 sm:w-10 sm:h-10 object-contain pixel-art transition-all duration-300 ${
-                    healProgress >= 90 ? 'brightness-125 scale-105' : 'brightness-100'
-                  }`}
-                  style={{
-                    filter:
-                      healProgress < 100
-                        ? 'drop-shadow(0 0 6px #ff8fb1)'
-                        : 'drop-shadow(0 0 10px rgba(52,211,153,0.8))',
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {healProgress >= 90 && (
-          <div className="hm-msg animate-fade-in" style={{ visibility: 'visible' }}>
-            Your team is in great shape!
-          </div>
-        )}
-      </div>
-
-      <button onClick={onSkip} className="fx-skip-btn">
-        <span>SKIP</span>
-        <span className="text-[11px] text-slate-300">▸▸</span>
-      </button>
-    </div>
-  );
-};
-
 export const Arena: React.FC = () => {
   const [gameClock, setGameClock] = useState(() => new Date());
   const {
+    encounter,
     party,
     activePartyIndex,
     setActivePartyIndex,
@@ -238,6 +87,11 @@ export const Arena: React.FC = () => {
     isCatchable,
     activeTrainer,
     bossIntroActive,
+    allyRecalling,
+    allySendingOut,
+    enemyRecalling,
+    newCatchCard,
+    dismissNewCatchCard,
     chapterCompleteBanner,
     activeDrop,
     berryBuffs,
@@ -249,12 +103,17 @@ export const Arena: React.FC = () => {
     trainerOnField,
     transitionTick,
     duplicatePopup,
+    sidebarExpPopups,
     selectedBall,
     pokedexCaught,
     resolveCombatImpact,
     finishCombatEffect,
     capturePresentation,
     finishCapturePresentation,
+    healPresentation,
+    finishHealPresentation,
+    finishItemDrop,
+    autoCatch,
   } = useGameStore();
 
   const activeCatchBall = React.useMemo(() => {
@@ -282,72 +141,7 @@ export const Arena: React.FC = () => {
   const fxContainerRef = useRef<HTMLDivElement | null>(null);
   const playerMonRef = useRef<HTMLDivElement | null>(null);
   const enemyMonRef = useRef<HTMLDivElement | null>(null);
-
-  // One animation engine owns movement and reports the actual contact frame.
-  const lastCombatKey = useRef<number | null>(null);
-  useEffect(() => {
-    BattleFX.cancel();
-    return () => BattleFX.cancel();
-  }, [currentChapterId, currentStep]);
-  useEffect(() => {
-    if (!combatEffect || lastCombatKey.current === combatEffect.key) return;
-    lastCombatKey.current = combatEffect.key;
-
-    const moveKey = combatEffect.moveKey || combatEffect.moveName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    const isTargetEnemy = combatEffect.target === 'enemy';
-    const attEl = isTargetEnemy ? playerMonRef.current : enemyMonRef.current;
-    const defEl = isTargetEnemy ? enemyMonRef.current : playerMonRef.current;
-
-    const effectiveMove = BattleFX.has(moveKey) ? moveKey : (BattleFX.has('tackle') ? 'tackle' : 'pound');
-    if (attEl && defEl && fxContainerRef.current) {
-      BattleFX.play({
-        move: effectiveMove,
-        attEl,
-        defEl,
-        fxEl: fxContainerRef.current,
-        shakeEl: arenaRef.current,
-        mirror: !isTargetEnemy,
-        speed: combatEffect.speed || gameSpeed,
-        miss: combatEffect.miss,
-        crit: combatEffect.crit,
-        onImpact: () => resolveCombatImpact(combatEffect.key),
-      }).then(() => finishCombatEffect(combatEffect.key))
-        .catch(() => finishCombatEffect(combatEffect.key));
-    } else {
-      finishCombatEffect(combatEffect.key);
-    }
-  }, [combatEffect, resolveCombatImpact, finishCombatEffect]);
-
-  // Keep the ball trajectory, absorption, bounce and shakes on one clock.
-  useEffect(() => {
-    if (!capturePresentation || !arenaRef.current || !fxContainerRef.current || !enemyMonRef.current) return;
-    BattleFX.cancel();
-    let cancelled = false;
-    const arena = arenaRef.current;
-    const target = enemyMonRef.current;
-    const fx = fxContainerRef.current;
-    const rect = arena.getBoundingClientRect();
-    const hero = arena.querySelector('.capture-trainer')?.getBoundingClientRect();
-    const present = capturePresentation.success && capturePresentation.duplicate ? CaptureFX.quick : CaptureFX.play;
-    present(arena, fx, target, {
-      ball: capturePresentation.ball,
-      speed: gameSpeed,
-      shakes: capturePresentation.shakes,
-      success: capturePresentation.success,
-      name: enemy ? getPokemonSpecies(enemy.speciesId).name : undefined,
-      from: hero ? { x: hero.right - rect.left - hero.width * .2, y: hero.top - rect.top + hero.height * .3 } : undefined,
-    }).then(() => { if (!cancelled) finishCapturePresentation(capturePresentation.key); })
-      .catch((error) => {
-        console.warn('Capture presentation failed:', error);
-        if (!cancelled) finishCapturePresentation(capturePresentation.key);
-      });
-    return () => {
-      cancelled = true;
-      fx.querySelectorAll('.capture-sequence').forEach(el => el.remove());
-      target.getAnimations().forEach(animation => animation.cancel());
-      target.style.opacity = '';
-    };
-  }, [capturePresentation, finishCapturePresentation]);
+  const enemySpriteRef = useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
     const clockTimer = window.setInterval(() => setGameClock(new Date()), 30_000);
@@ -457,32 +251,7 @@ export const Arena: React.FC = () => {
     });
   }, [transitionTick, gameSpeed]);
 
-  // Pokémon Center gradual heal progress
-  const [healProgress, setHealProgress] = useState(0);
-
-  useEffect(() => {
-    if (nodeType === 'center') {
-      setHealProgress(0);
-
-      const startTime = performance.now();
-      const duration = 2400 / gameSpeed;
-      let animId: number;
-
-      const tick = (now: number) => {
-        const elapsed = now - startTime;
-        const progress = Math.min(100, Math.round((elapsed / duration) * 100));
-        setHealProgress(progress);
-        if (progress < 100) {
-          animId = requestAnimationFrame(tick);
-        }
-      };
-
-      animId = requestAnimationFrame(tick);
-      return () => cancelAnimationFrame(animId);
-    } else {
-      setHealProgress(0);
-    }
-  }, [nodeType, currentStep, gameSpeed]);
+  useArenaEffects({ arenaRef, fxContainerRef, playerMonRef, enemyMonRef, enemySpriteRef, currentChapter });
 
   const isRaining = currentChapterId === 'kanto-7' ? currentStep <= 5 : currentChapter.weather === 'rain';
   const clockLabel = gameClock.toLocaleTimeString('en-GB', {
@@ -662,6 +431,24 @@ export const Arena: React.FC = () => {
           </div>
         )}
 
+        {/* Trainer VS Intro before trainer battles */}
+        {bossIntroActive && nodeType === 'red' && activeTrainer && (
+          <div className="vs-intro" aria-live="polite">
+            <div className="vs-card left">
+              <img src="/assets/trainers/red.png" alt="Red" />
+              <span className="vs-name">Red</span>
+            </div>
+            <div className="vs-card right">
+              <img src={`/assets/trainers/${activeTrainer.sprite}.png`} alt={activeTrainer.name} />
+              <span className="vs-name">
+                {activeTrainer.name}
+                {activeTrainer.title && <small>{activeTrainer.title}</small>}
+              </span>
+            </div>
+            <div className="vs-text">VS</div>
+          </div>
+        )}
+
         {/* Gym leader reveal before combat */}
         {bossIntroActive && nodeType === 'badge' && activeTrainer && (
           <div className="gym-boss-intro" aria-live="polite" style={{ '--boss-color': '#ffcb05' } as React.CSSProperties}>
@@ -734,36 +521,60 @@ export const Arena: React.FC = () => {
           {party.map((mon, idx) => {
             const sp = POKEMON_SPECIES_MAP[mon.speciesId];
             const isCurrent = idx === activePartyIndex;
+            const isKo = mon.currentHp <= 0;
             const hpPct = Math.max(0, Math.min(100, (mon.currentHp / mon.maxHp) * 100));
 
+            const expPop = sidebarExpPopups?.[mon.uid];
+
             return (
-              <button
+              <div
                 key={mon.uid}
-                onClick={() => setActivePartyIndex(idx)}
-                className={`battle-team-slot rounded-xl border-2 flex flex-col items-center justify-between relative ${
-                  isCurrent
-                    ? 'bg-[#22212d]/95 border-[#ffcb05] shadow-[0_0_10px_rgba(255,203,5,0.45)] scale-105 z-10'
-                    : 'bg-[#151825]/90 border-[#252a3e] hover:border-slate-400'
-                }`}
-                title={`${sp?.name || 'Mon'} — Lv.${mon.level}`}
+                className="relative flex-none"
+                style={{ width: 'var(--tile)', height: 'var(--tile)' }}
               >
-                <img
-                  src={getPokemonSpriteUrl(mon.speciesId, mon.isShiny)}
-                  alt={sp?.name || 'Mon'}
-                  className="w-8 h-8 object-contain pixel-art mt-0.5"
-                />
-                <span className="text-[9px] font-black text-white leading-none font-game">
-                  Lv.{mon.level}
-                </span>
-                <div className="w-[88%] h-[3px] bg-slate-950 rounded-full overflow-hidden mb-0.5">
-                  <div
-                    className={`h-full transition-all duration-300 ${
-                      hpPct > 50 ? 'bg-[#f0607a]' : hpPct > 20 ? 'bg-amber-400' : 'bg-red-600'
-                    }`}
-                    style={{ width: `${hpPct}%` }}
+                <button
+                  onClick={() => setActivePartyIndex(idx)}
+                  className={`battle-team-slot rounded-xl border-2 flex flex-col items-center justify-between relative ${
+                    isKo
+                      ? 'slot-ko bg-[#141722]/90 border-[#222638] opacity-85'
+                      : isCurrent
+                        ? 'bg-[#2b2824]/95 border-[#ffcb05] shadow-[0_2px_0_rgba(0,0,0,0.45),0_0_10px_rgba(255,203,5,0.45)] scale-105 z-10'
+                        : 'bg-[#151825]/90 border-[#252a3e] hover:border-slate-400'
+                  }`}
+                  title={`${sp?.name || 'Mon'} — Lv.${mon.level}`}
+                >
+                  <img
+                    src={getPokemonSpriteUrl(mon.speciesId, mon.isShiny)}
+                    alt={sp?.name || 'Mon'}
+                    className={`object-contain pixel-art ${isKo ? 'grayscale brightness-75 opacity-75' : ''}`}
                   />
-                </div>
-              </button>
+                  <span className={`font-black leading-none font-game ${isKo ? 'text-[#a0a4ae]' : 'text-white'}`}>
+                    Lv.{mon.level}
+                  </span>
+                  <div className="w-[88%] h-[5px] bg-black/35 rounded-full overflow-hidden mb-0.5">
+                    {!isKo && (
+                      <div
+                        className={`h-full transition-all duration-300 shadow-[inset_0_1px_rgba(255,255,255,0.3)] ${
+                          hpPct > 20 ? 'bg-[#f0607a]' : 'bg-[#d6334f]'
+                        }`}
+                        style={{ width: `${hpPct}%` }}
+                      />
+                    )}
+                  </div>
+                </button>
+                {expPop && (
+                  <div
+                    key={`${mon.uid}-${expPop.amount}`}
+                    className={`xp-pop rail-xp${expPop.active ? ' bonus' : ''}`}
+                    style={{
+                      left: 'calc(100% + 8px)',
+                      top: '50%',
+                    }}
+                  >
+                    +{expPop.amount.toLocaleString()} <small>XP{expPop.active ? ' ×1.1' : ''}</small>
+                  </div>
+                )}
+              </div>
             );
           })}
         </div>
@@ -780,36 +591,28 @@ export const Arena: React.FC = () => {
           </div>
         ))}
 
-        {/* Duplicate EXP Flying Particles */}
+        {/* Duplicate EXP Flying Particles (positioned directly over caught enemy at left: 78%) */}
         {duplicatePopup && (
           <>
             <div
               className="xp-pop dup"
-              style={{ right: '28%', top: '55%' }}
+              style={{ left: '78%', top: '58%' }}
             >
               <small className="dup-tag">DUPLICATE</small>
               {duplicatePopup.text}
             </div>
             <div
               className="xp-ball"
-              style={{ right: '28%', top: '60%' }}
+              style={{ left: '78%', top: '63%' }}
             />
           </>
         )}
 
         {/* Main Stage Arena Area */}
-        {nodeType === 'center' ? (
-          /* AUTHENTIC POKÉMON CENTER HEAL SCENE */
-          <PokemonCenterHealStage
-            chapterName={currentChapter.name}
-            party={party}
-            healProgress={healProgress}
-            onSkip={skipHeal}
-          />
-        ) : (
+        {nodeType === 'center' || nodeType === 'question' ? null : (
           <div className="relative z-10 w-full h-full pointer-events-none">
-            {/* Red Trainer (Slides in to left of hero during wild battles and catch sequence) */}
-            {trainerOnField && (
+            {/* Red Trainer (Slides in to left of hero during catch sequence only) */}
+            {trainerOnField && !bossIntroActive && (
               <div className="capture-trainer hero absolute left-[19%] bottom-[22%] -translate-x-1/2 flex flex-col items-center z-20 pointer-events-auto">
                 <img
                   src="/assets/trainers/red.png"
@@ -820,42 +623,55 @@ export const Arena: React.FC = () => {
               </div>
             )}
 
-            {/* PLAYER SIDE: Active Pokémon (left: 38%, bottom: 22%) */}
-            {activeMon && activeSpecies && (
+            {/* PLAYER SIDE: Active Pokémon (left: 30%, bottom: 22%) */}
+            {activeMon && activeSpecies && !bossIntroActive && (
               <div
+                key={`ally-${encounter.encounterId}-${party[activePartyIndex]?.uid}`}
                 ref={playerMonRef}
-                className={`battle-mon ally absolute pointer-events-auto z-10 ${isCatchSequenceActive ? 'invisible' : ''}`}
+                className="battle-mon ally absolute pointer-events-auto z-10"
                 style={{ '--sprite-top': `${spriteTop(activeMon.speciesId)}px` } as React.CSSProperties}
               >
                 <div
                   className="relative"
                 >
-                  {/* Authentic mini-hp pill bar above head */}
-                  <div className="mini-hp">
-                    <div className="hp">
-                      <div
-                        style={{
-                          width: `${(activeMon.currentHp / activeMon.maxHp) * 100}%`,
-                          background: (activeMon.currentHp / activeMon.maxHp) > 0.2 ? '#f0607a' : '#d6334f',
-                        }}
-                      />
+                  {/* Authentic mini-hp pill bar above head (hidden when HP <= 0 or recalling) */}
+                  {activeMon.currentHp > 0 && !allyRecalling && (
+                    <div className="mini-hp">
+                      <div className="hp">
+                        <div
+                          style={{
+                            width: `${(activeMon.currentHp / activeMon.maxHp) * 100}%`,
+                            background: (activeMon.currentHp / activeMon.maxHp) > 0.2 ? '#f0607a' : '#d6334f',
+                          }}
+                        />
+                      </div>
                     </div>
-                  </div>
+                  )}
 
-                  {/* Clean sprite with no outer shadow */}
+                  {/* Authentic pixel ground shadow (behind sprite) */}
+                  {activeMon.currentHp > 0 && !allyRecalling && (
+                    <div className="cb-shadow-pixel" />
+                  )}
+
+                  {/* Clean sprite with KO red-glow silhouette (stays visible until recalled into Pokéball) */}
                   <img
                     src={getPokemonSpriteUrl(activeMon.speciesId, activeMon.isShiny)}
                     alt={activeSpecies.name}
-                    className={`battle-sprite pixel-art select-none -scale-x-100 ${activeMon.currentHp <= 0 ? 'animate-faint' : ''}`}
+                    className={`battle-sprite pixel-art select-none -scale-x-100 ${
+                      activeMon.currentHp <= 0
+                        ? !allyRecalling
+                          ? 'mon-ko [filter:brightness(0)_invert(1)_drop-shadow(0_0_2px_#ff3b3b)_drop-shadow(0_0_5px_#ff3b3b)]'
+                          : 'mon-ko'
+                        : ''
+                    }`}
                   />
 
-                  {/* Authentic pixel ground shadow */}
-                  <div className="cb-shadow-pixel" />
-
-                  {/* Authentic mini-lv text below feet */}
-                  <div className="mini-lv">
-                    <span className="lvn">Lv.{activeMon.level}</span>
-                  </div>
+                  {/* Authentic mini-lv text below feet (hidden when HP <= 0 or recalling) */}
+                  {activeMon.currentHp > 0 && !allyRecalling && (
+                    <div className="mini-lv">
+                      <span className="lvn">Lv.{activeMon.level}</span>
+                    </div>
+                  )}
                 </div>
               </div>
             )}
@@ -864,24 +680,26 @@ export const Arena: React.FC = () => {
             {activeTrainer && currentChapterId !== 'special-mewtwo' && !bossIntroActive && (
               <div className="trainer-slot absolute inset-0 pointer-events-none">
                 <div className="battle-opponent-trainer trainer absolute flex flex-col items-center">
+                  <div className="cb-shadow-pixel z-0" />
                   <img
                     src={`/assets/trainers/${activeTrainer.sprite}.png`}
                     alt={activeTrainer.name}
-                    className="w-24 h-24 sm:w-28 sm:h-28 object-contain pixel-art"
+                    className="relative z-[1] w-24 h-24 sm:w-28 sm:h-28 object-contain pixel-art"
                   />
-                  <div className="cb-shadow-pixel" />
                 </div>
               </div>
             )}
 
             {/* ENEMY SIDE: Wild Pokémon, Trainer Mon, or Caught Pokéball (left: 78%, bottom: 25%) */}
             <div
+              key={`enemy-${encounter.encounterId}-${enemy?.uid}`}
               ref={enemyMonRef}
               className="battle-mon enemy absolute pointer-events-auto z-10"
               style={{ '--sprite-top': `${spriteTop(enemy?.speciesId || 16)}px` } as React.CSSProperties}
             >
-              {enemy && enemySpecies ? (
+              {enemy && enemySpecies && !bossIntroActive ? (
                 <div
+                  key={enemy.uid}
                   className="relative"
                 >
                   {/* Sleeping 'Z' */}
@@ -891,53 +709,72 @@ export const Arena: React.FC = () => {
                     </span>
                   )}
 
-                  {/* Authentic mini-hp pill bar above head */}
-                  <div className="mini-hp">
-                    <div className="hp">
-                      <div
-                        style={{
-                          width: `${(enemy.currentHp / enemy.maxHp) * 100}%`,
-                          background: (enemy.currentHp / enemy.maxHp) > 0.2 ? '#f0607a' : '#d6334f',
-                        }}
-                      />
+                  {/* Authentic mini-hp pill bar above head (hidden during faint/capture/recall) */}
+                  {enemy.currentHp > 0 && !isCatchSequenceActive && !capturePresentation && !enemyRecalling && (
+                    <div className="mini-hp">
+                      <div className="hp">
+                        <div
+                          style={{
+                            width: `${(enemy.currentHp / enemy.maxHp) * 100}%`,
+                            background: (enemy.currentHp / enemy.maxHp) > 0.2 ? '#f0607a' : '#d6334f',
+                          }}
+                        />
+                      </div>
                     </div>
-                  </div>
+                  )}
 
-                  {/* Clean sprite with no outer shadow */}
+                  {/* Authentic pixel ground shadow (behind sprite, hidden when in-ball/fainted/recalling) */}
+                  {enemy.currentHp > 0 && !isCatchSequenceActive && !capturePresentation && !enemyRecalling && (
+                    <div className="cb-shadow-pixel" />
+                  )}
+
+                  {/* Clean sprite with KO fade-out (wild) or KO red glow (trainer) */}
                   <img
+                    ref={enemySpriteRef}
                     src={getPokemonSpriteUrl(enemy.speciesId, enemy.isShiny)}
                     alt={enemySpecies.name}
-                    className={`battle-sprite pixel-art select-none ${enemy.currentHp <= 0 && !isCatchSequenceActive ? 'animate-faint' : ''}`}
+                    className={`battle-sprite pixel-art select-none ${
+                      enemy.currentHp <= 0
+                        ? isCatchSequenceActive
+                          ? 'mon-ko'
+                          : activeTrainer
+                            ? !enemyRecalling
+                              ? 'mon-ko [filter:brightness(0)_invert(1)_drop-shadow(0_0_2px_#ff3b3b)_drop-shadow(0_0_5px_#ff3b3b)]'
+                              : 'mon-ko'
+                            : !(autoCatch && isCatchable)
+                              ? 'mon-ko animate-faint'
+                              : 'mon-ko'
+                        : ''
+                    }`}
                   />
 
-                  {/* Authentic pixel ground shadow */}
-                  <div className="cb-shadow-pixel" />
-
-                  {/* Authentic mini-lv text below feet with owned icon if in dex */}
-                  <div className="mini-lv">
-                    {enemyStatus === 'SLP' && (
-                      <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-emerald-700 text-white uppercase mr-1">
-                        SLP
-                      </span>
-                    )}
-                    <span className="lvn">Lv.{enemy.level}</span>
-                    {pokedexCaught.includes(enemy.speciesId) && (
-                      <img
-                        src="/assets/items/poke-ball.png"
-                        alt="Caught"
-                        className="owned ml-1"
-                        title="Already caught"
-                      />
-                    )}
-                  </div>
+                  {/* Authentic mini-lv text below feet (hidden when HP <= 0 or in-ball/recalling) */}
+                  {enemy.currentHp > 0 && !isCatchSequenceActive && !capturePresentation && !enemyRecalling && (
+                    <div className="mini-lv">
+                      {enemyStatus === 'SLP' && (
+                        <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-emerald-700 text-white uppercase mr-1">
+                          SLP
+                        </span>
+                      )}
+                      <span className="lvn">Lv.{enemy.level}</span>
+                      {pokedexCaught.includes(enemy.speciesId) && (
+                        <img
+                          src="/assets/items/poke-ball.png"
+                          alt="Caught"
+                          className="owned ml-1"
+                          title="Already caught"
+                        />
+                      )}
+                    </div>
+                  )}
                 </div>
               ) : null}
             </div>
           </div>
         )}
 
-        {/* Floating Item Drop */}
-        {activeDrop && (
+        {/* Lightweight Wild KO Money Text (Item/Money Drops at '?' nodes use authentic ItemFX engine) */}
+        {activeDrop && activeDrop.type === 'money-text' && (
           <div
             key={activeDrop.id}
             className="absolute bottom-20 z-30 flex flex-col items-center pointer-events-none transition-all duration-300"
@@ -946,21 +783,6 @@ export const Arena: React.FC = () => {
             <div className="text-sm font-black text-[#ffcb05] drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)] animate-drop-text font-game whitespace-nowrap mb-1">
               +{activeDrop.title}
             </div>
-
-            {activeDrop.type !== 'money-text' && (
-              <div className="relative flex flex-col items-center animate-item-drop">
-                {activeDrop.type === 'money' ? (
-                  <div className="coin-spin-sprite scale-125 drop-shadow-[0_4px_6px_rgba(0,0,0,0.85)] my-2" />
-                ) : (
-                  <img
-                    src={activeDrop.iconUrl}
-                    alt={activeDrop.title}
-                    className="w-12 h-12 object-contain pixel-art drop-shadow-[0_6px_8px_rgba(0,0,0,0.85)]"
-                  />
-                )}
-                <div className="w-10 h-2 bg-black/60 rounded-full blur-[1px] animate-drop-shadow -mt-1" />
-              </div>
-            )}
           </div>
         )}
 
@@ -998,6 +820,8 @@ export const Arena: React.FC = () => {
           Other trainers' feats show up here.
         </p>
       </div>
+
+
     </div>
   );
 };

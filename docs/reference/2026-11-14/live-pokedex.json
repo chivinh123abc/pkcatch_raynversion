@@ -1,0 +1,180 @@
+{
+  "text": "Audit#6563\nPokédex 1 / 151\n3,000 ₽\n0\nSave\n⚙\nKanto · Chapter 1\nBoulder Badge\n▾\nStep 2 / 21 · 5 %\nLv. 14–20\nProgress\nTeam/PC\nPOKÉDEX\nActivities\nDay Care\nGame Corner\nRaids\nUnderground\nSocial\nFriends\nTrades\nShop\nAchievements\nGUIDE\nDISCORD\nPokédex\ni\nSeen 2\n Shinies 0\nRegions complete 0/4\n0.2 %\n1 / 493\nKanto\n1 / 151\nJohto\nHoenn\nSinnoh\nLATEST CATCHES\nSTATUS\n▾\nSHINIES\nTYPES\n▾\nREGIONS\n▾\nKanto\n×2\n150 to go\n1 / 151\n▾\nNo. 001\n???\nNo. 002\n???\nNo. 003\n???\nNEW\nNo. 004\nCharmander\nNo. 005\n???\nNo. 006\n???\nNo. 007\n???\nNo. 008\n???\nNo. 009\n???\nNo. 010\n???\nNo. 011\n???\nNo. 012\n???\nNo. 013\n???\nNo. 014\n???\nNo. 015\n???\nNo. 016\nPidgey\nNo. 017\n???\nNo. 018\n???\nNo. 019\n???\nNo. 020\n???\nNo. 021\n???\nNo. 022\n???\nNo. 023\n???\nNo. 024\n???\nNo. 025\n???\nNo. 026\n???\nNo. 027\n???\nNo. 028\n???\nNo. 029\n???\nNo. 030\n???\nNo. 031\n???\nNo. 032\n???\nNo. 033\n???\nNo. 034\n???\nNo. 035\n???\nNo. 036\n???\nNo. 037\n???\nNo. 038\n???\nNo. 039\n???\nNo. 040\n???\nNo. 041\n???\nNo. 042\n???\nNo. 043\n???\nNo. 044\n???\nNo. 045\n???\nNo. 046\n???\nNo. 047\n???\nNo. 048\n???\nNo. 049\n???\nNo. 050\n???\nNo. 051\n???\nNo. 052\n???\nNo. 053\n???\nNo. 054\n???\nNo. 055\n???\nNo. 056\n???\nNo. 057\n???\nNo. 058\n???\nNo. 059\n???\nNo. 060\n???\nNo. 061\n???\nNo. 062\n???\nNo. 063\n???\nNo. 064\n???\nNo. 065\n???\nNo. 066\n???\nNo. 067\n???\nNo. 068\n???\nNo. 069\n???\nNo. 070\n???\nNo. 071\n???\nNo. 072\n???\nNo. 073\n???\nNo. 074\n???\nNo. 075\n???\nNo. 076\n???\nNo. 077\n???\nNo. 078\n???\nNo. 079\n???\nNo. 080\n???\nNo. 081\n???\nNo. 082\n???\nNo. 083\n???\nNo. 084\n???\nNo. 085\n???\nNo. 086\n???\nNo. 087\n???\nNo. 088\n???\nNo. 089\n???\nNo. 090\n???\nNo. 091\n???\nNo. 092\n???\nNo. 093\n???\nNo. 094\n???\nNo. 095\n???\nNo. 096\n???\nNo. 097\n???\nNo. 098\n???\nNo. 099\n???\nNo. 100\n???\nNo. 101\n???\nNo. 102\n???\nNo. 103\n???\nNo. 104\n???\nNo. 105\n???\nNo. 106\n???\nNo. 107\n???\nNo. 108\n???\nNo. 109\n???\nNo. 110\n???\nNo. 111\n???\nNo. 112\n???\nNo. 113\n???\nNo. 114\n???\nNo. 115\n???\nNo. 116\n???\nNo. 117\n???\nNo. 118\n???\nNo. 119\n???\nNo. 120\n???\nNo. 121\n???\nNo. 122\n???\nNo. 123\n???\nNo. 124\n???\nNo. 125\n???\nNo. 126\n???\nNo. 127\n???\nNo. 128\n???\nNo. 129\n???\nNo. 130\n???\nNo. 131\n???\nNo. 132\n???\nNo. 133\n???\nNo. 134\n???\nNo. 135\n???\nNo. 136\n???\nNo. 137\n???\nNo. 138\n???\nNo. 139\n???\nNo. 140\n???\nNo. 141\n???\nNo. 142\n???\nNo. 143\n???\nNo. 144\n???\nNo. 145\n???\nNo. 146\n???\nNo. 147\n???\nNo. 148\n???\nNo. 149\n???\nNo. 150\n???\nNo. 151\n???\nJohto\nRegion locked\n▾\nHoenn\nRegion locked\n▾\nSinnoh\nRegion locked\n▾",
+  "buttons": [
+    {
+      "id": "trainer-btn",
+      "text": "Audit#6563Pokédex 1 / 151\n      NEW",
+      "disabled": false
+    },
+    {
+      "id": "save-btn",
+      "text": "Save",
+      "disabled": false
+    },
+    {
+      "id": "options-btn",
+      "text": "⚙",
+      "disabled": false
+    },
+    {
+      "id": "side-chapter",
+      "text": "Kanto · Chapter 1Boulder Badge▾\n      \n      Step 2 / 21 · 5 %Lv. 14–20",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Progress",
+      "screen": "map",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Team/PC",
+      "screen": "team",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Pokédex",
+      "screen": "pokedex",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Activities",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Day Care",
+      "screen": "pension",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Game Corner",
+      "screen": "casino",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "RaidsRaidsRaids open once you've beaten the Kanto League.",
+      "screen": "raid",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "UndergroundUndergroundFurther along in the adventure",
+      "screen": "underground",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Social",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Friends",
+      "screen": "friends",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Trades",
+      "screen": "trade",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Shop",
+      "screen": "shop",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Achievements",
+      "screen": "achievements",
+      "disabled": false
+    },
+    {
+      "id": "guide-btn",
+      "text": "Guide",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "iPokédexA species counts as long as you keep one: once traded, it's back to \"no longer owned\". Catch every species of a region once, Mythical included, to double your Shiny odds in that region.",
+      "disabled": false
+    },
+    {
+      "id": "dex-status-btn",
+      "text": "Status ▾",
+      "disabled": false
+    },
+    {
+      "id": "dex-shiny",
+      "text": "Shinies",
+      "disabled": false
+    },
+    {
+      "id": "dex-type-btn",
+      "text": "Types ▾",
+      "disabled": false
+    },
+    {
+      "id": "dex-region-btn",
+      "text": "Regions ▾",
+      "disabled": false
+    }
+  ],
+  "geometry": {
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1430,
+      "height": 60
+    },
+    ".sidebar": null,
+    "#arena": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".arena": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".scene-bar": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".capture-result": null,
+    ".dexcard-modal": null,
+    ".team-slots": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".dex-hero": {
+      "x": 280,
+      "y": 72.64442443847656,
+      "width": 1134,
+      "height": 251.99998474121094
+    },
+    ".lab-fx": null,
+    ".hatch-fx.gift": null,
+    "#modal-root": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    }
+  }
+}
