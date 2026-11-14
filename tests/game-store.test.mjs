@@ -14,9 +14,11 @@ const makeTestMon = (speciesId, level, suffix) => ({
 });
 const initial = {
   ...baseInitial,
+  pokedexCaught: [4, 16],
+  pokedexSeen: [4, 16],
   party: [
     baseInitial.party[0],
-    baseInitial.party[1],
+    makeTestMon(16, 4, '2'),
     makeTestMon(45, 100, '3'),
     makeTestMon(149, 100, '4'),
     makeTestMon(6, 100, '5'),
@@ -33,6 +35,59 @@ beforeEach((t) => {
   store.setState(initial, true);
 });
 afterEach((t) => { store.getState().loadStepNode(1); t.mock.restoreAll(); t.mock.timers.reset(); });
+
+test('presets preserve every owned Pokemon and restore their original order and health', () => {
+  const before = new Map(store.getState().party.map(mon => [mon.uid, { ...mon }]));
+  assert.equal(store.getState().selectPartyPreset(1), true);
+  const removed = initial.party[1].uid;
+  assert.equal(store.getState().depositPokemon(removed), true);
+  assert.equal(store.getState().party.length, 5);
+  assert.equal(store.getState().selectPartyPreset(0), true);
+  assert.deepEqual(store.getState().party.map(mon => mon.uid), [...before.keys()]);
+  assert.equal(store.getState().selectPartyPreset(1), true);
+  assert.equal(store.getState().party.length, 5);
+  const all = [...store.getState().party, ...store.getState().pcBox];
+  assert.equal(new Set(all.map(mon => mon.uid)).size, before.size);
+  for (const mon of all) assert.deepEqual(mon, before.get(mon.uid));
+  store.getState().saveGame(true);
+  store.setState(initial, true);
+  store.getState().loadGame();
+  assert.equal(store.getState().activePartyPreset, 1);
+  assert.equal(store.getState().party.length, 5);
+  assert.equal(store.getState().pcBox[0].uid, removed);
+});
+
+test('presets reject invalid, fainted and busy teams without changing ownership', () => {
+  const before = store.getState().party;
+  assert.equal(store.getState().selectPartyPreset(5), false);
+  store.setState({ healPulse: true });
+  assert.equal(store.getState().selectPartyPreset(1), false);
+  store.setState({ healPulse: false, isCatchSequenceActive: true });
+  assert.equal(store.getState().selectPartyPreset(1), false);
+  store.setState({ isCatchSequenceActive: false, pcBox: [{ ...initial.party[0], uid: 'fainted-preset', currentHp: 0 }], partyPresets: [null, ['fainted-preset'], null, null, null] });
+  assert.equal(store.getState().selectPartyPreset(1), false);
+  assert.equal(store.getState().party, before);
+  assert.equal(store.getState().pcBox[0].uid, 'fainted-preset');
+});
+
+test('custom PC order and reviewed dex entries survive save/load with old saves supported', () => {
+  const a = { ...initial.party[0], uid: 'pc-a' }, b = { ...initial.party[1], uid: 'pc-b' };
+  store.setState({ pcBox: [a, b] });
+  assert.equal(store.getState().movePcPokemon('pc-b', 'pc-a'), true);
+  store.getState().reviewPokedexEntry(4);
+  store.getState().reviewPokedexEntry(151);
+  store.setState(initial, true);
+  store.getState().loadGame();
+  assert.deepEqual(store.getState().pcBox.map(mon => mon.uid), ['pc-b', 'pc-a']);
+  assert.deepEqual(store.getState().pokedexReviewed, [4]);
+  const save = JSON.parse(storage.get('pokecatch_save_v1'));
+  delete save.partyPresets; delete save.activePartyPreset; delete save.pokedexReviewed;
+  storage.set('pokecatch_save_v1', JSON.stringify(save));
+  store.getState().loadGame();
+  assert.equal(store.getState().activePartyPreset, 0);
+  assert.deepEqual(store.getState().partyPresets[0], store.getState().party.map(mon => mon.uid));
+  assert.deepEqual(store.getState().pokedexReviewed, []);
+});
 
 test('save/load preserves PC, inventory, badges, dex and preferences', () => {
   const pcMon = { ...initial.party[0], uid: 'pc-test', currentHp: 15 };

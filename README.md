@@ -25,3 +25,9 @@ npm test
 # Build for production
 npm run build
 ```
+
+Team/PC and Pokédex open beside the sidebar. Select a Pokémon to inspect it, move it to/from PC, or swap it into a full team; drag team slots to reorder. New-catch cards wait for **Continue** before advancing.
+
+Use the five Team presets to save/switch lineups without copying Pokémon. Drag PC Pokémon onto a team slot, or select **Custom** PC sort to keep a manual order. Pokédex NEW markers clear when entries are viewed and persist with the save. See [collection UI notes](docs/R01_COLLECTIONS_OVERLAYS.md) for verified behavior and remaining differences.
+
+Run `npm run test:ui` for Chrome browser checks. See [visual alignment notes](docs/VISUAL_ALIGNMENT.md) for reference screenshots, verified changes, and remaining differences. Current species data covers Kanto's 151 Pokémon; full-game parity is not yet verified.

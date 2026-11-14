@@ -1,0 +1,170 @@
+{
+  "text": "Audit#6563\nPokédex 1 / 151\n3,000 ₽\n0\nSave\n⚙\nKanto · Chapter 1\nBoulder Badge\n▾\nStep 2 / 21 · 5 %\nLv. 14–20\nProgress\nTeam/PC\nPokédex\nActivities\nDay Care\nGame Corner\nRaids\nUnderground\nSocial\nFriends\nTrades\nShop\nAchievements\nGUIDE\nDISCORD\nFriends\ni\n\nFriends meet up online: sign in to add friends and raid with their Pokémon.\n\nSIGN IN WITH DISCORD\nSIGN IN WITH GOOGLE",
+  "buttons": [
+    {
+      "id": "trainer-btn",
+      "text": "Audit#6563Pokédex 1 / 151\n      NEW",
+      "disabled": false
+    },
+    {
+      "id": "save-btn",
+      "text": "Save",
+      "disabled": false
+    },
+    {
+      "id": "options-btn",
+      "text": "⚙",
+      "disabled": false
+    },
+    {
+      "id": "side-chapter",
+      "text": "Kanto · Chapter 1Boulder Badge▾\n      \n      Step 2 / 21 · 5 %Lv. 14–20",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Progress",
+      "screen": "map",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Team/PC",
+      "screen": "team",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Pokédex",
+      "screen": "pokedex",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Activities",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Day Care",
+      "screen": "pension",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Game Corner",
+      "screen": "casino",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "RaidsRaidsRaids open once you've beaten the Kanto League.",
+      "screen": "raid",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "UndergroundUndergroundFurther along in the adventure",
+      "screen": "underground",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Social",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Friends",
+      "screen": "friends",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Trades",
+      "screen": "trade",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Shop",
+      "screen": "shop",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Achievements",
+      "screen": "achievements",
+      "disabled": false
+    },
+    {
+      "id": "guide-btn",
+      "text": "Guide",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "iFriendsAdd a Trainer with their friend code (Name#1234), up to 30. A friend who has already faced the day's boss can join your Raid with their real Pokémon, and their trade offers come first.",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Sign in with Discord",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Sign in with Google",
+      "disabled": false
+    }
+  ],
+  "geometry": {
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1430,
+      "height": 60
+    },
+    ".sidebar": null,
+    "#arena": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".arena": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".scene-bar": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".capture-result": null,
+    ".dexcard-modal": null,
+    ".team-slots": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".dex-hero": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".lab-fx": null,
+    ".hatch-fx.gift": null,
+    "#modal-root": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    }
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "text": "Audit#6563\nPokédex 1 / 151\n3,000 ₽\n0\nSave\n⚙\nKanto · Chapter 1\nBoulder Badge\n▾\nStep 2 / 21 · 5 %\nLv. 14–20\nPROGRESS\nTeam/PC\nPokédex\n1\nActivities\nDay Care\nGame Corner\nRaids\nUnderground\nSocial\nFriends\nTrades\nShop\nAchievements\nGUIDE\nDISCORD\nAdventure\ni\nRegions 1/9\nKanto\n1/151 caught\nJohto\nFinish Kanto to unlock\nHoenn\nFinish Johto to unlock\nSinnoh\nFinish Hoenn to unlock\nUnova\nComing soon…\nKalos\nComing soon…\nAlola\nComing soon…\nGalar\nComing soon…\nPaldea\nComing soon…\nGYMS\n01\nBoulder Badge\nRecommended Lv. 14–20\n02\nCascade Badge\nLocked\nCerulean Cave\nBeat the Pokémon League\n03\nThunder Badge\nLocked\n04\nRainbow Badge\nLocked\n05\nSoul Badge\nLocked\n06\nMarsh Badge\nLocked\n07\nVolcano Badge\nLocked\nPower Plant\nCatch every Electric-type Pokémon\n0/8\nSeafoam Islands\nCatch every Ice-type Pokémon\n0/4\n08\nEarth Badge\nLocked\n09\nVictory Road\nLocked\nBlazing Cave\nCatch every Fire-type Pokémon\n+3\n1/11\nLEAGUE\n🏆\nPokémon League\nLocked\nLEGENDARIES\nFaraway Island\nComplete the region's Pokédex\n1/150\nINFO\n▶ In progress\nBrock\nRock\nBoulder Badge\nRecommended Lv. \n14–20\nLv. \n20\n cap\ni\nReward \n1,500–3,500 ₽\n☀️ Day\nITEMS FOUND HERE 0/1 found\nPOKÉMON FOUND HERE 0/14 caught\n☀️\nDAY\nNOW\n🌙\nNIGHT\n🌧️\nRAIN\n⛈️\nTHUNDERSTORM\nCONTINUE",
+  "buttons": [
+    {
+      "id": "trainer-btn",
+      "text": "Audit#6563Pokédex 1 / 151\n      NEW",
+      "disabled": false
+    },
+    {
+      "id": "save-btn",
+      "text": "Save",
+      "disabled": false
+    },
+    {
+      "id": "options-btn",
+      "text": "⚙",
+      "disabled": false
+    },
+    {
+      "id": "side-chapter",
+      "text": "Kanto · Chapter 1Boulder Badge▾\n      \n      Step 2 / 21 · 5 %Lv. 14–20",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Progress",
+      "screen": "map",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Team/PC",
+      "screen": "team",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Pokédex1",
+      "screen": "pokedex",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Activities",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Day Care",
+      "screen": "pension",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Game Corner",
+      "screen": "casino",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "RaidsRaidsRaids open once you've beaten the Kanto League.",
+      "screen": "raid",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "UndergroundUndergroundFurther along in the adventure",
+      "screen": "underground",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Social",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Friends",
+      "screen": "friends",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Trades",
+      "screen": "trade",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Shop",
+      "screen": "shop",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Achievements",
+      "screen": "achievements",
+      "disabled": false
+    },
+    {
+      "id": "guide-btn",
+      "text": "Guide",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "iAdventureEach Gym is a chapter: beat its Leader to earn the badge and open what comes next. Your Pokémon can't go above the next Leader's level; their badge lifts that cap. A finished chapter can be replayed, and ↻ loops several of them to train.",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Kanto\n      1/151 caught",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "01\n      Boulder BadgeRecommended Lv. 14–20",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "02\n      Cascade BadgeLocked",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "03\n      Thunder BadgeLocked",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "04\n      Rainbow BadgeLocked",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "05\n      Soul BadgeLocked",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "06\n      Marsh BadgeLocked",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "07\n      Volcano BadgeLocked",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "08\n      Earth BadgeLocked",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "09\n      Victory RoadLocked",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "🏆\n      Pokémon LeagueLocked",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "iLevel capYour Pokémon can't go past this level until the next trainer is beaten. While you're away, they gain 12 levels at most.",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Continue",
+      "disabled": false
+    }
+  ],
+  "geometry": {
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1430,
+      "height": 60
+    },
+    ".sidebar": null,
+    "#arena": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".arena": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".scene-bar": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".capture-result": null,
+    ".dexcard-modal": null,
+    ".team-slots": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".dex-hero": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".lab-fx": null,
+    ".hatch-fx.gift": null,
+    "#modal-root": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    }
+  }
+}

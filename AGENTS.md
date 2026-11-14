@@ -156,3 +156,52 @@
   - **Xử lý khi cả đội thất bại (`src/store/useGameStore.ts`):** Hiện thông báo thất bại (`Defeated! Your entire team fainted.`), chuyển vào animation hồi máu của Pokémon Center trước, sau khi hồi máu xong mới quay lại bước 1 từ đầu route.
   - **Animation Idle (`src/styles/reference-layout.css`, `src/components/Arena.tsx`):** Thêm `@keyframes pen-idle` (`scale: 1.05 0.95`, `2.4s ease-in-out infinite`) cho Pokémon còn sống trên sàn đấu và thanh đội hình bên trái (độ trễ so le từng ô, Pokémon gục đứng yên).
   - **Kiểm tra:** `npm test` (`13/13` pass) và `npm run build` (`tsc -b && vite build` 0 lỗi).
+
+### Đợt căn giao diện ngoài và Collection UI — 14/11/2026
+- Dùng `CollectionPage.tsx` cho màn Team/PC và Pokédex cạnh sidebar; `CollectionModal.tsx` cũ không còn được App sử dụng.
+- `PokemonDetails.tsx` dùng chung cho thẻ chi tiết và thẻ bắt mới; `capture` quyết định Continue, `isNew` chỉ quyết định nhãn NEW. Dialog bắt mới ưu tiên hơn dialog chi tiết.
+- CSS gốc được scope trong `reference-ui.css` (tạo bằng `scratch/visual-parity/extract-ui-styles.mjs`); adapter React/mobile trong `replica-ui.css`. Không chèn bundle game gốc vào production.
+- Giữ Arena mounted và giữ geometry khi mở collection, tránh ngắt hiệu ứng. App quản lý thẻ bắt mới toàn cục.
+- `npm test` 13/13, `npm run test:ui` 9/9, build thành công. Xem `docs/VISUAL_ALIGNMENT.md` và ảnh `scratch/visual-parity/local-*.png`; chưa khẳng định toàn game đạt 90–100%.
+
+### R00 — Baseline live và ma trận công việc — 14/11/2026
+- Bản chuẩn mới: live v0.4.103, BUILD `5598c5890a`, app `c0c995f8f9`, CSS `7130b4d937`. Xem `docs/reference-version.md`; snapshot/APK cũ chỉ hỗ trợ, không coi là bằng chứng live.
+- `docs/REFERENCE_CHECKLIST.md` có 30 mục UI và 16 nhóm cơ chế/FX; bằng chứng trong `docs/reference/2026-11-14/`. R00 chưa sửa code game.
+- Live Progress mở màn Adventure cạnh sidebar, khác modal đang dùng trong clone. Tổng bước route live đã biến đổi giữa các phiên; không hardcode 21 dựa trên một ảnh.
+- Runtime clone: 13 chapter, 10 dùng lại legacy `CHAPTER_1_STEPS`, 10 lệch tổng bước với mảng node. Không đánh dấu các chapter này hoàn thành.
+- Baseline source/data: `scratch/backups/r00-code-2026-11-14.zip`. Ưu tiên tiếp theo R01.1 là Progress/Adventure, giữ Arena mounted và các sửa FX/EXP của người dùng.
+
+### R01.1 — Progress page và shell — 14/11/2026
+- `AdventurePage.tsx` được App render cạnh sidebar; `AdventureModal.tsx` không còn được import. State `isAdventureModalOpen` giữ tên cũ nhưng điều khiển Progress page.
+- Progress/chapter card mở page; Continue giữ nguyên node hiện tại; preview không đổi encounter; chapter khác chỉ chuyển khi Start/Replay. Arena giữ mounted và geometry khi ẩn.
+- `progress-reference.css` scope CSS của live v0.4.103, sinh bởi `prepare-r01-reference.mjs`; adapter và geometry mới trong `progress.css`, import sau replica-ui. Đừng sửa CSS sinh tự động nếu không cập nhật script/adapter.
+- Desktop 1440×900: header1430×60, side264×840 ở(0,60), arena798×448.875 ở(280,108), right320, timeline28. Root giữ gutter scrollbar10px; mobile ẩn gutter.
+- `docs/R01_PROGRESS_LAYOUT.md` và `docs/r01-evidence/` ghi ảnh/số đo/checks. Dữ liệu các chapter cũ chưa được làm lại; lock UI chỉ dựa dữ liệu/save hiện có.
+
+### R01.3–R01.5 — Collections và overlay — 15/11/2026
+- Live v0.4.103 vẫn là chuẩn. `collections-reference.css` sinh từ `prepare-collections-reference.mjs`; adapter trong `collections.css`, import cuối sau progress styles.
+- Preset lưu UID qua `partyPresets/activePartyPreset`; tạo preset mới sao lưu đội hiện tại (không tạo đội rỗng vì runtime cần con khỏe). Chuyển preset không clone object Pokémon hoặc reset HP/EXP. PC Custom dùng thứ tự `pcBox`.
+- `pokedexReviewed/reviewPokedexEntry` lưu NEW đã xem. Tổng dex vẫn151, vùng khác khóa; không hardcode493 nếu chưa tích hợp dữ liệu.
+- `PokemonDetails` portal trực tiếp vào game shell, inert nền và trap/restore focus. Capture chỉ Continue; ESC không dismiss capture. `dc-facts` là con trực tiếp của `dc-top`, tránh hack display:contents gây chồng ở320px.
+- Giữ scale capture .78 + idle. Shiny resolver dùng PokéSprite remote do thư mục shiny local chưa có; ảnh thường vẫn dùng resolver hiện tại.
+- `docs/R01_COLLECTIONS_OVERLAYS.md`, `docs/r013-r015-evidence/` có giới hạn, ảnh và số đo. `npm test`16/16, browser toàn bộ19/19; UI rerun13/13 sau chỉnh cuối; build thành công. Bước tiếp R02, chưa sửa dữ liệu các chapter cũ.
+
+### R02 — Runtime chiến đấu/capture/reward — 15/11/2026
+- Chi tiết và giới hạn: [docs/R02_RUNTIME.md](docs/R02_RUNTIME.md). Backup trước sửa: `scratch/backups/r02-code-2026-11-15.zip`.
+- `createGameStore({ clock, random })` tạo runtime riêng từng store. Default `useGameStore` giữ API cũ. `src/game/domain/` giữ kiểu/công thức; `src/game/systems/` giữ battle, capture, rewards và encounter; store ghép hệ thống và giữ save/collection/inventory.
+- `GameplayRuntime` sở hữu encounter ID, operation key, phase, timer, watchdog và reward ledger. Đổi node vô hiệu callback cũ; impact/finish/reward lặp chỉ được áp dụng một lần. `encounter` trong state là snapshot để quan sát; không lưu callback/timer vào save.
+- `useArenaEffects` là adapter cho engine native. Battle/Capture/Heal/Item chốt speed đầu hiệu ứng. Đổi tốc độ và mở collection không phát lại FX. `EffectTimers` hủy timer riêng của BattleFX; lớp DOM riêng cô lập callback particle đến muộn. Scene dither giữ thời lượng đã chốt khi bắt đầu.
+- `startGameplayLoop` tách nhịp combat khỏi giây thực của buff. Khi tab bị trì hoãn, buff trừ thời gian thực đã qua; không bù hàng loạt đòn combat. Autosave giữ nhịp thực cũ.
+- Giữ save `version:2/saveVersion:4`, key `pokecatch_save_v1`, preset/PC/NEW, scale capture .78 + idle và vị trí thông báo bắt. Không đổi dữ liệu chapter/công thức thành luật mới trong đợt refactor.
+- Xác minh cuối: **33/33 test store/runtime**, **23/23 test browser**, **build thành công** (cảnh báo chunk >500kB còn như trước). Browser chạy bằng `node scratch/visual-parity/run-browser-checks.mjs`, tự dừng Vite sau chạy. Không còn server do lượt kiểm tra này giữ lại.
+- Bước tiếp theo **R03 — vòng Chương 1 từ starter tới Brock**; EXP gia đình/duplicate, status, phần thưởng wild và timing video vẫn cần đối chiếu, không coi R02 là nghiệm thu độ giống toàn game.
+
+### Menu collection: thông báo mới — 15/11/2026
+- Đối chiếu bundle chuẩn `app.c0c995f8f9.js`: menu gọi cả `Screens.team.newCount()` và `Screens.pokedex.newCount()`, nhưng ép số của màn đang mở thành 0. Không kết luận game gốc chỉ có badge Team/PC.
+- `teamReviewedUids` và `dexNotifiedSpecies` lưu riêng trạng thái đã ghé màn; App gọi `markCollectionVisited` khi mở collection bằng sidebar/mobile. `pokedexReviewed` vẫn dùng cho NEW trên từng thẻ, không dùng để đếm badge menu.
+- Save cũ thiếu hai trường mới được khởi tạo từ Pokémon/dex hiện có, tránh tạo thông báo hàng loạt cho dữ liệu lịch sử. Giữ saveVersion4.
+- Badge dùng `.sidebar-collection-unread`, position static trong nút, không kế thừa text-shadow của nút đang chọn; ẩn khi màn tương ứng đang mở.
+
+### Reset save theo yêu cầu và thẻ tiếp tục chapter — 15/11/2026
+- Thẻ chapter trên sidebar gọi `onResumeAdventure` để đóng Progress/collection và hiện sân hiện tại; không gọi `selectChapter/loadStepNode`, không mở bảng Progress. Nút Progress vẫn mở bản đồ.
+- `applyRequestedSaveReset` áp dụng một lần trên mỗi origin bằng marker `pokecatch_reset_20261115_01`: backup save cũ vào `pokecatch_backup_before_reset_20261115_01`, xóa key save hiện tại, reset state đang chạy rồi load encounter mới. Các lần reload sau giữ tiến trình mới. Không đổi saveVersion hoặc file fixture của bản tham khảo.

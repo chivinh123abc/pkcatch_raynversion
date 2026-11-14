@@ -1,0 +1,150 @@
+/* React adapters for collections, measured against live v0.4.103. */
+.game-shell .collection-page .map-head { height:52px; min-height:52px; }
+.game-shell .collection-page .map-head h2 { font:700 28px/1 var(--font-title); }
+.game-shell .collection-page .team-panel .map-head { height:62px; min-height:62px; padding:8px 16px; flex-wrap:nowrap; }
+.game-shell .collection-page .team-slots { gap:16px; padding:16px; }
+.game-shell .collection-page .team-slots .slot { height:210px; min-height:210px; aspect-ratio:auto; padding:10px; border:2px solid #333a52; border-radius:10px 10px 10px 36px; }
+.game-shell .collection-page .team-slots .slot.filled { justify-content:flex-end; }
+.game-shell .collection-page .replica-team-art { height:128px; flex:1; min-height:0; }
+.game-shell .collection-page .slot .name { margin:4px 0 0; font:700 20px/21px var(--font-title); max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.game-shell .collection-page .slot .lv { margin:0; max-width:100%; font:400 16px/17px var(--font); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.game-shell .collection-page .slot .xpbar { flex:none; width:80%; height:8px; margin:4px 0 0; }
+.game-shell .collection-page .slot.empty { border:2px dashed #66708a88; background:#ffffff03; justify-content:center; gap:4px; color:#c3c9d8; }
+.game-shell .collection-page .slot.empty > span { font:700 18px var(--font); }
+.game-shell .collection-page .slot.empty > span::before { content:'＋ '; }
+.game-shell .collection-page .slot.empty small { max-width:150px; font:400 16px/1.1 var(--font); color:var(--muted); }
+.game-shell .collection-page .team-sets { display:flex; flex:none; order:0; margin:0 0 0 16px; width:216px; min-width:216px; height:44px; padding:3px; gap:0; }
+.game-shell .collection-page .team-sets button { display:flex; align-items:center; justify-content:center; gap:4px; position:relative; width:38px; min-width:0; height:34px; padding:0 4px; font:700 18px var(--font); }
+.game-shell .collection-page .team-sets button.on { width:52px; }
+.game-shell .collection-page .team-sets .ts-lead { display:flex; align-items:center; justify-content:center; width:22px; height:24px; }
+.game-shell .collection-page .team-avg { white-space:nowrap; gap:12px; }
+.game-shell .collection-page .pc-sticky { position:sticky; top:8px; z-index:20; margin-top:16px; padding:8px 0 10px; background:#141826f5; }
+.game-shell .collection-page .pc-filters { gap:8px; }
+.game-shell .collection-page .pc-sticky .pc-filters { flex-wrap:wrap; }
+.game-shell .collection-page .pc-filters > .replica-filter { width:120px; flex:none; }
+.game-shell .collection-page .pc-filters > button { min-width:88px; }
+.game-shell .collection-page .pc-filters > button[aria-label="Reverse PC sort"] { width:38px; min-width:38px; }
+.game-shell .collection-page input[type=search] { min-width:140px; }
+.game-shell .collection-page .pc-filters > input { flex:1 1 200px; }
+.game-shell .collection-page .pc-filters select { width:auto; max-width:100%; }
+.game-shell .collection-page .replica-sort { width:120px; }
+.game-shell .collection-page .pc-grid { gap:8px; padding:12px; min-height:120px; margin:0; grid-template-columns:repeat(auto-fill,minmax(108px,1fr)); }
+.game-shell .collection-page .pc-cell { height:auto; min-height:116px; aspect-ratio:1; padding:6px 2px 16px; }
+.game-shell .collection-page .replica-pc-art { flex:1; min-height:0; height:76px; }
+.game-shell .collection-page .pc-xp { left:8px; right:8px; bottom:6px; height:6px; border-radius:99px; overflow:hidden; }
+.game-shell .collection-page .replica-empty { padding:28px 8px; font-size:18px; }
+.game-shell .collection-page .dex-hero-body { min-height:196px; height:196px; padding:16px; gap:16px; }
+.game-shell .collection-page .dex-ring { width:128px; height:128px; padding:14px; }
+.game-shell .collection-page .dex-ring > div { background:#161c2c; }
+.game-shell .collection-page .dex-hero-side { min-width:0; }
+.game-shell .collection-page .dex-reg-bars { display:flex; gap:8px; }
+.game-shell .collection-page .replica-region-progress { min-height:19px; height:19px; grid-template-columns:72px minmax(0,1fr) 64px; }
+.game-shell .collection-page .dex-last { margin-top:12px; gap:16px; }
+.game-shell .collection-page .dex-last button { height:48px; }
+.game-shell .collection-page .replica-dex-region { margin-top:16px; }
+.game-shell .collection-page .replica-region-heading { height:54px; min-height:54px; gap:12px; }
+.game-shell .collection-page .replica-region-heading .map-sum { gap:12px; }
+.game-shell .collection-page .dex-grid { grid-template-columns:repeat(auto-fill,minmax(124px,1fr)); padding:12px; gap:8px; }
+.game-shell .collection-page .dex-cell { height:144px; min-height:144px; padding:6px 4px; background-color:transparent; border:2px solid transparent; }
+.game-shell .collection-page .dex-cell .replica-dex-art { height:78px; flex:none; }
+.game-shell .collection-page .dex-cell .num { font-size:14px; }
+.game-shell .collection-page .dex-cell .nm { font:700 18px/1.05 var(--font-title); }
+.game-shell .collection-page .dex-new,.game-shell .collection-page .dex-unread { padding:2px 7px; border-radius:99px; background:#ffcb05; color:#1b1b22; font:700 13px/1.1 var(--font); }
+.game-shell .collection-page .dex-new { position:absolute; top:8px; left:8px; }
+.game-shell .collection-page .dex-locked-region { display:flex; align-items:center; gap:16px; padding:16px; margin-top:12px; background:#1c2030; border:2px solid #333a52; opacity:.55; }
+.game-shell .collection-page .dex-locked-region h2 { margin:0; font:700 24px var(--font-title); }
+.game-shell .collection-page .dex-locked-region > span { display:flex; align-items:center; gap:6px; margin-left:auto; color:var(--muted); font-size:16px; }
+.game-shell .collection-page .dex-locked-region img { width:14px; height:14px; }
+.game-shell .collection-page .replica-collection-notice:empty { display:none; }
+.game-shell .collection-page button:focus-visible,.game-shell .collection-page select:focus-visible,.game-shell .collection-page input:focus-visible { outline:2px solid #ffcb05; outline-offset:2px; }
+.game-shell .replica-toast { position:fixed; top:16px; left:50%; translate:-50% 0; width:max-content; max-width:90vw; background:#fdfdfd; color:#222; border:4px solid #3a4a6b; box-shadow:inset 0 0 0 3px #a9c1e8,0 8px 30px #0006; pointer-events:none; animation:collection-toast 2.2s ease-out forwards; }
+@keyframes collection-toast { 0%,100% { opacity:0; transform:translateY(-12px); } 15%,85% { opacity:1; transform:translateY(0); } }
+.game-shell .replica-detail .replica-move-fact b { font-size:14px; }
+.game-shell .replica-detail button:focus-visible,.game-shell .replica-detail summary:focus-visible { outline:2px solid #ffcb05; outline-offset:2px; }
+@media (max-width:1100px) and (min-width:801px) {
+  .game-shell .collection-page .team-panel .map-head { flex-wrap:wrap; height:auto; min-height:62px; }
+  .game-shell .collection-page .team-sets { order:3; flex-basis:100%; margin:0; max-width:216px; }
+  .game-shell .collection-page .team-slots { gap:8px; padding:12px; }
+  .game-shell .collection-page .slot .name { font-size:18px; }
+}
+@media (max-width:800px) {
+  .game-shell .collection-page .team-panel .map-head { height:auto; min-height:106px; padding:8px 16px; flex-wrap:wrap; gap:12px; }
+  .game-shell .collection-page .map-sum { flex-wrap:wrap; }
+  .game-shell .collection-page .team-sets { order:10; flex:1 0 100%; min-width:0; max-width:none; width:100%; height:48px; padding:0; margin:0; }
+  .game-shell .collection-page .team-sets button,.game-shell .collection-page .team-sets button.on { flex:1; width:auto; height:44px; }
+  .game-shell .collection-page .team-avg { margin-left:auto; }
+  .game-shell .collection-page .team-slots { grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; padding:16px; }
+  .game-shell .collection-page .team-slots .slot { height:110px; min-height:110px; padding:6px; border-bottom-left-radius:24px; }
+  .game-shell .collection-page .team-slots .slot.filled { height:169px; min-height:169px; }
+  .game-shell .collection-page .replica-team-art { height:78px; }
+  .game-shell .collection-page .replica-team-art .replica-sprite { --sprite-k:2!important; }
+  .game-shell .collection-page .slot-types { top:4px; left:4px; gap:2px; }
+  .game-shell .collection-page .slot-types .type { padding:1px 4px; font-size:12px; }
+  .game-shell .collection-page .slot .name { font-size:16px; line-height:18px; }
+  .game-shell .collection-page .slot .lv { font-size:12px; line-height:14px; }
+  .game-shell .collection-page .slot.empty > span { font-size:16px; }
+  .game-shell .collection-page .slot.empty small { font-size:13px; }
+  .game-shell .collection-page .pc-sticky { top:0; }
+  .game-shell .collection-page .pc-grid { grid-template-columns:repeat(5,minmax(0,1fr)); gap:4px; padding:8px; }
+  .game-shell .collection-page .pc-cell { min-height:88px; }
+  .game-shell .collection-page .replica-pc-art .replica-sprite { --sprite-k:1!important; }
+  .game-shell .collection-page .pc-filters { gap:6px; }
+  .game-shell .collection-page .pc-filters > input { flex-basis:100%; }
+  .game-shell .collection-page .pc-filters > .btn,.game-shell .collection-page .pc-filters > select { flex:1 1 auto; min-width:0; font-size:14px; }
+  .game-shell .collection-page .pc-sticky .pc-filters > input { width:100%; flex:1 0 100%; }
+  .game-shell .collection-page .pc-sticky .pc-filters > :not(input) { width:0; min-width:0; flex:1 1 0; padding-left:4px; padding-right:4px; font-size:13px; }
+  .game-shell .collection-page .pc-sticky .pc-filters > button[aria-label="Reverse PC sort"] { flex:0 0 32px; width:32px; min-width:32px; }
+  .game-shell .collection-page .dex-hero > .map-head { height:auto; min-height:76px; flex-wrap:wrap; padding:10px 12px; }
+  .game-shell .collection-page .dex-hero .map-sum { flex-basis:100%; justify-content:space-between; margin:0; gap:6px; font-size:13px; }
+  .game-shell .collection-page .dex-hero-body { height:auto; min-height:0; flex-direction:column; align-items:stretch; padding:16px 12px; }
+  .game-shell .collection-page .dex-ring { align-self:center; }
+  .game-shell .collection-page .replica-region-progress { grid-template-columns:56px minmax(0,1fr) 56px; font-size:14px; gap:6px; }
+  .game-shell .collection-page .dex-last { gap:8px; }
+  .game-shell .collection-page .dex-last > div { flex-wrap:wrap; }
+  .game-shell .collection-page .replica-region-heading { flex-wrap:wrap; height:auto; min-height:64px; padding:10px; gap:8px; }
+  .game-shell .collection-page .replica-region-heading .map-sum { flex-basis:100%; justify-content:flex-end; font-size:13px; gap:8px; }
+  .game-shell .collection-page .replica-region-meter { width:80px; }
+  .game-shell .collection-page .dex-grid { grid-template-columns:repeat(5,minmax(0,1fr)); gap:4px; padding:8px; }
+  .game-shell .collection-page .dex-cell { min-height:112px; height:112px; padding:4px 2px; }
+  .game-shell .collection-page .dex-cell .replica-dex-art { height:56px; }
+  .game-shell .collection-page .replica-dex-art .replica-sprite { --sprite-k:1!important; }
+  .game-shell .collection-page .dex-cell .nm { font-size:14px; }
+  .game-shell .collection-page .dex-cell .num { font-size:12px; }
+  .game-shell .collection-page .dex-new { top:4px; left:3px; padding:1px 4px; font-size:11px; }
+  .game-shell .replica-detail { max-height:calc(100dvh - 32px); overflow:auto; }
+  .game-shell .replica-detail .replica-mon-actions { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .game-shell .replica-detail .replica-mon-actions .btn:last-child { grid-column:1/-1; }
+}
+.game-shell .replica-detail .replica-action-status { color:#ffe066; font-size:16px; margin:12px 0 0; }
+.game-shell .replica-detail .dexcard.v2 .dc-top { display:grid; grid-template-columns:148px minmax(0,1fr); gap:10px 16px; align-items:start; }
+.game-shell .replica-detail .dexcard.v2 .dc-hero { grid-column:1; grid-row:1 / span 2; min-height:148px; }
+.game-shell .replica-detail .dexcard.v2 .dc-id { display:flex; grid-column:2; grid-row:1; flex-direction:column; min-width:0; gap:8px; align-self:start; }
+.game-shell .replica-detail .dexcard.v2 .genus { margin:0; line-height:1.15; overflow-wrap:anywhere; }
+.game-shell .replica-detail .dexcard.v2 .badges { display:flex; flex-wrap:wrap; align-items:center; gap:4px; margin:0; }
+.game-shell .replica-detail .dexcard.v2 .dc-facts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); grid-column:2; grid-row:2; gap:6px; margin:0; }
+.game-shell .replica-detail .dexcard.v2 .dc-fact { display:flex; flex-direction:column; align-items:stretch; min-width:0; overflow:hidden; gap:2px; }
+.game-shell .replica-detail .dexcard.v2 .dc-fact b { overflow-wrap:anywhere; }
+.game-shell .replica-detail .dexcard.v2 .replica-move-fact b { display:block; }
+@media (max-width:800px) {
+  .game-shell .replica-detail .dexcard.v2 .dc-top { grid-template-columns:120px minmax(0,1fr); gap:12px; }
+  .game-shell .replica-detail .dexcard.v2 .dc-hero { grid-row:1; }
+  .game-shell .replica-detail .dexcard.v2 .dc-id { align-self:center; }
+  .game-shell .replica-detail .dexcard.v2 .genus { margin:0; align-self:stretch; }
+  .game-shell .replica-detail .dexcard.v2 .badges { margin:0; align-self:stretch; }
+  .game-shell .replica-detail .dexcard.v2 .dc-facts { grid-column:1/-1; grid-row:2; }
+}
+@media (prefers-reduced-motion:no-preference) {
+  .game-shell .collection-page .slot.filled:not([data-fainted]) .replica-team-art .replica-sprite { transform-origin:50% 90%; animation:pen-idle 2.4s ease-in-out infinite; }
+  .game-shell .collection-page .slot.filled:nth-child(2n) .replica-team-art .replica-sprite { animation-delay:-.8s; }
+}
+.game-shell .game-sidebar .side-nav-btn > .sidebar-collection-unread {
+  position:static; display:inline-flex; align-items:center; justify-content:center;
+  flex:0 0 auto; box-sizing:border-box; margin-left:auto; min-width:20px; height:20px; padding:0 5px;
+  border-radius:999px; background:#ffcb05; color:#1b1b22;
+  text-align:center; text-shadow:none; letter-spacing:0; white-space:nowrap;
+  font:400 16px/20px var(--font); font-variant-numeric:tabular-nums;
+  box-shadow:0 0 8px #ffcb0526;
+}
+.game-shell .collection-page .slot-buddy { position:absolute; z-index:2; top:8px; right:8px; display:flex; align-items:center; justify-content:center; width:30px; height:30px; border:2px solid #ba5590; border-radius:10px; background:#57364d; }
+.game-shell .collection-page .slot-buddy img { width:22px; height:22px; object-fit:contain; image-rendering:pixelated; }
+@media (max-width:360px) { .game-shell .collection-page .pc-sticky .pc-filters > :not(input) { font-size:12px; } }

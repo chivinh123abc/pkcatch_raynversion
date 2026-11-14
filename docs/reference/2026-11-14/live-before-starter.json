@@ -1,0 +1,181 @@
+{
+  "text": "Red\nPokédex\n0 ₽\nSave\n⚙\nProgress\nTeam/PC\nPokédex\nActivities\nDay Care\nGame Corner\nRaids\nUnderground\nSocial\nFriends\nTrades\nBlack Market\nShop\nAchievements\nGUIDE\nDISCORD\nOff on an adventure!\n×1\n×2\n×3\nProf. Oak\nBut first, you need a partner. Come on, choose your first Pokémon!\n▼",
+  "buttons": [
+    {
+      "id": "trainer-btn",
+      "text": "RedPokédex",
+      "disabled": false
+    },
+    {
+      "id": "save-btn",
+      "text": "Save",
+      "disabled": false
+    },
+    {
+      "id": "options-btn",
+      "text": "⚙",
+      "disabled": false
+    },
+    {
+      "id": "side-chapter",
+      "text": "",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Progress",
+      "screen": "map",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Team/PC",
+      "screen": "team",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Pokédex",
+      "screen": "pokedex",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Activities",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Day Care",
+      "screen": "pension",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Game Corner",
+      "screen": "casino",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Raids",
+      "screen": "raid",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Underground",
+      "screen": "underground",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Social",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Friends",
+      "screen": "friends",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Trades",
+      "screen": "trade",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Black Market",
+      "screen": "market",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Shop",
+      "screen": "shop",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "Achievements",
+      "screen": "achievements",
+      "disabled": false
+    },
+    {
+      "id": "guide-btn",
+      "text": "Guide",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "×1",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "×2",
+      "disabled": false
+    },
+    {
+      "id": "",
+      "text": "×3",
+      "disabled": false
+    }
+  ],
+  "geometry": {
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1430,
+      "height": 60
+    },
+    ".sidebar": null,
+    "#arena": {
+      "x": 280,
+      "y": 108,
+      "width": 798,
+      "height": 448.875
+    },
+    ".arena": {
+      "x": 280,
+      "y": 108,
+      "width": 798,
+      "height": 448.875
+    },
+    ".scene-bar": {
+      "x": 291,
+      "y": 121,
+      "width": 0,
+      "height": 0
+    },
+    ".capture-result": null,
+    ".dexcard-modal": null,
+    ".team-slots": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".dex-hero": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    ".lab-fx": {
+      "x": 0,
+      "y": 0,
+      "width": 1430,
+      "height": 900
+    },
+    ".hatch-fx.gift": null,
+    "#modal-root": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    }
+  }
+}

@@ -1,0 +1,1262 @@
+{
+  "capturedAt": "2026-11-14T17:25:08.145Z",
+  "clientDate": "2026-11-15",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "fixture": "initial: one Charmander Lv.5, caught/seen #4; populated: six team members and 18 PC mons; isolated browser only",
+  "errors": [],
+  "sources": [
+    {
+      "file": "src/App.tsx",
+      "sha256": "27dd93d5b9ad4e55d6729e1c1220b8517f1053b40aa735e268a622012020022a"
+    },
+    {
+      "file": "src/main.tsx",
+      "sha256": "cba482d34051e88908689d4751271092f68b98535b1430eab0ffb2271ab21d3e"
+    },
+    {
+      "file": "src/components/LeftSidebar.tsx",
+      "sha256": "dd6675cdc2def15279385c693aa890f5d8b75e5a3b41af1ed740fb89023f9c28"
+    },
+    {
+      "file": "src/data/pokemonData.ts",
+      "sha256": "a22a098a17d5357dfe9962beccd06efbd88be67e8e0e198faac8831902d4fd2e"
+    },
+    {
+      "file": "src/components/collectionUtils.ts",
+      "sha256": "92a1a83179f1fc3afc30b49dc31d2a574cd63caad63dfb560025b4ccce9e66f8"
+    },
+    {
+      "file": "src/styles/collections.css",
+      "sha256": "1dcb267f07ec62f0951b4a39b81e5e03b9f549e422d3a4a83f222f82c3de915b"
+    },
+    {
+      "file": "src/styles/collections-reference.css",
+      "sha256": "0a52be5d043db2c018b8238a31d6faa03a26f8d72db69a4966ab5ba6ed1ced4b"
+    },
+    {
+      "file": "src/components/CollectionPage.tsx",
+      "sha256": "844106705c295f36a22b298486a41b02731a13e87144f9195a294d50d48c0071"
+    },
+    {
+      "file": "src/components/PokemonDetails.tsx",
+      "sha256": "5514b2df09523e2a1f846f82a8d77f95b8058b7b4cefbe4952d4dda0be7543da"
+    },
+    {
+      "file": "src/store/useGameStore.ts",
+      "sha256": "8eb7aae20a3fd95df849d482a421d1ec71a609e2a4bb430fa3e9d512ba44569d"
+    }
+  ],
+  "screens": {
+    "adventure": {
+      "text": "Audit#TEST\nPokédex 1 / 151\n0 ₽\n0\nSave\n⚙\nKanto · Chapter 1\nBoulder Badge\nStep 1 / 20 · 0 %\nLv. 14-20\nProgress\nTeam/PC\nPokédex\n1\nActivities\n▸\nSocial\n▸\nShop\nAchievements\nRoute 1\n[\n]\n?\n?\n?\n?\n?\n1/20\n🌙\n00:25\n⛅\nClear skies\nLv.5\n+4 XP ×1.1\nLv.5\nLv.4\nA wild Rattata appeared!\nx1\nx2\nx3\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×0\n×0\n×0\n×0\nFound here\ni\nRoute 1\n0/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n55%\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "clientWidth": 1440
+      },
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1430,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        ".battle-stage": {
+          "x": 280,
+          "y": 108,
+          "width": 798,
+          "height": 448.875
+        },
+        ".battle-bottom": {
+          "x": 363,
+          "y": 496.875,
+          "width": 702,
+          "height": 47
+        },
+        ".battle-log": {
+          "x": 363,
+          "y": 496.875,
+          "width": 566,
+          "height": 47
+        },
+        ".replica-detail": null,
+        ".team-panel": null,
+        ".team-panel .map-head": null,
+        ".team-slots": null,
+        ".slot": null,
+        ".team-sets": null,
+        ".pc-sticky": null,
+        ".pc-grid": null,
+        ".dex-hero": null,
+        ".dex-hero-body": null,
+        ".dex-ring": null,
+        ".dex-reg-bars": null,
+        ".dex-grid": null,
+        ".dex-cell": null,
+        ".replica-toast": null
+      }
+    },
+    "team": {
+      "text": "Audit#TEST\nPokédex 1 / 151\n0 ₽\n0\nSave\n⚙\nKanto · Chapter 1\nBoulder Badge\nStep 1 / 20 · 0 %\nLv. 14-20\nProgress\nTEAM/PC\nPokédex\n1\nActivities\n▸\nSocial\n▸\nShop\nAchievements\nRoute 1\n[\n]\n?\n?\n?\n?\n?\n1/20\n🌙\n00:25\n⛅\nClear skies\nLv.5\n+4 XP ×1.1\nLv.5\nLv.4\nA wild Rattata appeared!\nx1\nx2\nx3\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×0\n×0\n×0\n×0\nFound here\ni\nRoute 1\n0/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n55%\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%\nTeam\n?\n1\n+\n+\n+\n+\nAverage level\n5\nFire\nCharmander\nLv. 5 · Flamethrower\nFree slot\nPick a Pokémon from the PC\nFree slot\nPick a Pokémon from the PC\nFree slot\nPick a Pokémon from the PC\nFree slot\nPick a Pokémon from the PC\nFree slot\nPick a Pokémon from the PC\nTypes\nNormal\nFire\nWater\nElectric\nGrass\nIce\nFighting\nPoison\nGround\nFlying\nPsychic\nBug\nRock\nGhost\nDragon\nSteel\nFairy\n✦ SHINIES\nCAN EVOLVE\nRecent\nPokédex No.\nName\nLevel\nRarity\nStats\nCustom\n↓\n\nThe PC is empty. Pokémon caught while your team is full end up here.",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "clientWidth": 1440
+      },
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1430,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        ".battle-stage": {
+          "x": 280,
+          "y": 108,
+          "width": 798,
+          "height": 448.875
+        },
+        ".battle-bottom": {
+          "x": 363,
+          "y": 496.875,
+          "width": 702,
+          "height": 47
+        },
+        ".battle-log": {
+          "x": 363,
+          "y": 496.875,
+          "width": 566,
+          "height": 47
+        },
+        ".replica-detail": null,
+        ".team-panel": {
+          "x": 280,
+          "y": 72,
+          "width": 1134,
+          "height": 308
+        },
+        ".team-panel .map-head": {
+          "x": 282,
+          "y": 74,
+          "width": 1130,
+          "height": 62
+        },
+        ".team-slots": {
+          "x": 282,
+          "y": 136,
+          "width": 1130,
+          "height": 242
+        },
+        ".slot": {
+          "x": 298,
+          "y": 152,
+          "width": 169.65625,
+          "height": 210
+        },
+        ".team-sets": {
+          "x": 455.9375,
+          "y": 82,
+          "width": 216,
+          "height": 44
+        },
+        ".pc-sticky": {
+          "x": 280,
+          "y": 396,
+          "width": 1134,
+          "height": 58
+        },
+        ".pc-grid": {
+          "x": 280,
+          "y": 454,
+          "width": 1134,
+          "height": 120
+        },
+        ".dex-hero": null,
+        ".dex-hero-body": null,
+        ".dex-ring": null,
+        ".dex-reg-bars": null,
+        ".dex-grid": null,
+        ".dex-cell": null,
+        ".replica-toast": null
+      }
+    },
+    "pokedex": {
+      "text": "Audit#TEST\nPokédex 1 / 151\n0 ₽\n0\nSave\n⚙\nKanto · Chapter 1\nBoulder Badge\nStep 1 / 20 · 0 %\nLv. 14-20\nProgress\nTeam/PC\nPOKÉDEX\n1\nActivities\n▸\nSocial\n▸\nShop\nAchievements\nRoute 1\n[\n]\n?\n?\n?\n?\n?\n1/20\n🌙\n00:25\n⛅\nClear skies\nLv.5\n+4 XP ×1.1\nLv.5\nLv.4\nA wild Rattata appeared!\nx1\nx2\nx3\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×0\n×0\n×0\n×0\nFound here\ni\nRoute 1\n0/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n55%\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%\nPokédex\n?\nSeen 1\n✦ Shinies 0\nRegions complete 0/1\n0.7 %\n1 / 151\nKanto\n1 / 151\nJohto\nHoenn\nSinnoh\nLATEST CATCHES\nStatus\nCaught\nNot caught\nSeen, not caught\nUnknown\n✦ SHINIES\nTypes\nNormal\nFire\nWater\nElectric\nGrass\nIce\nFighting\nPoison\nGround\nFlying\nPsychic\nBug\nRock\nGhost\nDragon\nSteel\nFairy\nKanto\nJohto · Locked\nHoenn · Locked\nSinnoh · Locked\nKanto\n1 new\n150 to go\n1 / 151\n▾\nNo. 001\n???\nNo. 002\n???\nNo. 003\n???\nNEW\nNo. 004\nCharmander\nNo. 005\n???\nNo. 006\n???\nNo. 007\n???\nNo. 008\n???\nNo. 009\n???\nNo. 010\n???\nNo. 011\n???\nNo. 012\n???\nNo. 013\n???\nNo. 014\n???\nNo. 015\n???\nNo. 016\n???\nNo. 017\n???\nNo. 018\n???\nNo. 019\n???\nNo. 020\n???\nNo. 021\n???\nNo. 022\n???\nNo. 023\n???\nNo. 024\n???\nNo. 025\n???\nNo. 026\n???\nNo. 027\n???\nNo. 028\n???\nNo. 029\n???\nNo. 030\n???\nNo. 031\n???\nNo. 032\n???\nNo. 033\n???\nNo. 034\n???\nNo. 035\n???\nNo. 036\n???\nNo. 037\n???\nNo. 038\n???\nNo. 039\n???\nNo. 040\n???\nNo. 041\n???\nNo. 042\n???\nNo. 043\n???\nNo. 044\n???\nNo. 045\n???\nNo. 046\n???\nNo. 047\n???\nNo. 048\n???\nNo. 049\n???\nNo. 050\n???\nNo. 051\n???\nNo. 052\n???\nNo. 053\n???\nNo. 054\n???\nNo. 055\n???\nNo. 056\n???\nNo. 057\n???\nNo. 058\n???\nNo. 059\n???\nNo. 060\n???\nNo. 061\n???\nNo. 062\n???\nNo. 063\n???\nNo. 064\n???\nNo. 065\n???\nNo. 066\n???\nNo. 067\n???\nNo. 068\n???\nNo. 069\n???\nNo. 070\n???\nNo. 071\n???\nNo. 072\n???\nNo. 073\n???\nNo. 074\n???\nNo. 075\n???\nNo. 076\n???\nNo. 077\n???\nNo. 078\n???\nNo. 079\n???\nNo. 080\n???\nNo. 081\n???\nNo. 082\n???\nNo. 083\n???\nNo. 084\n???\nNo. 085\n???\nNo. 086\n???\nNo. 087\n???\nNo. 088\n???\nNo. 089\n???\nNo. 090\n???\nNo. 091\n???\nNo. 092\n???\nNo. 093\n???\nNo. 094\n???\nNo. 095\n???\nNo. 096\n???\nNo. 097\n???\nNo. 098\n???\nNo. 099\n???\nNo. 100\n???\nNo. 101\n???\nNo. 102\n???\nNo. 103\n???\nNo. 104\n???\nNo. 105\n???\nNo. 106\n???\nNo. 107\n???\nNo. 108\n???\nNo. 109\n???\nNo. 110\n???\nNo. 111\n???\nNo. 112\n???\nNo. 113\n???\nNo. 114\n???\nNo. 115\n???\nNo. 116\n???\nNo. 117\n???\nNo. 118\n???\nNo. 119\n???\nNo. 120\n???\nNo. 121\n???\nNo. 122\n???\nNo. 123\n???\nNo. 124\n???\nNo. 125\n???\nNo. 126\n???\nNo. 127\n???\nNo. 128\n???\nNo. 129\n???\nNo. 130\n???\nNo. 131\n???\nNo. 132\n???\nNo. 133\n???\nNo. 134\n???\nNo. 135\n???\nNo. 136\n???\nNo. 137\n???\nNo. 138\n???\nNo. 139\n???\nNo. 140\n???\nNo. 141\n???\nNo. 142\n???\nNo. 143\n???\nNo. 144\n???\nNo. 145\n???\nNo. 146\n???\nNo. 147\n???\nNo. 148\n???\nNo. 149\n???\nNo. 150\n???\nNo. 151\n???\nJohto\nRegion locked ▾\nHoenn\nRegion locked ▾\nSinnoh\nRegion locked ▾",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "clientWidth": 1440
+      },
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1430,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        ".battle-stage": {
+          "x": 280,
+          "y": 108,
+          "width": 798,
+          "height": 448.875
+        },
+        ".battle-bottom": {
+          "x": 363,
+          "y": 496.875,
+          "width": 702,
+          "height": 47
+        },
+        ".battle-log": {
+          "x": 363,
+          "y": 496.875,
+          "width": 566,
+          "height": 47
+        },
+        ".replica-detail": null,
+        ".team-panel": null,
+        ".team-panel .map-head": null,
+        ".team-slots": null,
+        ".slot": null,
+        ".team-sets": null,
+        ".pc-sticky": {
+          "x": 280,
+          "y": 340,
+          "width": 1134,
+          "height": 58
+        },
+        ".pc-grid": null,
+        ".dex-hero": {
+          "x": 280,
+          "y": 72,
+          "width": 1134,
+          "height": 252
+        },
+        ".dex-hero-body": {
+          "x": 282,
+          "y": 126,
+          "width": 1130,
+          "height": 196
+        },
+        ".dex-ring": {
+          "x": 298,
+          "y": 160,
+          "width": 128,
+          "height": 128
+        },
+        ".dex-reg-bars": {
+          "x": 442,
+          "y": 137,
+          "width": 954,
+          "height": 100
+        },
+        ".dex-grid": {
+          "x": 282,
+          "y": 470,
+          "width": 1130,
+          "height": 2904
+        },
+        ".dex-cell": {
+          "x": 294,
+          "y": 482,
+          "width": 131.25,
+          "height": 144
+        },
+        ".replica-toast": null
+      }
+    },
+    "team-details": {
+      "text": "Audit#TEST\nPokédex 1 / 151\n0 ₽\n0\nSave\n⚙\nKanto · Chapter 1\nBoulder Badge\nStep 1 / 20 · 0 %\nLv. 14-20\nProgress\nTEAM/PC\nPokédex\nActivities\n▸\nSocial\n▸\nShop\nAchievements\nRoute 1\n[\n]\n?\n?\n?\n?\n?\n1/20\n🌙\n00:25\n⛅\nClear skies\nLv.5\n+4 XP ×1.1\nLv.5\nLv.4\nA wild Rattata appeared!\nx1\nx2\nx3\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×0\n×0\n×0\n×0\nFound here\ni\nRoute 1\n0/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n55%\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%\nTeam\n?\n1\n+\n+\n+\n+\nAverage level\n5\nFire\nCharmander\nLv. 5 · Flamethrower\nFree slot\nPick a Pokémon from the PC\nFree slot\nPick a Pokémon from the PC\nFree slot\nPick a Pokémon from the PC\nFree slot\nPick a Pokémon from the PC\nFree slot\nPick a Pokémon from the PC\nTypes\nNormal\nFire\nWater\nElectric\nGrass\nIce\nFighting\nPoison\nGround\nFlying\nPsychic\nBug\nRock\nGhost\nDragon\nSteel\nFairy\n✦ SHINIES\nCAN EVOLVE\nRecent\nPokédex No.\nName\nLevel\nRarity\nStats\nCustom\n↓\n\nThe PC is empty. Pokémon caught while your team is full end up here.\n\nCharmander\nNo. 004\nKanto 1/151\n✕\nLizard Pokémon\nFire\n● Rare\nLevel\n5\nHeight\n0.6 m\nWeight\n8.5 kg\nCaught\n1\nHP\n20 / 20\nMove\nFlamethrower\n\nFrom the time it is born, a flame burns at the tip of its tail. Its life would end if the flame were to go out.\n\nStats\nTotal 77\n← MOVE\nMOVE →\nTO PC",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "clientWidth": 1440
+      },
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1430,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        ".battle-stage": {
+          "x": 280,
+          "y": 108,
+          "width": 798,
+          "height": 448.875
+        },
+        ".battle-bottom": {
+          "x": 363,
+          "y": 496.875,
+          "width": 702,
+          "height": 47
+        },
+        ".battle-log": {
+          "x": 363,
+          "y": 496.875,
+          "width": 566,
+          "height": 47
+        },
+        ".replica-detail": {
+          "x": 485,
+          "y": 196.453125,
+          "width": 460,
+          "height": 507.078125
+        },
+        ".team-panel": {
+          "x": 280,
+          "y": 72,
+          "width": 1134,
+          "height": 308
+        },
+        ".team-panel .map-head": {
+          "x": 282,
+          "y": 74,
+          "width": 1130,
+          "height": 62
+        },
+        ".team-slots": {
+          "x": 282,
+          "y": 136,
+          "width": 1130,
+          "height": 242
+        },
+        ".slot": {
+          "x": 298,
+          "y": 152,
+          "width": 169.65625,
+          "height": 210
+        },
+        ".team-sets": {
+          "x": 455.9375,
+          "y": 82,
+          "width": 216,
+          "height": 44
+        },
+        ".pc-sticky": {
+          "x": 280,
+          "y": 396,
+          "width": 1134,
+          "height": 58
+        },
+        ".pc-grid": {
+          "x": 280,
+          "y": 454,
+          "width": 1134,
+          "height": 120
+        },
+        ".dex-hero": null,
+        ".dex-hero-body": null,
+        ".dex-ring": null,
+        ".dex-reg-bars": null,
+        ".dex-grid": null,
+        ".dex-cell": null,
+        ".replica-toast": null
+      }
+    },
+    "team-populated": {
+      "text": "Audit#TEST\nPokédex 6 / 151\n0 ₽\n0\nSave\n⚙\nKanto · Chapter 1\nBoulder Badge\nStep 1 / 20 · 0 %\nLv. 14-20\nProgress\nTEAM/PC\nPokédex\n6\nActivities\n▸\nSocial\n▸\nShop\nAchievements\nRoute 1\n[\n]\n?\n?\n?\n?\n?\n1/20\n🌙\n00:25\n⛅\nClear skies\nLv.5\nLv.6\nLv.7\nLv.8\nLv.9\nLv.10\nLv.5\nLv.4\nA wild Rattata appeared!\nx1\nx2\nx3\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×0\n×0\n×0\n×0\nFound here\ni\nRoute 1\n2/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n✓\n55%\n✓\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%\nTeam\n?\n1\n+\n+\n+\n+\nAverage level\n8\nFire\nCharmander\nLv. 5 · Flamethrower\nNormal\nFlying\nPidgey\nLv. 6 · Tackle\nElectric\nPikachu\nLv. 7 · Thunderbolt\nBug\nCaterpie\nLv. 8 · X-Scissor\nWater\nSquirtle\nLv. 9 · Hydro Pump\nGrass\nPoison\nBulbasaur\nLv. 10 · Razor Leaf\nTypes\nNormal\nFire\nWater\nElectric\nGrass\nIce\nFighting\nPoison\nGround\nFlying\nPsychic\nBug\nRock\nGhost\nDragon\nSteel\nFairy\n✦ SHINIES\nCAN EVOLVE\nRecent\nPokédex No.\nName\nLevel\nRarity\nStats\nCustom\n↓\nLv. 10\nLv. 11\nLv. 12\nLv. 13\nLv. 14\nLv. 15\nLv. 16\nLv. 17\nLv. 18\nLv. 19\nLv. 20\nLv. 21\nLv. 22\nLv. 23\nLv. 24\nLv. 25\nLv. 26\nLv. 27",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "clientWidth": 1440
+      },
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1430,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        ".battle-stage": {
+          "x": 280,
+          "y": 108,
+          "width": 798,
+          "height": 448.875
+        },
+        ".battle-bottom": {
+          "x": 358,
+          "y": 496.875,
+          "width": 707,
+          "height": 47
+        },
+        ".battle-log": {
+          "x": 358,
+          "y": 496.875,
+          "width": 571,
+          "height": 47
+        },
+        ".replica-detail": null,
+        ".team-panel": {
+          "x": 280,
+          "y": 72,
+          "width": 1134,
+          "height": 308
+        },
+        ".team-panel .map-head": {
+          "x": 282,
+          "y": 74,
+          "width": 1130,
+          "height": 62
+        },
+        ".team-slots": {
+          "x": 282,
+          "y": 136,
+          "width": 1130,
+          "height": 242
+        },
+        ".slot": {
+          "x": 298,
+          "y": 150.0911407470703,
+          "width": 169.65625,
+          "height": 209.99998474121094
+        },
+        ".team-sets": {
+          "x": 455.9375,
+          "y": 82,
+          "width": 216,
+          "height": 44
+        },
+        ".pc-sticky": {
+          "x": 280,
+          "y": 396,
+          "width": 1134,
+          "height": 58
+        },
+        ".pc-grid": {
+          "x": 280,
+          "y": 454,
+          "width": 1134,
+          "height": 268
+        },
+        ".dex-hero": null,
+        ".dex-hero-body": null,
+        ".dex-ring": null,
+        ".dex-reg-bars": null,
+        ".dex-grid": null,
+        ".dex-cell": null,
+        ".replica-toast": null
+      }
+    },
+    "pokedex-populated": {
+      "text": "Audit#TEST\nPokédex 6 / 151\n0 ₽\n0\nSave\n⚙\nKanto · Chapter 1\nBoulder Badge\nStep 1 / 20 · 0 %\nLv. 14-20\nProgress\nTeam/PC\nPOKÉDEX\n6\nActivities\n▸\nSocial\n▸\nShop\nAchievements\nRoute 1\n[\n]\n?\n?\n?\n?\n?\n1/20\n🌙\n00:25\n⛅\nClear skies\nLv.5\nLv.6\nLv.7\nLv.8\nLv.9\nLv.10\nLv.5\nLv.4\nA wild Rattata appeared!\nx1\nx2\nx3\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×0\n×0\n×0\n×0\nFound here\ni\nRoute 1\n2/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n✓\n55%\n✓\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%\nPokédex\n?\nSeen 7\n✦ Shinies 0\nRegions complete 0/1\n4.0 %\n6 / 151\nKanto\n6 / 151\nJohto\nHoenn\nSinnoh\nLATEST CATCHES\nStatus\nCaught\nNot caught\nSeen, not caught\nUnknown\n✦ SHINIES\nTypes\nNormal\nFire\nWater\nElectric\nGrass\nIce\nFighting\nPoison\nGround\nFlying\nPsychic\nBug\nRock\nGhost\nDragon\nSteel\nFairy\nKanto\nJohto · Locked\nHoenn · Locked\nSinnoh · Locked\nKanto\n6 new\n145 to go\n6 / 151\n▾\nNEW\nNo. 001\nBulbasaur\nNo. 002\n???\nNo. 003\n???\nNEW\nNo. 004\nCharmander\nNo. 005\n???\nNo. 006\n???\nNEW\nNo. 007\nSquirtle\nNo. 008\n???\nNo. 009\n???\nNEW\nNo. 010\nCaterpie\nNo. 011\n???\nNo. 012\n???\nNo. 013\n???\nNo. 014\n???\nNo. 015\n???\nNEW\nNo. 016\nPidgey\nNo. 017\n???\nNo. 018\n???\nNo. 019\nRattata\nNo. 020\n???\nNo. 021\n???\nNo. 022\n???\nNo. 023\n???\nNo. 024\n???\nNEW\nNo. 025\nPikachu\nNo. 026\n???\nNo. 027\n???\nNo. 028\n???\nNo. 029\n???\nNo. 030\n???\nNo. 031\n???\nNo. 032\n???\nNo. 033\n???\nNo. 034\n???\nNo. 035\n???\nNo. 036\n???\nNo. 037\n???\nNo. 038\n???\nNo. 039\n???\nNo. 040\n???\nNo. 041\n???\nNo. 042\n???\nNo. 043\n???\nNo. 044\n???\nNo. 045\n???\nNo. 046\n???\nNo. 047\n???\nNo. 048\n???\nNo. 049\n???\nNo. 050\n???\nNo. 051\n???\nNo. 052\n???\nNo. 053\n???\nNo. 054\n???\nNo. 055\n???\nNo. 056\n???\nNo. 057\n???\nNo. 058\n???\nNo. 059\n???\nNo. 060\n???\nNo. 061\n???\nNo. 062\n???\nNo. 063\n???\nNo. 064\n???\nNo. 065\n???\nNo. 066\n???\nNo. 067\n???\nNo. 068\n???\nNo. 069\n???\nNo. 070\n???\nNo. 071\n???\nNo. 072\n???\nNo. 073\n???\nNo. 074\n???\nNo. 075\n???\nNo. 076\n???\nNo. 077\n???\nNo. 078\n???\nNo. 079\n???\nNo. 080\n???\nNo. 081\n???\nNo. 082\n???\nNo. 083\n???\nNo. 084\n???\nNo. 085\n???\nNo. 086\n???\nNo. 087\n???\nNo. 088\n???\nNo. 089\n???\nNo. 090\n???\nNo. 091\n???\nNo. 092\n???\nNo. 093\n???\nNo. 094\n???\nNo. 095\n???\nNo. 096\n???\nNo. 097\n???\nNo. 098\n???\nNo. 099\n???\nNo. 100\n???\nNo. 101\n???\nNo. 102\n???\nNo. 103\n???\nNo. 104\n???\nNo. 105\n???\nNo. 106\n???\nNo. 107\n???\nNo. 108\n???\nNo. 109\n???\nNo. 110\n???\nNo. 111\n???\nNo. 112\n???\nNo. 113\n???\nNo. 114\n???\nNo. 115\n???\nNo. 116\n???\nNo. 117\n???\nNo. 118\n???\nNo. 119\n???\nNo. 120\n???\nNo. 121\n???\nNo. 122\n???\nNo. 123\n???\nNo. 124\n???\nNo. 125\n???\nNo. 126\n???\nNo. 127\n???\nNo. 128\n???\nNo. 129\n???\nNo. 130\n???\nNo. 131\n???\nNo. 132\n???\nNo. 133\n???\nNo. 134\n???\nNo. 135\n???\nNo. 136\n???\nNo. 137\n???\nNo. 138\n???\nNo. 139\n???\nNo. 140\n???\nNo. 141\n???\nNo. 142\n???\nNo. 143\n???\nNo. 144\n???\nNo. 145\n???\nNo. 146\n???\nNo. 147\n???\nNo. 148\n???\nNo. 149\n???\nNo. 150\n???\nNo. 151\n???\nJohto\nRegion locked ▾\nHoenn\nRegion locked ▾\nSinnoh\nRegion locked ▾",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "clientWidth": 1440
+      },
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1430,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        ".battle-stage": {
+          "x": 280,
+          "y": 108,
+          "width": 798,
+          "height": 448.875
+        },
+        ".battle-bottom": {
+          "x": 358,
+          "y": 496.875,
+          "width": 707,
+          "height": 47
+        },
+        ".battle-log": {
+          "x": 358,
+          "y": 496.875,
+          "width": 571,
+          "height": 47
+        },
+        ".replica-detail": null,
+        ".team-panel": null,
+        ".team-panel .map-head": null,
+        ".team-slots": null,
+        ".slot": null,
+        ".team-sets": null,
+        ".pc-sticky": {
+          "x": 280,
+          "y": 340,
+          "width": 1134,
+          "height": 58
+        },
+        ".pc-grid": null,
+        ".dex-hero": {
+          "x": 280,
+          "y": 72,
+          "width": 1134,
+          "height": 252
+        },
+        ".dex-hero-body": {
+          "x": 282,
+          "y": 126,
+          "width": 1130,
+          "height": 196
+        },
+        ".dex-ring": {
+          "x": 298,
+          "y": 160,
+          "width": 128,
+          "height": 128
+        },
+        ".dex-reg-bars": {
+          "x": 442,
+          "y": 137,
+          "width": 954,
+          "height": 100
+        },
+        ".dex-grid": {
+          "x": 282,
+          "y": 470,
+          "width": 1130,
+          "height": 2904
+        },
+        ".dex-cell": {
+          "x": 294,
+          "y": 482,
+          "width": 131.25,
+          "height": 144
+        },
+        ".replica-toast": null
+      }
+    },
+    "new-catch": {
+      "text": "Audit#TEST\nPokédex 6 / 151\n0 ₽\n0\nSave\n⚙\nKanto · Chapter 1\nBoulder Badge\nStep 1 / 20 · 0 %\nLv. 14-20\nProgress\nTeam/PC\nPOKÉDEX\n6\nActivities\n▸\nSocial\n▸\nShop\nAchievements\nRoute 1\n[\n]\n?\n?\n?\n?\n?\n1/20\n🌙\n00:25\n⛅\nClear skies\nLv.5\nLv.6\nLv.7\nLv.8\nLv.9\nLv.10\nLv.5\nLv.4\nA wild Rattata appeared!\nx1\nx2\nx3\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×0\n×0\n×0\n×0\nFound here\ni\nRoute 1\n2/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n✓\n55%\n✓\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%\nPokédex\n?\nSeen 7\n✦ Shinies 0\nRegions complete 0/1\n4.0 %\n6 / 151\nKanto\n6 / 151\nJohto\nHoenn\nSinnoh\nLATEST CATCHES\nStatus\nCaught\nNot caught\nSeen, not caught\nUnknown\n✦ SHINIES\nTypes\nNormal\nFire\nWater\nElectric\nGrass\nIce\nFighting\nPoison\nGround\nFlying\nPsychic\nBug\nRock\nGhost\nDragon\nSteel\nFairy\nKanto\nJohto · Locked\nHoenn · Locked\nSinnoh · Locked\nKanto\n6 new\n145 to go\n6 / 151\n▾\nNEW\nNo. 001\nBulbasaur\nNo. 002\n???\nNo. 003\n???\nNEW\nNo. 004\nCharmander\nNo. 005\n???\nNo. 006\n???\nNEW\nNo. 007\nSquirtle\nNo. 008\n???\nNo. 009\n???\nNEW\nNo. 010\nCaterpie\nNo. 011\n???\nNo. 012\n???\nNo. 013\n???\nNo. 014\n???\nNo. 015\n???\nNEW\nNo. 016\nPidgey\nNo. 017\n???\nNo. 018\n???\nNo. 019\nRattata\nNo. 020\n???\nNo. 021\n???\nNo. 022\n???\nNo. 023\n???\nNo. 024\n???\nNEW\nNo. 025\nPikachu\nNo. 026\n???\nNo. 027\n???\nNo. 028\n???\nNo. 029\n???\nNo. 030\n???\nNo. 031\n???\nNo. 032\n???\nNo. 033\n???\nNo. 034\n???\nNo. 035\n???\nNo. 036\n???\nNo. 037\n???\nNo. 038\n???\nNo. 039\n???\nNo. 040\n???\nNo. 041\n???\nNo. 042\n???\nNo. 043\n???\nNo. 044\n???\nNo. 045\n???\nNo. 046\n???\nNo. 047\n???\nNo. 048\n???\nNo. 049\n???\nNo. 050\n???\nNo. 051\n???\nNo. 052\n???\nNo. 053\n???\nNo. 054\n???\nNo. 055\n???\nNo. 056\n???\nNo. 057\n???\nNo. 058\n???\nNo. 059\n???\nNo. 060\n???\nNo. 061\n???\nNo. 062\n???\nNo. 063\n???\nNo. 064\n???\nNo. 065\n???\nNo. 066\n???\nNo. 067\n???\nNo. 068\n???\nNo. 069\n???\nNo. 070\n???\nNo. 071\n???\nNo. 072\n???\nNo. 073\n???\nNo. 074\n???\nNo. 075\n???\nNo. 076\n???\nNo. 077\n???\nNo. 078\n???\nNo. 079\n???\nNo. 080\n???\nNo. 081\n???\nNo. 082\n???\nNo. 083\n???\nNo. 084\n???\nNo. 085\n???\nNo. 086\n???\nNo. 087\n???\nNo. 088\n???\nNo. 089\n???\nNo. 090\n???\nNo. 091\n???\nNo. 092\n???\nNo. 093\n???\nNo. 094\n???\nNo. 095\n???\nNo. 096\n???\nNo. 097\n???\nNo. 098\n???\nNo. 099\n???\nNo. 100\n???\nNo. 101\n???\nNo. 102\n???\nNo. 103\n???\nNo. 104\n???\nNo. 105\n???\nNo. 106\n???\nNo. 107\n???\nNo. 108\n???\nNo. 109\n???\nNo. 110\n???\nNo. 111\n???\nNo. 112\n???\nNo. 113\n???\nNo. 114\n???\nNo. 115\n???\nNo. 116\n???\nNo. 117\n???\nNo. 118\n???\nNo. 119\n???\nNo. 120\n???\nNo. 121\n???\nNo. 122\n???\nNo. 123\n???\nNo. 124\n???\nNo. 125\n???\nNo. 126\n???\nNo. 127\n???\nNo. 128\n???\nNo. 129\n???\nNo. 130\n???\nNo. 131\n???\nNo. 132\n???\nNo. 133\n???\nNo. 134\n???\nNo. 135\n???\nNo. 136\n???\nNo. 137\n???\nNo. 138\n???\nNo. 139\n???\nNo. 140\n???\nNo. 141\n???\nNo. 142\n???\nNo. 143\n???\nNo. 144\n???\nNo. 145\n???\nNo. 146\n???\nNo. 147\n???\nNo. 148\n???\nNo. 149\n???\nNo. 150\n???\nNo. 151\n???\nJohto\nRegion locked ▾\nHoenn\nRegion locked ▾\nSinnoh\nRegion locked ▾\nCharmander\nNEW\nNo. 004\nKanto 6/151\nLizard Pokémon\nFire\n● Rare\nLevel\n5\nHeight\n0.6 m\nWeight\n8.5 kg\nCaught\n1\n\nFrom the time it is born, a flame burns at the tip of its tail. Its life would end if the flame were to go out.\n\nCONTINUE",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "clientWidth": 1440
+      },
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1430,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        ".battle-stage": {
+          "x": 280,
+          "y": 108,
+          "width": 798,
+          "height": 448.875
+        },
+        ".battle-bottom": {
+          "x": 358,
+          "y": 496.875,
+          "width": 707,
+          "height": 47
+        },
+        ".battle-log": {
+          "x": 358,
+          "y": 496.875,
+          "width": 571,
+          "height": 47
+        },
+        ".replica-detail": {
+          "x": 485,
+          "y": 238.453125,
+          "width": 460,
+          "height": 423.078125
+        },
+        ".team-panel": null,
+        ".team-panel .map-head": null,
+        ".team-slots": null,
+        ".slot": null,
+        ".team-sets": null,
+        ".pc-sticky": {
+          "x": 280,
+          "y": 340,
+          "width": 1134,
+          "height": 58
+        },
+        ".pc-grid": null,
+        ".dex-hero": {
+          "x": 280,
+          "y": 72,
+          "width": 1134,
+          "height": 252
+        },
+        ".dex-hero-body": {
+          "x": 282,
+          "y": 126,
+          "width": 1130,
+          "height": 196
+        },
+        ".dex-ring": {
+          "x": 298,
+          "y": 160,
+          "width": 128,
+          "height": 128
+        },
+        ".dex-reg-bars": {
+          "x": 442,
+          "y": 137,
+          "width": 954,
+          "height": 100
+        },
+        ".dex-grid": {
+          "x": 282,
+          "y": 470,
+          "width": 1130,
+          "height": 2904
+        },
+        ".dex-cell": {
+          "x": 294,
+          "y": 482,
+          "width": 131.25,
+          "height": 144
+        },
+        ".replica-toast": null
+      }
+    },
+    "toast": {
+      "text": "Audit#TEST\nPokédex 6 / 151\n0 ₽\n0\nSave\n⚙\nPidgey joined your collection!\nKanto · Chapter 1\nBoulder Badge\nStep 1 / 20 · 0 %\nLv. 14-20\nProgress\nTeam/PC\nPOKÉDEX\n6\nActivities\n▸\nSocial\n▸\nShop\nAchievements\nRoute 1\n[\n]\n?\n?\n?\n?\n?\n1/20\n🌙\n00:25\n⛅\nClear skies\nLv.5\nLv.6\nLv.7\nLv.8\nLv.9\nLv.10\nLv.6\nLv.2\nA wild Rattata appeared!\nx1\nx2\nx3\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×0\n×0\n×0\n×0\nFound here\ni\nRoute 1\n2/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n✓\n55%\n✓\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%\nPokédex\n?\nSeen 7\n✦ Shinies 0\nRegions complete 0/1\n4.0 %\n6 / 151\nKanto\n6 / 151\nJohto\nHoenn\nSinnoh\nLATEST CATCHES\nStatus\nCaught\nNot caught\nSeen, not caught\nUnknown\n✦ SHINIES\nTypes\nNormal\nFire\nWater\nElectric\nGrass\nIce\nFighting\nPoison\nGround\nFlying\nPsychic\nBug\nRock\nGhost\nDragon\nSteel\nFairy\nKanto\nJohto · Locked\nHoenn · Locked\nSinnoh · Locked\nKanto\n6 new\n145 to go\n6 / 151\n▾\nNEW\nNo. 001\nBulbasaur\nNo. 002\n???\nNo. 003\n???\nNEW\nNo. 004\nCharmander\nNo. 005\n???\nNo. 006\n???\nNEW\nNo. 007\nSquirtle\nNo. 008\n???\nNo. 009\n???\nNEW\nNo. 010\nCaterpie\nNo. 011\n???\nNo. 012\n???\nNo. 013\n???\nNo. 014\n???\nNo. 015\n???\nNEW\nNo. 016\nPidgey\nNo. 017\n???\nNo. 018\n???\nNo. 019\nRattata\nNo. 020\n???\nNo. 021\n???\nNo. 022\n???\nNo. 023\n???\nNo. 024\n???\nNEW\nNo. 025\nPikachu\nNo. 026\n???\nNo. 027\n???\nNo. 028\n???\nNo. 029\n???\nNo. 030\n???\nNo. 031\n???\nNo. 032\n???\nNo. 033\n???\nNo. 034\n???\nNo. 035\n???\nNo. 036\n???\nNo. 037\n???\nNo. 038\n???\nNo. 039\n???\nNo. 040\n???\nNo. 041\n???\nNo. 042\n???\nNo. 043\n???\nNo. 044\n???\nNo. 045\n???\nNo. 046\n???\nNo. 047\n???\nNo. 048\n???\nNo. 049\n???\nNo. 050\n???\nNo. 051\n???\nNo. 052\n???\nNo. 053\n???\nNo. 054\n???\nNo. 055\n???\nNo. 056\n???\nNo. 057\n???\nNo. 058\n???\nNo. 059\n???\nNo. 060\n???\nNo. 061\n???\nNo. 062\n???\nNo. 063\n???\nNo. 064\n???\nNo. 065\n???\nNo. 066\n???\nNo. 067\n???\nNo. 068\n???\nNo. 069\n???\nNo. 070\n???\nNo. 071\n???\nNo. 072\n???\nNo. 073\n???\nNo. 074\n???\nNo. 075\n???\nNo. 076\n???\nNo. 077\n???\nNo. 078\n???\nNo. 079\n???\nNo. 080\n???\nNo. 081\n???\nNo. 082\n???\nNo. 083\n???\nNo. 084\n???\nNo. 085\n???\nNo. 086\n???\nNo. 087\n???\nNo. 088\n???\nNo. 089\n???\nNo. 090\n???\nNo. 091\n???\nNo. 092\n???\nNo. 093\n???\nNo. 094\n???\nNo. 095\n???\nNo. 096\n???\nNo. 097\n???\nNo. 098\n???\nNo. 099\n???\nNo. 100\n???\nNo. 101\n???\nNo. 102\n???\nNo. 103\n???\nNo. 104\n???\nNo. 105\n???\nNo. 106\n???\nNo. 107\n???\nNo. 108\n???\nNo. 109\n???\nNo. 110\n???\nNo. 111\n???\nNo. 112\n???\nNo. 113\n???\nNo. 114\n???\nNo. 115\n???\nNo. 116\n???\nNo. 117\n???\nNo. 118\n???\nNo. 119\n???\nNo. 120\n???\nNo. 121\n???\nNo. 122\n???\nNo. 123\n???\nNo. 124\n???\nNo. 125\n???\nNo. 126\n???\nNo. 127\n???\nNo. 128\n???\nNo. 129\n???\nNo. 130\n???\nNo. 131\n???\nNo. 132\n???\nNo. 133\n???\nNo. 134\n???\nNo. 135\n???\nNo. 136\n???\nNo. 137\n???\nNo. 138\n???\nNo. 139\n???\nNo. 140\n???\nNo. 141\n???\nNo. 142\n???\nNo. 143\n???\nNo. 144\n???\nNo. 145\n???\nNo. 146\n???\nNo. 147\n???\nNo. 148\n???\nNo. 149\n???\nNo. 150\n???\nNo. 151\n???\nJohto\nRegion locked ▾\nHoenn\nRegion locked ▾\nSinnoh\nRegion locked ▾",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "clientWidth": 1440
+      },
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1430,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        ".battle-stage": {
+          "x": 280,
+          "y": 108,
+          "width": 798,
+          "height": 448.875
+        },
+        ".battle-bottom": {
+          "x": 358,
+          "y": 496.875,
+          "width": 707,
+          "height": 47
+        },
+        ".battle-log": {
+          "x": 358,
+          "y": 496.875,
+          "width": 571,
+          "height": 47
+        },
+        ".replica-detail": null,
+        ".team-panel": null,
+        ".team-panel .map-head": null,
+        ".team-slots": null,
+        ".slot": null,
+        ".team-sets": null,
+        ".pc-sticky": {
+          "x": 280,
+          "y": 340,
+          "width": 1134,
+          "height": 58
+        },
+        ".pc-grid": null,
+        ".dex-hero": {
+          "x": 280,
+          "y": 72,
+          "width": 1134,
+          "height": 252
+        },
+        ".dex-hero-body": {
+          "x": 282,
+          "y": 126,
+          "width": 1130,
+          "height": 196
+        },
+        ".dex-ring": {
+          "x": 298,
+          "y": 160,
+          "width": 128,
+          "height": 128
+        },
+        ".dex-reg-bars": {
+          "x": 442,
+          "y": 137,
+          "width": 954,
+          "height": 100
+        },
+        ".dex-grid": {
+          "x": 282,
+          "y": 470,
+          "width": 1130,
+          "height": 2904
+        },
+        ".dex-cell": {
+          "x": 294,
+          "y": 482,
+          "width": 131.25,
+          "height": 144
+        },
+        ".replica-toast": {
+          "x": 564.75,
+          "y": 16,
+          "width": 300.5,
+          "height": 68
+        }
+      }
+    },
+    "team-mobile": {
+      "text": "Pokédex 6 / 151\n0 ₽\n⚙\nRoute 1\n[\n]\n?\n?\n?\n?\n?\n1/20\n🌙\n00:25\n⛅\nLv.5\nLv.6\nLv.7\nLv.8\nLv.9\nLv.10\nLv.6\nLv.2\nA wild Rattata appeared!\nx1\nx2\nx3\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×0\n×0\n×0\n×0\nFound here\ni\nRoute 1\n2/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n✓\n55%\n✓\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%\nTeam\n?\n1\n+\n+\n+\n+\nAverage level\n8\nFire\nCharmander\nLv. 5 · Flamethrower\nNormal\nFlying\nPidgey\nLv. 6 · Tackle\nElectric\nPikachu\nLv. 7 · Thunderbolt\nBug\nCaterpie\nLv. 8 · X-Scissor\nWater\nSquirtle\nLv. 9 · Hydro Pump\nGrass\nPoison\nBulbasaur\nLv. 10 · Razor Leaf\nTypes\nNormal\nFire\nWater\nElectric\nGrass\nIce\nFighting\nPoison\nGround\nFlying\nPsychic\nBug\nRock\nGhost\nDragon\nSteel\nFairy\n✦ SHINIES\nCAN EVOLVE\nRecent\nPokédex No.\nName\nLevel\nRarity\nStats\nCustom\n↓\nLv. 10\nLv. 11\nLv. 12\nLv. 13\nLv. 14\nLv. 15\nLv. 16\nLv. 17\nLv. 18\nLv. 19\nLv. 20\nLv. 21\nLv. 22\nLv. 23\nLv. 24\nLv. 25\nLv. 26\nLv. 27\nProgress\nTeam/PC\nPokédex\n☰\nMenu",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "clientWidth": 390
+      },
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        ".battle-stage": {
+          "x": 16,
+          "y": 112,
+          "width": 358,
+          "height": 268.5
+        },
+        ".battle-bottom": {
+          "x": 73,
+          "y": 335.5,
+          "width": 292,
+          "height": 36
+        },
+        ".battle-log": {
+          "x": 73,
+          "y": 335.5,
+          "width": 198,
+          "height": 36
+        },
+        ".replica-detail": null,
+        ".team-panel": {
+          "x": 16,
+          "y": 76,
+          "width": 358,
+          "height": 496
+        },
+        ".team-panel .map-head": {
+          "x": 18,
+          "y": 78,
+          "width": 354,
+          "height": 106
+        },
+        ".team-slots": {
+          "x": 18,
+          "y": 184,
+          "width": 354,
+          "height": 386
+        },
+        ".slot": {
+          "x": 34,
+          "y": 200,
+          "width": 96.65625,
+          "height": 169
+        },
+        ".team-sets": {
+          "x": 34,
+          "y": 126,
+          "width": 322,
+          "height": 48
+        },
+        ".pc-sticky": {
+          "x": 16,
+          "y": 588,
+          "width": 358,
+          "height": 104
+        },
+        ".pc-grid": {
+          "x": 16,
+          "y": 692,
+          "width": 358,
+          "height": 384
+        },
+        ".dex-hero": null,
+        ".dex-hero-body": null,
+        ".dex-ring": null,
+        ".dex-reg-bars": null,
+        ".dex-grid": null,
+        ".dex-cell": null,
+        ".replica-toast": null
+      }
+    },
+    "pokedex-mobile": {
+      "text": "Pokédex 6 / 151\n0 ₽\n⚙\nRoute 1\n[\n]\n?\n?\n?\n?\n?\n1/20\n🌙\n00:25\n⛅\nLv.5\nLv.6\nLv.7\nLv.8\nLv.9\nLv.10\nLv.6\nLv.2\nA wild Rattata appeared!\nx1\nx2\nx3\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×0\n×0\n×0\n×0\nFound here\ni\nRoute 1\n2/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n✓\n55%\n✓\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%\nPokédex\n?\nSeen 7\n✦ Shinies 0\nRegions complete 0/1\n4.0 %\n6 / 151\nKanto\n6 / 151\nJohto\nHoenn\nSinnoh\nLATEST CATCHES\nStatus\nCaught\nNot caught\nSeen, not caught\nUnknown\n✦ SHINIES\nTypes\nNormal\nFire\nWater\nElectric\nGrass\nIce\nFighting\nPoison\nGround\nFlying\nPsychic\nBug\nRock\nGhost\nDragon\nSteel\nFairy\nKanto\nJohto · Locked\nHoenn · Locked\nSinnoh · Locked\nKanto\n6 new\n145 to go\n6 / 151\n▾\nNEW\nNo. 001\nNo. 002\nNo. 003\nNEW\nNo. 004\nNo. 005\nNo. 006\nNEW\nNo. 007\nNo. 008\nNo. 009\nNEW\nNo. 010\nNo. 011\nNo. 012\nNo. 013\nNo. 014\nNo. 015\nNEW\nNo. 016\nNo. 017\nNo. 018\nNo. 019\nNo. 020\nNo. 021\nNo. 022\nNo. 023\nNo. 024\nNEW\nNo. 025\nNo. 026\nNo. 027\nNo. 028\nNo. 029\nNo. 030\nNo. 031\nNo. 032\nNo. 033\nNo. 034\nNo. 035\nNo. 036\nNo. 037\nNo. 038\nNo. 039\nNo. 040\nNo. 041\nNo. 042\nNo. 043\nNo. 044\nNo. 045\nNo. 046\nNo. 047\nNo. 048\nNo. 049\nNo. 050\nNo. 051\nNo. 052\nNo. 053\nNo. 054\nNo. 055\nNo. 056\nNo. 057\nNo. 058\nNo. 059\nNo. 060\nNo. 061\nNo. 062\nNo. 063\nNo. 064\nNo. 065\nNo. 066\nNo. 067\nNo. 068\nNo. 069\nNo. 070\nNo. 071\nNo. 072\nNo. 073\nNo. 074\nNo. 075\nNo. 076\nNo. 077\nNo. 078\nNo. 079\nNo. 080\nNo. 081\nNo. 082\nNo. 083\nNo. 084\nNo. 085\nNo. 086\nNo. 087\nNo. 088\nNo. 089\nNo. 090\nNo. 091\nNo. 092\nNo. 093\nNo. 094\nNo. 095\nNo. 096\nNo. 097\nNo. 098\nNo. 099\nNo. 100\nNo. 101\nNo. 102\nNo. 103\nNo. 104\nNo. 105\nNo. 106\nNo. 107\nNo. 108\nNo. 109\nNo. 110\nNo. 111\nNo. 112\nNo. 113\nNo. 114\nNo. 115\nNo. 116\nNo. 117\nNo. 118\nNo. 119\nNo. 120\nNo. 121\nNo. 122\nNo. 123\nNo. 124\nNo. 125\nNo. 126\nNo. 127\nNo. 128\nNo. 129\nNo. 130\nNo. 131\nNo. 132\nNo. 133\nNo. 134\nNo. 135\nNo. 136\nNo. 137\nNo. 138\nNo. 139\nNo. 140\nNo. 141\nNo. 142\nNo. 143\nNo. 144\nNo. 145\nNo. 146\nNo. 147\nNo. 148\nNo. 149\nNo. 150\nNo. 151\nJohto\nRegion locked ▾\nHoenn\nRegion locked ▾\nSinnoh\nRegion locked ▾\nProgress\nTeam/PC\nPokédex\n☰\nMenu",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "clientWidth": 390
+      },
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        ".battle-stage": {
+          "x": 16,
+          "y": 112,
+          "width": 358,
+          "height": 268.5
+        },
+        ".battle-bottom": {
+          "x": 73,
+          "y": 335.5,
+          "width": 292,
+          "height": 36
+        },
+        ".battle-log": {
+          "x": 73,
+          "y": 335.5,
+          "width": 198,
+          "height": 36
+        },
+        ".replica-detail": null,
+        ".team-panel": null,
+        ".team-panel .map-head": null,
+        ".team-slots": null,
+        ".slot": null,
+        ".team-sets": null,
+        ".pc-sticky": {
+          "x": 16,
+          "y": 548.59375,
+          "width": 358,
+          "height": 104
+        },
+        ".pc-grid": null,
+        ".dex-hero": {
+          "x": 16,
+          "y": 76,
+          "width": 358,
+          "height": 456.59375
+        },
+        ".dex-hero-body": {
+          "x": 18,
+          "y": 155.59375,
+          "width": 354,
+          "height": 375
+        },
+        ".dex-ring": {
+          "x": 131,
+          "y": 171.59375,
+          "width": 128,
+          "height": 128
+        },
+        ".dex-reg-bars": {
+          "x": 30,
+          "y": 315.59375,
+          "width": 330,
+          "height": 100
+        },
+        ".dex-grid": {
+          "x": 18,
+          "y": 744.1875,
+          "width": 354,
+          "height": 3608
+        },
+        ".dex-cell": {
+          "x": 26,
+          "y": 752.1875,
+          "width": 64.390625,
+          "height": 112
+        },
+        ".replica-toast": null
+      }
+    },
+    "new-catch-mobile": {
+      "text": "Pokédex 6 / 151\n0 ₽\n⚙\nRoute 1\n[\n]\n?\n?\n?\n?\n?\n1/20\n🌙\n00:25\n⛅\nLv.5\nLv.6\nLv.7\nLv.8\nLv.9\nLv.10\nLv.6\nLv.2\nA wild Rattata appeared!\nx1\nx2\nx3\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×0\n×0\n×0\n×0\nFound here\ni\nRoute 1\n2/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n✓\n55%\n✓\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%\nPokédex\n?\nSeen 7\n✦ Shinies 0\nRegions complete 0/1\n4.0 %\n6 / 151\nKanto\n6 / 151\nJohto\nHoenn\nSinnoh\nLATEST CATCHES\nStatus\nCaught\nNot caught\nSeen, not caught\nUnknown\n✦ SHINIES\nTypes\nNormal\nFire\nWater\nElectric\nGrass\nIce\nFighting\nPoison\nGround\nFlying\nPsychic\nBug\nRock\nGhost\nDragon\nSteel\nFairy\nKanto\nJohto · Locked\nHoenn · Locked\nSinnoh · Locked\nKanto\n6 new\n145 to go\n6 / 151\n▾\nNEW\nNo. 001\nNo. 002\nNo. 003\nNEW\nNo. 004\nNo. 005\nNo. 006\nNEW\nNo. 007\nNo. 008\nNo. 009\nNEW\nNo. 010\nNo. 011\nNo. 012\nNo. 013\nNo. 014\nNo. 015\nNEW\nNo. 016\nNo. 017\nNo. 018\nNo. 019\nNo. 020\nNo. 021\nNo. 022\nNo. 023\nNo. 024\nNEW\nNo. 025\nNo. 026\nNo. 027\nNo. 028\nNo. 029\nNo. 030\nNo. 031\nNo. 032\nNo. 033\nNo. 034\nNo. 035\nNo. 036\nNo. 037\nNo. 038\nNo. 039\nNo. 040\nNo. 041\nNo. 042\nNo. 043\nNo. 044\nNo. 045\nNo. 046\nNo. 047\nNo. 048\nNo. 049\nNo. 050\nNo. 051\nNo. 052\nNo. 053\nNo. 054\nNo. 055\nNo. 056\nNo. 057\nNo. 058\nNo. 059\nNo. 060\nNo. 061\nNo. 062\nNo. 063\nNo. 064\nNo. 065\nNo. 066\nNo. 067\nNo. 068\nNo. 069\nNo. 070\nNo. 071\nNo. 072\nNo. 073\nNo. 074\nNo. 075\nNo. 076\nNo. 077\nNo. 078\nNo. 079\nNo. 080\nNo. 081\nNo. 082\nNo. 083\nNo. 084\nNo. 085\nNo. 086\nNo. 087\nNo. 088\nNo. 089\nNo. 090\nNo. 091\nNo. 092\nNo. 093\nNo. 094\nNo. 095\nNo. 096\nNo. 097\nNo. 098\nNo. 099\nNo. 100\nNo. 101\nNo. 102\nNo. 103\nNo. 104\nNo. 105\nNo. 106\nNo. 107\nNo. 108\nNo. 109\nNo. 110\nNo. 111\nNo. 112\nNo. 113\nNo. 114\nNo. 115\nNo. 116\nNo. 117\nNo. 118\nNo. 119\nNo. 120\nNo. 121\nNo. 122\nNo. 123\nNo. 124\nNo. 125\nNo. 126\nNo. 127\nNo. 128\nNo. 129\nNo. 130\nNo. 131\nNo. 132\nNo. 133\nNo. 134\nNo. 135\nNo. 136\nNo. 137\nNo. 138\nNo. 139\nNo. 140\nNo. 141\nNo. 142\nNo. 143\nNo. 144\nNo. 145\nNo. 146\nNo. 147\nNo. 148\nNo. 149\nNo. 150\nNo. 151\nJohto\nRegion locked ▾\nHoenn\nRegion locked ▾\nSinnoh\nRegion locked ▾\nProgress\nTeam/PC\nPokédex\n☰\nMenu\nPidgey\nNEW\nNo. 016\nKanto 6/151\nTiny Bird Pokémon\nNormal\nFlying\n● Common\nLevel\n5\nHeight\n0.3 m\nWeight\n1.8 kg\nCaught\n1\n\nVery docile. If attacked, it will often kick up sand to protect itself rather than fight back.\n\nCONTINUE",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "clientWidth": 390
+      },
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        ".battle-stage": {
+          "x": 16,
+          "y": 112,
+          "width": 358,
+          "height": 268.5
+        },
+        ".battle-bottom": {
+          "x": 73,
+          "y": 335.5,
+          "width": 292,
+          "height": 36
+        },
+        ".battle-log": {
+          "x": 73,
+          "y": 335.5,
+          "width": 198,
+          "height": 36
+        },
+        ".replica-detail": {
+          "x": 16,
+          "y": 162.203125,
+          "width": 358,
+          "height": 519.59375
+        },
+        ".team-panel": null,
+        ".team-panel .map-head": null,
+        ".team-slots": null,
+        ".slot": null,
+        ".team-sets": null,
+        ".pc-sticky": {
+          "x": 16,
+          "y": 548.59375,
+          "width": 358,
+          "height": 104
+        },
+        ".pc-grid": null,
+        ".dex-hero": {
+          "x": 16,
+          "y": 76,
+          "width": 358,
+          "height": 456.59375
+        },
+        ".dex-hero-body": {
+          "x": 18,
+          "y": 155.59375,
+          "width": 354,
+          "height": 375
+        },
+        ".dex-ring": {
+          "x": 131,
+          "y": 171.59375,
+          "width": 128,
+          "height": 128
+        },
+        ".dex-reg-bars": {
+          "x": 30,
+          "y": 315.59375,
+          "width": 330,
+          "height": 100
+        },
+        ".dex-grid": {
+          "x": 18,
+          "y": 744.1875,
+          "width": 354,
+          "height": 3608
+        },
+        ".dex-cell": {
+          "x": 26,
+          "y": 752.1875,
+          "width": 64.390625,
+          "height": 112
+        },
+        ".replica-toast": null
+      }
+    },
+    "new-catch-small": {
+      "text": "Pokédex 6 / 151\n0 ₽\n⚙\nRoute 1\n[\n]\n?\n?\n?\n?\n?\n1/20\n🌙\n00:25\n⛅\nLv.5\nLv.6\nLv.7\nLv.8\nLv.9\nLv.10\nLv.6\nLv.2\nA wild Rattata appeared!\nx1\nx2\nx3\n\nOther trainers' feats show up here.\n\nConsumables ?\nBAG\n×0\n×0\n×0\n×0\nFound here\ni\nRoute 1\n2/13\n45%\n25%\n15%\n🌙\nNIGHT\nNOW\n25%\n20%\n☀️\nDAY\n✓\n55%\n✓\n20%\n20%\n10%\n10%\n5%\n5%\n🌧️\nRAIN\n8%\nPokédex\n?\nSeen 7\n✦ Shinies 0\nRegions complete 0/1\n4.0 %\n6 / 151\nKanto\n6 / 151\nJohto\nHoenn\nSinnoh\nLATEST CATCHES\nStatus\nCaught\nNot caught\nSeen, not caught\nUnknown\n✦ SHINIES\nTypes\nNormal\nFire\nWater\nElectric\nGrass\nIce\nFighting\nPoison\nGround\nFlying\nPsychic\nBug\nRock\nGhost\nDragon\nSteel\nFairy\nKanto\nJohto · Locked\nHoenn · Locked\nSinnoh · Locked\nKanto\n6 new\n145 to go\n6 / 151\n▾\nNEW\nNo. 001\nNo. 002\nNo. 003\nNEW\nNo. 004\nNo. 005\nNo. 006\nNEW\nNo. 007\nNo. 008\nNo. 009\nNEW\nNo. 010\nNo. 011\nNo. 012\nNo. 013\nNo. 014\nNo. 015\nNEW\nNo. 016\nNo. 017\nNo. 018\nNo. 019\nNo. 020\nNo. 021\nNo. 022\nNo. 023\nNo. 024\nNEW\nNo. 025\nNo. 026\nNo. 027\nNo. 028\nNo. 029\nNo. 030\nNo. 031\nNo. 032\nNo. 033\nNo. 034\nNo. 035\nNo. 036\nNo. 037\nNo. 038\nNo. 039\nNo. 040\nNo. 041\nNo. 042\nNo. 043\nNo. 044\nNo. 045\nNo. 046\nNo. 047\nNo. 048\nNo. 049\nNo. 050\nNo. 051\nNo. 052\nNo. 053\nNo. 054\nNo. 055\nNo. 056\nNo. 057\nNo. 058\nNo. 059\nNo. 060\nNo. 061\nNo. 062\nNo. 063\nNo. 064\nNo. 065\nNo. 066\nNo. 067\nNo. 068\nNo. 069\nNo. 070\nNo. 071\nNo. 072\nNo. 073\nNo. 074\nNo. 075\nNo. 076\nNo. 077\nNo. 078\nNo. 079\nNo. 080\nNo. 081\nNo. 082\nNo. 083\nNo. 084\nNo. 085\nNo. 086\nNo. 087\nNo. 088\nNo. 089\nNo. 090\nNo. 091\nNo. 092\nNo. 093\nNo. 094\nNo. 095\nNo. 096\nNo. 097\nNo. 098\nNo. 099\nNo. 100\nNo. 101\nNo. 102\nNo. 103\nNo. 104\nNo. 105\nNo. 106\nNo. 107\nNo. 108\nNo. 109\nNo. 110\nNo. 111\nNo. 112\nNo. 113\nNo. 114\nNo. 115\nNo. 116\nNo. 117\nNo. 118\nNo. 119\nNo. 120\nNo. 121\nNo. 122\nNo. 123\nNo. 124\nNo. 125\nNo. 126\nNo. 127\nNo. 128\nNo. 129\nNo. 130\nNo. 131\nNo. 132\nNo. 133\nNo. 134\nNo. 135\nNo. 136\nNo. 137\nNo. 138\nNo. 139\nNo. 140\nNo. 141\nNo. 142\nNo. 143\nNo. 144\nNo. 145\nNo. 146\nNo. 147\nNo. 148\nNo. 149\nNo. 150\nNo. 151\nJohto\nRegion locked ▾\nHoenn\nRegion locked ▾\nSinnoh\nRegion locked ▾\nProgress\nTeam/PC\nPokédex\n☰\nMenu\nPidgey\nNEW\nNo. 016\nKanto 6/151\nTiny Bird Pokémon\nNormal\nFlying\n● Common\nLevel\n5\nHeight\n0.3 m\nWeight\n1.8 kg\nCaught\n1\n\nVery docile. If attacked, it will often kick up sand to protect itself rather than fight back.\n\nCONTINUE",
+      "viewport": {
+        "width": 320,
+        "height": 568,
+        "clientWidth": 320
+      },
+      "horizontalOverflow": false,
+      "geometry": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 320,
+          "height": 60
+        },
+        ".game-sidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        ".battle-stage": {
+          "x": 16,
+          "y": 112,
+          "width": 288,
+          "height": 216
+        },
+        ".battle-bottom": {
+          "x": 73,
+          "y": 283,
+          "width": 222,
+          "height": 36
+        },
+        ".battle-log": {
+          "x": 73,
+          "y": 283,
+          "width": 128,
+          "height": 36
+        },
+        ".replica-detail": {
+          "x": 16,
+          "y": 24.203125,
+          "width": 288,
+          "height": 519.59375
+        },
+        ".team-panel": null,
+        ".team-panel .map-head": null,
+        ".team-slots": null,
+        ".slot": null,
+        ".team-sets": null,
+        ".pc-sticky": {
+          "x": 16,
+          "y": 604.59375,
+          "width": 288,
+          "height": 104
+        },
+        ".pc-grid": null,
+        ".dex-hero": {
+          "x": 16,
+          "y": 76,
+          "width": 288,
+          "height": 512.59375
+        },
+        ".dex-hero-body": {
+          "x": 18,
+          "y": 155.59375,
+          "width": 284,
+          "height": 431
+        },
+        ".dex-ring": {
+          "x": 96,
+          "y": 171.59375,
+          "width": 128,
+          "height": 128
+        },
+        ".dex-reg-bars": {
+          "x": 30,
+          "y": 315.59375,
+          "width": 260,
+          "height": 100
+        },
+        ".dex-grid": {
+          "x": 18,
+          "y": 800.1875,
+          "width": 284,
+          "height": 3608
+        },
+        ".dex-cell": {
+          "x": 26,
+          "y": 808.1875,
+          "width": 50.390625,
+          "height": 112
+        },
+        ".replica-toast": null
+      }
+    }
+  },
+  "data": {
+    "chapters": [
+      {
+        "id": "kanto-1",
+        "name": "Boulder Badge",
+        "totalSteps": 20,
+        "actualSteps": 20,
+        "reusesLegacyChapter1": false
+      },
+      {
+        "id": "kanto-2",
+        "name": "Cascade Badge",
+        "totalSteps": 20,
+        "actualSteps": 19,
+        "reusesLegacyChapter1": true
+      },
+      {
+        "id": "special-mewtwo",
+        "name": "Mewtwo",
+        "totalSteps": 10,
+        "actualSteps": 10,
+        "reusesLegacyChapter1": false
+      },
+      {
+        "id": "kanto-3",
+        "name": "Thunder Badge",
+        "totalSteps": 22,
+        "actualSteps": 19,
+        "reusesLegacyChapter1": true
+      },
+      {
+        "id": "kanto-4",
+        "name": "Rainbow Badge",
+        "totalSteps": 24,
+        "actualSteps": 19,
+        "reusesLegacyChapter1": true
+      },
+      {
+        "id": "kanto-5",
+        "name": "Soul Badge",
+        "totalSteps": 25,
+        "actualSteps": 19,
+        "reusesLegacyChapter1": true
+      },
+      {
+        "id": "kanto-6",
+        "name": "Marsh Badge",
+        "totalSteps": 26,
+        "actualSteps": 19,
+        "reusesLegacyChapter1": true
+      },
+      {
+        "id": "kanto-7",
+        "name": "Volcano Badge",
+        "totalSteps": 30,
+        "actualSteps": 30,
+        "reusesLegacyChapter1": false
+      },
+      {
+        "id": "special-power-plant",
+        "name": "Power Plant",
+        "totalSteps": 15,
+        "actualSteps": 19,
+        "reusesLegacyChapter1": true
+      },
+      {
+        "id": "special-seafoam",
+        "name": "Seafoam Islands",
+        "totalSteps": 15,
+        "actualSteps": 19,
+        "reusesLegacyChapter1": true
+      },
+      {
+        "id": "kanto-8",
+        "name": "Earth Badge",
+        "totalSteps": 30,
+        "actualSteps": 19,
+        "reusesLegacyChapter1": true
+      },
+      {
+        "id": "kanto-9",
+        "name": "Victory Road",
+        "totalSteps": 35,
+        "actualSteps": 19,
+        "reusesLegacyChapter1": true
+      },
+      {
+        "id": "special-blazing-cave",
+        "name": "Blazing Cave",
+        "totalSteps": 15,
+        "actualSteps": 19,
+        "reusesLegacyChapter1": true
+      }
+    ],
+    "actions": [
+      "setGameSpeed",
+      "setSelectedBall",
+      "toggleAutoCatch",
+      "reviewPokedexEntry",
+      "movePcPokemon",
+      "selectPartyPreset",
+      "setActivePartyIndex",
+      "movePartyMember",
+      "depositPokemon",
+      "withdrawPokemon",
+      "openAdventureModal",
+      "closeAdventureModal",
+      "selectChapter",
+      "loadStepNode",
+      "tickBerryBuffs",
+      "useBerry",
+      "triggerRandomGift",
+      "advanceStep",
+      "skipHeal",
+      "finishHealPresentation",
+      "finishItemDrop",
+      "catchEnemy",
+      "dismissNewCatchCard",
+      "finishCapturePresentation",
+      "resolveCombatImpact",
+      "finishCombatEffect",
+      "tickCombat",
+      "saveGame",
+      "loadGame"
+    ]
+  }
+}

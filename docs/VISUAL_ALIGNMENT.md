@@ -18,3 +18,17 @@
 - Ảnh trong `scratch/visual-parity/`: `original-00.png` trích từ video, `local-before.png`, `local-after.png`, `local-after-wide.png`.
 
 Các ảnh dùng save/trạng thái kiểm tra riêng. Chưa có screenshot diff tự động với cùng save trên bản live; chưa xác nhận mọi màn hình, mọi chiêu thức hay toàn bộ game đạt 90–100%. Nội dung các chương, tiến triển và những khoảng thiếu còn lại nằm trong [báo cáo hệ thống](CLONE_PARITY_AUDIT.md).
+
+## Đợt giao diện ngoài, Team/PC, Pokédex và thẻ bắt mới
+
+Đối chiếu CSS/JS gốc lưu trong `thamkhao/gamegoc/` và chạy lại bundle tham khảo trong `thamkhao/extracted_apk/assets/` bằng context Chrome riêng. Script `scratch/visual-parity/reference-collections.mjs` chỉ phục vụ kiểm chứng; bản React không chạy bundle tham khảo, iframe hoặc proxy. Bundle APK có các chỉnh sửa riêng về sprite/dữ liệu; những nút tiện ích APK không được đưa vào bản React. Các ảnh tham khảo không phải bằng chứng toàn bộ giao diện live hiện tại trùng khớp.
+
+- Căn lại header, nền Pokéball, sidebar, chữ Jersey, màu chọn menu, chiều rộng cột và vùng chơi. Team/PC và Pokédex hiển thị thành màn hình cạnh sidebar. Sân đấu vẫn được giữ mounted và giữ kích thước khi chuyển màn để không cắt hiệu ứng đang chạy.
+- Team có sáu ô, hệ, cấp độ, XP và kéo đổi vị trí; PC có tìm kiếm, bộ lọc, sắp xếp, phân trang, gửi/nhận và đổi Pokémon với đội đầy.
+- Pokédex có vòng tiến độ, thanh vùng, Pokémon bắt gần nhất, bộ lọc và lưới 151 loài Kanto. Các vùng ngoài Kanto vẫn khóa theo dữ liệu hiện có.
+- Thẻ bắt mới dùng Dex Card: NEW, tên/số, ảnh, hệ, độ hiếm, cấp độ, chiều cao/cân nặng, số lượng đã bắt, mô tả loài và Continue. Metadata 151 loài nằm trong `src/data/pokemonDetails.json`; sprite vẫn qua resolver dùng chung. Thẻ bắt mới được ưu tiên khi đang xem thẻ chi tiết để tránh hai dialog chồng nhau.
+- Bố cục mobile có điều hướng dưới, sidebar mở bằng Menu, Team ba cột và thẻ chi tiết vừa chiều ngang 390px.
+
+Ảnh kiểm chứng trong `scratch/visual-parity/`: `original-team.png`, `original-pokedex.png`, `original-new-catch.png` và các ảnh `local-exterior.png`, `local-team.png`, `local-pokedex.png`, `local-new-catch.png`. Ở viewport 1440×1000, Team bắt đầu tại (280,72), rộng 1144px; thẻ bắt mới rộng 460px. Fixture và save kiểm tra độc lập với save người dùng.
+
+Kiểm tra: `npm test` 13/13; `npm run test:ui` 9/9 trên Chrome (gồm kích thước sân, contact HP, tốc độ, capture, Team/PC, Pokédex, ưu tiên dialog và mobile); `npm run build` thành công. Vite còn cảnh báo bundle JS trên 500KB. Chưa nghiệm thu toàn game 90–100%; các menu phụ và dữ liệu ngoài Kanto còn khoảng thiếu.
