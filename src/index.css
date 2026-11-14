@@ -1,0 +1,1615 @@
+@import './fonts.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font: "Jersey 10", system-ui, -apple-system, sans-serif;
+    --font-title: "Jersey 15", system-ui, -apple-system, sans-serif;
+    --font-pixel: "Jersey 15", system-ui, -apple-system, sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #0d101a;
+    color: #e8ecf4;
+    font-family: var(--font);
+    background-image: radial-gradient(circle at center, rgba(30, 41, 59, 0.25) 0%, transparent 70%),
+      url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23182133' fill-opacity='0.22' fill-rule='evenodd'%3E%3Cpath d='M20 2a18 18 0 1 0 0 36 18 18 0 0 0 0-36zm0 2c8.28 0 15.08 6.3 15.93 14.36h-8.08a8 8 0 0 0-15.7 0H4.07C4.92 10.3 11.72 4 20 4zm0 32c-8.28 0-15.08-6.3-15.93-14.36h8.08a8 8 0 0 0 15.7 0h8.08C35.08 29.7 28.28 36 20 36zm0-11a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-2a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: auto, 40px 40px;
+    min-height: 100vh;
+  }
+}
+
+.font-pixel {
+  font-family: var(--font-pixel);
+  letter-spacing: 0.02em;
+}
+
+.font-game {
+  font-family: var(--font);
+}
+
+.pixel-art {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Authentic Poke'Catch side-nav button styles */
+.side-nav-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 12px;
+  border: 1px solid #202436;
+  background-color: #161824;
+  color: #c8ccd6;
+  font-family: var(--font-pixel);
+  font-size: 20px;
+  cursor: pointer;
+  text-align: left;
+  user-select: none;
+  transition: all 0.15s ease;
+}
+
+.side-nav-btn:hover:not(:disabled, .locked) {
+  background-color: #1f2334;
+  color: #ffffff;
+  transform: translateX(2px);
+}
+
+.side-nav-btn.active {
+  color: #ffffff;
+  border-color: rgba(227, 53, 59, 0.7);
+  background: linear-gradient(90deg, rgba(227, 53, 59, 0.65), rgba(227, 53, 59, 0.25));
+  box-shadow: inset 0 -3px rgba(0, 0, 0, 0.25);
+}
+
+.side-nav-sub-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 1px solid #1c2030;
+  background-color: #141622;
+  color: #c8ccd6;
+  font-family: var(--font-pixel);
+  font-size: 19px;
+  cursor: pointer;
+  text-align: left;
+  user-select: none;
+  transition: all 0.15s ease;
+}
+
+.side-nav-sub-btn:hover:not(:disabled, .locked) {
+  background-color: #1d2133;
+  color: #ffffff;
+  transform: translateX(2px);
+}
+
+/* Chevron */
+.nav-chev {
+  width: 7px;
+  height: 7px;
+  margin-left: auto;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  opacity: 0.7;
+  transform: rotate(-45deg);
+  transition: transform 0.2s ease;
+}
+
+.nav-chev.open {
+  transform: rotate(45deg);
+}
+
+/* Bag Timer Overlay over Berry Button (Khớp style gốc app.2a43a96474.css) */
+.bag-timer {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  line-height: 1;
+  pointer-events: none;
+  text-shadow: 0 1px 0 #000, 0 -1px 0 #000, 1px 0 0 #000, -1px 0 0 #000, 0 2px 4px rgba(0,0,0,0.95);
+  white-space: nowrap;
+}
+
+/* Animations for combat */
+@keyframes floatDmg {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.8);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1.2);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(-26px) scale(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-38px) scale(0.9);
+  }
+}
+
+.animate-damage {
+  animation: floatDmg 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+@keyframes lungeRight {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(14px); }
+  45% { transform: translateX(var(--lunge-distance, 230px)) scale(.88, 1.1); }
+  60% { transform: translateX(var(--lunge-distance, 230px)); }
+  100% { transform: translateX(0); }
+}
+
+.animate-lunge-player {
+  animation: lungeRight 626.67ms cubic-bezier(0.3, 0.7, 0.3, 1);
+}
+
+@keyframes lungeLeft {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-32px); }
+  100% { transform: translateX(0); }
+}
+
+.animate-lunge-enemy {
+  animation: lungeLeft 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Animations for Falling Item Drop (Rơi từ trên cao xuống nảy nhẹ, hiển thị rồi thu thập biến mất) */
+@keyframes coinSpin {
+  from {
+    background-position: 0px 0px;
+  }
+  to {
+    background-position: -192px 0px;
+  }
+}
+
+.coin-spin-sprite {
+  width: 32px;
+  height: 32px;
+  background-image: url('/assets/ui/coin-spin-frames.png');
+  background-repeat: no-repeat;
+  background-size: 192px 32px;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  animation: coinSpin 0.42s steps(6, end) infinite;
+}
+
+@keyframes itemDropFall {
+  0% {
+    transform: translateY(-240px) scale(0.5);
+    opacity: 0;
+  }
+  35% {
+    transform: translateY(0) scale(1.2);
+    opacity: 1;
+  }
+  48% {
+    transform: translateY(-20px) scale(0.9);
+  }
+  60% {
+    transform: translateY(0) scale(1.05);
+  }
+  70% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  85% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-12px) scale(0.7);
+    opacity: 0;
+  }
+}
+
+.animate-item-drop {
+  animation: itemDropFall 1.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes dropShadowExpand {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+  35% {
+    transform: scale(1.2);
+    opacity: 0.5;
+  }
+  70% {
+    transform: scale(1);
+    opacity: 0.35;
+  }
+  85% {
+    transform: scale(1);
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+}
+
+.animate-drop-shadow {
+  animation: dropShadowExpand 1.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes dropTextFloat {
+  0% {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+  25% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  75% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-26px);
+    opacity: 0;
+  }
+}
+
+.animate-drop-text {
+  animation: dropTextFloat 1.5s ease-out forwards;
+}
+
+/* Animations for Pokémon Center Healing Scene (Khớp 100% ảnh tham khảo Indigo Plateau) */
+@keyframes healCrossFloat {
+  0% {
+    transform: translateY(6px) scale(0.6);
+    opacity: 0;
+  }
+  30% {
+    transform: translateY(-2px) scale(1.1);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(-14px) scale(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-26px) scale(0.7);
+    opacity: 0;
+  }
+}
+
+.animate-heal-cross {
+  animation: healCrossFloat 1.2s ease-out infinite;
+}
+
+@keyframes healPadPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 12px rgba(244, 114, 182, 0.5), inset 0 0 6px rgba(255, 255, 255, 0.7);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 0 24px rgba(244, 114, 182, 0.95), inset 0 0 10px #ffffff;
+  }
+}
+
+.animate-heal-pad {
+  animation: healPadPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes healBallHover {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-heal-ball {
+  animation: healBallHover 1.5s ease-in-out infinite;
+}
+
+/* Authentic Poké'Catch Pokémon Center Healing FX (Khớp 100% css gốc) */
+.heal-fx {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: #060810d9;
+  overflow: hidden;
+}
+
+.hm-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  --b: clamp(64px, 8.5vw, 84px);
+}
+
+.hm-title {
+  font-family: var(--font-pixel);
+  font-size: clamp(16px, 2.2vw, 24px);
+  color: #ffffff;
+  text-shadow: 0 3px 0 #b8325c;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.hm-machine {
+  position: relative;
+  padding: 4px 8px 16px;
+}
+
+.hm-pads {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+.hm-msg {
+  padding: 8px 18px;
+  font-family: var(--font-pixel);
+  font-size: clamp(14px, 1.8vw, 18px);
+  color: #ffffff;
+  background: #b8325c;
+  border: 3px solid #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 0 3px #1b1b22, 6px 6px 0 3px rgba(0, 0, 0, 0.45);
+  text-align: center;
+  user-select: none;
+}
+
+.hm-tray {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.hm-slot {
+  position: relative;
+  width: var(--b);
+  height: calc(var(--b) * 0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  animation: hmFloat 2.4s steps(4) infinite alternate;
+}
+
+.hm-slot:nth-child(2n) {
+  animation-delay: -0.6s;
+}
+
+.hm-slot:nth-child(3n) {
+  animation-delay: -1.2s;
+}
+
+@keyframes hmFloat {
+  to {
+    transform: translateY(-4px);
+  }
+}
+
+.fx-skip-btn {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  width: max-content;
+  z-index: 50;
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 18px;
+  border-radius: 9999px;
+  background: #1c2030e6;
+  border: 2px solid #363c54;
+  color: #ffffff;
+  font-family: var(--font-pixel);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), inset 0 -2px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.fx-skip-btn:hover {
+  border-color: #ffffff;
+  background: #252b42;
+  transform: translateX(-50%) translateY(-1px);
+}
+
+.fx-skip-btn:active {
+  transform: translateX(-50%) translateY(1px);
+}
+
+/* ==========================================================================
+   Combat Move Animation Effects (Move FX, Shake, Hit Flash, Damage Number)
+   ========================================================================== */
+
+/* ==========================================================================
+   Poké'Catch Official UI Component Styles (Extracted from APK app.46311d7f13.css)
+   ========================================================================== */
+
+/* Timeline Rail (.tl-rail) */
+.tl-rail {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: var(--panel, #1c2030);
+  border-radius: 9999px;
+  border: 1px solid var(--line, #333a52);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.tl-rail .tl-zone {
+  flex: none;
+  width: 110px;
+  color: var(--muted, #9aa3bb);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.tl-rail .timeline {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  padding: 2px 8px;
+  background: none;
+  border: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+/* Universally disable all scrollbars across browsers */
+*::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+* {
+  -ms-overflow-style: none !important; /* IE and Edge */
+  scrollbar-width: none !important; /* Firefox */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  display: block !important;
+  width: 6px !important;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin !important;
+}
+
+.tl-rail .tl-link {
+  flex: none;
+  width: 14px;
+  height: 4px;
+  background: #252a3d;
+  transition: background-color 0.3s;
+}
+
+.tl-rail .tl-link.on {
+  background: #4cc96a;
+}
+
+.tl-rail .tl-node {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  border-radius: 4px;
+  border: 2px solid #1b1b22;
+  background: #252a3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.tl-rail .tl-node.fight {
+  background: #e3353b;
+}
+
+.tl-rail .tl-node.done {
+  opacity: 0.6;
+}
+
+.tl-rail .tl-node.wild {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  background: none;
+}
+
+.tl-rail .tl-node.wild img.tl-grass {
+  width: 18px;
+  height: 16px;
+  image-rendering: pixelated;
+}
+
+.tl-rail .tl-node.heal {
+  width: 22px;
+  height: 22px;
+  border: 0;
+  background: none;
+}
+
+.tl-rail .tl-node.heal img {
+  width: 22px;
+  height: 22px;
+  image-rendering: pixelated;
+}
+
+.tl-rail .tl-node.misc {
+  width: auto;
+  min-width: 12px;
+  border: 0;
+  background: none;
+  color: #ffffff;
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.tl-rail .tl-node.gym {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid #ffcb05;
+  background: #252a3d;
+}
+
+.tl-rail .tl-node.gym img.tl-badge {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+  object-fit: contain;
+}
+
+.tl-rail .tl-node.current {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 10px rgba(255, 255, 255, 0.8);
+  transform: scale(1.15);
+  z-index: 10;
+}
+
+.tl-rail .tl-count {
+  flex: none;
+  min-width: 36px;
+  text-align: right;
+  color: #ffcb05;
+  font-weight: 700;
+  font-family: var(--font);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* 6 Left Party Slots Rail (.team-rail) */
+.team-rail {
+  position: absolute;
+  left: 8px;
+  top: 10px;
+  bottom: 10px;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  box-sizing: border-box;
+  width: 52px;
+  pointer-events: none;
+}
+
+.tr-row {
+  pointer-events: auto;
+  position: relative;
+  flex: none;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 6px;
+  overflow: hidden;
+  color: #fff;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,0.14) 0 1px, transparent 1px 3px), #252a3d;
+  border: 2px solid #333a52;
+  border-radius: 10px;
+  box-shadow: 0 2px rgba(0, 0, 0, 0.45), 0 4px 8px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: transform 0.1s ease, border-color 0.15s, background 0.15s;
+}
+
+.tr-row:hover {
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,0.14) 0 1px, transparent 1px 3px), #2e3550;
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.tr-row.acting {
+  border-color: #ffcb05;
+  box-shadow: 0 0 12px rgba(255, 203, 5, 0.45);
+  transform: scale(1.04);
+}
+
+.tr-hp {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.tr-hp i {
+  display: block;
+  height: 100%;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.3);
+  transition: width 0.3s;
+}
+
+.tr-xp {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.tr-xp i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #2fae4f, #7fd63a 60%, #c8ec3c);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.3);
+  transition: width 0.3s;
+}
+
+.tr-lv {
+  margin-top: -6px;
+  font-family: var(--font);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  color: #a0a4ae;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 2px #000;
+}
+
+/* Authentic Battle Log Dialog Box */
+.battle-log-rpg {
+  position: absolute;
+  left: 12px;
+  right: 130px;
+  bottom: 10px;
+  min-height: 38px;
+  padding: 6px 14px;
+  background: #fdfdfd;
+  color: #1b1b22;
+  border: 3px solid #3a4a6b;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 2px #a9c1e8, 0 4px 10px rgba(0, 0, 0, 0.4);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+}
+
+/* Speed Controls (.adv-controls .seg#speed-btns) */
+.adv-controls-seg {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 30;
+  display: inline-flex;
+  border-radius: 10px;
+  background: #141724;
+  border: 1px solid #2b3046;
+  padding: 2px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.adv-controls-seg button {
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #9aa3bb;
+  border-radius: 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.adv-controls-seg button.on {
+  background: #e3353b;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Community Feats Card (.newsbar) */
+.newsbar-container {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 8px 16px;
+  background: #10131f;
+  border: 1px solid #333a52;
+  border-radius: 12px;
+  min-height: 48px;
+  color: #9aa3bb;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* Buff Stack for Berries on Arena (.buff-stack) */
+.buff-stack-arena {
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  display: flex;
+  gap: 6px;
+  z-index: 25;
+}
+
+.buff-pill-arena {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: rgba(20, 24, 38, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.buff-pill-arena img {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+  object-fit: contain;
+}
+
+/* Quake / Screen Shake */
+@keyframes quake {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-5px, 3px); }
+  50% { transform: translate(5px, -3px); }
+  75% { transform: translate(-3px, -2px); }
+}
+
+.animate-quake {
+  animation: quake 0.22s ease-in-out;
+}
+
+/* ==========================================================================
+   Idle Breathing Animation (Squash & Stretch: Kéo dãn ngang & dọc nhịp thở)
+   ========================================================================== */
+@keyframes idleBreathingPlayer {
+  0%, 100% {
+    transform: scaleX(-1) scale(1, 1) translateY(0);
+  }
+  35% {
+    /* Hít vào / vươn người: Dãn dọc, thu hẹp ngang nhẹ */
+    transform: scaleX(-0.95) scaleY(1.06) translateY(-4px);
+  }
+  70% {
+    /* Thở ra / chùng người: Dãn ngang, hạ dọc nhẹ */
+    transform: scaleX(-1.06) scaleY(0.95) translateY(1px);
+  }
+}
+
+@keyframes idleBreathingEnemy {
+  0%, 100% {
+    transform: scale(1, 1) translateY(0);
+  }
+  35% {
+    /* Hít vào / vươn người: Dãn dọc, thu hẹp ngang nhẹ */
+    transform: scaleX(0.95) scaleY(1.06) translateY(-4px);
+  }
+  70% {
+    /* Thở ra / chùng người: Dãn ngang, hạ dọc nhẹ */
+    transform: scaleX(1.06) scaleY(0.95) translateY(1px);
+  }
+}
+
+.animate-idle-player {
+  animation: idleBreathingPlayer 1.9s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.animate-idle-enemy {
+  animation: idleBreathingEnemy 1.9s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+/* ==========================================================================
+   Defender Hit Recoil & Flash (Giữ nguyên hướng nhìn, không bao giờ bị quay lưng)
+   ========================================================================== */
+@keyframes dummyHitPlayer {
+  0% {
+    transform: scaleX(-1) rotate(0) scale(1);
+    filter: brightness(2.8) saturate(0.2);
+  }
+  25% {
+    /* Giật lùi về bên trái, co rúm nhẹ */
+    transform: scaleX(-1) translateX(12px) rotate(-8deg) scale(0.92, 1.05);
+    filter: brightness(2) contrast(1.5);
+  }
+  50% {
+    transform: scaleX(-1) translateX(-4px) rotate(5deg) scale(1.05, 0.94);
+    filter: brightness(1.4);
+  }
+  100% {
+    transform: scaleX(-1) rotate(0) scale(1);
+    filter: none;
+  }
+}
+
+@keyframes dummyHitEnemy {
+  0% {
+    transform: rotate(0) scale(1);
+    filter: brightness(2.8) saturate(0.2);
+  }
+  25% {
+    /* Giật lùi về bên phải, co rúm nhẹ */
+    transform: translateX(12px) rotate(8deg) scale(0.92, 1.05);
+    filter: brightness(2) contrast(1.5);
+  }
+  50% {
+    transform: translateX(-4px) rotate(-5deg) scale(1.05, 0.94);
+    filter: brightness(1.4);
+  }
+  100% {
+    transform: rotate(0) scale(1);
+    filter: none;
+  }
+}
+
+.animate-target-hit-player {
+  animation: targetRecoilLeft 240ms cubic-bezier(0.3, 0.7, 0.3, 1);
+  transform-origin: bottom center;
+}
+
+.animate-target-hit-enemy {
+  animation: targetRecoilRight 240ms cubic-bezier(0.3, 0.7, 0.3, 1);
+  transform-origin: bottom center;
+}
+
+.animate-target-hit-flash { animation: targetPixelFlash 400ms steps(5, end); }
+@keyframes targetRecoilRight {
+  0%, 100% { transform: none; }
+  25% { transform: translateX(3px) scale(1.1, .88); }
+  50% { transform: translateX(-2px) scale(.95, 1.06); }
+  75% { transform: scale(1.02, .98); }
+}
+@keyframes targetRecoilLeft {
+  0%, 100% { transform: none; }
+  25% { transform: translateX(-3px) scale(1.1, .88); }
+  50% { transform: translateX(2px) scale(.95, 1.06); }
+  75% { transform: scale(1.02, .98); }
+}
+@keyframes targetPixelFlash {
+  0%, 100% { filter: none; }
+  25% { filter: brightness(3) saturate(0); }
+  50% { filter: none; }
+  75% { filter: brightness(2.5) saturate(0); }
+}
+
+.animate-target-hit {
+  animation: dummyHitEnemy 0.38s cubic-bezier(0.2, 0.8, 0.3, 1);
+  transform-origin: bottom center;
+}
+
+/* Floating Damage Indicator */
+@keyframes floatDamageText {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.8);
+  }
+  25% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1.25);
+  }
+  75% {
+    opacity: 1;
+    transform: translateY(-26px) scale(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.9);
+  }
+}
+
+.animate-damage-float {
+  animation: floatDamageText 0.65s cubic-bezier(0.2, 0.9, 0.4, 1) forwards;
+}
+
+/* Battle move sprite animations are defined in the Showdown FX block below. */
+/* Pixel-like faint: white hit silhouette breaks into small gold/cyan squares. */
+.animate-faint { animation: faintSilhouette 680ms steps(8, end) forwards; }
+@keyframes faintSilhouette {
+  0% { filter: brightness(0) invert(1) drop-shadow(0 0 5px #fff); opacity:1; transform:scale(1); }
+  18% { filter: brightness(0) invert(1) drop-shadow(0 0 7px #fff); opacity:1; }
+  42% { filter: brightness(1.8) sepia(1) saturate(2) hue-rotate(355deg); opacity:.9; transform:scale(1.02); }
+  100% { filter:brightness(1.4) sepia(1) saturate(2); opacity:0; transform:scale(.92) translateY(-8px); }
+}
+.faint-particle-layer { position:absolute; z-index:35; left:50%; top:48%; width:1px; height:1px; pointer-events:none; }
+.faint-particle-layer i { position:absolute; width:4px; height:4px; background:#ffe56d; box-shadow:0 0 5px #fff7ad; image-rendering:pixelated; animation:faintPixel 640ms steps(5,end) calc(var(--particle-delay, 0ms) + 90ms) forwards; }
+.faint-particle-layer i:nth-child(3n) { background:#b9f7ff; box-shadow:0 0 5px #75eaff; width:3px; height:3px; }
+.faint-particle-layer i:nth-child(2n) { width:2px; height:2px; }
+@keyframes faintPixel { 0% { opacity:0; transform:translate(0,0) scale(.5); } 20% { opacity:1; } 100% { opacity:0; transform:translate(var(--particle-x),var(--particle-y)) scale(.2); } }
+
+/* Pokémon Showdown battle FX: use its shipped artwork instead of homemade shapes. */
+.move-effect {
+  position: absolute;
+  left: var(--effect-x, 79.5%);
+  top: var(--effect-y, 54%);
+  width: 112px;
+  height: 112px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.move-fx-layer-enemy { --effect-x: 79.5%; --effect-y: 54%; }
+.move-fx-layer-player { --effect-x: 30%; --effect-y: 54%; }
+.battle-fx-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+.move-effect::before,
+.move-effect::after { display: none !important; }
+.move-effect > img {
+  position: relative;
+  display: block;
+  flex: none;
+  object-fit: contain;
+  image-rendering: auto;
+  filter: none;
+  animation: showdownFxBurst 400ms ease-out both;
+}
+.move-effect { animation-duration: 400ms; }
+@keyframes showdownFxBurst {
+  0% { opacity: 0; scale: .35; }
+  20% { opacity: .95; scale: 1.05; }
+  70% { opacity: .85; scale: 1; }
+  100% { opacity: 0; scale: 1.2; }
+}
+.move-effect-slash > img { position: absolute; width: 60px; height: 60px; }
+.move-effect-slash > img:nth-child(1) { left: 12px; top: 20px; transform: rotate(-35deg); }
+.move-effect-slash > img:nth-child(2) { right: 10px; top: 22px; transform: rotate(40deg); animation-delay: 45ms; }
+.move-effect-slash > img:nth-child(3) { left: 28px; bottom: 8px; transform: rotate(-12deg); animation-delay: 90ms; }
+.move-effect-impact > img { width: 122px; height: 116px; }
+.move-effect-fire > img { width: 74px; height: 74px; }
+.move-effect-water > img { display: none; }
+.move-effect-ice > img { width: 82px; height: 82px; }
+.move-effect-grass > img { width: 60px; height: 72px; transform: rotate(-28deg); }
+.move-effect-electric > img { width: 42px; height: 112px; }
+.move-effect-rock > img { position: absolute; width: 42px; height: 48px; }
+.move-effect-rock > img:nth-child(1) { left: 9px; top: 10px; animation-delay: 30ms; }
+.move-effect-rock > img:nth-child(2) { right: 10px; top: 17px; animation-delay: 90ms; }
+.move-effect-rock > img:nth-child(3) { left: 37px; bottom: 4px; animation-delay: 150ms; }
+.move-effect-ground > img,
+.move-effect-psychic > img,
+.move-effect-poison > img,
+.move-effect-bug > img,
+.move-effect-ghost > img,
+.move-effect-dragon > img,
+.move-effect-steel > img,
+.move-effect-fairy > img { width: 84px; height: 84px; }
+.move-effect-bug > img { transform: rotate(-30deg); }
+.move-effect-steel > img { width: 92px; height: 92px; }
+
+.showdown-water-shot {
+  position: absolute;
+  z-index: 31;
+  top: 45%;
+  width: min(72vw, 900px);
+  height: 60px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.showdown-water-shot-enemy { right: 18px; }
+.showdown-water-shot-player { left: calc(100% - 18px); }
+.showdown-water-shot img {
+  position: absolute;
+  top: 0;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  image-rendering: auto;
+  filter: none;
+}
+.showdown-water-shot-enemy img { left: 0; animation: showdownWaterShotRight 300ms ease-out both; }
+.showdown-water-shot-player img { left: calc(100% - 60px); animation: showdownWaterShotLeft 300ms ease-out both; }
+@keyframes showdownWaterShotRight {
+  0% { left: 0; opacity: 0; scale: .35; }
+  15% { opacity: .75; }
+  100% { left: calc(100% - 60px); opacity: .85; scale: 1; }
+}
+@keyframes showdownWaterShotLeft {
+  0% { left: calc(100% - 60px); opacity: 0; scale: .35; }
+  15% { opacity: .75; }
+  100% { left: 0; opacity: .85; scale: 1; }
+}
+
+/* ==========================================================================
+   AUTHENTIC POKÉ'CATCH CATCH, DUPLICATE EXP & TRAINER BATTLE VISUALS
+   Extracted 100% from app.3f7c34e1ef.css & gameplay.mp4
+   ========================================================================== */
+
+/* Duplicate EXP Floating Tag above Caught Pokéball */
+.xp-pop {
+  position: absolute;
+  z-index: 40;
+  font-family: var(--font-pixel);
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: #c8ec3c;
+  text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  pointer-events: none;
+  animation: xpPopAnim 1.6s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+}
+
+.xp-pop small {
+  font-size: 0.7em;
+  color: #7fd63a;
+}
+
+.xp-pop.dup .dup-tag {
+  display: block;
+  font-size: 0.55em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: -2px;
+}
+
+@keyframes xpPopAnim {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.3);
+  }
+  25% {
+    opacity: 1;
+    transform: translate(-50%, -120%) scale(1.3);
+  }
+  45% {
+    transform: translate(-50%, -100%) scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: translate(-50%, -120%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -140%) scale(0.8);
+  }
+}
+
+/* Flying Green XP Particle from ball to sidebar */
+.xp-ball {
+  position: absolute;
+  z-index: 40;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle at 40% 40%, #ffffff 0 22%, #e8ff8a 45%, #8fd63a);
+  box-shadow: 0 0 6px 2px #aaeb46d9, 0 0 16px 4px #78d63a73;
+  animation: flyToSidebar 0.85s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes flyToSidebar {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-200px, -60px) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-420px, 80px) scale(0.4);
+    opacity: 0;
+  }
+}
+
+/* Top Toast Notification Banner (frame 12s) */
+.top-toast-banner {
+  animation: toastSlideDown 2.2s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+
+@keyframes toastSlideDown {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -100%);
+  }
+  15% {
+    opacity: 1;
+    transform: translate(-50%, 8px);
+  }
+  85% {
+    opacity: 1;
+    transform: translate(-50%, 8px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -100%);
+  }
+}
+
+/* Sidebar EXP Pop (frame 13s) */
+.sidebar-exp-pop {
+  animation: sidebarFloatExp 1.4s ease-out forwards;
+}
+
+@keyframes sidebarFloatExp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.85);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.15);
+  }
+  75% {
+    opacity: 1;
+    transform: translateY(-16px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-28px) scale(0.9);
+  }
+}
+
+/* Animated Pokéball throw across arena */
+@keyframes throwArc {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(0.6);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(160px, -90px) rotate(360deg) scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(320px, 10px) rotate(720deg) scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-throw-arc {
+  animation: throwArc 0.55s ease-out forwards;
+}
+
+/* Pokéball Shake on Ground */
+@keyframes ballWiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-18deg); }
+  50% { transform: rotate(18deg); }
+  75% { transform: rotate(-10deg); }
+}
+
+.animate-ball-wiggle {
+  animation: ballWiggle 0.4s ease-in-out infinite;
+}
+
+/* White Pixel Burst / Dust Cloud when Pokéball hits enemy */
+@keyframes pixelDustBurst {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.3);
+    filter: brightness(2) drop-shadow(0 0 10px #ffffff);
+  }
+  70% {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.6) translateY(-10px);
+  }
+}
+
+.animate-pixel-dust {
+  animation: pixelDustBurst 0.4s ease-out forwards;
+}
+
+/* Retro Damage Number Floating (Matches frame 01s, 20s, 31s) */
+.retro-damage-number {
+  position: absolute;
+  z-index: 35;
+  font-family: var(--font-pixel);
+  font-weight: 900;
+  white-space: nowrap;
+  pointer-events: none;
+  text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
+               0 2px 0 #000, 2px 0 0 #000, 0 -2px 0 #000, -2px 0 0 #000;
+  font-size: 22px;
+  animation: retroDamageFloat 950ms ease-out forwards;
+}
+.damage-target-enemy { left: 79.5%; top: 54%; transform: translate(-50%, -50%); }
+.damage-target-player { left: 30%; top: 54%; transform: translate(-50%, -50%); }
+.damage-critical { color: #ffe66b; font-size: 26px; }
+.retro-damage-number.text-white { color: #fff; }
+@keyframes retroDamageFloat {
+  0% { opacity: 0; transform: translate(-50%, calc(-50% + 10px)) scale(2, .3); }
+  12% { opacity: 1; transform: translate(-50%, calc(-50% - 22px)) scale(.8, 1.45); }
+  22% { transform: translate(-50%, calc(-50% - 14px)) scale(1.2, .82); }
+  30% { transform: translate(-50%, calc(-50% - 17px)) scale(.96, 1.05); }
+  70% { opacity: 1; transform: translate(calc(-50% - 4px), calc(-50% - 30px)); }
+  100% { opacity: 0; transform: translate(calc(-50% - 7px), calc(-50% - 40px)); }
+}
+
+/* Sleeping Pokémon 'Z' drift (frame 18-20s) */
+@keyframes sleepZDrift {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.6);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(6px, -12px) scale(1);
+  }
+  70% {
+    opacity: 0.8;
+    transform: translate(14px, -26px) scale(1.15);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(22px, -42px) scale(1.3);
+  }
+}
+
+.animate-sleep-z {
+  animation: sleepZDrift 1.5s ease-out infinite;
+}
+
+/* Custom scrollbar for AdventureModal */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #111422;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #2b334d;
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #3e486b;
+}
+
+/* Brock's reveal uses the original gym intro positions and staggered timing. */
+.gym-boss-intro {
+  --boss-color: #ffcb05;
+  position: absolute;
+  inset: 0;
+  z-index: 55;
+  overflow: hidden;
+  pointer-events: none;
+  background: rgba(5, 7, 12, 0);
+  animation: gymIntroBack 300ms linear forwards, gymIntroFade 300ms 2.58s ease-in forwards;
+}
+.gym-boss-band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 13%;
+  z-index: 3;
+  background: #05070c;
+  box-shadow: 0 2px color-mix(in srgb, var(--boss-color) 70%, transparent);
+}
+.gym-boss-band-top {
+  top: 0;
+  transform: translateY(-100%);
+  animation: gymBandTop 300ms cubic-bezier(.2,.8,.3,1) forwards;
+}
+.gym-boss-band-bottom {
+  bottom: 0;
+  transform: translateY(100%);
+  box-shadow: 0 -2px color-mix(in srgb, var(--boss-color) 70%, transparent);
+  animation: gymBandBottom 300ms cubic-bezier(.2,.8,.3,1) forwards;
+}
+.gym-boss-who {
+  position: absolute;
+  left: 58%;
+  bottom: 13%;
+  height: 48%;
+  z-index: 2;
+  opacity: 0;
+  animation: gymLeaderReveal 480ms 300ms cubic-bezier(.2,.8,.3,1) forwards;
+}
+.gym-boss-portrait {
+  display: block;
+  width: auto;
+  height: 100%;
+  image-rendering: pixelated;
+  transform-origin: 50% 100%;
+  filter: brightness(0) drop-shadow(0 0 10px color-mix(in srgb, var(--boss-color) 80%, transparent));
+  animation: gymPortraitReveal 360ms 1s ease-out both;
+}
+.gym-boss-info {
+  position: absolute;
+  z-index: 2;
+  left: 7%;
+  top: 50%;
+  translate: 0 -50%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 48%;
+  opacity: 0;
+  color: #fff;
+  animation: gymInfoReveal 380ms 1s cubic-bezier(.2,.8,.3,1) forwards,
+    gymInfoExit 240ms 2.58s ease-in both;
+}
+.gym-boss-info small {
+  color: var(--boss-color);
+  font-size: clamp(10px, 1.4vw, 16px);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-shadow: 0 2px #05070c;
+}
+.gym-boss-info strong {
+  color: #fff;
+  font: 700 clamp(28px, 4.6vw, 56px)/1 var(--font-pixel, sans-serif);
+  text-shadow: 4px 4px 0 #05070c, -2px -2px 0 #05070c, 2px -2px 0 #05070c, -2px 2px 0 #05070c;
+}
+.gym-boss-tags { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 3px; }
+.gym-boss-tags em { color: #c5c8d3; font: normal 700 13px var(--font, sans-serif); }
+.gym-boss-tags img { width: 28px; height: 28px; object-fit: contain; image-rendering: pixelated; }
+.gym-boss-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: #fff;
+  opacity: 0;
+  animation: gymRevealFlash 360ms 1s linear both;
+}
+.gym-victory-banner {
+  position: absolute;
+  z-index: 45;
+  top: 42%;
+  left: 50%;
+  display: flex;
+  width: min(260px, 82%);
+  min-height: 100px;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  transform: translateX(-50%);
+  padding: 10px 16px;
+  color: #fff;
+  border: 2px solid #ffe28a;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(38, 45, 75, .97), rgba(17, 23, 43, .98));
+  box-shadow: 0 5px 0 rgba(7, 11, 24, .8), 0 0 22px rgba(255, 209, 77, .45);
+  text-align: center;
+  text-shadow: 0 2px #111;
+  animation: gymVictoryPop 300ms ease-out both, gymVictoryExit 200ms 1s linear both;
+}
+.gym-victory-banner strong { font: 700 19px var(--font-pixel, sans-serif); }
+.gym-victory-banner span { color: #ffe18a; font: 700 15px var(--font, sans-serif); }
+.gym-victory-banner small { color: #bdd0f1; font: 700 12px var(--font, sans-serif); }
+@keyframes gymIntroBack { from { background-color: rgba(5,7,12,0); } to { background-color: rgba(5,7,12,.7); } }
+@keyframes gymIntroFade { from { opacity: 1; } to { opacity: 0; } }
+@keyframes gymBandTop { from { transform: translateY(-100%); } to { transform: none; } }
+@keyframes gymBandBottom { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes gymLeaderReveal {
+  0% { transform: translateX(60%); opacity: 0; }
+  80% { transform: translateX(-4%); opacity: 1; }
+  100% { transform: none; opacity: 1; }
+}
+@keyframes gymPortraitReveal {
+  0% { filter: brightness(0) drop-shadow(0 0 10px color-mix(in srgb, var(--boss-color) 80%, transparent)); scale: 1.12 .9; }
+  50% { scale: .96 1.05; }
+  100% { filter: drop-shadow(0 6px 0 rgba(0,0,0,.4)); scale: 1; }
+}
+@keyframes gymInfoReveal {
+  0% { transform: translateX(-40px); opacity: 0; }
+  70% { transform: translateX(6px); opacity: 1; }
+  100% { transform: none; opacity: 1; }
+}
+@keyframes gymInfoExit { to { transform: translateX(-30px); opacity: 0; } }
+@keyframes gymRevealFlash { 0% { opacity: 1; } 100% { opacity: 0; } }
+@media (max-width: 640px) { .gym-boss-who { left: 52%; } }
+@keyframes gymVictoryPop {
+  0% { opacity: 0; transform: translate(-50%,-50%) scale(.3,.1); }
+  50% { opacity: 1; transform: translate(-50%,-50%) scale(1.08,.95); }
+  100% { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+}
+@keyframes gymVictoryExit { to { opacity: 0; transform: translate(-50%,-60%) scale(.95); } }
+
+.arena-opponent-trainer {
+  position: absolute;
+  z-index: 2;
+  right: 3%;
+  bottom: 26%;
+  height: 32%;
+  max-width: 16%;
+  width: auto;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 6px 0 rgba(0, 0, 0, .4));
+  animation: opponentTrainerEnter 520ms cubic-bezier(.2,.8,.3,1) both;
+}
+@keyframes opponentTrainerEnter {
+  0% { transform: translateX(140%); opacity: 0; }
+  70% { transform: translateX(-6%) scale(1.05,.95); opacity: 1; }
+  100% { transform: none; opacity: 1; }
+}
+.gym-chapter-banner {
+  position: absolute;
+  z-index: 46;
+  top: 42%;
+  left: 50%;
+  display: flex;
+  width: min(260px, 82%);
+  min-height: 100px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 10px 16px;
+  color: #fff;
+  border: 2px solid #ffe28a;
+  border-radius: 12px;
+  background: linear-gradient(#2a2f45, #1b1b22);
+  box-shadow: 0 5px 0 rgba(7,11,24,.8), 0 0 22px rgba(255,209,77,.45);
+  text-align: center;
+  text-shadow: 0 2px #111;
+  transform: translate(-50%,-50%);
+  animation: gymVictoryPop 300ms ease-out both, gymVictoryExit 200ms 1.4s linear both;
+}
+.gym-chapter-banner strong { font: 700 21px var(--font-pixel, sans-serif); }
+.gym-chapter-banner span { color: #ffe18a; font: 700 18px var(--font-pixel, sans-serif); }
+
+/* ==========================================================================
+   Authentic Battlefield Mini HP, Mini Lv, and Ground Shadows
+   ========================================================================== */
+.mini-hp {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 4px);
+  width: 44px;
+  transform: translateX(-50%);
+  z-index: 20;
+  pointer-events: none;
+}
+.mini-hp .hp {
+  height: 7px;
+  background: #0d101a;
+  border: 1.5px solid #1b1b22;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+.mini-hp .hp div {
+  height: 100%;
+  transition: width 0.3s ease-out;
+}
+
+.mini-lv {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  white-space: nowrap;
+  font-family: var(--font-pixel);
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow:
+    -1px -1px 0 #1b1b22,
+     1px -1px 0 #1b1b22,
+    -1px  1px 0 #1b1b22,
+     1px  1px 0 #1b1b22,
+     0px  1px 0 #1b1b22,
+     0px -1px 0 #1b1b22,
+     1px  0px 0 #1b1b22,
+    -1px  0px 0 #1b1b22;
+  pointer-events: none;
+}
+.mini-lv .owned {
+  width: 14px;
+  height: 14px;
+  image-rendering: pixelated;
+  display: inline-block;
+}
+
+.cb-shadow-pixel {
+  width: 52px;
+  height: 12px;
+  background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCA2IiBzaGFwZS1yZW5kZXJpbmc9ImNyaXNwRWRnZXMiIGZpbGw9IiMwMDAiPjxyZWN0IHg9IjYiIHk9IjAiIHdpZHRoPSIxMiIgaGVpZ2h0PSIxIi8+PHJlY3QgeD0iMyIgeT0iMSIgd2lkdGg9IjE4IiBoZWlnaHQ9IjEiLz48cmVjdCB4PSIxIiB5PSIyIiB3aWR0aD0iMjIiIGhlaWdodD0iMSIvPjxyZWN0IHg9IjEiIHk9IjMiIHdpZHRoPSIyMiIgaGVpZ2h0PSIxIi8+PHJlY3QgeD0iMyIgeT0iNCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjEiLz48cmVjdCB4PSI2IiB5PSI1IiB3aWR0aD0iMTIiIGhlaWdodD0iMSIvPjwvc3ZnPgo=") center / 100% 100% no-repeat;
+  image-rendering: pixelated;
+  opacity: 0.28;
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+

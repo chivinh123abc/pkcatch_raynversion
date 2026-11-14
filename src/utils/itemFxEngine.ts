@@ -1,0 +1,98 @@
+// @ts-nocheck
+// Visual routines ported from the archived app.5a63acc466.js.
+import { nativeFxRuntime as t } from "./nativeFxRuntime";
+const Gn={now:()=>performance.now()};
+const Jn=fn=>requestAnimationFrame(fn);
+const Va=(fn,ms)=>setTimeout(fn,ms);
+const ks=(fn,ms)=>setInterval(fn,ms);
+const e=(text,values={})=>text.replace(/\{(\w+)\}/g,(_,key)=>values[key]||"");
+export const ItemFX = function () { const a = new WeakSet, f = "assets/ui/coin-spin-frames.png"; async function d(Pe, Ve = 64) { await Pe.decode().catch(() => { }); try {
+    const Ye = document.createElement("canvas");
+    Ye.width = Pe.naturalWidth, Ye.height = Pe.naturalHeight;
+    const r = Ye.getContext("2d");
+    r.drawImage(Pe, 0, 0);
+    const { data: re } = r.getImageData(0, 0, Ye.width, Ye.height);
+    let U = Ye.width, $t = Ye.height, w = -1, s = -1;
+    for (let te = 0; te < Ye.height; te++)
+        for (let Qe = 0; Qe < Ye.width; Qe++)
+            re[(te * Ye.width + Qe) * 4 + 3] && (U = Math.min(U, Qe), w = Math.max(w, Qe), $t = Math.min($t, te), s = Math.max(s, te));
+    if (w < U)
+        return 0;
+    const xt = document.createElement("canvas");
+    xt.width = w - U + 1, xt.height = s - $t + 1, xt.getContext("2d").drawImage(Ye, U, $t, xt.width, xt.height, 0, 0, xt.width, xt.height);
+    const ie = Math.max(1, Math.floor(Ve / Math.max(xt.width, xt.height)));
+    return Object.assign(Pe.style, { width: xt.width * ie + "px", height: xt.height * ie + "px", transformOrigin: "50% 100%" }), Pe.src = xt.toDataURL(), await Pe.decode(), xt.width * ie;
+}
+catch {
+    return 0;
+} } async function ne(Pe, { name: Ve = e("Baie Mepo"), src: Ye = "assets/ui/berry-leppa.png", message: r = e("{name} Obtenue !", { name: Ve }), speed: re = 1, reduced: U = !1, money: $t = !1 } = {}) { if (a.has(Pe))
+    return; a.add(Pe); const w = document.createElement("div"); w.className = "berry-fx", w.innerHTML = '<span class="berry-shadow"></span><img class="berry-sprite" src="assets/ui/berry-leppa.png" alt=""><div class="berry-reward" role="status"></div>'; const s = w.querySelector("img"), xt = w.querySelector(".berry-shadow"), ie = w.querySelector(".berry-reward"); s.src = Ye, ie.textContent = r, ie.style.zIndex = "100", Pe.appendChild(w); const te = U || matchMedia("(prefers-reduced-motion: reduce)").matches, Qe = M => te ? 1 : M / Math.max(1, re), De = (M, Y, me, V = "linear") => M.animate(Y, { duration: Qe(me), easing: V, fill: "forwards" }).finished, Ce = (M, Y = 1) => De(M, [{ transform: `scale(${Y})` }, { transform: `scale(${Y * 1.3}, ${Y * .65})`, offset: .3 }, { transform: `scale(${Y * .75}, ${Y * 1.12})`, offset: .55 }, { transform: "scale(0)" }], 340, "ease-in-out"); let tt; const lt = () => tt ||= (async () => { t.Sfx?.buy?.(), await De(ie, [{ opacity: 0, transform: "translate(-50%, 8px) scale(.94)" }, { opacity: 1, transform: "translate(-50%, 0) scale(1)" }], 240, "ease-out"); })(), ve = (M, Y = 1, me = 1, V = 0) => `translateY(${M}px) scale(${Y}, ${me}) rotate(${V}deg)`, Se = M => { te || t.CaptureFX?.particles(w, Pe.clientWidth * .56, Pe.clientHeight * .73, { n: M, colors: ["#f4e5b8", "#c7b789", "#8c805f"], size: 3, spread: 24, up: 7, gravity: 12, dur: 280 }); }; try {
+    const M = await d(s);
+    if (M && Object.assign(s.style, { left: `calc(56% - ${M / 2}px)`, bottom: "27%" }), $t) {
+        s.style.display = xt.style.display = "none";
+        const Y = f;
+        await new Promise((V, st) => { const Re = new Image; Re.onload = V, Re.onerror = () => st(new Error("Impossible de charger la sprite sheet des pièces")), Re.src = Y; });
+        const me = te ? 1 : 32;
+        await Promise.all(Array.from({ length: me }, async (V, st) => { const Re = me === 1 ? .56 : .28 + Math.random() * .48, ce = .71 + Math.random() * .09, Me = (Math.random() - .5) * 60, Oe = 30 + Math.random() * 35, Le = document.createElement("div"); Le.className = "money-coin", Object.assign(Le.style, { left: Re * 100 + "%", top: ce * 100 + "%", zIndex: Math.round(ce * 100) }); const Ie = document.createElement("span"); Ie.className = "money-coin-sprite", Ie.style.backgroundImage = `url(${Y})`; const rt = .6075 * (1 + Math.random() * .25); Ie.style.transform = `scale(${rt})`; const It = xt.cloneNode(); It.className = "berry-shadow money-coin-shadow", It.removeAttribute("style"), Le.append(It, Ie), w.appendChild(Le); const ut = Pe.clientHeight * ce + 36, ee = [], W = []; for (let fe = 0; fe <= 64; fe++) {
+            const oe = fe / 64;
+            let j;
+            if (oe < .44)
+                j = -ut * (1 - (oe / .44) ** 2);
+            else if (oe < .74) {
+                const E = (oe - .44) / .3;
+                j = -4 * Oe * E * (1 - E);
+            }
+            else if (oe < .94) {
+                const E = (oe - .74) / .2;
+                j = -4 * 12 * E * (1 - E);
+            }
+            else
+                j = 0;
+            const je = (1 - oe) * Me;
+            ee.push({ offset: oe, opacity: fe ? 1 : 0, transform: `translate(${je}px, ${Math.round(j)}px)` }), W.push({ offset: oe, opacity: .12 + .23 * Math.max(0, 1 + j / ut), transform: `scale(${rt * (.35 + .3 * Math.max(0, 1 + j / 65))})` });
+        } const Z = Qe(800 + Math.random() * 180), at = st === 0 ? 0 : st === me - 1 ? 1300 : Math.random() * 1300, St = te ? 0 : at / Math.max(1, re); It.animate(W, { duration: Z, delay: St, fill: "both" }), te || Ie.animate([{ backgroundPosition: "0px 0px" }, { backgroundPosition: "-192px 0px" }], { duration: Qe(420), delay: St, iterations: 1 / 0, easing: "steps(6, end)" }); const N = document.createElement("div"); N.className = "money-coin-flight", Le.appendChild(N), N.appendChild(Ie), await N.animate(ee, { duration: Z, delay: St, fill: "both" }).finished, await lt(), await new Promise(fe => Va(fe, (150 + Math.random() * 200) / Math.max(1, re))), await Promise.all([Ce(Ie, rt), Ce(It, rt * .65)]), Le.getAnimations({ subtree: !0 }).forEach(fe => fe.cancel()), Le.remove(); }));
+    }
+    else {
+        const Y = Pe.clientHeight * .73 + s.clientHeight;
+        s.style.opacity = "1", xt.animate([{ opacity: 0, transform: "scale(.35)" }, { opacity: .35, transform: "scale(1)" }], { duration: Qe(560), fill: "forwards" }), await De(s, [{ transform: ve(-Y, .9, 1.12, -18) }, { transform: ve(0, .92, 1.12, 0) }], 560, "cubic-bezier(.55,0,1,.5)"), Se(8);
+        for (const [me, V, st, Re] of [[58, 380, 1.28, 5], [19, 250, 1.14, 3]])
+            await De(s, [{ transform: ve(0, 1, 1) }, { transform: ve(0, st, 2 - st) }], 65, "ease-out"), xt.animate([{ transform: "scale(1)" }, { transform: "scale(.55)", offset: .5 }, { transform: "scale(1)" }], { duration: Qe(V), fill: "forwards" }), await De(s, [{ transform: ve(0, st, 2 - st), easing: "cubic-bezier(0,.5,.45,1)" }, { transform: ve(-me, .94, 1.06, 8), offset: .5, easing: "cubic-bezier(.55,0,1,.5)" }, { transform: ve(0, 1, 1) }], V), Se(Re);
+        await De(s, [{ transform: ve(0, 1.08, .92) }, { transform: ve(0) }], 140, "ease-out");
+    }
+    await lt(), $t || await new Promise(Y => Va(Y, 1500 / Math.max(1, re))), await Promise.all([...$t ? [] : [Ce(s), Ce(xt)], De(ie, [{ transform: "translate(-50%, 0) scale(1)" }, { transform: "translate(-50%, 0) scale(1.06, .85)", offset: .3 }, { transform: "translate(-50%, 0) scale(0)" }], 340, "ease-in-out")]);
+}
+finally {
+    w.getAnimations({ subtree: !0 }).forEach(M => M.cancel()), w.remove(), a.delete(Pe);
+} } async function B(Pe, { items: Ve, ask: Ye = e("Choisis un objet !"), speed: r = 1 } = {}) { const re = document.createElement("div"); re.className = "berry-fx item-choice", re.innerHTML = `<div class="berry-reward" role="status"></div><button class="btn primary lg ic-go" disabled>${Ye.replace(/ !$/, "")}</button>`; const U = re.querySelector(".berry-reward"), $t = re.querySelector(".ic-go"); Pe.appendChild(re); const w = tt => tt / Math.max(1, r), s = (tt, lt, ve, Se = "linear") => tt.animate(lt, { duration: w(ve), easing: Se, fill: "forwards" }).finished, xt = (tt, lt = 1, ve = 1, Se = 0) => `translateY(${tt}px) scale(${lt}, ${ve}) rotate(${Se}deg)`, ie = tt => (U.textContent = tt, s(U, [{ opacity: 0, transform: "translate(-50%, 8px) scale(.94)" }, { opacity: 1, transform: "translate(-50%, 0) scale(1)" }], 240, "ease-out")), te = (tt, lt = 1) => s(tt, [{ transform: `scale(${lt})` }, { transform: `scale(${lt * 1.3}, ${lt * .65})`, offset: .3 }, { transform: `scale(${lt * .75}, ${lt * 1.12})`, offset: .55 }, { transform: "scale(0)" }], 340, "ease-in-out"), Qe = 22, De = await Promise.all(Ve.map(async (tt, lt) => { const ve = (lt + 1) / (Ve.length + 1) * 100, Se = document.createElement("button"); Se.className = "ic-item", Se.setAttribute("aria-label", tt.name), Se.style.left = ve + "%", Se.innerHTML = '<span class="berry-shadow"></span><img class="berry-sprite" alt="">', re.appendChild(Se); const M = Se.querySelector("img"), Y = Se.querySelector(".berry-shadow"); M.src = tt.src; const me = await d(M, 72); return me && (M.style.left = `calc(50% - ${me / 2}px)`), { el: Se, img: M, shadow: Y, it: tt }; })); let Ce = null; try {
+    ie(Ye), await Promise.all(De.map(async ({ img: ve, shadow: Se }, M) => { await new Promise(me => Va(me, w(M * 240))); const Y = Pe.clientHeight * .73 + ve.clientHeight; ve.style.opacity = "1", Se.animate([{ opacity: 0, transform: "scale(.35)" }, { opacity: .35, transform: "scale(1)" }], { duration: w(560), fill: "forwards" }), await s(ve, [{ transform: xt(-Y, .9, 1.12, -18) }, { transform: xt(0, .92, 1.12, 0) }], 560, "cubic-bezier(.55,0,1,.5)"), t.Sfx?.thud?.(); for (const [me, V, st] of [[58, 380, 1.28], [19, 250, 1.14]])
+        await s(ve, [{ transform: xt(0, 1, 1) }, { transform: xt(0, st, 2 - st) }], 65, "ease-out"), Se.animate([{ transform: "scale(1)" }, { transform: "scale(.55)", offset: .5 }, { transform: "scale(1)" }], { duration: w(V), fill: "forwards" }), await s(ve, [{ transform: xt(0, st, 2 - st), easing: "cubic-bezier(0,.5,.45,1)" }, { transform: xt(-me, .94, 1.06, 8), offset: .5, easing: "cubic-bezier(.55,0,1,.5)" }, { transform: xt(0, 1, 1) }], V); await s(ve, [{ transform: xt(0, 1.08, .92) }, { transform: xt(0) }], 140, "ease-out"); })), await Promise.all(De.map(async (ve, Se) => { await new Promise(M => Va(M, w(Se * 140))), ve.shadow.animate([{ transform: "scale(1)", opacity: .35 }, { transform: "scale(.7)", opacity: .22 }], { duration: w(500), fill: "forwards" }), await s(ve.img, [{ transform: xt(0) }, { transform: xt(0, 1.2, .82), offset: .25 }, { transform: xt(-Qe - 8, .9, 1.12), offset: .7 }, { transform: xt(-Qe) }], 520, "ease-out"), ve.img.getAnimations().forEach(M => M.cancel()), ve.img.style.transform = xt(-Qe), ve.bob = ve.img.animate([{ transform: "translateY(0)" }, { transform: `translateY(-6px) rotate(${Se % 2 ? 3 : -3}deg)` }], { duration: 1300 + Se * 170, direction: "alternate", iterations: 1 / 0, easing: "ease-in-out", composite: "add" }); })), re.classList.add("ready"), $t.animate([{ transform: "scale(.85)", opacity: 0 }, { transform: "scale(1.05)", opacity: 1, offset: .6 }, { transform: "none", opacity: 1 }], { duration: 260, easing: "ease-out", fill: "both" });
+    const tt = await new Promise(ve => { De.forEach((Se, M) => { Se.el.onclick = () => { if (Ce === Se.it.id)
+        return; Ce = Se.it.id, De.forEach(V => { V.el.classList.toggle("on", V === Se), V.el.classList.toggle("off", V !== Se), V.img.style.transform = xt(V === Se ? -Qe - 14 : -Qe); }), t.Sfx?.click?.(); const Y = Se.img.getBoundingClientRect(), me = re.getBoundingClientRect(); t.CaptureFX?.particles(re, Y.left - me.left + Y.width / 2, Y.top - me.top + Y.height / 2, { n: 8, colors: ["#ffe066", "#fff"], size: 4, spread: 40, up: 10, dur: 500, gravity: 0, shape: "star" }), U.textContent = Se.it.name, $t.disabled = !1, $t.textContent = e("Choisir {name}", { name: Se.it.name }); }; }), $t.onclick = () => { Ce != null && ve(Ce); }; });
+    re.classList.remove("ready"), $t.disabled = !0, $t.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, fill: "forwards" });
+    const lt = De.find(ve => ve.it.id === tt);
+    return await Promise.all(De.filter(ve => ve !== lt).map(ve => (ve.bob?.cancel(), Promise.all([te(ve.img), te(ve.shadow)])))), lt.bob?.cancel(), lt.el.classList.remove("on"), await s(lt.img, [{ transform: xt(-Qe - 14) }, { transform: xt(0, 1.25, .75), offset: .6 }, { transform: xt(-10, .92, 1.08), offset: .82 }, { transform: xt(0) }], 420, "ease-in"), await ie(e("Tu obtiens {name} !", { name: lt.it.name })), t.Sfx?.buy?.(), await new Promise(ve => Va(ve, w(1200))), await Promise.all([te(lt.img), te(lt.shadow), s(U, [{ transform: "translate(-50%, 0) scale(1)" }, { transform: "translate(-50%, 0) scale(1.06, .85)", offset: .3 }, { transform: "translate(-50%, 0) scale(0)" }], 340, "ease-in-out")]), tt;
+}
+finally {
+    De.forEach(tt => tt.bob?.cancel()), re.getAnimations({ subtree: !0 }).forEach(tt => tt.cancel()), re.remove();
+} } async function ft(Pe, { items: Ve, message: Ye, speed: r = 1, reduced: re = !1 } = {}) { if (a.has(Pe))
+    return; a.add(Pe); const U = document.createElement("div"); U.className = "berry-fx item-drops", U.innerHTML = '<div class="berry-reward" role="status"></div>'; const $t = U.querySelector(".berry-reward"); $t.textContent = Ye, Pe.appendChild(U); const w = re || matchMedia("(prefers-reduced-motion: reduce)").matches, s = De => w ? 1 : De / Math.max(1, r), xt = (De, Ce, tt, lt = "linear") => De.animate(Ce, { duration: s(tt), easing: lt, fill: "forwards" }).finished, ie = (De, Ce = 1, tt = 1, lt = 0) => `translateY(${De}px) scale(${Ce}, ${tt}) rotate(${lt}deg)`, te = (De, Ce = 1) => xt(De, [{ transform: `scale(${Ce})` }, { transform: `scale(${Ce * 1.3}, ${Ce * .65})`, offset: .3 }, { transform: `scale(${Ce * .75}, ${Ce * 1.12})`, offset: .55 }, { transform: "scale(0)" }], 340, "ease-in-out"), Qe = De => new Promise(Ce => Va(Ce, s(De))); try {
+    const De = await Promise.all(Ve.map(async (Ce, tt) => { const lt = document.createElement("div"); lt.className = "ic-item drop-item", lt.style.left = (tt + 1) / (Ve.length + 1) * 100 + "%", lt.setAttribute("aria-label", Ce.name || ""), lt.innerHTML = `<span class="berry-shadow"></span>${Ce.html ? `<span class="berry-sprite drop-html">${Ce.html}</span>` : '<img class="berry-sprite" alt="">'}${Ce.n != null ? `<b class="drop-q">×${t.UI?.fmt ? t.UI.fmt(Ce.n) : Ce.n}</b>` : ""}`, U.appendChild(lt); const ve = lt.querySelector(".berry-sprite"), Se = lt.querySelector(".berry-shadow"), M = lt.querySelector(".drop-q"); if (!Ce.html) {
+        ve.src = Ce.src;
+        const Y = await d(ve, 64);
+        Y && (ve.style.left = `calc(50% - ${Y / 2}px)`);
+    } return { el: lt, img: ve, shadow: Se, q: M }; }));
+    xt($t, [{ opacity: 0, transform: "translate(-50%, 8px) scale(.94)" }, { opacity: 1, transform: "translate(-50%, 0) scale(1)" }], 240, "ease-out"), await Promise.all(De.map(async ({ img: Ce, shadow: tt, q: lt }, ve) => { await Qe(ve * 380); const Se = Pe.clientHeight * .73 + Ce.clientHeight; Ce.style.opacity = "1", tt.animate([{ opacity: 0, transform: "scale(.35)" }, { opacity: .35, transform: "scale(1)" }], { duration: s(560), fill: "forwards" }), await xt(Ce, [{ transform: ie(-Se, .9, 1.12, -18) }, { transform: ie(0, .92, 1.12, 0) }], 560, "cubic-bezier(.55,0,1,.5)"), t.Sfx?.thud?.(); for (const [M, Y, me] of [[48, 340, 1.26], [16, 230, 1.12]])
+        await xt(Ce, [{ transform: ie(0, 1, 1) }, { transform: ie(0, me, 2 - me) }], 65, "ease-out"), tt.animate([{ transform: "scale(1)" }, { transform: "scale(.55)", offset: .5 }, { transform: "scale(1)" }], { duration: s(Y), fill: "forwards" }), await xt(Ce, [{ transform: ie(0, me, 2 - me), easing: "cubic-bezier(0,.5,.45,1)" }, { transform: ie(-M, .94, 1.06, 8), offset: .5, easing: "cubic-bezier(.55,0,1,.5)" }, { transform: ie(0, 1, 1) }], Y); await xt(Ce, [{ transform: ie(0, 1.08, .92) }, { transform: ie(0) }], 140, "ease-out"), t.Sfx?.buy?.(), lt && xt(lt, [{ opacity: 0, transform: "translate(-50%, 6px) scale(.6)" }, { opacity: 1, transform: "translate(-50%, 0) scale(1.15)", offset: .6 }, { opacity: 1, transform: "translate(-50%, 0) scale(1)" }], 260, "ease-out"); })), await Qe(2200), await Promise.all(De.map(async ({ img: Ce, shadow: tt, q: lt }, ve) => { await Qe(ve * 120), await Promise.all([te(Ce), te(tt), lt && xt(lt, [{ opacity: 1 }, { opacity: 0 }], 200)]); })), await xt($t, [{ transform: "translate(-50%, 0) scale(1)" }, { transform: "translate(-50%, 0) scale(1.06, .85)", offset: .3 }, { transform: "translate(-50%, 0) scale(0)" }], 340, "ease-in-out");
+}
+finally {
+    U.getAnimations({ subtree: !0 }).forEach(De => De.cancel()), U.remove(), a.delete(Pe);
+} } const I = 40; async function K(Pe, { items: Ve, message: Ye, speed: r = 1, reduced: re = !1 } = {}) { if (a.has(Pe))
+    return; a.add(Pe); const U = document.createElement("div"); U.className = "berry-fx item-shower", U.innerHTML = '<div class="berry-reward" role="status"></div>'; const $t = U.querySelector(".berry-reward"); $t.textContent = Ye, Pe.appendChild(U); const w = re || matchMedia("(prefers-reduced-motion: reduce)").matches, s = De => w ? 1 : De / Math.max(1, r), xt = De => new Promise(Ce => Va(Ce, s(De))), ie = Ve.reduce((De, Ce) => De + Ce.n, 0), te = ie > I ? I / ie : 1, Qe = Ve.flatMap(De => Array.from({ length: Math.max(1, Math.round(De.n * te)) }, () => De.src)).sort(() => Math.random() - .5); try {
+    const De = Pe.clientHeight, Ce = Pe.clientWidth, tt = Ce < 500 ? 32 : 40, lt = Qe.map((Se, M) => { const Y = document.createElement("img"); Y.className = "shower-it", Y.src = Se, Y.alt = ""; const me = 12 + Math.random() * 76, V = .66 + Math.random() * .16; return Object.assign(Y.style, { left: `calc(${me}% - ${tt / 2}px)`, top: `calc(${V * 100}% - ${tt}px)`, width: tt + "px", height: tt + "px", zIndex: Math.round(V * 100) }), U.appendChild(Y), { el: Y, drop: V * De + tt + 20, spin: (Math.random() - .5) * 80, delay: M * (900 / Math.max(8, Qe.length)) + Math.random() * 120 }; });
+    $t.animate([{ opacity: 0, transform: "translate(-50%, 8px) scale(.94)" }, { opacity: 1, transform: "translate(-50%, 0) scale(1)" }], { duration: s(240), easing: "ease-out", fill: "forwards" });
+    let ve = 0;
+    await Promise.all(lt.map(async ({ el: Se, drop: M, spin: Y, delay: me }) => { await xt(me), Se.style.opacity = "1", await Se.animate([{ transform: `translateY(${-M}px) rotate(${Y}deg)` }, { transform: `translateY(0) rotate(${Y / 3}deg)` }], { duration: s(520 + Math.random() * 160), easing: "cubic-bezier(.55,0,1,.5)", fill: "forwards" }).finished, ve++ % 4 === 0 && t.Sfx?.thud?.(), await Se.animate([{ transform: `rotate(${Y / 3}deg) scale(1.25, .75)` }, { transform: `translateY(${-10 - Math.random() * 12}px) rotate(0deg) scale(.95, 1.05)`, offset: .45 }, { transform: "translateY(0) rotate(0deg) scale(1)" }], { duration: s(320), easing: "ease-out", fill: "forwards" }).finished; })), t.Sfx?.buy?.(), await xt(1400), await Promise.all(lt.map(async ({ el: Se }, M) => { await xt(M * 18), await Se.animate([{ transform: "translateY(0) scale(1)" }, { transform: "translateY(-14px) scale(1.1)", offset: .4 }, { transform: "translateY(-4px) scale(0)" }], { duration: s(300), easing: "ease-in", fill: "forwards" }).finished; })), await $t.animate([{ transform: "translate(-50%, 0) scale(1)" }, { transform: "translate(-50%, 0) scale(1.06, .85)", offset: .3 }, { transform: "translate(-50%, 0) scale(0)" }], { duration: s(340), easing: "ease-in-out", fill: "forwards" }).finished;
+}
+finally {
+    U.getAnimations({ subtree: !0 }).forEach(De => De.cancel()), U.remove(), a.delete(Pe);
+} } return ne.choose = B, ne.drops = ft, ne.shower = K, ne; }();
