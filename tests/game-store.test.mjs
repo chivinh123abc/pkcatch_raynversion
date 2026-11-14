@@ -5,7 +5,24 @@ import { build } from 'esbuild';
 // Bundle the TypeScript store in memory, using the compiler already used by Vite.
 const bundle = await build({ entryPoints: ['src/store/useGameStore.ts'], bundle: true, write: false, platform: 'node', format: 'esm', define: { 'process.env.NODE_ENV': '"production"' } });
 const { useGameStore: store } = await import(`data:text/javascript;base64,${Buffer.from(bundle.outputFiles[0].text).toString('base64')}`);
-const initial = store.getInitialState();
+const baseInitial = store.getInitialState();
+const makeTestMon = (speciesId, level, suffix) => ({
+  ...baseInitial.party[0],
+  uid: `test-${speciesId}-${suffix}`,
+  speciesId,
+  level,
+});
+const initial = {
+  ...baseInitial,
+  party: [
+    baseInitial.party[0],
+    baseInitial.party[1],
+    makeTestMon(45, 100, '3'),
+    makeTestMon(149, 100, '4'),
+    makeTestMon(6, 100, '5'),
+    makeTestMon(9, 100, '6'),
+  ],
+};
 const storage = new Map();
 globalThis.localStorage = { getItem: (key) => storage.get(key) ?? null, setItem: (key, value) => storage.set(key, value) };
 
@@ -18,7 +35,7 @@ beforeEach((t) => {
 afterEach((t) => { store.getState().loadStepNode(1); t.mock.restoreAll(); t.mock.timers.reset(); });
 
 test('save/load preserves PC, inventory, badges, dex and preferences', () => {
-  const pcMon = { ...initial.party[0], uid: 'pc-test', currentHp: 25 };
+  const pcMon = { ...initial.party[0], uid: 'pc-test', currentHp: 15 };
   store.setState({ pcBox: [pcMon], badges: ['boulder-badge'], pokedexSeen: [16, 19],
     activePartyIndex: 2, selectedBall: 'masterball', balls: { pokeball: 0, greatball: 3, ultraball: 4, masterball: 0 },
     gameSpeed: 2, autoCatch: false, trainerTag: '#test', berryBuffs: { greatBall: 20, ultraBall: 0, nanab: 0, pinap: 18 } });
@@ -137,7 +154,7 @@ test('changing nodes discards the old impact callback', () => {
 });
 
 test('capture rewards wait for the presentation and cannot be applied twice', () => {
-  store.setState({ selectedBall: 'masterball', berryBuffs: { greatBall: 0, ultraBall: 0, nanab: 0, pinap: 0 } });
+  store.setState({ selectedBall: 'masterball', berryBuffs: { greatBall: 0, ultraBall: 0, nanab: 0, pinap: 0 }, pokedexCaught: [4] });
   store.getState().catchEnemy();
   const presentation = store.getState().capturePresentation;
   assert.equal(store.getState().catchPhase, 'throw');

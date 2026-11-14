@@ -148,3 +148,11 @@
 148:   - **Vị trí nút SKIP chuẩn:** Nút **`SKIP ▸▸`** được ghim chắc chắn ở đáy sàn đấu (`bottom: 14px; left: 50%; transform: translateX(-50%)`), tách biệt hoàn toàn khỏi khu vực bệ hồi máu và nằm ngay ngắn trên nền sàn đấu như bản gốc.
 149:   - **6 Bệ hồi phục màu hồng tím sáng:** Đặt đúng vị trí trên mặt bàn quầy tiếp đón Pokémon Center với bóng đổ mịn màng trên mặt gỗ.
 150: - [x] Hiệu Ứng Hồi Máu Dần Dần Tại Pokémon Center:
+- [x] **Cập nhật 14/11/2026 — Đồng bộ Chiến đấu, EXP, UI Panel & Animation Idle theo Game Gốc:**
+  - **Thu & tung Pokémon đồng đội (`src/components/Arena.tsx`):** Pokéball thu (`allyRecalling`) và tung (`allySendingOut`) bay từ rìa trái (`sx = -18`, `sy = aRect.height * 0.65`), ẩn sprite Red trong lúc giao tranh.
+  - **Hiệu ứng KO đối thủ (`src/components/Arena.tsx`):** Pokémon của Trainer hiển thị silhouette viền sáng đỏ KO cho tới khi thu về bóng (`enemyRecalling`); Pokémon hoang dã (khi không auto-catch) chạy `animate-faint`.
+  - **Phóng to & căn vị trí sprite 2 bên panel (`src/styles/reference-layout.css`, `src/components/RightPanel.tsx`):** Phóng to sprite đội hình bên trái (`scale(1.38)`, dịch lên `-4px` để không bị `Lv.` che) và `Found here` bên phải (`w-12 h-11 scale-[1.28] -translate-y-0.5`, đặt `%` xuống đáy ô).
+  - **Hiển thị `+XP` bên phải đội hình & chia EXP toàn đội (`src/store/useGameStore.ts`, `src/components/Arena.tsx`, `src/index.css`):** Công thức `calcBattleExp` (`XP_WINS_PER_LEVEL = 15`, `XP_BASE_REF = 60`, `XP_ACTIVE_BONUS = 1.1`), chia EXP cho toàn bộ đội hình kể cả Pokémon đã gục (đồng đội không ra trận nhận `baseExp × 1.0`, Pokémon ra trận nhận `×1.1`), tag `.xp-pop.rail-xp` hiển thị căn giữa theo chiều dọc và nằm ngoài bên phải từng ô.
+  - **Xử lý khi cả đội thất bại (`src/store/useGameStore.ts`):** Hiện thông báo thất bại (`Defeated! Your entire team fainted.`), chuyển vào animation hồi máu của Pokémon Center trước, sau khi hồi máu xong mới quay lại bước 1 từ đầu route.
+  - **Animation Idle (`src/styles/reference-layout.css`, `src/components/Arena.tsx`):** Thêm `@keyframes pen-idle` (`scale: 1.05 0.95`, `2.4s ease-in-out infinite`) cho Pokémon còn sống trên sàn đấu và thanh đội hình bên trái (độ trễ so le từng ô, Pokémon gục đứng yên).
+  - **Kiểm tra:** `npm test` (`13/13` pass) và `npm run build` (`tsc -b && vite build` 0 lỗi).

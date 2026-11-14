@@ -118,6 +118,13 @@ export const RightPanel: React.FC = () => {
     setSelectedFoundArea(routeDropdownName);
   }, [currentChapterId, routeDropdownName]);
 
+  const [nowTick, setNowTick] = useState(() => new Date());
+  useEffect(() => {
+    const id = window.setInterval(() => setNowTick(new Date()), 30_000);
+    return () => window.clearInterval(id);
+  }, []);
+  const isNightNow = nowTick.getHours() >= 19 || nowTick.getHours() < 6;
+
   const activeArea = KANTO7_AREAS[selectedFoundArea] || KANTO7_AREAS[routeDropdownName] || KANTO7_AREAS['Routes 19-20'];
   const foundSpecies = [...new Set((currentChapterId === 'kanto-7'
     ? activeArea.pokemon
@@ -126,198 +133,147 @@ export const RightPanel: React.FC = () => {
     ? Boolean(activeArea.rain)
     : currentChapter.weather === 'rain';
 
+  const renderFoundCell = (mon: FoundPokemon, activeNow: boolean) => {
+    const isCaught = pokedexCaught.includes(mon.speciesId);
+    return (
+      <div
+        key={mon.speciesId}
+        className={`relative rounded-[10px] border px-1 pt-1.5 pb-1.5 flex flex-col items-center justify-between gap-0.5 min-h-[72px] transition-opacity ${
+          isCaught
+            ? 'bg-[#6dff8f12] border-[#6dff8f]/25'
+            : 'bg-[#00000040] border-white/10'
+        } ${activeNow ? 'opacity-100' : 'opacity-45 brightness-75'}`}
+        title={`${mon.name} (${mon.rate})`}
+      >
+        {isCaught && (
+          <span className="absolute top-1 right-1.5 z-10 text-[11px] font-bold text-[#6dff8f] leading-none drop-shadow-[1px_1px_0_#000]">
+            ✓
+          </span>
+        )}
+        <div className="w-full h-[46px] flex items-center justify-center overflow-hidden">
+          <img
+            src={getPokemonSpriteUrl(mon.speciesId, false)}
+            alt={mon.name}
+            className="w-12 h-11 scale-[1.28] -translate-y-0.5 object-contain pixel-art"
+          />
+        </div>
+        <span className="relative z-10 text-[11px] font-bold text-white tabular-nums font-game leading-none drop-shadow-[1px_1px_0_#000]">
+          {mon.rate}
+        </span>
+      </div>
+    );
+  };
+
+  const conditionalSections = React.useMemo(() => {
+    if (currentChapterId === 'kanto-7') return [];
+    const sections: Array<{ key: string; icon: string; label: string; isNow: boolean; list: FoundPokemon[] }> = [];
+    if (currentChapter.pokemonFound.day && currentChapter.pokemonFound.day.length > 0) {
+      sections.push({
+        key: 'day',
+        icon: '☀️',
+        label: 'DAY',
+        isNow: !isNightNow,
+        list: currentChapter.pokemonFound.day,
+      });
+    }
+    if (currentChapter.pokemonFound.night && currentChapter.pokemonFound.night.length > 0) {
+      sections.push({
+        key: 'night',
+        icon: '🌙',
+        label: 'NIGHT',
+        isNow: isNightNow,
+        list: currentChapter.pokemonFound.night,
+      });
+    }
+    if (currentChapter.pokemonFound.rain && currentChapter.pokemonFound.rain.length > 0) {
+      sections.push({
+        key: 'rain',
+        icon: '🌧️',
+        label: 'RAIN',
+        isNow: isRaining,
+        list: currentChapter.pokemonFound.rain,
+      });
+    }
+    return sections.sort((a, b) => Number(b.isNow) - Number(a.isNow));
+  }, [currentChapterId, currentChapter, isNightNow, isRaining]);
+
+  const caughtHereCount = foundSpecies.filter((id) => pokedexCaught.includes(id)).length;
+  const allCaughtHere = foundSpecies.length > 0 && caughtHereCount === foundSpecies.length;
+
   return (
-    <aside className="w-56 shrink-0 flex flex-col gap-2.5 select-none text-xs font-game">
+    <aside className="w-64 shrink-0 flex flex-col gap-2.5 select-none text-xs font-game">
       <Consumables />
 
-      {/* 2. Found Here Header Box (Khớp 100% video gameplay frame 00s, 10s) */}
-      <div className="bg-[#141624] border border-[#212536] rounded-2xl p-3 shadow-md flex flex-col gap-2.5">
-        <div className="flex items-center justify-between pb-2 border-b border-[#212536]">
-          <div className="flex items-center gap-1.5">
-            <span className="font-pixel text-white text-[19px]">Found here</span>
-            <span
-              className="w-3.5 h-3.5 rounded-full bg-[#202538] text-slate-400 text-[10px] flex items-center justify-center font-bold cursor-pointer font-game"
-            >
-              ?
-            </span>
-          </div>
+      {/* 2. Found Here Box (matches original .zone-box / .zone-head / .zone-grid) */}
+      <div className="bg-[#1c2030] border-2 border-[#333a52] rounded-xl px-3.5 py-3 shadow-md flex flex-col gap-2.5">
+        <div className="flex items-baseline gap-2 pb-2 border-b-2 border-[#333a52]">
+          <b className="text-[14px] font-bold text-white whitespace-nowrap">Found here</b>
+          <span
+            className="w-4 h-4 rounded-full bg-[#252a3d] border border-[#333a52] text-[#9aa3bb] text-[10px] flex items-center justify-center font-bold cursor-pointer shrink-0"
+          >
+            i
+          </span>
 
-          <div className="flex items-center gap-1 min-w-0">
+          <div className="flex items-center gap-1.5 min-w-0 flex-1 justify-end">
             {currentChapterId === 'kanto-7' ? (
               <select
                 aria-label="Found here area"
                 value={selectedFoundArea}
                 onChange={(event) => setSelectedFoundArea(event.target.value)}
-                className="max-w-[112px] truncate bg-transparent text-[11px] font-bold text-slate-300 outline-none cursor-pointer"
+                className="max-w-[100px] truncate bg-transparent text-[12px] text-[#9aa3bb] outline-none cursor-pointer"
               >
                 {Object.keys(KANTO7_AREAS).map((area) => (
-                  <option key={area} value={area} className="bg-[#141624] text-white">{area}</option>
+                  <option key={area} value={area} className="bg-[#1c2030] text-white">{area}</option>
                 ))}
               </select>
             ) : (
-              <span className="text-[11px] font-bold text-slate-300">{routeDropdownName}</span>
+              <span className="text-[12px] text-[#9aa3bb] truncate">{routeDropdownName}</span>
             )}
-            <span className="text-[11px] font-black text-emerald-400 ml-1">
-              {foundSpecies.filter((id) => pokedexCaught.includes(id)).length}/{foundSpecies.length}
+            <span className={`text-[14px] font-bold tabular-nums shrink-0 ${allCaughtHere ? 'text-[#6dff8f]' : 'text-[#ffcb05]'}`}>
+              {caughtHereCount}/{foundSpecies.length}
             </span>
-            <span className="text-[10px] text-slate-400">▾</span>
           </div>
         </div>
 
-        {/* Rain Section */}
-        {currentChapterId === 'kanto-7' && !isRaining && <div className="grid grid-cols-4 gap-1.5">
-          {activeArea.pokemon.map(mon => <div key={mon.speciesId} className="relative rounded-lg bg-[#181d2e] border border-[#365442] flex flex-col items-center justify-center" title={`${mon.name} (${mon.rate})`}>
-            <img src={getPokemonSpriteUrl(mon.speciesId)} alt={mon.name} className="pixel-art" />
-            <span className="text-slate-200">{mon.rate}</span>
-          </div>)}
-        </div>}
-        {isRaining && (
+        {/* Always available / Area list */}
+        {currentChapterId === 'kanto-7' ? (
           <div>
-            <div className="text-[11px] font-bold text-sky-300 mb-1 flex items-center gap-1">
-              <span>🌧️</span>
-              <span>Rain until 0:00</span>
-            </div>
-            <div className="grid grid-cols-4 gap-1.5">
-              {(currentChapterId === 'kanto-7' ? activeArea.pokemon : currentChapter.pokemonFound.base).map((mon) => (
-                <div
-                  key={mon.speciesId}
-                  className="relative rounded-lg bg-[#181d2e] border border-[#252c44] p-1 flex flex-col items-center justify-center"
-                  title={`${mon.name} (${mon.rate})`}
-                >
-                  <img
-                    src={getPokemonSpriteUrl(mon.speciesId, false)}
-                    alt={mon.name}
-                    className="w-7 h-7 object-contain pixel-art drop-shadow"
-                  />
-                  <span className="text-[8px] font-bold text-slate-300 tabular-nums">
-                    {mon.rate}
-                  </span>
-                  {pokedexCaught.includes(mon.speciesId) && (
-                    <img
-                      src="/assets/ui/poke-ball.png"
-                      alt="Caught"
-                      className="absolute -top-1 -right-1 w-3 h-3 pixel-art"
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Night Section */}
-        {currentChapterId !== 'kanto-7' && currentChapter.pokemonFound.night && currentChapter.pokemonFound.night.length > 0 && (
-          <div>
-            <div className="flex items-center justify-between text-[11px] font-bold text-indigo-300 mb-1">
-              <span className="flex items-center gap-1">
-                <span>🌙</span>
-                <span>NIGHT</span>
-              </span>
-              <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-amber-500 text-black uppercase">
-                NOW
-              </span>
-            </div>
-            <div className="grid grid-cols-4 gap-1.5">
-              {currentChapter.pokemonFound.night.map((mon) => (
-                <div
-                  key={mon.speciesId}
-                  className="relative rounded-lg bg-[#181d2e] border border-indigo-900/50 p-1 flex flex-col items-center justify-center"
-                  title={`${mon.name} (${mon.rate})`}
-                >
-                  <img
-                    src={getPokemonSpriteUrl(mon.speciesId, false)}
-                    alt={mon.name}
-                    className="w-7 h-7 object-contain pixel-art drop-shadow"
-                  />
-                  <span className="text-[8px] font-bold text-slate-300 tabular-nums">
-                    {mon.rate}
-                  </span>
-                  {pokedexCaught.includes(mon.speciesId) && (
-                    <img
-                      src="/assets/ui/poke-ball.png"
-                      alt="Caught"
-                      className="absolute -top-1 -right-1 w-3 h-3 pixel-art"
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Rain Bonus Section */}
-        {currentChapterId !== 'kanto-7' && currentChapter.pokemonFound.rain && currentChapter.pokemonFound.rain.length > 0 && (
-          <div>
-            <div className="flex items-center justify-between text-[11px] font-bold text-sky-300 mb-1">
-              <span className="flex items-center gap-1">
+            {isRaining && (
+              <div className="text-[11px] font-bold text-sky-300 mb-1.5 flex items-center gap-1 font-game">
                 <span>🌧️</span>
-                <span>RAIN</span>
-              </span>
-              <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-amber-500 text-black uppercase">
-                NOW
-              </span>
-            </div>
+                <span>Rain until 0:00</span>
+              </div>
+            )}
             <div className="grid grid-cols-4 gap-1.5">
-              {currentChapter.pokemonFound.rain.map((mon) => (
-                <div
-                  key={mon.speciesId}
-                  className="relative rounded-lg bg-[#181d2e] border border-sky-900/50 p-1 flex flex-col items-center justify-center"
-                  title={`${mon.name} (${mon.rate})`}
-                >
-                  <img
-                    src={getPokemonSpriteUrl(mon.speciesId, false)}
-                    alt={mon.name}
-                    className="w-7 h-7 object-contain pixel-art drop-shadow"
-                  />
-                  <span className="text-[8px] font-bold text-slate-300 tabular-nums">
-                    {mon.rate}
-                  </span>
-                  {pokedexCaught.includes(mon.speciesId) && (
-                    <img
-                      src="/assets/ui/poke-ball.png"
-                      alt="Caught"
-                      className="absolute -top-1 -right-1 w-3 h-3 pixel-art"
-                    />
-                  )}
-                </div>
-              ))}
+              {activeArea.pokemon.map((mon) => renderFoundCell(mon, true))}
             </div>
           </div>
-        )}
-
-        {/* Day Section */}
-        {currentChapterId !== 'kanto-7' && currentChapter.pokemonFound.day && currentChapter.pokemonFound.day.length > 0 && (
-          <div>
-            <div className="text-[11px] font-bold text-amber-300 mb-1 flex items-center gap-1">
-              <span>☀️</span>
-              <span>DAY</span>
-            </div>
-            <div className="grid grid-cols-4 gap-1.5">
-              {currentChapter.pokemonFound.day.map((mon) => (
-                <div
-                  key={mon.speciesId}
-                  className="relative rounded-lg bg-[#181d2e] border border-amber-900/50 p-1 flex flex-col items-center justify-center"
-                  title={`${mon.name} (${mon.rate})`}
-                >
-                  <img
-                    src={getPokemonSpriteUrl(mon.speciesId, false)}
-                    alt={mon.name}
-                    className="w-7 h-7 object-contain pixel-art drop-shadow"
-                  />
-                  <span className="text-[8px] font-bold text-slate-300 tabular-nums">
-                    {mon.rate}
+        ) : (
+          <>
+            {currentChapter.pokemonFound.base.length > 0 && (
+              <div className="grid grid-cols-4 gap-1.5">
+                {currentChapter.pokemonFound.base.map((mon) => renderFoundCell(mon, true))}
+              </div>
+            )}
+            {conditionalSections.map((sec) => (
+              <div key={sec.key} className="pt-2 border-t border-[#212536]">
+                <div className={`flex items-center justify-between text-[11px] font-bold mb-1.5 font-game tracking-wider ${sec.isNow ? 'text-white' : 'text-slate-400 opacity-55'}`}>
+                  <span className="flex items-center gap-1">
+                    <span>{sec.icon}</span>
+                    <span>{sec.label}</span>
                   </span>
-                  {pokedexCaught.includes(mon.speciesId) && (
-                    <img
-                      src="/assets/ui/poke-ball.png"
-                      alt="Caught"
-                      className="absolute -top-1 -right-1 w-3 h-3 pixel-art"
-                    />
+                  {sec.isNow && (
+                    <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-[#ffcb05] text-[#1a1a1a] uppercase leading-none">
+                      NOW
+                    </span>
                   )}
                 </div>
-              ))}
-            </div>
-          </div>
+                <div className="grid grid-cols-4 gap-1.5">
+                  {sec.list.map((mon) => renderFoundCell(mon, sec.isNow))}
+                </div>
+              </div>
+            ))}
+          </>
         )}
       </div>
     </aside>

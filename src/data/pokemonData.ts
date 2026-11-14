@@ -1,4 +1,5 @@
 import { CombatEffect, PokemonSpecies, PokemonStats, PokemonType } from '../types/game';
+import { getTypeMultiplier } from './typeChart';
 
 export const POKEMON_SPECIES_MAP: Record<number, PokemonSpecies> = {
   1: {
@@ -1417,8 +1418,18 @@ export const TYPE_MOVES_MAP: Record<PokemonType, MoveData[]> = {
   Fairy: [move('Moonblast', 'moonblast', 'Fairy', 'special', 'fairy'), move('Dazzling Gleam', 'dazzling-gleam', 'Fairy', 'special', 'fairy')],
 };
 
-export function getPokemonMove(types: PokemonType[]): MoveData {
-  const primaryType = types[0] || 'Normal';
-  const movePool = TYPE_MOVES_MAP[primaryType] || TYPE_MOVES_MAP['Normal'];
+export function getPokemonMove(types: PokemonType[], enemyTypes?: PokemonType[]): MoveData {
+  let chosenType: PokemonType = types[0] || 'Normal';
+  if (enemyTypes && enemyTypes.length > 0 && types.length > 1) {
+    let bestMult = -1;
+    for (const t of types) {
+      const mult = getTypeMultiplier([t], enemyTypes);
+      if (mult > bestMult) {
+        bestMult = mult;
+        chosenType = t;
+      }
+    }
+  }
+  const movePool = TYPE_MOVES_MAP[chosenType] || TYPE_MOVES_MAP['Normal'];
   return movePool[Math.floor(Math.random() * movePool.length)];
 }

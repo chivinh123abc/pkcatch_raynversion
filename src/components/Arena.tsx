@@ -10,6 +10,9 @@ import { ALL_CHAPTERS, DEFAULT_CHAPTER } from '../data/chaptersData';
 import { runDitherTransition } from '../utils/ditherTransition';
 import { BattleFX } from '../utils/battleFxEngine';
 import { CaptureFX } from '../utils/captureFxEngine';
+import { HealFX } from '../utils/healFxEngine';
+import { ItemFX } from '../utils/itemFxEngine';
+import { nativeFxRuntime } from '../utils/nativeFxRuntime';
 import SPRITE_BOUNDS from '../data/spriteBounds.json';
 
 // Animated pixel rain canvas matching Poke'Catch
@@ -67,157 +70,6 @@ const RainEffect: React.FC = () => {
   );
 };
 
-// Authentic Poke'Catch Pokemon Center Heal Stage with Canvas Pads
-const PokemonCenterHealStage: React.FC<{
-  chapterName: string;
-  party: any[];
-  healProgress: number;
-  onSkip: () => void;
-}> = ({ chapterName, party, healProgress, onSkip }) => {
-  const padsCanvasRef = useRef<HTMLCanvasElement | null>(null);
-  const trayRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const canvas = padsCanvasRef.current;
-    const tray = trayRef.current;
-    if (!canvas || !tray) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animId = 0;
-    const ce = 2; // pixel scale
-    const pinkPal = ['#ffffff', '#ffe0e8', '#ffb3c7', '#ff8fb1', '#d85a80', '#8c2a48'];
-    const darkBase = ['#2a2440', '#1a1628', '#0d0b16'];
-
-    const putPixel = (x: number, y: number, color: string, alpha: number = 1) => {
-      x = Math.round(x);
-      y = Math.round(y);
-      if (alpha < 1 && (alpha <= 0 || (((x + y) & 3) / 4 >= alpha * 1.2 && (x ^ y) % 2))) return;
-      ctx.fillStyle = color;
-      ctx.fillRect(x, y, 1, 1);
-    };
-
-    const drawEllipse = (
-      cx: number,
-      cy: number,
-      rx: number,
-      ry: number,
-      color: string,
-      alpha: number = 1,
-      innerCut: number = 0
-    ) => {
-      for (let dy = -Math.ceil(ry); dy <= ry; dy++) {
-        for (let dx = -Math.ceil(rx); dx <= rx; dx++) {
-          const dist = (dx * dx) / (rx * rx) + (dy * dy) / (ry * ry);
-          if (dist <= 1 && dist >= innerCut * innerCut) {
-            putPixel(cx + dx, cy + dy, color, alpha);
-          }
-        }
-      }
-    };
-
-    const render = (now: number) => {
-      const machineEl = canvas.parentElement;
-      if (!machineEl) return;
-      const mRect = machineEl.getBoundingClientRect();
-      const targetW = Math.ceil(mRect.width / ce);
-      const targetH = Math.ceil(mRect.height / ce);
-      if (canvas.width !== targetW || canvas.height !== targetH) {
-        canvas.width = targetW;
-        canvas.height = targetH;
-      }
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      const isHealing = healProgress < 100;
-      const j = 0.5 + 0.5 * Math.sin(now / (isHealing ? 100 : 300));
-      const slots = tray.querySelectorAll('.hm-slot');
-
-      slots.forEach((slot) => {
-        const sRect = slot.getBoundingClientRect();
-        const cx = Math.round((sRect.left + sRect.width / 2 - mRect.left) / ce);
-        const cy = Math.round((sRect.bottom - sRect.height * 0.16 - mRect.top) / ce);
-        const rx = Math.round((sRect.width * 0.42) / ce);
-        const ry = Math.max(3, Math.round(rx * 0.32));
-
-        // Ground shadow
-        drawEllipse(cx, cy + ry + 4, rx * 0.8, ry * 0.6, '#000000', 0.45);
-        // Dark bevels
-        drawEllipse(cx, cy + 2, rx, ry, darkBase[2]);
-        drawEllipse(cx, cy + 1, rx, ry, darkBase[1]);
-        drawEllipse(cx, cy, rx, ry, isHealing ? pinkPal[4] : darkBase[0]);
-        drawEllipse(cx, cy, rx, ry, isHealing ? pinkPal[2] : '#5d6788', 1, 0.82);
-
-        if (isHealing) {
-          drawEllipse(cx, cy, rx * (0.5 + 0.08 * j), ry * (0.5 + 0.08 * j), pinkPal[3], 0.9);
-          drawEllipse(cx, cy, rx * 0.25, ry * 0.25, pinkPal[1], 0.8);
-        }
-
-        // Top rim highlight
-        for (let dx = -rx * 0.55; dx <= rx * 0.55; dx++) {
-          const topDy = -ry * Math.sqrt(Math.max(0, 1 - (dx / rx) ** 2));
-          putPixel(cx + dx, cy + topDy, isHealing ? pinkPal[0] : '#c9d2e6');
-        }
-      });
-
-      animId = requestAnimationFrame(render);
-    };
-
-    animId = requestAnimationFrame(render);
-    return () => cancelAnimationFrame(animId);
-  }, [healProgress]);
-
-  return (
-    <div className="heal-fx select-none relative">
-      <div className="hm-stage -translate-y-2">
-        <div className="hm-title font-pixel text-lg sm:text-xl">
-          {chapterName} Pokémon Center
-        </div>
-
-        <div className="hm-machine">
-          <canvas ref={padsCanvasRef} className="hm-pads" />
-          <div ref={trayRef} className="hm-tray">
-            {party.map((mon, slotIdx) => (
-              <div key={mon.uid || slotIdx} className="hm-slot on">
-                <div
-                  className="absolute -top-7 text-emerald-400 font-black text-sm drop-shadow-[0_0_8px_#34d399] animate-heal-cross select-none pointer-events-none"
-                  style={{ animationDelay: `${(slotIdx % 3) * 350}ms` }}
-                >
-                  ✚
-                </div>
-
-                <img
-                  src="/assets/items/poke-ball.png"
-                  alt="Pokéball"
-                  className={`w-9 h-9 sm:w-10 sm:h-10 object-contain pixel-art transition-all duration-300 ${
-                    healProgress >= 90 ? 'brightness-125 scale-105' : 'brightness-100'
-                  }`}
-                  style={{
-                    filter:
-                      healProgress < 100
-                        ? 'drop-shadow(0 0 6px #ff8fb1)'
-                        : 'drop-shadow(0 0 10px rgba(52,211,153,0.8))',
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {healProgress >= 90 && (
-          <div className="hm-msg animate-fade-in" style={{ visibility: 'visible' }}>
-            Your team is in great shape!
-          </div>
-        )}
-      </div>
-
-      <button onClick={onSkip} className="fx-skip-btn">
-        <span>SKIP</span>
-        <span className="text-[11px] text-slate-300">▸▸</span>
-      </button>
-    </div>
-  );
-};
-
 export const Arena: React.FC = () => {
   const [gameClock, setGameClock] = useState(() => new Date());
   const {
@@ -238,6 +90,11 @@ export const Arena: React.FC = () => {
     isCatchable,
     activeTrainer,
     bossIntroActive,
+    allyRecalling,
+    allySendingOut,
+    enemyRecalling,
+    newCatchCard,
+    dismissNewCatchCard,
     chapterCompleteBanner,
     activeDrop,
     berryBuffs,
@@ -249,12 +106,17 @@ export const Arena: React.FC = () => {
     trainerOnField,
     transitionTick,
     duplicatePopup,
+    sidebarExpPopups,
     selectedBall,
     pokedexCaught,
     resolveCombatImpact,
     finishCombatEffect,
     capturePresentation,
     finishCapturePresentation,
+    healPresentation,
+    finishHealPresentation,
+    finishItemDrop,
+    autoCatch,
   } = useGameStore();
 
   const activeCatchBall = React.useMemo(() => {
@@ -282,6 +144,7 @@ export const Arena: React.FC = () => {
   const fxContainerRef = useRef<HTMLDivElement | null>(null);
   const playerMonRef = useRef<HTMLDivElement | null>(null);
   const enemyMonRef = useRef<HTMLDivElement | null>(null);
+  const enemySpriteRef = useRef<HTMLImageElement | null>(null);
 
   // One animation engine owns movement and reports the actual contact frame.
   const lastCombatKey = useRef<number | null>(null);
@@ -320,11 +183,11 @@ export const Arena: React.FC = () => {
 
   // Keep the ball trajectory, absorption, bounce and shakes on one clock.
   useEffect(() => {
-    if (!capturePresentation || !arenaRef.current || !fxContainerRef.current || !enemyMonRef.current) return;
+    const target = enemySpriteRef.current || enemyMonRef.current;
+    if (!capturePresentation || !arenaRef.current || !fxContainerRef.current || !target) return;
     BattleFX.cancel();
     let cancelled = false;
     const arena = arenaRef.current;
-    const target = enemyMonRef.current;
     const fx = fxContainerRef.current;
     const rect = arena.getBoundingClientRect();
     const hero = arena.querySelector('.capture-trainer')?.getBoundingClientRect();
@@ -345,9 +208,240 @@ export const Arena: React.FC = () => {
       cancelled = true;
       fx.querySelectorAll('.capture-sequence').forEach(el => el.remove());
       target.getAnimations().forEach(animation => animation.cancel());
-      target.style.opacity = '';
+      if (!capturePresentation.success) {
+        target.style.opacity = '';
+        target.style.visibility = '';
+      }
     };
   }, [capturePresentation, finishCapturePresentation]);
+
+  // Reset enemy visibility/opacity whenever a new enemy spawns, and animate trainer Pokéball send-out
+  useEffect(() => {
+    if (enemyMonRef.current) {
+      enemyMonRef.current.style.opacity = '';
+      enemyMonRef.current.style.visibility = '';
+      enemyMonRef.current.style.transform = '';
+      enemyMonRef.current.style.filter = '';
+    }
+    const sprite = enemySpriteRef.current;
+    if (sprite) {
+      sprite.style.opacity = '';
+      sprite.style.visibility = '';
+      sprite.style.transform = '';
+      sprite.style.filter = '';
+      if (activeTrainer && !bossIntroActive && enemy && enemy.currentHp > 0) {
+        const bounceDur = Math.max(180, 360 / gameSpeed);
+        const revealDur = Math.max(140, 260 / gameSpeed);
+        if (arenaRef.current && fxContainerRef.current) {
+          const aRect = arenaRef.current.getBoundingClientRect();
+          const sRect = sprite.getBoundingClientRect();
+          const pix = CaptureFX.pix(fxContainerRef.current);
+          const cx = sRect.left - aRect.left + sRect.width / 2;
+          const cy = sRect.top - aRect.top + sRect.height / 2;
+          pix.ring(cx, cy, 46, bounceDur, pix.PAL.white);
+          pix.burst(cx, cy, 10, 1.8, { pal: pix.PAL.white, grav: 0.03 });
+        }
+        sprite.animate(
+          [
+            { transform: 'translateY(55%) scale(0.7, 0.5)', filter: 'brightness(0)', opacity: 0 },
+            { transform: 'translateY(-24%) scale(0.82, 1.25)', filter: 'brightness(0)', opacity: 1, offset: 0.45 },
+            { transform: 'translateY(0) scale(1.14, 0.88)', filter: 'brightness(0)', opacity: 1, offset: 0.75 },
+            { transform: 'translateY(0) scale(1)', filter: 'brightness(0)', opacity: 1 },
+          ],
+          { duration: bounceDur, easing: 'ease-out', fill: 'forwards' }
+        ).finished.then(() => {
+          if (!sprite.isConnected) return;
+          sprite.animate(
+            [
+              { filter: 'brightness(0)' },
+              { filter: 'brightness(0) invert(1) drop-shadow(0 0 8px #fff)', offset: 0.35 },
+              { filter: 'none' },
+            ],
+            { duration: revealDur, easing: 'ease-out', fill: 'forwards' }
+          );
+        }).catch(() => {});
+      }
+    }
+  }, [enemy?.uid, nodeType, bossIntroActive]);
+
+  // Recall fainted opponent trainer Pokémon into its Pokéball before sending out the next one
+  useEffect(() => {
+    if (!enemyRecalling || !enemySpriteRef.current) return;
+    const sprite = enemySpriteRef.current;
+    const dur = Math.max(120, 240 / gameSpeed);
+    if (arenaRef.current && fxContainerRef.current) {
+      const aRect = arenaRef.current.getBoundingClientRect();
+      const sRect = sprite.getBoundingClientRect();
+      const pix = CaptureFX.pix(fxContainerRef.current);
+      pix.ring(sRect.left - aRect.left + sRect.width / 2, sRect.top - aRect.top + sRect.height / 2, 44, dur, pix.PAL.ball);
+    }
+    const anim = sprite.animate(
+      [
+        { transform: 'scale(1)', filter: 'none', opacity: 1 },
+        { transform: 'scale(1.1, 0.85)', filter: 'brightness(0) invert(1)', opacity: 1, offset: 0.35 },
+        { transform: 'scale(0)', filter: 'brightness(0) invert(1)', opacity: 0 },
+      ],
+      { duration: dur, easing: 'ease-in', fill: 'forwards' }
+    );
+    return () => {
+      anim.cancel();
+    };
+  }, [enemyRecalling]);
+
+  // Recall active ally Pokémon into its Pokéball (Pokéball flies from Red -> ring/burst -> sprite shrinks into ball)
+  useEffect(() => {
+    if (!allyRecalling || !playerMonRef.current) return;
+    const sprite = playerMonRef.current.querySelector('img.battle-sprite') as HTMLElement | null;
+    if (!sprite) return;
+    const totalDur = Math.max(200, 380 / gameSpeed);
+    const flyDur = Math.round(totalDur * 0.45);
+    const shrinkDur = totalDur - flyDur;
+    let cancelled = false;
+    let ballEl: HTMLImageElement | null = null;
+    let spriteAnim: Animation | null = null;
+
+    if (arenaRef.current && fxContainerRef.current) {
+      const aRect = arenaRef.current.getBoundingClientRect();
+      const sRect = sprite.getBoundingClientRect();
+      const tx = sRect.left - aRect.left + sRect.width / 2;
+      const ty = sRect.top - aRect.top + sRect.height * 0.55;
+      const sx = -18;
+      const sy = aRect.height * 0.65;
+      const mx = (sx + tx) / 2;
+      const my = Math.min(sy, ty) - 42;
+
+      ballEl = document.createElement('img');
+      ballEl.src = '/assets/items/poke-ball.png';
+      ballEl.alt = '';
+      Object.assign(ballEl.style, {
+        position: 'absolute',
+        left: '0',
+        top: '0',
+        width: '32px',
+        height: '32px',
+        imageRendering: 'pixelated',
+        pointerEvents: 'none',
+        zIndex: '30',
+      });
+      fxContainerRef.current.appendChild(ballEl);
+
+      const frames = Array.from({ length: 13 }, (_, idx) => {
+        const t = idx / 12;
+        const u = 1 - t;
+        const x = u * u * sx + 2 * u * t * mx + t * t * tx;
+        const y = u * u * sy + 2 * u * t * my + t * t * ty;
+        return { transform: `translate(${x - 16}px, ${y - 16}px) rotate(${360 * t}deg)` };
+      });
+      const ballAnim = ballEl.animate(frames, { duration: flyDur, easing: 'linear', fill: 'forwards' });
+      ballAnim.finished.then(() => {
+        if (cancelled) return;
+        if (fxContainerRef.current) {
+          const pix = CaptureFX.pix(fxContainerRef.current);
+          pix.ring(tx, ty, 44, shrinkDur + 100, pix.PAL.ball);
+          pix.burst(tx, ty, 10, 1.9, { pal: pix.PAL.ball, grav: 0.04 });
+        }
+        spriteAnim = sprite.animate(
+          [
+            { transform: 'scaleX(-1) scale(1)', filter: 'brightness(0) invert(1)', opacity: 1 },
+            { transform: 'scaleX(-1) scale(1.12, 0.85)', filter: 'brightness(0) invert(1)', opacity: 1, offset: 0.35 },
+            { transform: 'scaleX(-1) scale(0)', filter: 'brightness(0) invert(1)', opacity: 0 },
+          ],
+          { duration: shrinkDur, easing: 'ease-in', fill: 'forwards' }
+        );
+        if (ballEl) {
+          ballEl.animate(
+            [
+              { transform: `translate(${tx - 16}px, ${ty - 16}px) scale(1)`, opacity: 1 },
+              { transform: `translate(${sx - 16}px, ${sy - 16}px) scale(0.7)`, opacity: 0 },
+            ],
+            { duration: shrinkDur, easing: 'ease-in', fill: 'forwards' }
+          );
+        }
+      }).catch(() => {});
+    }
+
+    return () => {
+      cancelled = true;
+      spriteAnim?.cancel();
+      ballEl?.remove();
+    };
+  }, [allyRecalling]);
+
+  // Send out new ally Pokémon (Pokéball flies from Red -> burst -> new Pokémon expands from white flash)
+  useEffect(() => {
+    if (!allySendingOut || !playerMonRef.current) return;
+    const sprite = playerMonRef.current.querySelector('img.battle-sprite') as HTMLElement | null;
+    if (!sprite) return;
+    const totalDur = Math.max(200, 400 / gameSpeed);
+    const flyDur = Math.round(totalDur * 0.45);
+    const popDur = totalDur - flyDur;
+    let cancelled = false;
+    let ballEl: HTMLImageElement | null = null;
+    let spriteAnim: Animation | null = null;
+
+    sprite.style.opacity = '0';
+
+    if (arenaRef.current && fxContainerRef.current) {
+      const aRect = arenaRef.current.getBoundingClientRect();
+      const sRect = sprite.getBoundingClientRect();
+      const tx = sRect.left - aRect.left + sRect.width / 2;
+      const ty = sRect.top - aRect.top + sRect.height * 0.6;
+      const sx = -18;
+      const sy = aRect.height * 0.65;
+      const mx = (sx + tx) / 2;
+      const my = Math.min(sy, ty) - 46;
+
+      ballEl = document.createElement('img');
+      ballEl.src = '/assets/items/poke-ball.png';
+      ballEl.alt = '';
+      Object.assign(ballEl.style, {
+        position: 'absolute',
+        left: '0',
+        top: '0',
+        width: '32px',
+        height: '32px',
+        imageRendering: 'pixelated',
+        pointerEvents: 'none',
+        zIndex: '30',
+      });
+      fxContainerRef.current.appendChild(ballEl);
+
+      const frames = Array.from({ length: 13 }, (_, idx) => {
+        const t = idx / 12;
+        const u = 1 - t;
+        const x = u * u * sx + 2 * u * t * mx + t * t * tx;
+        const y = u * u * sy + 2 * u * t * my + t * t * ty;
+        return { transform: `translate(${x - 16}px, ${y - 16}px) rotate(${540 * t}deg)` };
+      });
+      const ballAnim = ballEl.animate(frames, { duration: flyDur, easing: 'linear', fill: 'forwards' });
+      ballAnim.finished.then(() => {
+        if (cancelled) return;
+        ballEl?.remove();
+        ballEl = null;
+        sprite.style.opacity = '';
+        if (fxContainerRef.current) {
+          const pix = CaptureFX.pix(fxContainerRef.current);
+          pix.ring(tx, ty, 48, popDur + 100, pix.PAL.ball);
+          pix.burst(tx, ty, 12, 2.2, { pal: pix.PAL.ball, grav: 0.04 });
+        }
+        spriteAnim = sprite.animate(
+          [
+            { transform: 'scaleX(-1) scale(0)', filter: 'brightness(0) invert(1)', opacity: 0 },
+            { transform: 'scaleX(-1) scale(1.14, 0.86)', filter: 'brightness(0) invert(1)', opacity: 1, offset: 0.55 },
+            { transform: 'scaleX(-1) scale(1)', filter: 'none', opacity: 1 },
+          ],
+          { duration: popDur, easing: 'ease-out', fill: 'forwards' }
+        );
+      }).catch(() => {});
+    }
+
+    return () => {
+      cancelled = true;
+      sprite.style.opacity = '';
+      spriteAnim?.cancel();
+      ballEl?.remove();
+    };
+  }, [allySendingOut]);
 
   useEffect(() => {
     const clockTimer = window.setInterval(() => setGameClock(new Date()), 30_000);
@@ -457,32 +551,92 @@ export const Arena: React.FC = () => {
     });
   }, [transitionTick, gameSpeed]);
 
-  // Pokémon Center gradual heal progress
-  const [healProgress, setHealProgress] = useState(0);
-
+  // Authentic Pokémon Center HealFX sequence
   useEffect(() => {
-    if (nodeType === 'center') {
-      setHealProgress(0);
+    if (!healPresentation || !arenaRef.current || !fxContainerRef.current) return;
+    BattleFX.cancel();
+    let cancelled = false;
+    const arena = arenaRef.current;
+    const fx = fxContainerRef.current;
+    nativeFxRuntime.onSkip = () => skipHeal();
 
-      const startTime = performance.now();
-      const duration = 2400 / gameSpeed;
-      let animId: number;
+    HealFX.play(arena, {
+      fx,
+      allies: null,
+      count: party.length,
+      slots: 6,
+      title: `${currentChapter.name} Pokémon Center`,
+      msg: 'Your team is in great shape!',
+      speed: () => useGameStore.getState().gameSpeed,
+      onHeal: () => {},
+    })
+      .then(() => {
+        if (!cancelled) finishHealPresentation(healPresentation.key);
+      })
+      .catch((error) => {
+        console.warn('HealFX failed:', error);
+        if (!cancelled) finishHealPresentation(healPresentation.key);
+      });
 
-      const tick = (now: number) => {
-        const elapsed = now - startTime;
-        const progress = Math.min(100, Math.round((elapsed / duration) * 100));
-        setHealProgress(progress);
-        if (progress < 100) {
-          animId = requestAnimationFrame(tick);
-        }
-      };
+    return () => {
+      cancelled = true;
+      nativeFxRuntime.onSkip = null;
+      arena.style.visibility = '';
+      arena.querySelectorAll('.heal-fx').forEach((el) => {
+        el.getAnimations({ subtree: true }).forEach((animation) => animation.cancel());
+        el.remove();
+      });
+    };
+  }, [healPresentation, finishHealPresentation, skipHeal]);
 
-      animId = requestAnimationFrame(tick);
-      return () => cancelAnimationFrame(animId);
-    } else {
-      setHealProgress(0);
-    }
-  }, [nodeType, currentStep, gameSpeed]);
+  // Authentic ItemFX sequence for '?' nodes, money drops, and item gifts
+  useEffect(() => {
+    if (!activeDrop || activeDrop.type === 'money-text' || !arenaRef.current) return;
+    let cancelled = false;
+    const arena = arenaRef.current;
+    const speed = activeDrop.speed || useGameStore.getState().gameSpeed;
+
+    const runItemFx = activeDrop.type === 'money'
+      ? ItemFX(arena, {
+          money: true,
+          name: activeDrop.title,
+          message: `Found ${activeDrop.title}!`,
+          speed,
+        })
+      : activeDrop.amount && activeDrop.amount > 1
+        ? (ItemFX as any).drops(arena, {
+            items: [{
+              name: activeDrop.title,
+              src: activeDrop.iconUrl.replace(/^\//, ''),
+              n: activeDrop.amount,
+            }],
+            message: `Found ${activeDrop.title}!`,
+            speed,
+          })
+        : ItemFX(arena, {
+            name: activeDrop.title,
+            src: activeDrop.iconUrl.replace(/^\//, ''),
+            message: `Found ${activeDrop.title}!`,
+            speed,
+          });
+
+    runItemFx
+      .then(() => {
+        if (!cancelled) finishItemDrop(activeDrop.id);
+      })
+      .catch((error) => {
+        console.warn('ItemFX failed:', error);
+        if (!cancelled) finishItemDrop(activeDrop.id);
+      });
+
+    return () => {
+      cancelled = true;
+      arena.querySelectorAll('.berry-fx').forEach((el) => {
+        el.getAnimations({ subtree: true }).forEach((animation) => animation.cancel());
+        el.remove();
+      });
+    };
+  }, [activeDrop, finishItemDrop]);
 
   const isRaining = currentChapterId === 'kanto-7' ? currentStep <= 5 : currentChapter.weather === 'rain';
   const clockLabel = gameClock.toLocaleTimeString('en-GB', {
@@ -662,6 +816,24 @@ export const Arena: React.FC = () => {
           </div>
         )}
 
+        {/* Trainer VS Intro before trainer battles */}
+        {bossIntroActive && nodeType === 'red' && activeTrainer && (
+          <div className="vs-intro" aria-live="polite">
+            <div className="vs-card left">
+              <img src="/assets/trainers/red.png" alt="Red" />
+              <span className="vs-name">Red</span>
+            </div>
+            <div className="vs-card right">
+              <img src={`/assets/trainers/${activeTrainer.sprite}.png`} alt={activeTrainer.name} />
+              <span className="vs-name">
+                {activeTrainer.name}
+                {activeTrainer.title && <small>{activeTrainer.title}</small>}
+              </span>
+            </div>
+            <div className="vs-text">VS</div>
+          </div>
+        )}
+
         {/* Gym leader reveal before combat */}
         {bossIntroActive && nodeType === 'badge' && activeTrainer && (
           <div className="gym-boss-intro" aria-live="polite" style={{ '--boss-color': '#ffcb05' } as React.CSSProperties}>
@@ -734,36 +906,60 @@ export const Arena: React.FC = () => {
           {party.map((mon, idx) => {
             const sp = POKEMON_SPECIES_MAP[mon.speciesId];
             const isCurrent = idx === activePartyIndex;
+            const isKo = mon.currentHp <= 0;
             const hpPct = Math.max(0, Math.min(100, (mon.currentHp / mon.maxHp) * 100));
 
+            const expPop = sidebarExpPopups?.[mon.uid];
+
             return (
-              <button
+              <div
                 key={mon.uid}
-                onClick={() => setActivePartyIndex(idx)}
-                className={`battle-team-slot rounded-xl border-2 flex flex-col items-center justify-between relative ${
-                  isCurrent
-                    ? 'bg-[#22212d]/95 border-[#ffcb05] shadow-[0_0_10px_rgba(255,203,5,0.45)] scale-105 z-10'
-                    : 'bg-[#151825]/90 border-[#252a3e] hover:border-slate-400'
-                }`}
-                title={`${sp?.name || 'Mon'} — Lv.${mon.level}`}
+                className="relative flex-none"
+                style={{ width: 'var(--tile)', height: 'var(--tile)' }}
               >
-                <img
-                  src={getPokemonSpriteUrl(mon.speciesId, mon.isShiny)}
-                  alt={sp?.name || 'Mon'}
-                  className="w-8 h-8 object-contain pixel-art mt-0.5"
-                />
-                <span className="text-[9px] font-black text-white leading-none font-game">
-                  Lv.{mon.level}
-                </span>
-                <div className="w-[88%] h-[3px] bg-slate-950 rounded-full overflow-hidden mb-0.5">
-                  <div
-                    className={`h-full transition-all duration-300 ${
-                      hpPct > 50 ? 'bg-[#f0607a]' : hpPct > 20 ? 'bg-amber-400' : 'bg-red-600'
-                    }`}
-                    style={{ width: `${hpPct}%` }}
+                <button
+                  onClick={() => setActivePartyIndex(idx)}
+                  className={`battle-team-slot rounded-xl border-2 flex flex-col items-center justify-between relative ${
+                    isKo
+                      ? 'slot-ko bg-[#141722]/90 border-[#222638] opacity-85'
+                      : isCurrent
+                        ? 'bg-[#2b2824]/95 border-[#ffcb05] shadow-[0_2px_0_rgba(0,0,0,0.45),0_0_10px_rgba(255,203,5,0.45)] scale-105 z-10'
+                        : 'bg-[#151825]/90 border-[#252a3e] hover:border-slate-400'
+                  }`}
+                  title={`${sp?.name || 'Mon'} — Lv.${mon.level}`}
+                >
+                  <img
+                    src={getPokemonSpriteUrl(mon.speciesId, mon.isShiny)}
+                    alt={sp?.name || 'Mon'}
+                    className={`object-contain pixel-art ${isKo ? 'grayscale brightness-75 opacity-75' : ''}`}
                   />
-                </div>
-              </button>
+                  <span className={`font-black leading-none font-game ${isKo ? 'text-[#a0a4ae]' : 'text-white'}`}>
+                    Lv.{mon.level}
+                  </span>
+                  <div className="w-[88%] h-[5px] bg-black/35 rounded-full overflow-hidden mb-0.5">
+                    {!isKo && (
+                      <div
+                        className={`h-full transition-all duration-300 shadow-[inset_0_1px_rgba(255,255,255,0.3)] ${
+                          hpPct > 20 ? 'bg-[#f0607a]' : 'bg-[#d6334f]'
+                        }`}
+                        style={{ width: `${hpPct}%` }}
+                      />
+                    )}
+                  </div>
+                </button>
+                {expPop && (
+                  <div
+                    key={`${mon.uid}-${expPop.amount}`}
+                    className={`xp-pop rail-xp${expPop.active ? ' bonus' : ''}`}
+                    style={{
+                      left: 'calc(100% + 8px)',
+                      top: '50%',
+                    }}
+                  >
+                    +{expPop.amount.toLocaleString()} <small>XP{expPop.active ? ' ×1.1' : ''}</small>
+                  </div>
+                )}
+              </div>
             );
           })}
         </div>
@@ -780,36 +976,28 @@ export const Arena: React.FC = () => {
           </div>
         ))}
 
-        {/* Duplicate EXP Flying Particles */}
+        {/* Duplicate EXP Flying Particles (positioned directly over caught enemy at left: 78%) */}
         {duplicatePopup && (
           <>
             <div
               className="xp-pop dup"
-              style={{ right: '28%', top: '55%' }}
+              style={{ left: '78%', top: '58%' }}
             >
               <small className="dup-tag">DUPLICATE</small>
               {duplicatePopup.text}
             </div>
             <div
               className="xp-ball"
-              style={{ right: '28%', top: '60%' }}
+              style={{ left: '78%', top: '63%' }}
             />
           </>
         )}
 
         {/* Main Stage Arena Area */}
-        {nodeType === 'center' ? (
-          /* AUTHENTIC POKÉMON CENTER HEAL SCENE */
-          <PokemonCenterHealStage
-            chapterName={currentChapter.name}
-            party={party}
-            healProgress={healProgress}
-            onSkip={skipHeal}
-          />
-        ) : (
+        {nodeType === 'center' || nodeType === 'question' ? null : (
           <div className="relative z-10 w-full h-full pointer-events-none">
-            {/* Red Trainer (Slides in to left of hero during wild battles and catch sequence) */}
-            {trainerOnField && (
+            {/* Red Trainer (Slides in to left of hero during catch sequence only) */}
+            {trainerOnField && !bossIntroActive && (
               <div className="capture-trainer hero absolute left-[19%] bottom-[22%] -translate-x-1/2 flex flex-col items-center z-20 pointer-events-auto">
                 <img
                   src="/assets/trainers/red.png"
@@ -820,42 +1008,54 @@ export const Arena: React.FC = () => {
               </div>
             )}
 
-            {/* PLAYER SIDE: Active Pokémon (left: 38%, bottom: 22%) */}
-            {activeMon && activeSpecies && (
+            {/* PLAYER SIDE: Active Pokémon (left: 30%, bottom: 22%) */}
+            {activeMon && activeSpecies && !bossIntroActive && (
               <div
                 ref={playerMonRef}
-                className={`battle-mon ally absolute pointer-events-auto z-10 ${isCatchSequenceActive ? 'invisible' : ''}`}
+                className="battle-mon ally absolute pointer-events-auto z-10"
                 style={{ '--sprite-top': `${spriteTop(activeMon.speciesId)}px` } as React.CSSProperties}
               >
                 <div
                   className="relative"
                 >
-                  {/* Authentic mini-hp pill bar above head */}
-                  <div className="mini-hp">
-                    <div className="hp">
-                      <div
-                        style={{
-                          width: `${(activeMon.currentHp / activeMon.maxHp) * 100}%`,
-                          background: (activeMon.currentHp / activeMon.maxHp) > 0.2 ? '#f0607a' : '#d6334f',
-                        }}
-                      />
+                  {/* Authentic mini-hp pill bar above head (hidden when HP <= 0 or recalling) */}
+                  {activeMon.currentHp > 0 && !allyRecalling && (
+                    <div className="mini-hp">
+                      <div className="hp">
+                        <div
+                          style={{
+                            width: `${(activeMon.currentHp / activeMon.maxHp) * 100}%`,
+                            background: (activeMon.currentHp / activeMon.maxHp) > 0.2 ? '#f0607a' : '#d6334f',
+                          }}
+                        />
+                      </div>
                     </div>
-                  </div>
+                  )}
 
-                  {/* Clean sprite with no outer shadow */}
+                  {/* Authentic pixel ground shadow (behind sprite) */}
+                  {activeMon.currentHp > 0 && !allyRecalling && (
+                    <div className="cb-shadow-pixel" />
+                  )}
+
+                  {/* Clean sprite with KO red-glow silhouette (stays visible until recalled into Pokéball) */}
                   <img
                     src={getPokemonSpriteUrl(activeMon.speciesId, activeMon.isShiny)}
                     alt={activeSpecies.name}
-                    className={`battle-sprite pixel-art select-none -scale-x-100 ${activeMon.currentHp <= 0 ? 'animate-faint' : ''}`}
+                    className={`battle-sprite pixel-art select-none -scale-x-100 ${
+                      activeMon.currentHp <= 0
+                        ? !allyRecalling
+                          ? 'mon-ko [filter:brightness(0)_invert(1)_drop-shadow(0_0_2px_#ff3b3b)_drop-shadow(0_0_5px_#ff3b3b)]'
+                          : 'mon-ko'
+                        : ''
+                    }`}
                   />
 
-                  {/* Authentic pixel ground shadow */}
-                  <div className="cb-shadow-pixel" />
-
-                  {/* Authentic mini-lv text below feet */}
-                  <div className="mini-lv">
-                    <span className="lvn">Lv.{activeMon.level}</span>
-                  </div>
+                  {/* Authentic mini-lv text below feet (hidden when HP <= 0 or recalling) */}
+                  {activeMon.currentHp > 0 && !allyRecalling && (
+                    <div className="mini-lv">
+                      <span className="lvn">Lv.{activeMon.level}</span>
+                    </div>
+                  )}
                 </div>
               </div>
             )}
@@ -864,12 +1064,12 @@ export const Arena: React.FC = () => {
             {activeTrainer && currentChapterId !== 'special-mewtwo' && !bossIntroActive && (
               <div className="trainer-slot absolute inset-0 pointer-events-none">
                 <div className="battle-opponent-trainer trainer absolute flex flex-col items-center">
+                  <div className="cb-shadow-pixel z-0" />
                   <img
                     src={`/assets/trainers/${activeTrainer.sprite}.png`}
                     alt={activeTrainer.name}
-                    className="w-24 h-24 sm:w-28 sm:h-28 object-contain pixel-art"
+                    className="relative z-[1] w-24 h-24 sm:w-28 sm:h-28 object-contain pixel-art"
                   />
-                  <div className="cb-shadow-pixel" />
                 </div>
               </div>
             )}
@@ -880,8 +1080,9 @@ export const Arena: React.FC = () => {
               className="battle-mon enemy absolute pointer-events-auto z-10"
               style={{ '--sprite-top': `${spriteTop(enemy?.speciesId || 16)}px` } as React.CSSProperties}
             >
-              {enemy && enemySpecies ? (
+              {enemy && enemySpecies && !bossIntroActive ? (
                 <div
+                  key={enemy.uid}
                   className="relative"
                 >
                   {/* Sleeping 'Z' */}
@@ -891,53 +1092,72 @@ export const Arena: React.FC = () => {
                     </span>
                   )}
 
-                  {/* Authentic mini-hp pill bar above head */}
-                  <div className="mini-hp">
-                    <div className="hp">
-                      <div
-                        style={{
-                          width: `${(enemy.currentHp / enemy.maxHp) * 100}%`,
-                          background: (enemy.currentHp / enemy.maxHp) > 0.2 ? '#f0607a' : '#d6334f',
-                        }}
-                      />
+                  {/* Authentic mini-hp pill bar above head (hidden during faint/capture/recall) */}
+                  {enemy.currentHp > 0 && !isCatchSequenceActive && !capturePresentation && !enemyRecalling && (
+                    <div className="mini-hp">
+                      <div className="hp">
+                        <div
+                          style={{
+                            width: `${(enemy.currentHp / enemy.maxHp) * 100}%`,
+                            background: (enemy.currentHp / enemy.maxHp) > 0.2 ? '#f0607a' : '#d6334f',
+                          }}
+                        />
+                      </div>
                     </div>
-                  </div>
+                  )}
 
-                  {/* Clean sprite with no outer shadow */}
+                  {/* Authentic pixel ground shadow (behind sprite, hidden when in-ball/fainted/recalling) */}
+                  {enemy.currentHp > 0 && !isCatchSequenceActive && !capturePresentation && !enemyRecalling && (
+                    <div className="cb-shadow-pixel" />
+                  )}
+
+                  {/* Clean sprite with KO fade-out (wild) or KO red glow (trainer) */}
                   <img
+                    ref={enemySpriteRef}
                     src={getPokemonSpriteUrl(enemy.speciesId, enemy.isShiny)}
                     alt={enemySpecies.name}
-                    className={`battle-sprite pixel-art select-none ${enemy.currentHp <= 0 && !isCatchSequenceActive ? 'animate-faint' : ''}`}
+                    className={`battle-sprite pixel-art select-none ${
+                      enemy.currentHp <= 0
+                        ? isCatchSequenceActive
+                          ? 'mon-ko'
+                          : activeTrainer
+                            ? !enemyRecalling
+                              ? 'mon-ko [filter:brightness(0)_invert(1)_drop-shadow(0_0_2px_#ff3b3b)_drop-shadow(0_0_5px_#ff3b3b)]'
+                              : 'mon-ko'
+                            : !(autoCatch && isCatchable)
+                              ? 'mon-ko animate-faint'
+                              : 'mon-ko'
+                        : ''
+                    }`}
                   />
 
-                  {/* Authentic pixel ground shadow */}
-                  <div className="cb-shadow-pixel" />
-
-                  {/* Authentic mini-lv text below feet with owned icon if in dex */}
-                  <div className="mini-lv">
-                    {enemyStatus === 'SLP' && (
-                      <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-emerald-700 text-white uppercase mr-1">
-                        SLP
-                      </span>
-                    )}
-                    <span className="lvn">Lv.{enemy.level}</span>
-                    {pokedexCaught.includes(enemy.speciesId) && (
-                      <img
-                        src="/assets/items/poke-ball.png"
-                        alt="Caught"
-                        className="owned ml-1"
-                        title="Already caught"
-                      />
-                    )}
-                  </div>
+                  {/* Authentic mini-lv text below feet (hidden when HP <= 0 or in-ball/recalling) */}
+                  {enemy.currentHp > 0 && !isCatchSequenceActive && !capturePresentation && !enemyRecalling && (
+                    <div className="mini-lv">
+                      {enemyStatus === 'SLP' && (
+                        <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-emerald-700 text-white uppercase mr-1">
+                          SLP
+                        </span>
+                      )}
+                      <span className="lvn">Lv.{enemy.level}</span>
+                      {pokedexCaught.includes(enemy.speciesId) && (
+                        <img
+                          src="/assets/items/poke-ball.png"
+                          alt="Caught"
+                          className="owned ml-1"
+                          title="Already caught"
+                        />
+                      )}
+                    </div>
+                  )}
                 </div>
               ) : null}
             </div>
           </div>
         )}
 
-        {/* Floating Item Drop */}
-        {activeDrop && (
+        {/* Lightweight Wild KO Money Text (Item/Money Drops at '?' nodes use authentic ItemFX engine) */}
+        {activeDrop && activeDrop.type === 'money-text' && (
           <div
             key={activeDrop.id}
             className="absolute bottom-20 z-30 flex flex-col items-center pointer-events-none transition-all duration-300"
@@ -946,21 +1166,6 @@ export const Arena: React.FC = () => {
             <div className="text-sm font-black text-[#ffcb05] drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)] animate-drop-text font-game whitespace-nowrap mb-1">
               +{activeDrop.title}
             </div>
-
-            {activeDrop.type !== 'money-text' && (
-              <div className="relative flex flex-col items-center animate-item-drop">
-                {activeDrop.type === 'money' ? (
-                  <div className="coin-spin-sprite scale-125 drop-shadow-[0_4px_6px_rgba(0,0,0,0.85)] my-2" />
-                ) : (
-                  <img
-                    src={activeDrop.iconUrl}
-                    alt={activeDrop.title}
-                    className="w-12 h-12 object-contain pixel-art drop-shadow-[0_6px_8px_rgba(0,0,0,0.85)]"
-                  />
-                )}
-                <div className="w-10 h-2 bg-black/60 rounded-full blur-[1px] animate-drop-shadow -mt-1" />
-              </div>
-            )}
           </div>
         )}
 
@@ -998,6 +1203,141 @@ export const Arena: React.FC = () => {
           Other trainers' feats show up here.
         </p>
       </div>
+
+      {/* New Pokémon / Shiny Caught Pokédex Card Modal (matches original .dexcard.v2) */}
+      {newCatchCard && (() => {
+        const sp = getPokemonSpecies(newCatchCard.speciesId);
+        const typeColors: Record<string, string> = {
+          Normal: '#a8a878', Fire: '#f08030', Water: '#6890f0', Electric: '#f8d030',
+          Grass: '#78c850', Ice: '#98d8d8', Fighting: '#c03028', Poison: '#a040a0',
+          Ground: '#e0c068', Flying: '#a890f0', Psychic: '#f85888', Bug: '#a8b820',
+          Rock: '#b8a038', Ghost: '#705898', Dragon: '#7038f8', Steel: '#b8b8d0', Fairy: '#ee99ac',
+        };
+        const primaryColor = typeColors[sp.types[0]] || '#6890f0';
+        const statsList = [
+          { label: 'HP', val: sp.baseStats.hp, color: '#ff5959' },
+          { label: 'ATK', val: sp.baseStats.attack, color: '#f5ac78' },
+          { label: 'DEF', val: sp.baseStats.defense, color: '#fae078' },
+          { label: 'SPA', val: sp.baseStats.spAttack, color: '#9db7f5' },
+          { label: 'SPD', val: sp.baseStats.spDefense, color: '#a7db8d' },
+          { label: 'SPE', val: sp.baseStats.speed, color: '#fa92b2' },
+        ];
+        const totalStats = statsList.reduce((sum, item) => sum + item.val, 0);
+        return (
+          <div className="fixed inset-0 z-[120] flex items-center justify-center bg-black/75 p-4 backdrop-blur-[2px]">
+            <div
+              className="w-full max-w-[460px] rounded-xl border-2 border-[#333a52] bg-[#1c2030] p-4 text-[#eef1f8] shadow-[0_16px_40px_rgba(0,0,0,0.65)] relative overflow-hidden"
+              style={{ '--c': primaryColor } as React.CSSProperties}
+            >
+              <div
+                className="flex items-center gap-2.5 min-h-[52px] -mx-4 -mt-4 mb-4 px-4 py-2.5"
+                style={{
+                  background: `linear-gradient(90deg, color-mix(in srgb, ${primaryColor} 45%, transparent), transparent)`,
+                  borderBottom: `2px solid color-mix(in srgb, ${primaryColor} 55%, transparent)`,
+                }}
+              >
+                <h2 className="font-game text-xl font-bold text-white leading-none m-0">
+                  {sp.name}{newCatchCard.isShiny ? ' ★' : ''}
+                </h2>
+                {newCatchCard.isNew && (
+                  <span className="px-2 py-0.5 rounded-full bg-[#ffcb05] text-[#1a1a1a] font-game text-[11px] font-extrabold uppercase tracking-wider">
+                    New
+                  </span>
+                )}
+                {newCatchCard.isShiny && (
+                  <span className="px-2 py-0.5 rounded-full bg-amber-300 text-[#1a1a1a] font-game text-[11px] font-extrabold uppercase tracking-wider">
+                    Shiny
+                  </span>
+                )}
+                <div className="ml-auto flex items-center gap-3 text-xs text-[#c3c9d8]">
+                  <span>
+                    No. <b className="text-white">{String(newCatchCard.speciesId).padStart(3, '0')}</b>
+                  </span>
+                  <button
+                    type="button"
+                    onClick={dismissNewCatchCard}
+                    aria-label="Close"
+                    className="w-8 h-8 rounded-md bg-[#252a3d] border-2 border-[#ff8a8a] text-[#ff8a8a] hover:bg-red-500/20 text-sm font-bold flex items-center justify-center cursor-pointer"
+                  >
+                    ✕
+                  </button>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-[148px_minmax(0,1fr)] gap-4 mb-4">
+                <div
+                  className="relative h-[148px] grid place-items-center overflow-hidden rounded-[6px_6px_6px_26px] border border-white/10"
+                  style={{
+                    background: `repeating-linear-gradient(0deg, rgba(0,0,0,0.14) 0 1px, transparent 1px 3px), color-mix(in srgb, ${primaryColor} 18%, #252a3d)`,
+                  }}
+                >
+                  <img
+                    src="/assets/ui/poke-ball.png"
+                    alt="Caught"
+                    className="absolute top-2 left-2 w-5 h-5 pixel-art"
+                  />
+                  <img
+                    src={getPokemonSpriteUrl(newCatchCard.speciesId, newCatchCard.isShiny)}
+                    alt={sp.name}
+                    className="w-[104px] h-[86px] object-contain pixel-art drop-shadow-[0_6px_8px_rgba(0,0,0,0.6)]"
+                  />
+                </div>
+                <div className="flex flex-col justify-between gap-2 min-w-0">
+                  <div className="flex flex-wrap gap-1.5">
+                    {sp.types.map((t) => (
+                      <span
+                        key={t}
+                        className="px-2.5 py-0.5 rounded text-[11px] font-bold uppercase tracking-wide text-white shadow-sm"
+                        style={{ backgroundColor: typeColors[t] || '#6890f0', textShadow: '0 1px 1px rgba(0,0,0,0.6)' }}
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="grid grid-cols-3 gap-1.5 text-xs">
+                    <div className="bg-[#252a3d] rounded-md px-2 py-1.5 text-[10px] text-[#9aa3bb]">
+                      Level
+                      <b className="block text-[12px] text-[#eef1f8] font-semibold">Lv. {newCatchCard.level}</b>
+                    </div>
+                    <div className="bg-[#252a3d] rounded-md px-2 py-1.5 text-[10px] text-[#9aa3bb]">
+                      Saved to
+                      <b className="block text-[12px] text-[#6dff8f] font-semibold">
+                        {newCatchCard.destination === 'party' ? 'Team' : 'PC'}
+                      </b>
+                    </div>
+                    <div className="bg-[#252a3d] rounded-md px-2 py-1.5 text-[10px] text-[#9aa3bb]">
+                      Total
+                      <b className="block text-[12px] text-[#ffcb05] font-semibold">{totalStats}</b>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-1 bg-[#141826] rounded-md p-2">
+                    {statsList.map((st) => (
+                      <div key={st.label} className="grid grid-cols-[28px_26px_1fr] items-center gap-1.5 text-[10px] font-game">
+                        <span className="text-[#9aa3bb] font-bold">{st.label}</span>
+                        <b className="text-white text-right tabular-nums">{st.val}</b>
+                        <div className="h-1.5 bg-[#252a3d] rounded-full overflow-hidden">
+                          <div
+                            className="h-full rounded-full"
+                            style={{ width: `${Math.min(100, (st.val / 160) * 100)}%`, backgroundColor: st.color }}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={dismissNewCatchCard}
+                className="w-full py-2 rounded-lg bg-[#ffcb05] hover:bg-[#ffd633] text-[#1a1a1a] font-game text-sm font-extrabold uppercase tracking-wider shadow-[0_3px_0_#b38b00] active:translate-y-0.5 transition cursor-pointer"
+              >
+                Continue
+              </button>
+            </div>
+          </div>
+        );
+      })()}
     </div>
   );
 };

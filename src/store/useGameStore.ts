@@ -76,6 +76,11 @@ interface GameState {
   isCatchable: boolean;
   activeTrainer: ActiveTrainerState | null;
   bossIntroActive: boolean;
+  allyRecalling: boolean;
+  allySendingOut: boolean;
+  enemyRecalling: boolean;
+  newCatchCard: { speciesId: number; level: number; isShiny: boolean; isNew: boolean; destination: 'party' | 'pc' } | null;
+  dismissNewCatchCard: () => void;
   chapterCompleteBanner: string | null;
   mysteryReward: MysteryReward | null;
   activeDrop: ActiveDrop | null;
@@ -99,6 +104,7 @@ interface GameState {
   damagePopups: DamagePopupItem[];
   topToastBanner: { text: string; iconSpeciesId?: number } | null;
   sidebarExpPopup: string | null;
+  sidebarExpPopups: Record<string, { amount: number; active: boolean }> | null;
   duplicatePopup: { text: string; amount: number; speciesId: number } | null;
   isCatchSequenceActive: boolean;
   catchPhase: 'none' | 'enter' | 'throw' | 'absorb' | 'land' | 'reward';
@@ -152,6 +158,7 @@ let pendingCombatImpact: { key: number; apply: () => void; after: () => void; im
 let pendingCaptureResult: { key: number; apply: () => void } | null = null;
 let pendingDropAdvance = false;
 let recoveringParty = false;
+let returnToStartAfterHeal = false;
 
 function clearScheduledNodeTimeouts() {
   scheduledNodeTimeouts.forEach(clearTimeout);
@@ -161,6 +168,7 @@ function clearScheduledNodeTimeouts() {
   pendingCaptureResult = null;
   pendingDropAdvance = false;
   recoveringParty = false;
+  returnToStartAfterHeal = false;
   turnBusy = false;
   if (unlockTimer) clearTimeout(unlockTimer);
 }
@@ -217,12 +225,85 @@ function createInstance(speciesId: number, level: number, isShiny: boolean = fal
   };
 }
 
+const XP_WINS_PER_LEVEL = 15;
+const XP_BASE_REF = 60;
+const XP_ACTIVE_BONUS = 1.1;
+
+function calcBattleExp(enemy: PokemonInstance, isTrainer: boolean, hasPinap: boolean): number {
+  const sp = getPokemonSpecies(enemy.speciesId);
+  const levelCurve = Math.max(25, Math.floor((4 * Math.pow(enemy.level + 1, 3)) / 5));
+  const raw = (levelCurve / XP_WINS_PER_LEVEL)
+    * Math.sqrt((sp.baseExp || XP_BASE_REF) / XP_BASE_REF)
+    * (isTrainer ? 1.5 : 1)
+    * (hasPinap ? 2 : 1);
+  return Math.max(4, Math.round(raw));
+}
+
+function applyExpToParty(party: PokemonInstance[], activeIndex: number, baseExp: number): {
+  party: PokemonInstance[];
+  activeGain: number;
+  gains: Record<string, { amount: number; active: boolean }>;
+} {
+  let activeGain = Math.round(baseExp * XP_ACTIVE_BONUS);
+  const gains: Record<string, { amount: number; active: boolean }> = {};
+  const nextParty = party.map((mon, idx) => {
+    if (mon.level >= 100) return mon;
+    const isActive = idx === activeIndex;
+    const gain = isActive ? Math.round(baseExp * XP_ACTIVE_BONUS) : Math.round(baseExp);
+    if (isActive) activeGain = gain;
+    gains[mon.uid] = { amount: gain, active: isActive };
+    let level = mon.level;
+    let exp = mon.exp + gain;
+    let expToNext = mon.expToNextLevel;
+    let stats = mon.stats;
+    let maxHp = mon.maxHp;
+    let currentHp = mon.currentHp;
+    while (exp >= expToNext && level < 100) {
+      exp -= expToNext;
+      level += 1;
+      const nextStats = calculateStats(getPokemonSpecies(mon.speciesId).baseStats, level);
+      const hpDiff = Math.max(0, nextStats.hp - maxHp);
+      stats = nextStats;
+      maxHp = nextStats.hp;
+      currentHp = currentHp > 0 ? Math.min(maxHp, currentHp + hpDiff) : 0;
+      expToNext = Math.floor((4 * Math.pow(level, 3)) / 5) || 50;
+    }
+    return { ...mon, level, exp, expToNextLevel: expToNext, stats, maxHp, currentHp };
+  });
+  return { party: nextParty, activeGain, gains };
+}
+
 function nextHealthyPartyIndex(party: PokemonInstance[], currentIndex: number): number {
   for (let offset = 1; offset <= party.length; offset += 1) {
     const index = (currentIndex + offset) % party.length;
     if (party[index]?.currentHp > 0) return index;
   }
   return currentIndex;
+}
+
+function bestPartyIndexForEnemy(party: PokemonInstance[], currentIndex: number, enemy: PokemonInstance): number {
+  const enemyTypes = getPokemonSpecies(enemy.speciesId).types;
+  const scoreFor = (mon: PokemonInstance) => {
+    const allyTypes = getPokemonSpecies(mon.speciesId).types;
+    const off = Math.max(...allyTypes.map((t) => getTypeMultiplier([t], enemyTypes)));
+    const def = Math.max(...enemyTypes.map((t) => getTypeMultiplier([t], allyTypes)));
+    const offScore = off === 0 ? -100 : off > 1 ? 2 : off < 1 ? -1 : 0;
+    const defScore = def > 1 ? -1 : def < 1 ? 1 : 0;
+    return offScore + defScore;
+  };
+  const current = party[currentIndex];
+  let bestIdx = current && current.currentHp > 0 ? currentIndex : -1;
+  let bestScore = bestIdx >= 0 ? scoreFor(current) : -Infinity;
+  for (let i = 0; i < party.length; i += 1) {
+    const mon = party[i];
+    if (!mon || mon.currentHp <= 0 || i === currentIndex) continue;
+    const score = scoreFor(mon);
+    if (score > bestScore) {
+      bestScore = score;
+      bestIdx = i;
+    }
+  }
+  return bestIdx >= 0 ? bestIdx : currentIndex;
 }
 
 function isValidSavedPokemon(mon: PokemonInstance): boolean {
@@ -258,19 +339,15 @@ export const useGameStore = create<GameState>((set, get) => ({
   trainerTag: '#0910',
   money: 30808,
   tokens: 3017,
-  // 6 Party slots matching gameplay video
+  // Chapter 1 starter party: Charmander Lv. 5 & Pidgey Lv. 4
   party: [
-    createInstance(112, 100), // Rhydon Lv. 100
-    createInstance(143, 83),  // Snorlax Lv. 83
-    createInstance(45, 100),  // Vileplume Lv. 100
-    createInstance(149, 100), // Dragonite Lv. 100
-    createInstance(6, 100),   // Charizard Lv. 100
-    createInstance(9, 100),   // Blastoise Lv. 100
+    createInstance(4, 5),   // Charmander Lv. 5
+    createInstance(16, 4),  // Pidgey Lv. 4
   ],
   pcBox: [],
   activePartyIndex: 0,
-  pokedexCaught: [112, 143, 45, 149, 6, 9],
-  pokedexSeen: [112, 143, 45, 149, 6, 9],
+  pokedexCaught: [4, 16],
+  pokedexSeen: [4, 16],
 
   // Start on the Boulder Badge route reflected in the Rocgym HAR reference.
   currentChapterId: 'kanto-1',
@@ -306,6 +383,10 @@ export const useGameStore = create<GameState>((set, get) => ({
   isCatchable: true,
   activeTrainer: null,
   bossIntroActive: false,
+  allyRecalling: false,
+  allySendingOut: false,
+  enemyRecalling: false,
+  newCatchCard: null,
   chapterCompleteBanner: null,
   mysteryReward: null,
   activeDrop: null,
@@ -325,6 +406,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   damagePopups: [],
   topToastBanner: null,
   sidebarExpPopup: null,
+  sidebarExpPopups: null,
   duplicatePopup: null,
   isCatchSequenceActive: false,
   catchPhase: 'none',
@@ -425,6 +507,10 @@ export const useGameStore = create<GameState>((set, get) => ({
       mysteryReward: null,
       activeTrainer: null,
       bossIntroActive: false,
+      allyRecalling: false,
+      allySendingOut: false,
+      enemyRecalling: false,
+      newCatchCard: null,
       enemyStatus: null,
       healPulse: false,
       healPresentation: null,
@@ -520,6 +606,7 @@ export const useGameStore = create<GameState>((set, get) => ({
         activeTrainer: null,
         mysteryReward: null,
         healPulse: false,
+        activePartyIndex: bestPartyIndexForEnemy(get().party, get().activePartyIndex, enemyMon),
         enemy: enemyMon,
         enemyStatus: status,
         battleLog: status === 'SLP' ? `🌙 It's fast asleep...` : `A wild ${enemySpecies.name} appeared!`,
@@ -585,9 +672,12 @@ export const useGameStore = create<GameState>((set, get) => ({
           currentMonIndex: 0,
           rewardMoney: t.rewardMoney,
         },
+        activePartyIndex: bestPartyIndexForEnemy(get().party, get().activePartyIndex, firstEnemy),
+        bossIntroActive: true,
         enemy: firstEnemy,
         battleLog: `${t.name} wants to battle! ${t.name} sends out ${enemySpecies.name}!`,
       });
+      scheduleNodeTimeout(() => set({ bossIntroActive: false }), 1500 / get().gameSpeed);
       return;
     }
 
@@ -613,6 +703,7 @@ export const useGameStore = create<GameState>((set, get) => ({
         },
         bossIntroActive: true,
         chapterCompleteBanner: null,
+        activePartyIndex: bestPartyIndexForEnemy(get().party, get().activePartyIndex, bossEnemy),
         enemy: bossEnemy,
         battleLog: `${t.name} challenged you! ${t.name} sends out ${enemySpecies.name}!`,
       });
@@ -681,10 +772,10 @@ export const useGameStore = create<GameState>((set, get) => ({
     const roll = Math.random();
     let drop: ActiveDrop;
 
-    if (roll < 0.4) {
+    if (roll < 0.55) {
       const berryTypes = ['razz', 'nanab', 'pinap', 'goldenRazz'] as const;
       const b = berryTypes[Math.floor(Math.random() * berryTypes.length)];
-      const count = b === 'goldenRazz' ? 1 : Math.floor(Math.random() * 3) + 1;
+      const count = 1;
       const berryName =
         b === 'razz'
           ? 'Razz Berry'
@@ -710,7 +801,7 @@ export const useGameStore = create<GameState>((set, get) => ({
         iconUrl,
         xPercent: xPos ?? Math.floor(55 + Math.random() * 20),
       };
-    } else if (roll < 0.75) {
+    } else {
       const foundMoney = Math.floor(Math.random() * 350) + 150;
       set((s) => ({ money: s.money + foundMoney }));
 
@@ -720,27 +811,6 @@ export const useGameStore = create<GameState>((set, get) => ({
         title: `₽${foundMoney.toLocaleString()}`,
         amount: foundMoney,
         iconUrl: '/assets/ui/coin-spin-frames.png',
-        xPercent: xPos ?? Math.floor(55 + Math.random() * 20),
-      };
-    } else {
-      const ballTypes: BallType[] = ['pokeball', 'greatball', 'ultraball'];
-      const chosenBall = ballTypes[Math.floor(Math.random() * ballTypes.length)];
-      const count = Math.floor(Math.random() * 2) + 1;
-      const ballName = chosenBall === 'pokeball' ? 'Poké Ball' : chosenBall === 'greatball' ? 'Great Ball' : 'Ultra Ball';
-
-      set((s) => ({
-        balls: {
-          ...s.balls,
-          [chosenBall]: s.balls[chosenBall] + count,
-        },
-      }));
-
-      drop = {
-        id: `drop-${Date.now()}-${Math.random()}`,
-        type: 'ball',
-        title: `${count}x ${ballName}`,
-        amount: count,
-        iconUrl: getItemSpriteUrl(chosenBall),
         xPercent: xPos ?? Math.floor(55 + Math.random() * 20),
       };
     }
@@ -766,11 +836,16 @@ export const useGameStore = create<GameState>((set, get) => ({
       currentStep: nextStep,
       mysteryReward: null,
       isCatchSequenceActive: false,
+      allyRecalling: false,
+      allySendingOut: false,
+      enemyRecalling: false,
+      newCatchCard: null,
       catchPhase: 'none',
       trainerOnField: false,
       duplicatePopup: null,
       topToastBanner: null,
       sidebarExpPopup: null,
+      sidebarExpPopups: null,
       damagePopups: [],
       combatEffect: null,
       playerAttacking: false,
@@ -787,15 +862,38 @@ export const useGameStore = create<GameState>((set, get) => ({
   finishHealPresentation: (key) => {
     if (get().nodeType !== 'center' || get().healPresentation?.key !== key) return;
     if (healTimeoutId) clearTimeout(healTimeoutId);
-    set(state => ({ party: state.party.map(mon => ({ ...mon, currentHp: mon.maxHp })), healPulse: false, healPresentation: null }));
-    get().advanceStep();
+    const shouldReturnToStart = returnToStartAfterHeal;
+    returnToStartAfterHeal = false;
+    set((state) => ({
+      party: state.party.map((mon) => ({ ...mon, currentHp: mon.maxHp })),
+      healPulse: false,
+      healPresentation: null,
+      ...(shouldReturnToStart
+        ? {
+            activePartyIndex: 0,
+            currentStep: 1,
+            transitionTick: state.transitionTick + 1,
+          }
+        : {}),
+    }));
+    if (shouldReturnToStart) {
+      get().loadStepNode(1);
+    } else {
+      get().advanceStep();
+    }
   },
   finishItemDrop: (id) => {
     if (get().activeDrop?.id !== id) return;
     const advance = pendingDropAdvance || get().nodeType === 'question';
+    const shouldRecall = advance && ['grass', 'red', 'badge'].includes(get().nodeType);
     pendingDropAdvance = false;
     set({ activeDrop: null, mysteryReward: null, chapterCompleteBanner: null });
-    if (advance) get().advanceStep();
+    if (shouldRecall) {
+      set({ allyRecalling: true });
+      scheduleNodeTimeout(() => get().advanceStep(), Math.max(160, 260 / get().gameSpeed));
+    } else if (advance) {
+      get().advanceStep();
+    }
   },
 
   /**
@@ -829,7 +927,9 @@ export const useGameStore = create<GameState>((set, get) => ({
     const totalCatchDuration = Math.max(1200, Math.floor(2200 / gameSpeed));
     lockTurnFor(totalCatchDuration);
 
-    const baseExpReward = Math.floor(38000 + enemy.level * 65 + Math.random() * 1500);
+    const battleExp = calcBattleExp(enemy, false, berryBuffs.pinap > 0);
+    const activeExp = Math.round(battleExp * XP_ACTIVE_BONUS);
+    const baseExpReward = isDuplicate ? battleExp * 3 : activeExp;
     const expFormatted = baseExpReward.toLocaleString();
     const rewardText = !caught
       ? `${enemySpecies.name} broke free!`
@@ -855,12 +955,15 @@ export const useGameStore = create<GameState>((set, get) => ({
               duplicatePopup: null,
               topToastBanner: { text: rewardText, iconSpeciesId: enemy.speciesId },
               sidebarExpPopup: null,
+              sidebarExpPopups: null,
             };
           }
 
           if (isDuplicate) {
+            const expRes = applyExpToParty(s.party, s.activePartyIndex, battleExp);
             return {
               catchPhase: 'reward',
+              party: expRes.party,
               duplicatePopup: {
                 text: `+${expFormatted} EXP`,
                 amount: baseExpReward,
@@ -870,16 +973,18 @@ export const useGameStore = create<GameState>((set, get) => ({
                 text: rewardText,
                 iconSpeciesId: enemy.speciesId,
               },
-              sidebarExpPopup: `+${expFormatted} EXP`,
+              sidebarExpPopup: `+${expRes.activeGain.toLocaleString()} XP`,
+              sidebarExpPopups: expRes.gains,
             };
           }
 
           const alreadyStored = s.pokedexCaught.includes(enemy.speciesId);
+          const expRes = applyExpToParty(s.party, s.activePartyIndex, battleExp);
           return {
             catchPhase: 'reward',
             party: !alreadyStored && captureDestination === 'party'
-              ? [...s.party, capturedMon]
-              : s.party,
+              ? [...expRes.party, capturedMon]
+              : expRes.party,
             pcBox: !alreadyStored && captureDestination === 'pc'
               ? [...s.pcBox, capturedMon]
               : s.pcBox,
@@ -890,26 +995,56 @@ export const useGameStore = create<GameState>((set, get) => ({
               ? s.pokedexSeen
               : [...s.pokedexSeen, enemy.speciesId],
             duplicatePopup: null,
-            topToastBanner: { text: rewardText, iconSpeciesId: enemy.speciesId },
-            sidebarExpPopup: null,
+            newCatchCard: !alreadyStored || enemy.isShiny
+              ? {
+                  speciesId: enemy.speciesId,
+                  level: enemy.level,
+                  isShiny: enemy.isShiny,
+                  isNew: !alreadyStored,
+                  destination: captureDestination,
+                }
+              : null,
+            topToastBanner: alreadyStored && !enemy.isShiny
+              ? { text: rewardText, iconSpeciesId: enemy.speciesId }
+              : null,
+            sidebarExpPopup: `+${expRes.activeGain.toLocaleString()} XP`,
+            sidebarExpPopups: expRes.gains,
           };
         });
+
+        // If a new species (or shiny) Dex Card is shown, wait for the user to dismiss it before advancing.
+        if (get().newCatchCard) return;
 
         // 4. Advance to next step with smooth dither transition
         scheduleNodeTimeout(() => {
           set((s) => ({
             enemy: null,
+            allyRecalling: true,
             activePartyIndex: get().nodeType === 'grass'
               ? nextHealthyPartyIndex(s.party, s.activePartyIndex)
               : s.activePartyIndex,
             transitionTick: s.transitionTick + 1,
           }));
-          get().advanceStep();
+          scheduleNodeTimeout(() => get().advanceStep(), Math.max(160, 260 / get().gameSpeed));
         }, rewardDuration);
 
     }};
     set({ capturePresentation: { key: captureKey, success: caught, duplicate: isDuplicate, ball: ballType, shakes: caught ? 4 : Math.floor(Math.random() * 3) } });
-    scheduleNodeTimeout(() => get().finishCapturePresentation(captureKey), 12000 / gameSpeed);
+    scheduleNodeTimeout(() => get().finishCapturePresentation(captureKey), 25000 / gameSpeed);
+  },
+
+  dismissNewCatchCard: () => {
+    if (!get().newCatchCard) return;
+    set((s) => ({
+      newCatchCard: null,
+      enemy: null,
+      allyRecalling: true,
+      activePartyIndex: get().nodeType === 'grass'
+        ? nextHealthyPartyIndex(s.party, s.activePartyIndex)
+        : s.activePartyIndex,
+      transitionTick: s.transitionTick + 1,
+    }));
+    scheduleNodeTimeout(() => get().advanceStep(), Math.max(160, 260 / get().gameSpeed));
   },
 
   finishCapturePresentation: (key) => {
@@ -940,32 +1075,71 @@ export const useGameStore = create<GameState>((set, get) => ({
 
   tickCombat: () => {
     const s = get();
-    if (turnBusy || pendingCombatImpact || recoveringParty || s.isCatchSequenceActive || s.healPulse || s.activeDrop || s.bossIntroActive) return;
+    if (turnBusy || pendingCombatImpact || recoveringParty || s.isCatchSequenceActive || s.allyRecalling || s.allySendingOut || s.enemyRecalling || s.healPulse || s.activeDrop || s.bossIntroActive || Boolean(s.newCatchCard)) return;
     const speed = s.gameSpeed;
     const recoverOrSwitch = () => {
       const state = get();
       if (state.party[state.activePartyIndex]?.currentHp > 0) return;
-      const healthy = state.party.findIndex(mon => mon.currentHp > 0);
-      if (healthy >= 0) {
-        set({ activePartyIndex: healthy, battleLog: getPokemonSpecies(state.party[healthy].speciesId).name + ' enters the battle!' });
-        lockTurnFor(400 / speed);
+      const healthy = state.enemy
+        ? bestPartyIndexForEnemy(state.party, state.activePartyIndex, state.enemy)
+        : state.party.findIndex(mon => mon.currentHp > 0);
+      if (healthy >= 0 && state.party[healthy]?.currentHp > 0) {
+        const faintedName = getPokemonSpecies(state.party[state.activePartyIndex]?.speciesId || 1).name;
+        const nextName = getPokemonSpecies(state.party[healthy].speciesId).name;
+        turnBusy = true;
+        set({
+          allyRecalling: true,
+          battleLog: `Come back, ${faintedName}!`,
+        });
+        scheduleNodeTimeout(() => {
+          set({
+            allyRecalling: false,
+            activePartyIndex: healthy,
+            allySendingOut: true,
+            battleLog: `Go, ${nextName}!`,
+          });
+          scheduleNodeTimeout(() => {
+            set({ allySendingOut: false });
+            turnBusy = false;
+            lockTurnFor(160 / speed);
+          }, Math.max(220, 420 / speed));
+        }, Math.max(220, 400 / speed));
         return;
       }
       if (recoveringParty) return;
       recoveringParty = true;
       turnBusy = true;
-      set({ battleLog: 'Your entire team fainted! Returning to Pokémon Center…' });
+      set({
+        allyRecalling: true,
+        topToastBanner: { text: 'Defeated! Your entire team fainted.' },
+        battleLog: 'You were defeated! Returning to the Pokémon Center…',
+      });
       scheduleNodeTimeout(() => {
-        const chapter = ALL_CHAPTERS.find(c => c.id === get().currentChapterId) || DEFAULT_CHAPTER;
-        const center = chapter.steps.filter(node => node.type === 'center' && node.step <= get().currentStep).pop() || chapter.steps.find(node => node.type === 'center');
-        if (center) {
-          set({ currentStep: center.step, activePartyIndex: 0 });
-          get().loadStepNode(center.step);
-        } else {
-          set(state => ({ party: state.party.map(mon => ({ ...mon, currentHp: mon.maxHp })), activePartyIndex: 0, currentStep: 1 }));
-          get().loadStepNode(1);
-        }
-      }, 900 / speed);
+        const healKey = ++combatEffectSequence;
+        const currentSpeed = get().gameSpeed;
+        returnToStartAfterHeal = true;
+        set((state) => ({
+          nodeType: 'center',
+          isCatchable: false,
+          activeTrainer: null,
+          trainerOnField: false,
+          mysteryReward: null,
+          activeDrop: null,
+          topToastBanner: null,
+          enemy: null,
+          allyRecalling: false,
+          allySendingOut: false,
+          healPulse: true,
+          transitionTick: state.transitionTick + 1,
+          healPresentation: {
+            key: healKey,
+            speed: currentSpeed,
+            initialHp: Object.fromEntries(state.party.map((mon) => [mon.uid, mon.currentHp])),
+          },
+          battleLog: '💖 Pokémon Center: Restoring all Pokémon to full health!',
+        }));
+        healTimeoutId = scheduleNodeTimeout(() => get().finishHealPresentation(healKey), 30000 / currentSpeed);
+      }, Math.max(600, 1100 / speed));
     };
     const attacker = s.party[s.activePartyIndex];
     if (!attacker || attacker.currentHp <= 0) { recoverOrSwitch(); return; }
@@ -981,35 +1155,64 @@ export const useGameStore = create<GameState>((set, get) => ({
       scheduleNodeTimeout(() => set(state => ({ damagePopups: state.damagePopups.filter(pop => pop.id !== id) })), 950 / speed);
     };
     const defeatedEnemy = () => {
-      if (get().enemy?.uid !== enemyUid || get().enemy.currentHp > 0) return;
+      const defeated = get().enemy;
+      if (!defeated || defeated.uid !== enemyUid || defeated.currentHp > 0) return;
       lockTurnFor(700 / speed);
-      set({ battleLog: enemyName + ' fainted!' });
       const trainer = get().activeTrainer;
+      const battleExp = calcBattleExp(defeated, Boolean(trainer), get().berryBuffs.pinap > 0);
+      set(state => {
+        const expRes = applyExpToParty(state.party, state.activePartyIndex, battleExp);
+        return {
+          party: expRes.party,
+          sidebarExpPopup: `+${expRes.activeGain.toLocaleString()} XP`,
+          sidebarExpPopups: expRes.gains,
+          battleLog: enemyName + ' fainted!',
+        };
+      });
+      scheduleNodeTimeout(() => set({ sidebarExpPopup: null, sidebarExpPopups: null }), 900 / speed);
       if (trainer) {
         const team = trainer.team.map((mon, index) => index === trainer.currentMonIndex ? { ...mon, fainted: true } : mon);
+        const next = trainer.currentMonIndex + 1;
         set({ activeTrainer: { ...trainer, team } });
+        if (next < team.length) {
+          lockTurnFor(1350 / speed);
+          scheduleNodeTimeout(() => {
+            set({ enemyRecalling: true });
+            scheduleNodeTimeout(() => {
+              const mon = createInstance(team[next].speciesId, team[next].level);
+              const bestIdx = bestPartyIndexForEnemy(get().party, get().activePartyIndex, mon);
+              set({
+                enemyRecalling: false,
+                activeTrainer: { ...trainer, team, currentMonIndex: next },
+                activePartyIndex: bestIdx,
+                enemy: mon,
+                battleLog: trainer.name + ' sends out ' + getPokemonSpecies(mon.speciesId).name + '!',
+              });
+            }, 280 / speed);
+          }, 350 / speed);
+          return;
+        }
         scheduleNodeTimeout(() => {
-          const next = trainer.currentMonIndex + 1;
-          if (next < team.length) {
-            const mon = createInstance(team[next].speciesId, team[next].level);
-            set({ activeTrainer: { ...trainer, team, currentMonIndex: next }, enemy: mon, battleLog: trainer.name + ' sends out ' + getPokemonSpecies(mon.speciesId).name + '!' });
-            return;
-          }
           const chapter = ALL_CHAPTERS.find(c => c.id === get().currentChapterId) || DEFAULT_CHAPTER;
           const badge = get().nodeType === 'badge' ? chapter.badgeSprite : null;
-          pendingDropAdvance = true;
-          set(state => ({ money: state.money + trainer.rewardMoney, badges: badge && !state.badges.includes(badge) ? [...state.badges, badge] : state.badges, chapterCompleteBanner: badge ? chapter.badgeName : null,
-            activeDrop: { id: 'reward-' + (++combatEffectSequence), type: 'money', title: '₽' + trainer.rewardMoney.toLocaleString(), amount: trainer.rewardMoney, iconUrl: '/assets/ui/relic-gold.png', speed, xPercent: 56 },
-            battleLog: 'Defeated ' + trainer.name + '! Received ₽' + trainer.rewardMoney.toLocaleString() + '!' }));
+          const isBadge = get().nodeType === 'badge';
+          set(state => ({
+            money: state.money + trainer.rewardMoney,
+            badges: badge && !state.badges.includes(badge) ? [...state.badges, badge] : state.badges,
+            chapterCompleteBanner: badge ? chapter.badgeName : null,
+            battleLog: 'Defeated ' + trainer.name + '! Received ₽' + trainer.rewardMoney.toLocaleString() + '!',
+          }));
+          scheduleNodeTimeout(() => {
+            set({ chapterCompleteBanner: null, allyRecalling: true });
+            scheduleNodeTimeout(() => get().advanceStep(), Math.max(160, 260 / speed));
+          }, (isBadge ? 1400 : 800) / speed);
         }, 500 / speed);
       } else {
-        const reward = Math.floor(35 + s.enemy.level * 5) * (get().berryBuffs.pinap > 0 ? 2 : 1);
-        set(state => ({ money: state.money + reward }));
         scheduleNodeTimeout(() => {
           if (get().autoCatch && get().isCatchable) get().catchEnemy();
           else {
-            pendingDropAdvance = true;
-            set({ activeDrop: { id: 'wild-reward-' + (++combatEffectSequence), type: 'money-text', title: '₽' + reward.toLocaleString(), amount: reward, iconUrl: '', xPercent: 78, speed } });
+            set({ allyRecalling: true });
+            scheduleNodeTimeout(() => get().advanceStep(), Math.max(160, 260 / speed));
           }
         }, 500 / speed);
       }
@@ -1023,7 +1226,7 @@ export const useGameStore = create<GameState>((set, get) => ({
         set({ battleLog: enemyName + ' is fast asleep…', enemyStatus: null });
         return;
       }
-      const move = getPokemonMove(getPokemonSpecies(state.enemy.speciesId).types);
+      const move = getPokemonMove(getPokemonSpecies(state.enemy.speciesId).types, getPokemonSpecies(target.speciesId).types);
       const roll = rollDamage(state.enemy, target, move);
       set({ battleLog: 'Foe ' + enemyName + ' used ' + move.name + '!' });
       scheduleCombatImpact({ type: move.effectType, target: 'player', damage: roll.damage, moveName: move.name, moveKey: move.key, speed, miss: roll.miss || roll.multiplier === 0, crit: roll.crit }, () => {
@@ -1040,8 +1243,16 @@ export const useGameStore = create<GameState>((set, get) => ({
         }
       });
     };
-    const move = getPokemonMove(getPokemonSpecies(attacker.speciesId).types);
+    const move = getPokemonMove(getPokemonSpecies(attacker.speciesId).types, getPokemonSpecies(s.enemy.speciesId).types);
     const roll = rollDamage(attacker, s.enemy, move);
+    if (roll.multiplier === 0) {
+      const bestIdx = bestPartyIndexForEnemy(s.party, s.activePartyIndex, s.enemy);
+      if (bestIdx !== s.activePartyIndex && s.party[bestIdx]?.currentHp > 0) {
+        set({ activePartyIndex: bestIdx, battleLog: 'Switched to ' + getPokemonSpecies(s.party[bestIdx].speciesId).name + ' for a better matchup!' });
+        lockTurnFor(400 / speed);
+        return;
+      }
+    }
     set({ battleLog: actorName + ' used ' + move.name + '!' });
     scheduleCombatImpact({ type: move.effectType, target: 'enemy', damage: roll.damage, moveName: move.name, moveKey: move.key, speed, miss: roll.miss || roll.multiplier === 0, crit: roll.crit }, () => {
       const current = get().enemy;
@@ -1064,6 +1275,7 @@ export const useGameStore = create<GameState>((set, get) => ({
       const state = get();
       const saveObj = {
         version: 2,
+        saveVersion: 3,
         savedAt: Date.now(),
         trainerName: state.trainerName,
         trainerTag: state.trainerTag,
@@ -1093,6 +1305,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   },
 
   loadGame: () => {
+    let restoredActivePartyIndex: number | null = null;
     try {
       const saved = localStorage.getItem('pokecatch_save_v1');
       if (saved) {
@@ -1109,16 +1322,25 @@ export const useGameStore = create<GameState>((set, get) => ({
           currentStep = currentStep >= chapter.totalSteps ? 1 : currentStep + 1;
         }
 
+        const isOldDemoParty =
+          obj.saveVersion !== 3 &&
+          Array.isArray(obj.party) &&
+          obj.party.some((m: PokemonInstance) => m && m.level >= 80);
+
         set({
           trainerName: obj.trainerName || 'Ray',
           trainerTag: typeof obj.trainerTag === 'string' ? obj.trainerTag : get().trainerTag,
           money: Number.isFinite(obj.money) && obj.money >= 0 ? Math.floor(obj.money) : get().money,
           tokens: Number.isFinite(obj.tokens) && obj.tokens >= 0 ? Math.floor(obj.tokens) : get().tokens,
-          party: Array.isArray(obj.party) && obj.party.length > 0 && obj.party.length <= 6 && obj.party.every(isValidSavedPokemon) ? obj.party : get().party,
+          party: isOldDemoParty
+            ? get().party
+            : Array.isArray(obj.party) && obj.party.length > 0 && obj.party.length <= 6 && obj.party.every(isValidSavedPokemon)
+            ? obj.party
+            : get().party,
           pcBox: Array.isArray(obj.pcBox) && obj.pcBox.every(isValidSavedPokemon) ? obj.pcBox : [],
           activePartyIndex: 0,
-          pokedexCaught: restoreDex(obj.pokedexCaught, get().pokedexCaught),
-          pokedexSeen: restoreDex(obj.pokedexSeen, restoreDex(obj.pokedexCaught, get().pokedexSeen)),
+          pokedexCaught: isOldDemoParty ? get().pokedexCaught : restoreDex(obj.pokedexCaught, get().pokedexCaught),
+          pokedexSeen: isOldDemoParty ? get().pokedexSeen : restoreDex(obj.pokedexSeen, restoreDex(obj.pokedexCaught, get().pokedexSeen)),
           badges: Array.isArray(obj.badges) ? obj.badges.filter((badge) => typeof badge === 'string') : [],
           balls: restoreCounters(get().balls, obj.balls),
           selectedBall: ['pokeball', 'greatball', 'ultraball', 'masterball'].includes(obj.selectedBall) ? obj.selectedBall : get().selectedBall,
@@ -1130,7 +1352,11 @@ export const useGameStore = create<GameState>((set, get) => ({
           berryBuffs: restoreCounters(get().berryBuffs, obj.berryBuffs, 28800),
         });
         const party = get().party;
-        set({ activePartyIndex: Number.isInteger(obj.activePartyIndex) && party[obj.activePartyIndex] ? obj.activePartyIndex : 0 });
+        restoredActivePartyIndex = Number.isInteger(obj.activePartyIndex) && party[obj.activePartyIndex] ? obj.activePartyIndex : 0;
+        set({ activePartyIndex: restoredActivePartyIndex });
+        if (isOldDemoParty) {
+          get().saveGame(true);
+        }
       }
     } catch (e) {
       console.error(e);
@@ -1138,5 +1364,8 @@ export const useGameStore = create<GameState>((set, get) => ({
     // Initialize the route on a fresh install too. Without this, the placeholder
     // enemy remains on screen and no encounter is actually active.
     get().loadStepNode(get().currentStep);
+    if (restoredActivePartyIndex !== null) {
+      set({ activePartyIndex: restoredActivePartyIndex });
+    }
   },
 }));
