@@ -33,6 +33,22 @@ test('battle geometry follows the original proportions at both desktop sizes', a
   }
 });
 
+test('timeline still reveals the active step without scrolling the document',async({page})=>{
+  await page.setViewportSize({width:390,height:844});await prepare(page);
+  const last=page.locator('.battle-timeline [title^="Step "]').last();
+  const step=Number((await last.getAttribute('title'))!.match(/^Step (\d+)/)![1]);
+  await page.evaluate(()=>window.scrollTo(0,100));
+  await expect.poll(()=>page.evaluate(()=>window.scrollY)).toBe(100);
+  await page.evaluate(step=>(window as any).__arenaStore.setState({currentStep:step}),step);
+  const rail=page.locator('.battle-timeline > div').first();
+  await expect.poll(()=>rail.evaluate(el=>el.scrollLeft)).toBeGreaterThan(0);
+  await expect.poll(async()=>{
+    const r=(await rail.boundingBox())!,n=(await last.boundingBox())!;
+    return n.x>=r.x-1&&n.x+n.width<=r.x+r.width+1;
+  }).toBe(true);
+  expect(await page.evaluate(()=>window.scrollY)).toBe(100);
+});
+
 test('actual move contact updates HP and accelerates at x3', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
@@ -164,6 +180,7 @@ test('healing keeps its animation on speed changes and Skip completes only its o
     (window as any).__healKey = store.getState().healPresentation.key;
   });
   await expect(page.locator('.heal-fx')).toBeAttached();
+  await expect(page.locator('.battle-stage')).toHaveCSS('background-image',/50-centre-pokemon-v2-710x400\.webp/);
   await page.evaluate(() => {
     (window as any).__healElement = document.querySelector('.heal-fx');
     (window as any).__arenaStore.getState().setGameSpeed(3);
@@ -174,6 +191,27 @@ test('healing keeps its animation on speed changes and Skip completes only its o
   await page.evaluate(() => (window as any).__arenaStore.getState().finishHealPresentation((window as any).__healKey));
   expect(await page.evaluate(() => (window as any).__arenaStore.getState().currentStep)).toBe(7);
   await expect(page.locator('.heal-fx')).toHaveCount(0);
+});
+
+test('a defeated party heals on the Pokemon Center background and returns to its route exactly once',async({page})=>{
+ test.setTimeout(60000);await prepare(page);
+ const route=await page.locator('.battle-stage').evaluate(el=>getComputedStyle(el).backgroundImage);
+ await page.evaluate(()=>{
+  const s=(window as any).__arenaStore;s.setState({gameSpeed:1,party:s.getState().party.map((m:any)=>({...m,currentHp:0}))});
+  s.getState().tickCombat();
+ });
+ await expect(page.locator('.heal-fx')).toBeAttached();
+ await expect(page.locator('.battle-stage')).toHaveCSS('background-image',/50-centre-pokemon-v2-710x400\.webp/);
+ const snapshot=await page.evaluate(()=>{const s=(window as any).__arenaStore;(window as any).__defeatHeal={key:s.getState().healPresentation.key,element:document.querySelector('.heal-fx')};return{step:s.getState().currentStep,encounter:s.runtime.encounterId};});
+ await page.evaluate(()=>(window as any).__arenaStore.getState().setGameSpeed(3));
+ expect(await page.evaluate(()=>document.querySelector('.heal-fx')===(window as any).__defeatHeal.element)).toBe(true);
+ await expect(page.locator('canvas[data-transition="dither"]')).toHaveCount(0);
+ await expect(page.locator('.heal-fx')).not.toContainText('Boulder Badge');
+ await page.screenshot({path:'docs/progress-heal-evidence/local-defeat-center.png'});
+ await page.evaluate(()=>{const s=(window as any).__arenaStore,key=(window as any).__defeatHeal.key;s.getState().finishHealPresentation(key);s.getState().finishHealPresentation(key);});
+ await expect(page.locator('.heal-fx')).toHaveCount(0);
+ await expect(page.locator('.battle-stage')).toHaveCSS('background-image',route);
+ expect(await page.evaluate(()=>{const s=(window as any).__arenaStore;return{step:s.getState().currentStep,healed:s.getState().party.every((m:any)=>m.currentHp===m.maxHp),encounter:s.runtime.encounterId};})).toEqual({step:1,healed:true,encounter:snapshot.encounter+1});
 });
 
 test('reloading an encounter discards native capture layers and late rewards', async ({ page }) => {

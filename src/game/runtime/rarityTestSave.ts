@@ -2,12 +2,22 @@ import { createPokemonInstance } from '../domain/pokemon';
 import { GameplayRuntime } from './GameplayRuntime';
 
 const SAVE_KEY = 'pokecatch_save_v1';
-export const RARITY_TEST_MARKER = 'pokecatch_rarity_test_20261116_01';
-export const RARITY_TEST_BACKUP = 'pokecatch_backup_before_rarity_test_20261116_01';
-// Two specimens for each rarity available in Kanto; native has no Unique here.
-export const RARITY_TEST_SPECIES = [19, 25, 20, 17, 3, 149, 144, 150] as const;
+export const RARITY_TEST_MARKER = 'pokecatch_rarity_test_20261116_04';
+export const RARITY_TEST_BACKUP = 'pokecatch_backup_before_rarity_test_20261116_04';
+// Keep the old specimen UIDs so upgrading an existing eight-mon grant adds only four.
+const SPECIMEN_UID_PREFIX = 'pokecatch_rarity_test_20261116_01';
+// Three specimens for every rarity available in Kanto; no species has native Unique here.
+export const RARITY_TEST_SPECIES = [19, 25, 16, 20, 17, 26, 3, 149, 130, 144, 150, 151] as const;
+export const SHINY_TEST_SPECIES = [1, 4, 7, 10, 16, 19, 25, 26, 39, 52, 54, 58, 65, 94, 123, 130, 133, 143, 149, 144, 145, 146, 150, 151] as const;
 
-/** Explicit dev URL opt-in. Patch the saved payload before loading it, preserving all other fields. */
+/** Pending user-requested local fixture; never seed a fresh/unselected starter save. */
+export function hasPendingRarityTestGrant(storage: Pick<Storage, 'getItem'>): boolean {
+    try {
+        return !storage.getItem(RARITY_TEST_MARKER) && JSON.parse(storage.getItem(SAVE_KEY) || 'null')?.starterChosen === true;
+    } catch { return false; }
+}
+
+/** Patch the saved payload before loading it, preserving all other fields. */
 export function addRarityTestPokemon(storage: Pick<Storage, 'getItem' | 'setItem'>): number {
     if (storage.getItem(RARITY_TEST_MARKER)) return 0;
     const raw = storage.getItem(SAVE_KEY);
@@ -20,15 +30,18 @@ export function addRarityTestPokemon(storage: Pick<Storage, 'getItem' | 'setItem
     }
     const runtime = new GameplayRuntime();
     const existing = new Set([...save.party, ...save.pcBox].map(mon => mon.uid));
-    const added = RARITY_TEST_SPECIES.flatMap(id => {
-        const uid = `${RARITY_TEST_MARKER}-${id}`;
-        return existing.has(uid) ? [] : [{ ...createPokemonInstance(id, 20, false, runtime), uid }];
+    const specimens = [
+        ...RARITY_TEST_SPECIES.map(id => ({id, shiny:false, uid:`${SPECIMEN_UID_PREFIX}-${id}`})),
+        ...SHINY_TEST_SPECIES.map(id => ({id, shiny:true, uid:`pokecatch_shiny_test_20261116_04-${id}`})),
+    ];
+    const added = specimens.flatMap(({id, shiny, uid}) => {
+        return existing.has(uid) ? [] : [{ ...createPokemonInstance(id, 20, shiny, runtime), uid }];
     });
     if (!storage.getItem(RARITY_TEST_BACKUP)) storage.setItem(RARITY_TEST_BACKUP, raw);
     if (added.length) {
         save.pcBox.push(...added);
-        save.pokedexCaught = [...new Set([...save.pokedexCaught, ...RARITY_TEST_SPECIES])];
-        save.pokedexSeen = [...new Set([...save.pokedexSeen, ...RARITY_TEST_SPECIES])];
+        save.pokedexCaught = [...new Set([...save.pokedexCaught, ...added.map(mon => mon.speciesId)])];
+        save.pokedexSeen = [...new Set([...save.pokedexSeen, ...added.map(mon => mon.speciesId)])];
         storage.setItem(SAVE_KEY, JSON.stringify(save));
     }
     // Stable specimen UIDs also prevent duplicates if writing this marker fails.

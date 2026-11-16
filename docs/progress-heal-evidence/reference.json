@@ -1,0 +1,66 @@
+{
+  "source": {
+    "build": "b05c8cc201",
+    "app": "c0081498f217061d529fb18ecc4833e9490c93e0b425fc3d04b713d990fdda11",
+    "css": "3e06fa8ed6cfcca3070da71b03fe5758d6b786faba9accdb4b680590f6cc525b"
+  },
+  "adventure": {
+    "init": "init(){zn(()=>document.hidden||qs(),1500),s(\"#bs-fold\").onclick=()=>{const da=s(\"#badge-stats\");da.classList.toggle(\"folded\"),s(\"#bs-fold\").textContent=da.classList.contains(\"folded\")?\"▶\":\"◀\"},P.ensure();const c=s(\"#arena\");new ResizeObserver(()=>{const da=Math.max(2,Math.round(c.clientWidth*.24/68));c.style.setProperty(\"--k\",da),c.style.setProperty(\"--ks\",Math.max(2,da-1)),c.style.setProperty(\"--kt\",da),nn(vn)}).observe(c),c.style.setProperty(\"--hud-bottom\",\"0px\"),new ResizeObserver(Ua).observe(c),new ResizeObserver(Re).observe(s(\"#enemy-hud\")),Z(),new ResizeObserver(()=>re()).observe(s(\"#timeline\"));const U=()=>P.state.tower?Ke()?a.Screens.raid.open(\"candy\"):a.Screens.raid.open(\"tower\"):P.state.event?.raid?a.Screens.raid.open(\"chroma\"):a.LegendZones.get(P.state.zone?.id)?.wb?a.Screens.raid.open(\"wb\"):a.Screens.map.open(D(P.state.chapter));s(\"#chapter-btn\").onclick=U,s(\"#side-chapter\").onclick=()=>s(\"#screen-adventure.active\")?U():s('#tabs [data-screen=\"adventure\"]').click(),P.state.paused=!1,h(\"#speed-btns button\").forEach(da=>da.onclick=()=>{d.SPEEDS.includes(+da.dataset.speed)&&(P.state.speed=+da.dataset.speed,Oe.save(),ha())}),s(\"#adv-empty button\").onclick=()=>a.App.show(\"team\"),nt(),Nn(),a.Events.on(()=>{bo(),ha()});const Ae=()=>Wn().catch(da=>{console.error(da),He=!1,F=\"\",na=null,Ut(()=>{try{Nn()}catch(Ra){console.error(Ra)}Ae()},1e3)});Ae()}",
+    "goChapter": "goChapter(c){(c!==P.state.chapter||P.state.event||P.state.zone)&&P.setChapter(c)&&(F=\"\",na=null),a.App.show(\"adventure\")}",
+    "chapterBadge": "(c,U)=>i.badgeHtml(c.boss?.badge,U)||(c.icon?`<img class=\"ac-ic\" style=\"--z:${U}\" src=\"${a.UI.artSrc(c.icon.id,c.icon.shiny)}\" alt=\"\">`:\"\")||Ne(c.boss,U)||`<span class=\"ac-star\">${c.boss?\"★\":\"?\"}</span>`",
+    "chapterMeta": "function ee(c){const U=i.CHAPTERS[c],Ae=U.steps.filter(u=>u.kind===\"gym\"),da=Ae[Ae.length-1],Ra=U.steps.filter(u=>u.kind===\"static\"),Va=Ae.length?Ae.flatMap(u=>i.gymTeam(c,u).map(t=>t[1])):Ra.map(u=>i.staticLevel(c,u)),Ka=Math.min(...Va),vt=U.capMargin&&i.aceOf(c)!=null?Math.max(...Va,i.capOf(c)):Math.max(...Va),g=da||Ra.at(-1)||U.steps.find(u=>u.bg===\"cave\"&&u.kind!==\"heal\")||U.steps[U.steps.length-1];return{boss:da,gyms:Ae,icon:U.icon,lv:Ka===vt?`${vt}`:`${Ka}–${vt}`,color:da?.color||U.color||\"#6b5bd6\",bg:a.SCENES.css(g,c),faces:Ae.length?Ae.map(u=>u.boss?`<img class=\"ac-mon\" src=\"${z(u.boss)}\" alt=\"\">`:`<img src=\"assets/trainers/${u.sprite}.png\" alt=\"\">`):Ra.slice(-1).map(u=>`<img class=\"ac-mon\" src=\"${z(u.id,u.shiny)}\" alt=\"\">`)}}"
+  },
+  "engine": {
+    "scene": "function ya(Be,Je){const Ie=Sa(Be,Je);if(Ie)return`url(${Ie.src})`;const v=Be?.bg||\"prairie\";return`url(${(s[se[v]]||s[se[Be?.fallback]]||s[1]).src})`}",
+    "badges": {
+      "Roche": 1,
+      "Cascade": 2,
+      "Foudre": 3,
+      "Prisme": 4,
+      "Âme": 5,
+      "Marais": 6,
+      "Volcan": 7,
+      "Terre": 8
+    },
+    "badgeHtml": "badgeHtml(s,h=2,m=\"\"){const Q=this.badgeSheet(s);return Q?`<span class=\"pbadge ${m}\" style=\"--z:${h};background-image:url(${Q.src});background-position:calc(-16px * var(--z) * ${Q.n-1}) 0\"></span>`:\"\"}"
+  },
+  "clickHarness": "Title bootstrap skipped; Adventure tab bridged to native App.show. Summary onclick and map.open are native.",
+  "summaryHandler": "()=>s(\"#screen-adventure.active\")?U():s('#tabs [data-screen=\"adventure\"]').click()",
+  "sideMarkup": "<button class=\"adv-trigger side-chap\" id=\"side-chapter\" title=\"Choose an adventure\" style=\"--c: #9a8b6a;\"><span class=\"side-chap-top\"><span class=\"ac-bdg\"><span class=\"pbadge \" style=\"--z:2;background-image:url(assets/badges/frlg-1.png);background-position:calc(-16px * var(--z) * 0) 0\"></span></span>\n      <span class=\"ac-t\"><small>Kanto · Chapter 1</small><b>Boulder Badge</b></span><span class=\"ac-car\">▾</span></span>\n      <span class=\"side-gauge\"><i style=\"width:0%\"></i></span>\n      <span class=\"side-chap-foot\"><span>Step 1 / 20 · <b>0 %</b></span><span>Lv. 14–20</span></span></button>",
+  "clicks": {
+    "before": "team",
+    "first": {
+      "current": "adventure",
+      "active": [
+        "screen-adventure"
+      ]
+    },
+    "second": {
+      "current": "map",
+      "active": [
+        "screen-map"
+      ],
+      "dialogs": [
+        {
+          "id": "",
+          "cls": "modal dexcard-modal gd-modal gd-tip-modal",
+          "display": "flex"
+        }
+      ]
+    }
+  },
+  "center": {
+    "scene": "url(assets/bg/scenes/50-centre-pokemon-v2-710x400.webp)",
+    "storyBadges": {
+      "0": "Roche",
+      "1": "Cascade",
+      "2": "Foudre",
+      "3": "Prisme",
+      "4": "Âme",
+      "5": "Marais",
+      "6": "Volcan",
+      "7": "Terre"
+    }
+  },
+  "defeatRenderer": "case\"defeat\":{const U=c.reason===\"stall\",Ae=await Ve(U?[e(\"Combat bloqué !\"),e(\"Aucune attaque ne fait effet : change ton équipe (types).\")]:[e(\"Ton équipe est K.O. !\"),c.center?e(\"Tu te précipites au Centre Pokémon de {place}…\",{place:H(e(c.center))}):e(\"Tu te précipites au Centre Pokémon…\")]);await En(()=>{E=null,_n([]),s(\"#trainer-slot\").innerHTML=\"\",s(\"#arena\").classList.remove(\"has-trainer\"),wa({name:c.center||\"Centre Pokémon\",bg:\"pokecenter\",fallback:\"town\"}),Xa(c.center?e(\"Centre Pokémon de {place}\",{place:H(e(c.center))}):e(\"Centre Pokémon\"))},Ae),await Wa(c.center),await En(()=>{F=\"\",na=null,Nn(),Xa(e(\"En route !\"))});const da=i.leagueOf(c.chapter);c.league?await ts(`${e(\"Retour au début de la Ligue\")}<small>${e(\"Élite {r}\",{r:qe[c.league.tier]})} · ${e(\"essai {n}\",{n:c.league.tries})}</small>`,1e3,\"defeat\"):c.elite?await ts(`${e(\"{mon} revient…\",{mon:H(Oe.DEX[c.elite.foe].name)})}<small>${e(\"Élite {r}\",{r:qe[c.elite.tier]})} · ${e(\"essai {n}\",{n:c.elite.tries})}</small>`,1e3,\"defeat\"):c.raid?await ts(`${e(\"Retour à l'entrée du raid\")}<small>${H(Oe.DEX[c.event].name)}</small>`,1e3,\"defeat\"):c.event?await ts(`${e(\"Retour au début de la chasse\")}<small>${H(Oe.DEX[c.event].name)}</small>`,1e3,\"defeat\"):await ts(da?`${e(\"Retour au début de la Ligue\")}<small>${H(e(i.CHAPTERS["
+}

@@ -69,13 +69,13 @@ test('mobile Progress and chapter details fit without hiding Continue behind nav
   await expect(page.locator('.adventure-view')).not.toHaveAttribute('hidden');
 });
 
-test('chapter summary resumes the selected encounter directly from Progress or Team/PC', async ({ page }) => {
+test('chapter summary resumes from other screens and opens Progress from the arena without reloading the encounter', async ({ page }) => {
   await prepare(page);
   const before = await page.evaluate(() => {
     const store = (window as any).__progressStore;
     return { chapter: store.getState().currentChapterId, step: store.getState().currentStep, enemy: store.getState().enemy.uid, encounter: store.runtime.encounterId };
   });
-  for (const name of ['Progress', 'Team/PC']) {
+  for (const name of ['Progress', 'Team/PC', 'Pokédex']) {
     await page.getByRole('button', { name, exact: true }).click();
     await page.getByRole('button', { name: 'Resume current adventure', exact: true }).click();
     await expect(page.locator('.adventure-view')).not.toHaveAttribute('hidden');
@@ -84,7 +84,40 @@ test('chapter summary resumes the selected encounter directly from Progress or T
       const store = (window as any).__progressStore;
       return { chapter: store.getState().currentChapterId, step: store.getState().currentStep, enemy: store.getState().enemy.uid, encounter: store.runtime.encounterId };
     })).toEqual(before);
+    await page.getByRole('button',{name:'Open current adventure progress',exact:true}).click();
+    await expect(page.getByRole('region',{name:'Adventure',exact:true})).toBeVisible();
+    expect(await page.evaluate(()=>{
+      const store=(window as any).__progressStore;
+      return {chapter:store.getState().currentChapterId,step:store.getState().currentStep,enemy:store.getState().enemy.uid,encounter:store.runtime.encounterId};
+    })).toEqual(before);
   }
+});
+
+test('Kanto badges render the native colored tile, including Cascade before earning it',async({page})=>{
+ test.setTimeout(60000);await prepare(page);
+ const samples=await page.evaluate(async()=>{
+  const {ALL_CHAPTERS,chapterIcon}=await import('/src/data/chaptersData.ts');
+  const load=(src:string)=>new Promise<HTMLImageElement>((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=reject;img.src=src;});
+  const canvas=document.createElement('canvas');canvas.width=canvas.height=16;const ctx=canvas.getContext('2d')!;
+  const result=[];
+  for(let i=0;i<8;i++){
+   const [tile,strip]=await Promise.all([load(chapterIcon(ALL_CHAPTERS[i])),load(`/assets/badges/frlg-${i+1}.png`)]);
+   ctx.clearRect(0,0,16,16);ctx.drawImage(tile,0,0);const actual=ctx.getImageData(0,0,16,16).data;
+   ctx.clearRect(0,0,16,16);ctx.drawImage(strip,i*16,0,16,16,0,0,16,16);const expected=ctx.getImageData(0,0,16,16).data;
+   result.push({same:actual.every((v,n)=>v===expected[n]),colored:Array.from({length:256},(_,n)=>n*4).filter(n=>actual[n+3]>0&&(actual[n]!==actual[n+1]||actual[n+1]!==actual[n+2])).length});
+  }
+  const s=(window as any).__progressStore;s.setState({badges:['boulder-badge'],completedChapters:['kanto-1']});s.getState().selectChapter('kanto-2');s.setState({isBattling:false});
+  return result;
+ });
+  for(const sample of samples)expect(sample.same).toBe(true);
+  // Boulder is naturally gray in the native art; Cascade must retain its blue palette.
+  expect(samples[1].colored).toBeGreaterThan(0);
+ const summary=page.getByRole('button',{name:'Open current adventure progress',exact:true});
+ await expect(summary.locator('img')).toHaveAttribute('src','/assets/badges/kanto/cascade-badge.svg');
+  await expect(summary.locator('img')).toHaveCSS('width','32px');
+  await expect(summary.locator('img')).toHaveCSS('height','32px');
+ await expect(summary).toContainText('Cascade Badge');
+ await summary.screenshot({path:'docs/progress-heal-evidence/local-cascade-summary.png'});
 });
 
 test('requested save reset runs once, backs up old data and retains progress on later reloads', async ({ page }) => {

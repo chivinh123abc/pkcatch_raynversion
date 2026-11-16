@@ -28,10 +28,10 @@ test('story gifts persist before choosing; fossil choice grants once and advance
   const store=(window as any).__kanto,{currentChapter}=await import('/src/game/data/chapterSelectors.ts');
   store.getState().loadStepNode(currentChapter(store.getState()).steps.find(n=>n.gift?.key==='fossil')!.step);store.getState().saveGame(true);
  });
- await expect(page.getByRole('dialog',{name:'Adventure gift'})).toBeVisible();await page.reload();
+ await expect(page.locator('.item-choice')).toBeVisible();await page.reload();
  await page.getByRole('button',{name:'Continue',exact:true}).click();
- const dialog=page.getByRole('dialog',{name:'Adventure gift'});await expect(dialog).toBeVisible();
- await dialog.getByRole('button',{name:'dome fossil'}).click();await expect(dialog).toHaveCount(0);await page.reload();
+ const dialog=page.locator('.item-choice');await expect(dialog).toBeVisible();await expect(dialog).toHaveClass(/ready/,{timeout:12000});
+ await dialog.getByRole('button',{name:'Dome Fossil',exact:true}).click();await dialog.getByRole('button',{name:'Choose Dome Fossil',exact:true}).click();await expect(dialog).toHaveCount(0);await page.reload();
  const items=await page.evaluate(async()=>{const {useGameStore}=await import('/src/store/useGameStore.ts');return useGameStore.getState().items;});expect(items['dome-fossil']).toBe(1);expect(items['helix-fossil']||0).toBe(0);
 });
 test('real Misty intro, sendouts and combat unlock Chapter 3 once',async({page})=>{

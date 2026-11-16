@@ -1,0 +1,296 @@
+{
+  "uiKeys": [
+    "bossMoves",
+    "zoneMoves",
+    "closeMovesDrawer",
+    "tierGlow",
+    "skippable",
+    "skipMark",
+    "spriteGlow",
+    "statBars"
+  ],
+  "i18nKeys": [
+    "lang",
+    "pref",
+    "LANGS",
+    "NAMES",
+    "t",
+    "set"
+  ],
+  "adventureKeys": [
+    "ensure",
+    "step",
+    "tick",
+    "addTime",
+    "fleeLeft",
+    "isLooping",
+    "toggleLoop",
+    "loopKey",
+    "chooseGift",
+    "overrideGift",
+    "npcTrade",
+    "npcTradeDone",
+    "npcOffers",
+    "offerHome",
+    "spareMon",
+    "setChapter",
+    "simulate",
+    "buildChapter",
+    "startEvent",
+    "startRaid",
+    "leaveEvent",
+    "startZone",
+    "leaveZone",
+    "startLeague",
+    "leaveLeague",
+    "startTower",
+    "leaveTower",
+    "offline",
+    "zonePool",
+    "habitatKey",
+    "spotToday",
+    "spotOn",
+    "capeOf",
+    "itemOdds",
+    "townOdds",
+    "honeyAt",
+    "catchProb",
+    "catchCtx",
+    "chooseBall",
+    "effectiveness",
+    "aliveTeam",
+    "fieldSize",
+    "winChance",
+    "counterValue",
+    "counterParts",
+    "counterTeam",
+    "rankAura",
+    "riposteOf",
+    "chooseRiddle",
+    "tryCapture",
+    "leaderBeaten",
+    "speed",
+    "state",
+    "simulating"
+  ],
+  "chapters": [
+    {
+      "index": 0,
+      "name": "Badge Roche",
+      "steps": [
+        {
+          "index": 0,
+          "kind": "gift",
+          "name": "Labo du Prof. Chen",
+          "bg": "town",
+          "gift": {
+            "key": "starter",
+            "choices": [
+              1,
+              4,
+              7
+            ],
+            "level": 5,
+            "text": "Le Prof. Chen te propose un Pokémon !"
+          }
+        },
+        {
+          "index": 6,
+          "kind": "find",
+          "name": "Musée d'Argenta",
+          "bg": "town",
+          "item": "old-amber",
+          "once": "old-amber"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "name": "Badge Cascade",
+      "steps": [
+        {
+          "index": 1,
+          "kind": "gift",
+          "name": "Centre Pokémon (Route 4)",
+          "bg": "town",
+          "gift": {
+            "key": "magikarp",
+            "choices": [
+              129
+            ],
+            "level": 5,
+            "text": "Un vendeur louche t'offre un Magicarpe…"
+          }
+        },
+        {
+          "index": 3,
+          "kind": "gift",
+          "name": "Mont Sélénite",
+          "bg": "cave",
+          "gift": {
+            "key": "fossil",
+            "items": [
+              "dome-fossil",
+              "helix-fossil"
+            ],
+            "text": "Deux fossiles au fond de la grotte… lequel prends-tu ?"
+          }
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "name": "Badge Foudre",
+      "steps": []
+    },
+    {
+      "index": 3,
+      "name": "Badge Prisme",
+      "steps": [
+        {
+          "index": 7,
+          "kind": "gift",
+          "name": "Manoir Céladon",
+          "bg": "town",
+          "gift": {
+            "key": "eevee",
+            "choices": [
+              133
+            ],
+            "level": 28,
+            "text": "Une Poké Ball traîne sur une table… c'est un Évoli !"
+          }
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "name": "Badge Âme",
+      "steps": [
+        {
+          "index": 1,
+          "kind": "static",
+          "name": "Tour Pokémon",
+          "bg": "cave",
+          "id": 105,
+          "level": 45,
+          "spirit": true,
+          "after": "silph-scope",
+          "once": "marowak-ghost",
+          "text": "Le fantôme d'une mère Ossatueur barre le sommet de la Tour !",
+          "reward": {
+            "key": "cubone-fuji",
+            "choices": [
+              104
+            ],
+            "level": 30,
+            "text": "L'âme d'Ossatueur s'apaise… M. Fuji te confie son petit."
+          }
+        },
+        {
+          "index": 3,
+          "kind": "static",
+          "name": "Route 12",
+          "bg": "lake",
+          "id": 143,
+          "level": 38,
+          "text": "Un Ronflex bloque le passage !"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "name": "Badge Marais",
+      "steps": [
+        {
+          "index": 6,
+          "kind": "gift",
+          "name": "Dojo de Safrania",
+          "bg": "town",
+          "gift": {
+            "key": "dojo",
+            "choices": [
+              106,
+              107
+            ],
+            "level": 42,
+            "text": "Le Maître Karaté t'offre un de ses Pokémon !"
+          }
+        },
+        {
+          "index": 8,
+          "kind": "find",
+          "name": "Sylphe SARL 7e",
+          "bg": "town",
+          "item": "rare-candy",
+          "once": "silph-rare-candy"
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "name": "Badge Volcan",
+      "steps": [
+        {
+          "index": 5,
+          "kind": "trade",
+          "name": "Labo de Cramois'Île",
+          "bg": "beach",
+          "level": 30,
+          "text": "Le labo ranime ton fossile !",
+          "offers": [
+            [
+              "dome-fossil",
+              140
+            ],
+            [
+              "helix-fossil",
+              138
+            ],
+            [
+              "old-amber",
+              142
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "name": "Badge Terre",
+      "steps": []
+    },
+    {
+      "index": 8,
+      "name": "Route Victoire",
+      "steps": []
+    },
+    {
+      "index": 9,
+      "name": "Conseil 4 : Olga",
+      "steps": []
+    },
+    {
+      "index": 10,
+      "name": "Conseil 4 : Aldo",
+      "steps": []
+    },
+    {
+      "index": 11,
+      "name": "Conseil 4 : Agatha",
+      "steps": []
+    },
+    {
+      "index": 12,
+      "name": "Conseil 4 : Peter",
+      "steps": []
+    },
+    {
+      "index": 13,
+      "name": "Maître de la Ligue",
+      "steps": []
+    }
+  ],
+  "spriteGlow": "function Oa(w,O){return new Promise(de=>{const oe=new Image;oe.onload=()=>{try{const xa=document.createElement(\"canvas\"),La=O?oe.naturalWidth/O.of:oe.naturalWidth;xa.width=La,xa.height=oe.naturalHeight;const Fa=xa.getContext(\"2d\");Fa.drawImage(oe,O?-La*(O.n-1):0,0);const _t=Fa.getImageData(0,0,xa.width,xa.height).data,bt=new Array(36).fill(0);for(let R=0;R<_t.length;R+=4){if(_t[R+3]<200)continue;const K=_t[R]/255,Y=_t[R+1]/255,W=_t[R+2]/255,fa=Math.max(K,Y,W),Ta=Math.min(K,Y,W),_a=fa-Ta;if(fa<.3||_a/fa<.3)continue;const It=_a===0?0:fa===K?((Y-W)/_a+6)%6:fa===Y?(W-K)/_a+2:(K-Y)/_a+4;bt[Math.floor(It*6)%36]+=_a/fa*fa}const xt=bt.indexOf(Math.max(...bt));if(!bt[xt])return de(null);const ys=(xt+.5)*10,Os=.9,is=.72,as=R=>(R+ys/30)%12,bs=Os*Math.min(is,1-is),_s=R=>Math.round(255*(is-bs*Math.max(-1,Math.min(as(R)-3,9-as(R),1))));de(`${_s(0)}, ${_s(8)}, ${_s(4)}`)}catch{de(null)}},oe.onerror=()=>de(null),oe.src=w})}",
+  "skippable": "function i(w){const O={skipped:!1,waiters:[]},de=H(`<button class=\"btn ghost fx-skip\">${e(\"Passer\")} ⏭</button>`);de.onpointerdown=xa=>xa.stopPropagation(),de.onclick=xa=>{xa.stopPropagation(),!O.skipped&&(O.skipped=!0,Je++,Ie++,O.hide(),d(),O.waiters.splice(0).forEach(La=>La()))},w.appendChild(de),O.hide=()=>{de.dataset.gone||(de.dataset.gone=\"1\",de.disabled=!0)},O.tap=(xa,La)=>(O.hide(),O.skipped?Promise.resolve():new Promise(Fa=>{O.waiters.push(Fa),xa.addEventListener(\"pointerdown\",Fa,{once:!0}),La&&Ut(Fa,La)}));const oe=xa=>{xa.key!==\"Escape\"||!de.isConnected||(xa.preventDefault(),xa.stopImmediatePropagation(),de.dataset.gone?O.waiters.splice(0).forEach(La=>La()):de.click())};return document.addEventListener(\"keydown\",oe,!0),O.end=()=>{document.removeEventListener(\"keydown\",oe,!0),de.remove(),O.skipped&&(O.skipped=!1,Je--)},O}"
+}

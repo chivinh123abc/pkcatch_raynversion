@@ -1,0 +1,25 @@
+{
+  "source": {
+    "build": "b05c8cc201",
+    "app": "c0081498f217061d529fb18ecc4833e9490c93e0b425fc3d04b713d990fdda11",
+    "css": "3e06fa8ed6cfcca3070da71b03fe5758d6b786faba9accdb4b680590f6cc525b"
+  },
+  "max": 100,
+  "leagueDone": 100,
+  "caps": [
+    20,
+    24,
+    30,
+    38,
+    46,
+    54,
+    62,
+    70,
+    75,
+    83,
+    88,
+    93,
+    95,
+    100
+  ]
+}

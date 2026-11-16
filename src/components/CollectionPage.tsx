@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { ALL_SPECIES, getPokemonSpecies } from '../data/pokemonData';
 import { TYPE_COLORS } from '../data/typeChart';
 import { useGameStore } from '../store/useGameStore';
@@ -9,15 +9,18 @@ import { RarityGlow } from './RarityGlow';
 import { pokemonRarity } from '../game/presentation/pokemonRarity';
 import { TypeBadge } from './TypeBadge';
 import { FilterSelect } from './FilterSelect';
+import { miniTeamSpriteScale } from '../game/presentation/miniTeam';
+import { currentLevelCap } from '../game/domain/levelCap';
 
 type Tab = 'team' | 'pokedex';
 const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova'];
 const PAGE_SIZE = 60;
 
 export function CollectionPage({ tab }: { tab: Tab }) {
-  const { party, pcBox, pokedexSeen, pokedexCaught, newCatchCard, partyPresets, activePartyPreset,
+  const { party, pcBox, buddy, pokedexSeen, pokedexCaught, newCatchCard, partyPresets, activePartyPreset,badges,completedChapters,
     selectPartyPreset, depositPokemon, withdrawPokemon, movePartyMember, movePcPokemon } = useGameStore();
   const [query, setQuery] = useState('');
+  const levelCap=currentLevelCap({badges,completedChapters});
   const [type, setType] = useState('');
   const [status, setStatus] = useState('all');
   const [shinyOnly, setShinyOnly] = useState(false);
@@ -31,6 +34,24 @@ export function CollectionPage({ tab }: { tab: Tab }) {
   const [dexOpen, setDexOpen] = useState(true);
   const [moreFilters, setMoreFilters] = useState(false);
   const search = useRef<HTMLInputElement>(null);
+  const section = useRef<HTMLElement>(null), teamSlots = useRef<HTMLDivElement>(null), miniTeam = useRef<HTMLDivElement>(null);
+  const [mini, setMini] = useState({visible:false,left:0,width:0,top:60,height:0,mobile:false});
+  useLayoutEffect(()=>{
+    if(tab!=='team')return;
+    let frame=0;
+    const measure=()=>{
+      frame=0;if(!section.current||!teamSlots.current||!miniTeam.current)return;
+      const bounds=section.current.getBoundingClientRect(),slots=teamSlots.current.getBoundingClientRect();
+      const top=document.querySelector('.replica-topbar')?.getBoundingClientRect().height||0;
+      const next={visible:slots.top<top-slots.height*.25,left:bounds.left,width:bounds.width,top,height:miniTeam.current.offsetHeight,mobile:innerWidth<=640};
+      setMini(previous=>Object.keys(next).every(key=>previous[key]===next[key])?previous:next);
+    };
+    const schedule=()=>{if(!frame)frame=requestAnimationFrame(measure);};
+    const observer=new ResizeObserver(schedule);
+    [section.current,teamSlots.current,miniTeam.current,document.querySelector('.replica-topbar')].forEach(element=>{if(element)observer.observe(element);});
+    window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule);measure();
+    return()=>{observer.disconnect();cancelAnimationFrame(frame);window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);};
+  },[tab]);
   const caught = new Set(pokedexCaught.filter(id => id >= 1 && id <= 151));
   const seen = new Set([...pokedexSeen, ...caught]);
   const owned = [...party, ...pcBox];
@@ -73,7 +94,7 @@ export function CollectionPage({ tab }: { tab: Tab }) {
     attempt(() => { for (let i = from; i !== index; i += direction) if (!movePartyMember(uid, direction)) return false; return true; });
   };
   const types = <FilterSelect value={type} aria-label="Filter by type" onChange={event => { setType(event.target.value); setPage(0); }}><option value="">Types</option>{Object.keys(TYPE_COLORS).map(value => <option key={value}>{value}</option>)}</FilterSelect>;
-  const shiny = <button className={`chip btn small replica-shiny-filter ${shinyOnly ? 'gold' : 'ghost'}`} aria-label="Shinies" aria-pressed={shinyOnly} onClick={() => { setShinyOnly(!shinyOnly); setPage(0); }}><span aria-hidden="true">✦</span><span className="filter-label"> Shinies</span></button>;
+  const shiny = <button className={`chip btn small replica-shiny-filter ${shinyOnly ? 'gold' : 'ghost'}`} aria-label="Shinies" aria-pressed={shinyOnly} onClick={() => { setShinyOnly(!shinyOnly); setPage(0); }}><i className="shiny-mk" aria-hidden="true"/><span className="filter-label"> Shinies</span></button>;
   const evolveFilter = <button className={`chip btn small replica-evolve-filter ${canEvolve ? 'gold' : 'ghost'}`} aria-pressed={canEvolve} onClick={() => { setCanEvolve(!canEvolve); setPage(0); }}>Can evolve</button>;
   const sortFilter = <select className="replica-sort" aria-label="Sort PC" value={sort} onChange={event => setSort(event.target.value)}><option value="recent">Recent</option><option value="number">Pokédex No.</option><option value="name">Name</option><option value="level">Level</option><option value="rarity">Rarity</option><option value="stats">Stats</option><option value="custom">Custom</option></select>;
   const reverseFilter = <button className="btn small ghost" aria-label="Reverse PC sort" onClick={() => setDescending(!descending)}>{descending ? '↓' : '↑'}</button>;
@@ -87,7 +108,7 @@ export function CollectionPage({ tab }: { tab: Tab }) {
   </>;
   const findSpace = () => { search.current?.focus(); search.current?.scrollIntoView({ block: 'center', behavior: 'smooth' }); };
 
-  return <section className="collection-page" id={`screen-${tab}`} aria-label={tab === 'team' ? 'Team and PC' : 'Pokédex'}>
+  return <section ref={section} className="collection-page" id={`screen-${tab}`} style={{'--mini-h':mini.visible?`${mini.height}px`:'0px','--topbar-h':`${mini.top}px`} as React.CSSProperties} aria-label={tab === 'team' ? 'Team and PC' : 'Pokédex'}>
     {tab === 'team' ? <>
       <div className="map-region team-panel" style={{ '--c': '#3b6fe0' } as React.CSSProperties}>
         <div className="map-head"><img src="/assets/items/poke-ball.png" alt="" /><h2>Team</h2><span className="replica-help" title="Select a Pokémon for details. Drag to reorder, or use the Move buttons on its card.">?</span>
@@ -100,27 +121,38 @@ export function CollectionPage({ tab }: { tab: Tab }) {
           })}</div>
           <div className="map-sum team-avg">Average level <b>{Math.round(party.reduce((sum, mon) => sum + mon.level, 0) / Math.max(1, party.length))}</b></div>
         </div>
-        <div className={`team-slots ${pendingSwap ? 'awaiting-swap' : ''}`}>
+        <div ref={teamSlots} id="team-slots" className={`team-slots ${pendingSwap ? 'awaiting-swap' : ''}`}>
           {Array.from({ length: 6 }, (_, index) => {
             const mon = party[index];
             return mon ? <button className="slot filled" key={mon.uid} data-fainted={mon.currentHp <= 0 ? '' : undefined} draggable onDragStart={event => event.dataTransfer.setData('text/plain', mon.uid)} onDragOver={event => event.preventDefault()} onDrop={event => { event.preventDefault(); dropOnSlot(event.dataTransfer.getData('text/plain'), index); }} onClick={() => chooseTeam(mon)} aria-label={`Team ${getPokemonSpecies(mon.speciesId).name}, level ${mon.level}`}>
               <div className="slot-types">{getPokemonSpecies(mon.speciesId).types.map(value => <TypeBadge key={value} type={value} small/>)}</div>
+              {buddy.uid === mon.uid && <span className="slot-buddy"><img src="/assets/items/love-ball.png" alt="Buddy" /></span>}
               <div className="replica-team-art"><PokemonSprite id={mon.speciesId} shiny={mon.isShiny} scale={3} /></div>
-              <div className="name">{mon.nickname || getPokemonSpecies(mon.speciesId).name}{mon.isShiny && <span className="replica-shiny" aria-label="Shiny"> ✦</span>}</div><div className="lv" title="Move preview">Lv. {mon.level} · {collectionMove(mon)}</div>
-              <div className="xpbar" role="progressbar" aria-label={`${getPokemonSpecies(mon.speciesId).name} EXP`} aria-valuenow={Math.round(experiencePercent(mon))} aria-valuemin={0} aria-valuemax={100}><div style={{ width: `${experiencePercent(mon)}%` }} /></div>
+              <div className="name">{mon.nickname || getPokemonSpecies(mon.speciesId).name}{mon.isShiny && <> <i className="shiny-mk" role="img" aria-label="Shiny"/></>}</div><div className="lv" title="Move preview">Lv. {mon.level} · {collectionMove(mon)}</div>
+              <div className="xpbar" role="progressbar" aria-label={`${getPokemonSpecies(mon.speciesId).name} EXP`} aria-valuenow={Math.round(experiencePercent(mon,levelCap))} aria-valuemin={0} aria-valuemax={100}><div style={{ width: `${experiencePercent(mon,levelCap)}%` }} /></div>
             </button> : <button className="slot empty" key={`empty-${index}`} onClick={findSpace} aria-label={`Empty team slot ${index + 1}`} onDragOver={event => event.preventDefault()} onDrop={event => { event.preventDefault(); dropOnSlot(event.dataTransfer.getData('text/plain'), index); }}><span>Free slot</span><small>Pick a Pokémon from the PC</small></button>;
           })}
         </div>
+      </div>
+      <div ref={element=>{miniTeam.current=element;if(element)element.inert=!mini.visible;}} id="team-mini" className={`team-mini${mini.visible?' show':''}`} style={{left:mini.left,width:mini.width,top:mini.top}} aria-label="Compact team" aria-hidden={!mini.visible}>
+        {Array.from({length:6},(_,index)=>{
+          const mon=party[index];
+          return mon?<button key={mon.uid} className="slot filled" aria-label={`Compact team ${getPokemonSpecies(mon.speciesId).name}, level ${mon.level}`} draggable onDragStart={event=>event.dataTransfer.setData('text/plain',mon.uid)} onDragOver={event=>event.preventDefault()} onDrop={event=>{event.preventDefault();dropOnSlot(event.dataTransfer.getData('text/plain'),index);}} onClick={()=>inspect(mon.speciesId,mon.uid)}>
+            <div className="w" style={{width:'100%',height:mini.mobile?38:84,display:'grid',placeItems:'center'}}><PokemonSprite id={mon.speciesId} shiny={mon.isShiny} scale={miniTeamSpriteScale(mon.speciesId,mini.mobile)}/></div>
+            <div className="name">{getPokemonSpecies(mon.speciesId).name}{mon.isShiny&&<> <i className="shiny-mk" role="img" aria-label="Shiny"/></>}</div><div className="lv">Lv. {mon.level}</div>
+            <div className="xpbar"><div style={{width:`${experiencePercent(mon,levelCap)}%`}}/></div>
+          </button>:<div key={`compact-empty-${index}`} className="slot empty" aria-label={`Empty compact team slot ${index+1}`} onDragOver={event=>event.preventDefault()} onDrop={event=>{event.preventDefault();dropOnSlot(event.dataTransfer.getData('text/plain'),index);}}/>;
+        })}
       </div>
       {pendingSwap && <div className="replica-swap-hint" role="status">Choose the team Pokémon to replace.<button className="btn small ghost" onClick={() => setPendingSwap(null)}>Cancel</button></div>}
       <div className="pc-sticky"><div className="pc-filters">
         <input ref={search} type="search" placeholder="Search a Pokémon…" aria-label="Search PC" value={query} onChange={event => { setQuery(event.target.value); setPage(0); }} />
         {types}{shiny}{evolveFilter}<div className="replica-sortbox">{sortFilter}{reverseFilter}</div>{extraFilters}
       </div></div>
-      <div className="pc-grid" aria-label="PC storage" onDragOver={event => event.preventDefault()} onDrop={event => { if (event.target !== event.currentTarget) return; const uid = event.dataTransfer.getData('text/plain'); if (party.some(mon => mon.uid === uid)) attempt(() => depositPokemon(uid)); }}>
+      <div id="pc-grid" className="pc-grid" aria-label="PC storage" onDragOver={event => event.preventDefault()} onDrop={event => { if (event.target !== event.currentTarget) return; const uid = event.dataTransfer.getData('text/plain'); if (party.some(mon => mon.uid === uid)) attempt(() => depositPokemon(uid)); }}>
         {!box.length && <p className="replica-empty">{pcBox.length ? 'No matching Pokémon.' : 'The PC is empty. Pokémon caught while your team is full end up here.'}</p>}
         {box.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE).map(mon => <button className="pc-cell" key={mon.uid} draggable onDragStart={event => event.dataTransfer.setData('text/plain', mon.uid)} onDragOver={event => event.preventDefault()} onDrop={event => { event.preventDefault(); event.stopPropagation(); const uid = event.dataTransfer.getData('text/plain'); if (party.some(mon => mon.uid === uid)) attempt(() => depositPokemon(uid)); else if (sort === 'custom') attempt(() => movePcPokemon(uid, mon.uid)); }} onClick={() => inspect(mon.speciesId, mon.uid)} aria-label={`PC ${getPokemonSpecies(mon.speciesId).name}, level ${mon.level}`} title={`${getPokemonSpecies(mon.speciesId).name} · Lv. ${mon.level}`}>
-          <RarityGlow id={mon.speciesId}/><div className="replica-pc-art"><PokemonSprite id={mon.speciesId} shiny={mon.isShiny} scale={2} /></div><span className="lvl">Lv. {mon.level}</span><div className="pc-xp"><div style={{ width: `${experiencePercent(mon)}%` }} /></div>
+          <RarityGlow id={mon.speciesId}/>{buddy.uid === mon.uid && <img className="pc-buddy" src="/assets/items/love-ball.png" alt="Buddy" />}<div className="replica-pc-art"><PokemonSprite id={mon.speciesId} shiny={mon.isShiny} scale={2} /></div><span className="lvl">{mon.isShiny&&<i className="shiny-mk" role="img" aria-label="Shiny"/>}Lv. {mon.level}</span><div className="pc-xp"><div style={{ width: `${experiencePercent(mon,levelCap)}%` }} /></div>
         </button>)}
       </div>
       {maxPage > 0 && <div className="replica-pagination"><button className="btn small ghost" disabled={!currentPage} onClick={() => setPage(currentPage - 1)}>Previous</button><span>{currentPage + 1} / {maxPage + 1}</span><button className="btn small ghost" disabled={currentPage === maxPage} onClick={() => setPage(currentPage + 1)}>Next</button></div>}
@@ -145,8 +177,6 @@ export function CollectionPage({ tab }: { tab: Tab }) {
       {regions.slice(1).map(name => <div className="map-region dex-locked-region" key={name}><h2>{name}</h2><span><img src="/assets/sidebar/padlock_pixel.svg" alt="" />Region locked ▾</span></div>)}
     </>}
     <p className="replica-collection-notice" role="status">{notice}</p>
-    {detail && !newCatchCard && <PokemonDetails speciesId={detail.id} level={selectedMon?.level} shiny={selectedMon?.isShiny} mon={selectedMon} notice={notice} onClose={() => setDetail(null)} actions={selectedMon && <>
-      {party.some(mon => mon.uid === selectedMon.uid) ? <><button className="btn small ghost" disabled={party[0]?.uid === selectedMon.uid} onClick={() => attempt(() => movePartyMember(selectedMon.uid, -1))}>← Move</button><button className="btn small ghost" disabled={party[party.length - 1]?.uid === selectedMon.uid} onClick={() => attempt(() => movePartyMember(selectedMon.uid, 1))}>Move →</button><button className="btn small" disabled={!party.some(mon => mon.uid !== selectedMon.uid && mon.currentHp > 0)} onClick={() => attempt(() => depositPokemon(selectedMon.uid))}>To PC</button></> : <button className="btn gold" onClick={() => party.length < 6 ? attempt(() => withdrawPokemon(selectedMon.uid)) : (setPendingSwap(selectedMon.uid), setDetail(null))}>{party.length < 6 ? 'Add to team' : 'Swap into team'}</button>}
-    </>} />}
+    {detail && !newCatchCard && <PokemonDetails speciesId={detail.id} level={selectedMon?.level} shiny={selectedMon?.isShiny} mon={selectedMon} onClose={() => setDetail(null)} />}
   </section>;
 }

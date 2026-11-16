@@ -23,7 +23,8 @@ export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex')
   const [socialOpen, setSocialOpen] = useState(false);
 
   const pct = Math.max(0, Math.round(((currentStep - 1) / currentChapter.totalSteps) * 100));
-  const teamNew = new Set([...party, ...pcBox].filter(mon => !teamReviewedUids.includes(mon.uid)).map(mon => mon.uid)).size;
+  // Native Screens.team.newCount: only newly received shinies without an OT.
+  const teamNew = new Set([...party, ...pcBox].filter(mon => mon.isShiny && !mon.ot && (mon.caughtAt || 0) > 0 && !teamReviewedUids.includes(mon.uid)).map(mon => mon.uid)).size;
   const dexNew = new Set(pokedexCaught.filter(id => !dexNotifiedSpecies.includes(id))).size;
 
   const handleOpenProgress = () => {
@@ -31,16 +32,17 @@ export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex')
     onShowAdventure();
   };
   const handleOpenMap = () => {
-    onResumeAdventure();
+    if (activeView === 'adventure') handleOpenProgress();
+    else onResumeAdventure();
   };
 
   return (
     <aside className="game-sidebar w-56 shrink-0 flex flex-col gap-2 select-none font-game">
-      {/* Resume the current encounter without reloading the selected chapter. */}
+      {/* Native summary resumes from another screen and opens Progress from the arena. */}
       <div
         onClick={handleOpenMap}
         role="button"
-        aria-label="Resume current adventure"
+        aria-label={activeView === 'adventure' ? 'Open current adventure progress' : 'Resume current adventure'}
         tabIndex={0}
         onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); handleOpenMap(); } }}
         className="rounded-2xl border-2 border-[#e3353b] bg-gradient-to-b from-[#241723] to-[#14131d] p-3 shadow-lg cursor-pointer hover:border-rose-400 transition"
@@ -50,7 +52,7 @@ export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex')
             <img
               src={chapterIcon(currentChapter)}
               alt=""
-              className="pixel-art max-h-8 max-w-8 object-contain"
+              className="pixel-art h-8 w-8 max-h-8 max-w-8 object-contain"
             />
           </div>
 

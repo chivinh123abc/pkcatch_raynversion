@@ -1,0 +1,168 @@
+{
+  "team": {
+    "style": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "textShadow": "oklch(0.402285 0.230417 2.66113) 2px 2px 0px",
+      "boxShadow": "none",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderWidth": "0px"
+    },
+    "before": {
+      "boxShadow": "none",
+      "backgroundColor": "oklch(0.397508 0.27231 352.661 / 0.5)",
+      "content": "\"\""
+    },
+    "after": {
+      "boxShadow": "none",
+      "backgroundColor": "rgb(27, 27, 34)",
+      "content": "\"\""
+    }
+  },
+  "pokedex": {
+    "style": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "textShadow": "oklch(0.402285 0.230417 2.66113) 2px 2px 0px",
+      "boxShadow": "none",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderWidth": "0px"
+    },
+    "before": {
+      "boxShadow": "none",
+      "backgroundColor": "oklch(0.397508 0.27231 352.661 / 0.5)",
+      "content": "\"\""
+    },
+    "after": {
+      "boxShadow": "none",
+      "backgroundColor": "rgb(27, 27, 34)",
+      "content": "\"\""
+    }
+  },
+  "capture": {
+    ".replica-modal-backdrop": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "20px",
+      "fontWeight": "500",
+      "lineHeight": "normal",
+      "color": "rgb(238, 241, 248)",
+      "textShadow": "none",
+      "boxShadow": "none",
+      "backgroundColor": "rgba(5, 7, 12, 0.72)",
+      "backdropFilter": "blur(3px)",
+      "borderWidth": "0px",
+      "borderRadius": "0px",
+      "padding": "16px"
+    },
+    ".modal": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "20px",
+      "fontWeight": "500",
+      "lineHeight": "normal",
+      "color": "rgb(238, 241, 248)",
+      "textShadow": "none",
+      "boxShadow": "rgba(0, 0, 0, 0.6) 0px 20px 60px 0px",
+      "backgroundColor": "rgb(28, 32, 48)",
+      "backdropFilter": "none",
+      "borderWidth": "3px",
+      "borderRadius": "18px",
+      "padding": "0px"
+    },
+    ".dc-head h2": {
+      "fontFamily": "\"Jersey 15\", system-ui, sans-serif",
+      "fontSize": "28px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "rgb(255, 255, 255)",
+      "textShadow": "none",
+      "boxShadow": "none",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "backdropFilter": "none",
+      "borderWidth": "0px",
+      "borderRadius": "0px",
+      "padding": "0px"
+    },
+    ".dc-new": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "rgb(27, 27, 34)",
+      "textShadow": "none",
+      "boxShadow": "none",
+      "backgroundColor": "rgb(255, 203, 5)",
+      "backdropFilter": "none",
+      "borderWidth": "0px",
+      "borderRadius": "999px",
+      "padding": "2px 8px"
+    },
+    ".genus": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "18px",
+      "fontWeight": "500",
+      "lineHeight": "normal",
+      "color": "rgb(195, 201, 216)",
+      "textShadow": "none",
+      "boxShadow": "none",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "backdropFilter": "none",
+      "borderWidth": "0px",
+      "borderRadius": "0px",
+      "padding": "0px"
+    },
+    ".dc-fact": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "500",
+      "lineHeight": "normal",
+      "color": "rgb(154, 163, 187)",
+      "textShadow": "none",
+      "boxShadow": "none",
+      "backgroundColor": "rgb(37, 42, 61)",
+      "backdropFilter": "none",
+      "borderWidth": "0px",
+      "borderRadius": "10px",
+      "padding": "6px 8px"
+    },
+    ".dc-fact b": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "18px",
+      "fontWeight": "600",
+      "lineHeight": "normal",
+      "color": "rgb(238, 241, 248)",
+      "textShadow": "none",
+      "boxShadow": "none",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "backdropFilter": "none",
+      "borderWidth": "0px",
+      "borderRadius": "0px",
+      "padding": "0px"
+    },
+    ".flavor": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "500",
+      "lineHeight": "20.3px",
+      "color": "rgb(195, 201, 216)",
+      "textShadow": "none",
+      "boxShadow": "none",
+      "backgroundColor": "rgb(16, 19, 31)",
+      "backdropFilter": "none",
+      "borderWidth": "0px",
+      "borderRadius": "10px",
+      "padding": "12px"
+    },
+    ".modal-actions .btn": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "20px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "rgb(27, 27, 34)",
+      "textShadow": "none",
+      "boxShadow": "none",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "backdropFilter": "none",
+      "borderWidth": "0px",
+      "borderRadius": "0px",
+      "padding": "0px 24px"
+    }
+  }
+}

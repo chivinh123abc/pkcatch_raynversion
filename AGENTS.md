@@ -21,6 +21,8 @@
 
 ## Các điều phải giữ
 
+- **Chỉ tái hiện game gốc, không tự sáng tạo:** mọi giao diện, nút, nội dung, điều kiện mở/nhận quà, phần thưởng và hành vi phải có bằng chứng từ bản gốc đúng phiên bản (runtime/source/screenshot). Không thêm tiện ích, thao tác, modal, thông báo hoặc điều kiện vì cho là hợp lý. Phần đã tự thêm mà bản gốc không có phải bỏ khỏi sản phẩm.
+- Chưa xác minh được thì ghi rõ thiếu bằng chứng trong tài liệu và tiếp tục đối chiếu; không tự suy đoán rồi đưa vào game. Dữ liệu lịch sử không có hiển thị theo cách native xử lý thiếu dữ liệu, không bịa metadata. Công cụ/fixture kiểm tra phải tách khỏi trải nghiệm người chơi.
 - Game React/TypeScript chạy client độc lập. Không đưa app gốc, iframe/proxy vào production; snapshot chỉ để đối chiếu/trích dữ liệu và renderer có adapter.
 - Save: `pokecatch_save_v1`, persist version2/saveVersion4. Không đổi marker reset hoặc làm mất party/PC/preset/NEW ngoài yêu cầu.
 - Nút1/2/3 tương ứng pace1/2/**2,5**. Mỗi actor có recovery rồi chờ325/pace; không chỉ chờ một lần cho cả cặp đòn. Xem [nhịp chiến đấu](docs/BATTLE_CADENCE_REVIEW.md).

@@ -4,8 +4,10 @@ import { bestPartyIndexForEnemy } from '../domain/battle';
 import { currentChapter, currentNode, nodePool, encounterContext, chapterCompleted, chapterUnlocked } from '../data/chapterSelectors';
 import { defaultChapterRun, weightedPick, evolutionChain, stageDistribution } from '../data/chapterGenerator';
 import type { AdventureGift } from '../../types/game';
-import { familyRoot, referenceLevel } from '../domain/chapterOne';
+import { familyRoot } from '../domain/chapterOne';
+import { familyCandyExperience } from '../domain/buddy';
 import { applyExpToParty } from '../domain/battle';
+import { currentLevelCap } from '../domain/levelCap';
 import type { GameState } from '../domain/GameState';
 import type { SystemContext } from './context';
 import { gameplaySpeed } from '../domain/presentationTiming';
@@ -27,16 +29,17 @@ export function createEncounterActions(context: SystemContext): Pick<GameState, 
             const cost=species!==null?gift.trade?.[species]:undefined;
             if(cost && !(get().items[cost]>0)) return;
             runtime.commitReward('story-gift:'+gift.key,()=>{
-                const mon=species!==null?createInstance(species,gift.level||5):null;
+                const mon=species!==null?createInstance(species,gift.level||5,runtime.random()<1/4096):null;
+                if(mon){mon.where=currentNode(get()).name;mon.how='gift';}
                 const duplicate=mon&&[...get().party,...get().pcBox].some(m=>m.speciesId===mon.speciesId&&m.isShiny===mon.isShiny);
-                const members=mon?[...get().party,...get().pcBox].filter(m=>familyRoot(m.speciesId)===familyRoot(mon.speciesId)&&m.level<100):[];
-                const feed=(m:typeof mon)=>duplicate&&members.some(member=>member.uid===m.uid)?applyExpToParty([m],-1,Math.round(referenceLevel(m.level).candyXp/members.length)).party[0]:m;
+                const cap=currentLevelCap(get()),members=mon?[...get().party,...get().pcBox].filter(m=>familyRoot(m.speciesId)===familyRoot(mon.speciesId)&&m.level<cap):[];
+                const feed=(m:typeof mon)=>duplicate&&members.some(member=>member.uid===m.uid)?applyExpToParty([m],-1,Math.round(familyCandyExperience(m.level)/members.length),null,cap).party[0]:m;
                 set(state=>({
                     pendingAdventureGift:null,gifts:gift.trade?state.gifts:[...new Set([...state.gifts,gift.key])],
                     items:{...state.items,...(cost?{[cost]:state.items[cost]-1}:{}),...(species===null?{[String(choice)]:(state.items[String(choice)]||0)+1}:{})},
                     party:duplicate?state.party.map(feed):mon&&state.party.length<6?[...state.party,mon]:state.party,
                     pcBox:duplicate?state.pcBox.map(feed):mon&&state.party.length>=6?[...state.pcBox,mon]:state.pcBox,
-                    newCatchCard:mon&&!duplicate&&!state.pokedexCaught.includes(mon.speciesId)?{speciesId:mon.speciesId,level:mon.level,isShiny:false,isNew:true,destination:state.party.length<6?'party':'pc'}:null,
+                    newCatchCard:mon&&!duplicate?{source:'gift',speciesId:mon.speciesId,level:mon.level,isShiny:mon.isShiny,isNew:!state.pokedexCaught.includes(mon.speciesId),destination:state.party.length<6?'party':'pc'}:null,
                     pokedexCaught:species!==null?[...new Set([...state.pokedexCaught,species])]:state.pokedexCaught,
                     pokedexSeen:species!==null?[...new Set([...state.pokedexSeen,species])]:state.pokedexSeen,
                     resolvedNode:{chapterId:state.currentChapterId,step:state.currentStep},

@@ -3,6 +3,7 @@ import type { PokemonInstance } from '../../types/game';
 import { calculateStats, getPokemonMove, getPokemonSpecies } from '../../data/pokemonData';
 import { getTypeMultiplier } from '../../data/typeChart';
 import MOVES from '../../data/moves.json';
+import { BUDDY_XP_MULT } from './buddy';
 export function rollDamage(attacker: PokemonInstance, defender: PokemonInstance, move: ReturnType<typeof getPokemonMove>, random: () => number = Math.random) {
     const species = getPokemonSpecies(attacker.speciesId);
     const multiplier = getTypeMultiplier([move.type], getPokemonSpecies(defender.speciesId).types);
@@ -28,7 +29,7 @@ export function calcBattleExp(enemy: PokemonInstance, isTrainer: boolean, hasPin
         * (hasPinap ? 1.25 : 1);
     return raw;
 }
-export function applyExpToParty(party: PokemonInstance[], activeIndex: number, baseExp: number): {
+export function applyExpToParty(party: PokemonInstance[], activeIndex: number, baseExp: number, buddyUid: string | null = null, cap = 100): {
     party: PokemonInstance[];
     activeGain: number;
     gains: Record<string, {
@@ -42,32 +43,29 @@ export function applyExpToParty(party: PokemonInstance[], activeIndex: number, b
         active: boolean;
     }> = {};
     const nextParty = party.map((mon, idx) => {
-        if (mon.level >= 100)
+        if (mon.level >= cap)
             return mon;
         const isActive = idx === activeIndex;
-        const gain = isActive ? Math.round(baseExp * XP_ACTIVE_BONUS) : Math.round(baseExp);
+        const gain = Math.round(baseExp * (isActive ? XP_ACTIVE_BONUS : 1) * (mon.uid === buddyUid ? BUDDY_XP_MULT : 1));
         if (isActive)
             activeGain = gain;
         gains[mon.uid] = { amount: gain, active: isActive };
-        let level = mon.level;
-        let exp = mon.exp + gain;
-        let expToNext = mon.expToNextLevel;
-        let stats = mon.stats;
-        let maxHp = mon.maxHp;
-        let currentHp = mon.currentHp;
-        while (exp >= expToNext && level < 100) {
-            exp -= expToNext;
-            level += 1;
-            const nextStats = calculateStats(getPokemonSpecies(mon.speciesId).baseStats, level, mon.isShiny);
-            const hpDiff = Math.max(0, nextStats.hp - maxHp);
-            stats = nextStats;
-            maxHp = nextStats.hp;
-            currentHp = currentHp > 0 ? Math.min(maxHp, currentHp + hpDiff) : 0;
-            expToNext = levelExperience(level);
-        }
-        return { ...mon, level, exp, expToNextLevel: expToNext, stats, maxHp, currentHp };
+        return gainExperience(mon, gain, cap);
     });
     return { party: nextParty, activeGain, gains };
+}
+/** Shared by battle, Buddy bonus and candies; a fainted Pokémon stays fainted. */
+export function gainExperience(mon: PokemonInstance, amount: number, cap = 100): PokemonInstance {
+    if (mon.level >= cap) return mon;
+    let level = mon.level, exp = mon.exp + Math.round(amount), needed = mon.expToNextLevel;
+    while (level < cap && exp >= needed) {
+        exp -= needed;
+        needed = levelExperience(++level);
+    }
+    if (level === mon.level) return { ...mon, exp };
+    const stats = calculateStats(getPokemonSpecies(mon.speciesId).baseStats, level, mon.isShiny);
+    return { ...mon, level, exp: level === 100 ? 0 : level >= cap ? Math.min(exp, needed - 1) : exp, expToNextLevel: needed, stats, maxHp: stats.hp,
+        currentHp: mon.currentHp > 0 ? Math.min(stats.hp, mon.currentHp + Math.max(0, stats.hp - mon.maxHp)) : 0 };
 }
 export function nextHealthyPartyIndex(party: PokemonInstance[], currentIndex: number): number {
     for (let offset = 1; offset <= party.length; offset += 1) {

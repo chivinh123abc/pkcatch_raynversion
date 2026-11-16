@@ -22,6 +22,9 @@ export interface DamagePopupItem {
     isCrit?: boolean;
 }
 export interface GameState {
+    buddy: import('./buddy').BuddyState;
+    setBuddy: (uid: string | null) => boolean;
+    useExpCandy: (uid: string, item: string) => boolean;
     encounter: RuntimeSnapshot;
     starterChosen: boolean;
     chooseStarter: (speciesId: number, profile?: {name: string; sprite: 'red' | 'leaf'}) => void;
@@ -90,6 +93,7 @@ export interface GameState {
     allySendingOut: boolean;
     enemyRecalling: boolean;
     newCatchCard: {
+        source?: 'gift';
         speciesId: number;
         level: number;
         isShiny: boolean;

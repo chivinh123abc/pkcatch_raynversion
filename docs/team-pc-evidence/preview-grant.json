@@ -1,0 +1,9 @@
+{
+  "origin": "http://127.0.0.1:3011",
+  "mode": "production preview",
+  "added": 36,
+  "shiny": 24,
+  "partyPreserved": true,
+  "backupPreserved": true,
+  "reloadNoDuplicate": true
+}

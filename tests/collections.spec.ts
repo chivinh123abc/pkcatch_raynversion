@@ -18,6 +18,30 @@ async function prepare(page: Page) {
   });
 }
 
+for (const width of [1440,390]) for (const tab of ['Team/PC','Pokédex']) {
+  test(`${tab} keeps the reader's scroll position when background adventure advances at ${width}px`,async({page})=>{
+    await page.setViewportSize({width,height:844});await prepare(page);
+    await page.evaluate(()=>{
+      const s=(window as any).__uiStore,base=s.getState().party[0];
+      s.setState({pcBox:Array.from({length:60},(_,i)=>({...base,uid:'scroll-pc-'+i,speciesId:i+1}))});
+    });
+    await page.getByRole('button',{name:tab,exact:true}).click();
+    const target=await page.evaluate(()=>{
+      const target=Math.min(650,document.documentElement.scrollHeight-innerHeight-80);
+      window.scrollTo(0,target);return target;
+    });
+    expect(target).toBeGreaterThan(200);
+    await expect.poll(()=>page.evaluate(()=>window.scrollY)).toBe(target);
+    for(const step of [2,3]){
+      await page.evaluate(step=>(window as any).__uiStore.setState({currentStep:step}),step);
+      // Wait for the browser's smooth scrolling; the old scrollIntoView moved the document.
+      await page.waitForTimeout(450);
+      expect(await page.evaluate(()=>window.scrollY)).toBe(target);
+    }
+    await expect(page.getByRole('region',{name:tab==='Team/PC'?'Team and PC':'Pokédex',exact:true})).toBeVisible();
+  });
+}
+
 test('rarity backgrounds match native colors, respect unknown/seen states, sort and reduced motion',async({page})=>{
   await prepare(page);
   await page.evaluate(()=>{
@@ -38,7 +62,8 @@ test('rarity backgrounds match native colors, respect unknown/seen states, sort 
   await fs.mkdir('docs/rarity-evidence',{recursive:true});
   await page.locator('.pc-grid').screenshot({path:'docs/rarity-evidence/local-pc.png'});
   await page.getByRole('button',{name:'PC Articuno, level 12',exact:true}).click();
-  await expect(page.getByRole('dialog').locator('.rarity')).toHaveText('● Legendary');
+  await expect(page.getByRole('dialog').locator('.rarity')).toHaveText('Legendary');
+  await expect(page.getByRole('dialog').locator('.rarity .rpips.r-legendary i')).toBeVisible();
   await page.getByRole('button',{name:'Close Pokémon details',exact:true}).click();
   await page.getByRole('button',{name:'Pokédex',exact:true}).click();
   await expect(page.locator('.dex-cell.unknown > .tglow').first()).toBeHidden();
@@ -66,7 +91,8 @@ test('Team/PC uses the main page, filters storage and adds a Pokémon to the tea
   const dialog = page.getByRole('dialog');
   await expect(dialog.getByRole('heading', { name: 'Pikachu' })).toBeVisible();
   await expect(dialog.getByText('Mouse Pokémon', { exact: true })).toBeVisible();
-  await dialog.getByRole('button', { name: 'Add to team' }).click();
+  await page.keyboard.press('Escape');
+  await page.getByRole('button', { name: 'PC Pikachu, level 12', exact: true }).dragTo(page.getByRole('button', { name: 'Empty team slot 2', exact: true }));
   await expect(dialog).toHaveCount(0);
   expect(await page.evaluate(() => (window as any).__uiStore.getState().party.length)).toBe(before + 1);
   await page.getByRole('button', { name: 'Progress', exact: true }).click();
@@ -108,7 +134,7 @@ test('Team and detail move previews follow the v0.5.02 learnset after leveling',
     await expect(slot.locator('.lv')).toHaveText(`Lv. ${level} · ${move}`);
     await slot.click();
     const dialog = page.getByRole('dialog');
-    await expect(dialog.locator('.replica-move-fact b')).toHaveText(move);
+    await expect(dialog.locator('.replica-move-fact>span:first-child>b')).toHaveText(move);
     await dialog.getByRole('button', { name: 'Close Pokémon details' }).click();
     await expect(dialog).toHaveCount(0);
   }
@@ -151,15 +177,13 @@ test('a new capture takes priority over collection details without stacking dial
 test('saved teams swap membership without duplicating Pokemon', async ({ page }) => {
   await prepare(page);
   await page.getByRole('button', { name: 'Team/PC', exact: true }).click();
-  await page.getByRole('button', { name: 'PC Pikachu, level 12', exact: true }).click();
-  await page.getByRole('dialog').getByRole('button', { name: 'Add to team', exact: true }).click();
+  await page.getByRole('button', { name: 'PC Pikachu, level 12', exact: true }).dragTo(page.getByRole('button', { name: 'Empty team slot 2', exact: true }));
   const before = await page.evaluate(() => {
     const s = (window as any).__uiStore.getState();
     return [...s.party, ...s.pcBox].map((mon: any) => mon.uid).sort();
   });
   await page.getByRole('button', { name: 'Save current team as Team 2', exact: true }).click();
-  await page.getByRole('button', { name: 'Team Pikachu, level 12', exact: true }).click();
-  await page.getByRole('dialog').getByRole('button', { name: 'To PC', exact: true }).click();
+  await page.getByRole('button', { name: 'Team Pikachu, level 12', exact: true }).dragTo(page.getByRole('button', { name: 'PC Rattata, level 8', exact: true }));
   await page.getByRole('button', { name: 'Use team 1', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Team Pikachu, level 12', exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Use team 2', exact: true }).click();
@@ -167,7 +191,7 @@ test('saved teams swap membership without duplicating Pokemon', async ({ page })
   expect(await page.evaluate(() => { const s = (window as any).__uiStore.getState(); return [...s.party, ...s.pcBox].map((mon: any) => mon.uid).sort(); })).toEqual(before);
 });
 
-test('PC dragging fills a slot, and a full team swaps through the details card', async ({ page }) => {
+test('PC dragging fills a slot and swaps an occupied slot without invented inspect actions', async ({ page }) => {
   await prepare(page);
   await page.getByRole('button', { name: 'Team/PC', exact: true }).click();
   await page.getByRole('button', { name: 'PC Pikachu, level 12', exact: true }).dragTo(page.getByRole('button', { name: 'Empty team slot 2', exact: true }));
@@ -176,9 +200,7 @@ test('PC dragging fills a slot, and a full team swaps through the details card',
     const s = (window as any).__uiStore, base = s.getState().party[0];
     s.setState({ party: [base, ...[10, 13, 16, 19, 21].map(id => ({ ...base, uid: 'swap-' + id, speciesId: id }))], pcBox: [{ ...base, uid: 'swap-pc', speciesId: 25, level: 12 }] });
   });
-  await page.getByRole('button', { name: 'PC Pikachu, level 12', exact: true }).click();
-  await page.getByRole('dialog').getByRole('button', { name: 'Swap into team', exact: true }).click();
-  await page.getByRole('button', { name: 'Team Charmander, level 5', exact: true }).click();
+  await page.getByRole('button', { name: 'PC Pikachu, level 12', exact: true }).dragTo(page.getByRole('button', { name: 'Team Charmander, level 5', exact: true }));
   const state = await page.evaluate(() => { const s = (window as any).__uiStore.getState(); return { team: s.party.map((m: any) => m.uid), pc: s.pcBox.map((m: any) => m.speciesId) }; });
   expect(state.team).toHaveLength(6); expect(state.team[0]).toBe('swap-pc'); expect(state.pc).toContain(4);
 });
@@ -204,13 +226,16 @@ test('dex has no individual NEW markers and dialogs isolate background keyboard 
 
 test('menu notifications clear on entering their own collection and persist across reload', async ({ page }) => {
   await prepare(page);
+  // This case tests existing notifications, independently of the requested local fixture.
+  await page.evaluate(async()=>{const {RARITY_TEST_MARKER}=await import('/src/game/runtime/rarityTestSave.ts');localStorage.setItem(RARITY_TEST_MARKER,'done');});
   const team = page.getByRole('button', { name: 'Team/PC', exact: true });
   const dex = page.getByRole('button', { name: 'Pokédex', exact: true });
-  await expect(team.locator('.sidebar-collection-unread')).toHaveText('3');
+  // Native Team/PC only counts new shinies without an original Trainer.
+  await expect(team.locator('.sidebar-collection-unread')).toHaveCount(0);
   await expect(dex.locator('.sidebar-collection-unread')).toHaveText('3');
   await dex.click();
   await expect(dex.locator('.sidebar-collection-unread')).toHaveCount(0);
-  await expect(team.locator('.sidebar-collection-unread')).toHaveText('3');
+  await expect(team.locator('.sidebar-collection-unread')).toHaveCount(0);
   await expect(page.locator('.dex-new,.dex-unread')).toHaveCount(0);
   expect(await page.evaluate(() => {
     const s=(window as any).__uiStore.getState();

@@ -39,8 +39,8 @@
 .game-shell .game-sidebar > div:first-child .text-\[17px\] { font-size:22px; line-height:24px; }
 .game-shell .collection-page { min-width:0; font:400 20px/1.2 var(--font); }
 .game-shell .collection-page h2 { margin:0; font-family:var(--font-title); }
-.game-shell .collection-page button,.game-shell .replica-detail button { cursor:pointer; }
-.game-shell .collection-page .btn,.game-shell .replica-detail .btn { position:relative; isolation:isolate; }
+.game-shell .collection-page button { cursor:pointer; }
+.game-shell .collection-page .btn { position:relative; isolation:isolate; }
 .game-shell .collection-page .map-region { overflow:hidden; }
 .game-shell .collection-page .map-head { min-height:54px; }
 .game-shell .collection-page .map-head > img { width:28px; height:28px; object-fit:contain; image-rendering:pixelated; }
@@ -111,28 +111,8 @@
 .game-shell .replica-sprite img { position:absolute; display:block; max-width:none; image-rendering:pixelated; }
 .game-shell .replica-sprite.unknown { filter:brightness(0); opacity:.35; }
 .game-shell .replica-modal-backdrop { position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center; padding:20px; background:#060810b8; backdrop-filter:blur(4px); font:400 20px/1.2 var(--font); }
-.game-shell .replica-detail { width:min(460px,100%); max-height:calc(100dvh - 40px); margin:0; overflow-y:auto; background:#1c2030; color:var(--text); border:2px solid color-mix(in srgb,var(--c) 55%,#333a52); border-radius:18px; box-shadow:0 16px 40px #0009; outline:none; animation:replica-dialog-in 180ms ease-out; }
-.game-shell .replica-detail .modal-body { padding:16px; }
-.game-shell .replica-detail .dc-head { margin:-16px -16px 16px; min-height:52px; padding:10px 14px; }
-.game-shell .replica-detail .dc-head h2 { font:700 28px/1 var(--font-title); }
-.game-shell .replica-detail .dc-sum { font-size:14px; gap:10px; }
-.game-shell .replica-detail .dc-top { display:grid; grid-template-columns:148px minmax(0,1fr); gap:16px; }
-.game-shell .replica-detail .dc-hero { display:flex; position:relative; align-items:center; justify-content:center; min-height:148px; overflow:hidden; }
-.game-shell .replica-detail .capture-pokemon-idle { display:flex; transform:scale(.78); transform-origin:50% 85%; animation:capture-pokemon-idle 2.4s ease-in-out infinite; }
 @keyframes capture-pokemon-idle { 0%,100% { transform:translateY(0) scale(.78); } 50% { transform:translateY(-2px) scale(.81,.75); } }
-@media (prefers-reduced-motion:reduce) { .game-shell .replica-detail .capture-pokemon-idle { animation:none; } }
-.game-shell .replica-detail .dc-ball { position:absolute; top:10px; right:10px; width:24px; height:24px; image-rendering:pixelated; }
-.game-shell .replica-detail .genus { font:700 18px var(--font-title); margin-bottom:8px; }
-.game-shell .replica-detail .badges { display:flex; flex-wrap:wrap; gap:4px; }
-.game-shell .replica-detail .type { font-size:14px; }
-.game-shell .replica-detail .rarity { color:#9aa4b1; font-size:14px; }
-.game-shell .replica-detail .dc-facts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; margin-top:10px; }
-.game-shell .replica-detail .dc-fact { padding:5px 7px; border-radius:8px; background:#252a3d; color:var(--muted); font:400 14px var(--font); }
-.game-shell .replica-detail .dc-fact b { display:flex; align-items:center; gap:3px; color:var(--text); font-weight:700; font-size:16px; }
-.game-shell .replica-detail .dc-fact img { width:18px; height:18px; image-rendering:pixelated; }
-.game-shell .replica-detail .flavor { font:400 18px/1.45 var(--font); color:var(--text); margin:16px 0 4px; }
-.game-shell .replica-detail .modal-actions { padding:16px; border-top:0; }
-.game-shell .replica-detail .modal-actions .btn { width:100%; min-height:44px; font:700 20px var(--font-title); text-transform:uppercase; letter-spacing:.06em; }
+@media (prefers-reduced-motion:reduce) { }
 .game-shell .replica-stat-details { margin-top:16px; border:1px solid #333a52; border-radius:8px; padding:10px; }
 .game-shell .replica-stat-details summary { cursor:pointer; display:flex; align-items:center; justify-content:space-between; font-family:var(--font-title); }
 .game-shell .replica-stat-details summary span { font-size:16px; color:var(--muted); }
@@ -145,7 +125,7 @@
 .game-shell .mobile-navigation,.game-shell .mobile-menu-backdrop { display:none; }
 @keyframes replica-dialog-in { from { opacity:0; transform:translateY(8px) scale(.97); } to { opacity:1; transform:none; } }
 @media (min-width:1600px) { .game-shell > main { grid-template-columns:248px minmax(0,1fr); } .game-shell .adventure-view { grid-template-columns:minmax(0,1fr) 320px; } }
-@media (max-width:700px) { .game-shell .collection-page .team-slots { grid-template-columns:repeat(3,minmax(0,1fr)); } .game-shell .replica-detail .dc-top { grid-template-columns:120px minmax(0,1fr); gap:12px; } .game-shell .replica-detail .dc-sum { flex-wrap:wrap; justify-content:flex-end; } }
+@media (max-width:700px) { .game-shell .collection-page .team-slots { grid-template-columns:repeat(3,minmax(0,1fr)); } }
 @media (max-width:640px) {
   .game-shell > main { display:block; min-width:0; width:100%; padding:16px 16px 88px; }
   .game-shell > main > .game-sidebar { display:none; }
@@ -206,16 +186,6 @@
   .game-shell .dex-cell .nm { font-size:14px; }
   .game-shell .replica-region-meter { width:68px; }
   .game-shell .replica-modal-backdrop { padding:16px; }
-  .game-shell .replica-detail { max-height:calc(100dvh - 32px); }
-  .game-shell .replica-detail .dc-top { grid-template-columns:120px minmax(0,1fr); gap:12px; }
-  .game-shell .replica-detail .dc-id { display:contents; }
-  .game-shell .replica-detail .dc-hero { grid-column:1; grid-row:1; }
-  .game-shell .replica-detail .genus { grid-column:2; grid-row:1; align-self:start; font-size:16px; }
-  .game-shell .replica-detail .badges { grid-column:2; grid-row:1; align-self:start; margin-top:32px; }
-  .game-shell .replica-detail .dc-facts { grid-column:1/-1; grid-row:2; margin-top:0; }
-  .game-shell .replica-detail .dc-head h2 { font-size:26px; }
-  .game-shell .replica-detail .dc-sum { font-size:12px; gap:5px; }
-  .game-shell .replica-detail .flavor { font-size:16px; }
   .game-shell .mobile-navigation { display:grid; position:fixed; z-index:80; left:8px; right:8px; bottom:8px; grid-template-columns:repeat(4,1fr); height:64px; padding:4px 4px max(4px,env(safe-area-inset-bottom)); border:2px solid #333a52; border-radius:14px; background:#1c2030f5; box-shadow:0 4px 18px #0006; }
   .game-shell .mobile-navigation button { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; border-radius:8px; color:#c3c9d8; font:700 14px var(--font); }
   .game-shell .mobile-navigation button[aria-current=page] { background:#e3353b; color:white; }

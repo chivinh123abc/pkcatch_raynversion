@@ -5,11 +5,14 @@ import { currentChapter, currentNode, chapterCompleted } from '../game/data/chap
 import { restoreChapterRun } from '../game/data/chapterGenerator';
 import { GameplayRuntime, RuntimeDependencies } from '../game/runtime/GameplayRuntime';
 import type { GameState } from '../game/domain/GameState';
-import { createPokemonInstance } from '../game/domain/pokemon';
+import { createPokemonInstance, migrateReferenceHp } from '../game/domain/pokemon';
 import { createBattleActions } from '../game/systems/battle';
 import { createCaptureActions } from '../game/systems/capture';
 import { createRewardActions } from '../game/systems/rewards';
 import { createEncounterActions } from '../game/systems/encounter';
+import { EXP_CANDIES, restoreBuddy } from '../game/domain/buddy';
+import { gainExperience } from '../game/domain/battle';
+import { currentLevelCap } from '../game/domain/levelCap';
 export type { ActiveTrainerState, DamagePopupItem, GameState } from '../game/domain/GameState';
 function isValidSavedPokemon(mon: PokemonInstance): boolean {
     return !!mon && typeof mon.uid === 'string' && Number.isInteger(mon.speciesId)
@@ -53,10 +56,29 @@ export function createGameStore(dependencies: RuntimeDependencies = {}) {
             items: {},
             gifts: [],
             captureRoll: null,
+            buddy: { uid: null, ko: 0 },
+            setBuddy: uid => {
+                if (uid !== null && ![...get().party, ...get().pcBox].some(mon => mon.uid === uid)) return false;
+                if (get().buddy.uid === uid) return true;
+                set({ buddy: { uid, ko: 0 } });
+                get().saveGame(true);
+                return true;
+            },
+            useExpCandy: (uid, item) => {
+                const state = get(), mon = [...state.party, ...state.pcBox].find(mon => mon.uid === uid);
+                const cap=currentLevelCap(state);
+                if (!mon || mon.level >= cap || !Object.prototype.hasOwnProperty.call(EXP_CANDIES, item) || !(state.items[item] > 0)) return false;
+                const amount = item === 'rare-candy' ? mon.expToNextLevel - mon.exp : EXP_CANDIES[item];
+                const next = gainExperience(mon, amount, cap);
+                set({ party: state.party.map(m => m.uid === uid ? next : m), pcBox: state.pcBox.map(m => m.uid === uid ? next : m), items: { ...state.items, [item]: state.items[item] - 1 } });
+                get().saveGame(true);
+                return true;
+            },
             chooseStarter: (id, profile) => {
                 if (get().starterChosen || ![1, 4, 7, 25].includes(id)) return;
                 const mon = createInstance(id, 5);
-                set({ starterChosen: true, party: [mon], pcBox: [], pokedexCaught: [id], pokedexSeen: [id], currentStep: 1,
+                mon.where = "Oak's Lab"; mon.how = 'gift';
+                set({ starterChosen: true, party: [mon], pcBox: [], buddy: { uid: mon.uid, ko: 0 }, pokedexCaught: [id], pokedexSeen: [id], currentStep: 1,
                     ...(profile ? {trainerName:profile.name.trim().slice(0,10)||'Red',trainerSprite:profile.sprite==='leaf'?'leaf':'red'} : {}) });
                 get().loadStepNode(1);
                 get().saveGame(true);
@@ -334,6 +356,7 @@ export function createGameStore(dependencies: RuntimeDependencies = {}) {
                         money: state.money,
                         tokens: state.tokens,
                         party: state.party,
+                        buddy: state.buddy,
                         pcBox: state.pcBox,
                         partyPresets: Array.from({ length: 5 }, (_, index) => index === state.activePartyPreset ? state.party.map(mon => mon.uid) : state.partyPresets[index] || null),
                         activePartyPreset: state.activePartyPreset,
@@ -422,9 +445,9 @@ export function createGameStore(dependencies: RuntimeDependencies = {}) {
                                 party: isOldDemoParty
                                     ? get().party
                                     : Array.isArray(obj.party) && obj.party.length > 0 && obj.party.length <= 6 && obj.party.every(isValidSavedPokemon)
-                                        ? obj.party
+                                        ? obj.party.map(migrateReferenceHp)
                                         : get().party,
-                                pcBox: Array.isArray(obj.pcBox) && obj.pcBox.every(isValidSavedPokemon) ? obj.pcBox : [],
+                                pcBox: Array.isArray(obj.pcBox) && obj.pcBox.every(isValidSavedPokemon) ? obj.pcBox.map(migrateReferenceHp) : [],
                                 activePartyIndex: 0,
                                 pokedexCaught: isOldDemoParty ? get().pokedexCaught : restoreDex(obj.pokedexCaught, get().pokedexCaught),
                                 pokedexSeen: isOldDemoParty ? get().pokedexSeen : restoreDex(obj.pokedexSeen, restoreDex(obj.pokedexCaught, get().pokedexSeen)),
@@ -447,6 +470,7 @@ export function createGameStore(dependencies: RuntimeDependencies = {}) {
                             });
                             const party = get().party;
                             const ownedIds = new Set([...party, ...get().pcBox].map(mon => mon.uid));
+                            set({ buddy: restoreBuddy(obj.buddy, [...party, ...get().pcBox]) });
                             const presets: (string[] | null)[] = Array.from({ length: 5 }, (_, index) => Array.isArray(obj.partyPresets?.[index]) ? [...new Set<string>(obj.partyPresets[index].filter((uid: unknown) => typeof uid === 'string' && ownedIds.has(uid)))].slice(0, 6) : null);
                             const presetIndex = Number.isInteger(obj.activePartyPreset) && obj.activePartyPreset >= 0 && obj.activePartyPreset < 5 ? obj.activePartyPreset : 0;
                             presets[presetIndex] = party.map(mon => mon.uid);

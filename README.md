@@ -6,6 +6,8 @@ A 100% client-side retro pixel art clone of Poké'Catch Online built with React 
 
 Học từ đầu bằng tiếng Việt: [Học làm webgame từ dự án này](docs/HOC_LAM_GAME_TU_DAU.md). Trạng thái mới: [runtime 14 chương Kanto](docs/R04_2_KANTO_RUNTIME.md) và [màn mở đầu/chọn starter](docs/ONBOARDING_PARITY.md).
 
+Tra lỗi và cách xử lý: [Các bug đã gặp và cách khắc phục](docs/BUGS_VA_CACH_KHAC_PHUC.md).
+
 ## Features
 - **Authentic Pixel Art**: Gen 8 box sprites (68x56) from PokéSprite and original retro UI fonts (Jersey 15 & 10).
 - **Procedural Move Visuals (BattleFX)**: Over 500 move animations rendered dynamically on Canvas matching the original game.
@@ -33,6 +35,6 @@ npm run build
 
 Team/PC and Pokédex open beside the sidebar. Select a Pokémon to inspect it, move it to/from PC, or swap it into a full team; drag team slots to reorder. New-catch cards wait for **Continue** before advancing.
 
-Use the five Team presets to save/switch lineups without copying Pokémon. Drag PC Pokémon onto a team slot, or select **Custom** PC sort to keep a manual order. Pokédex NEW markers clear when entries are viewed and persist with the save. See [collection UI notes](docs/R01_COLLECTIONS_OVERLAYS.md) for verified behavior and remaining differences.
+Use the five Team presets to save/switch lineups without copying Pokémon. Drag PC Pokémon onto a team slot, or select **Custom** PC sort to keep a manual order. Collection menu notifications clear on entering their screen; Pokédex tiles have no individual NEW markers. See [current layout and notification notes](docs/LAYOUT_PARITY_REVIEW.md) for verified behavior and remaining differences.
 
 Run `npm run test:ui` for Chrome browser checks. See [visual alignment notes](docs/VISUAL_ALIGNMENT.md) for reference screenshots, verified changes, and remaining differences. Current species data covers Kanto's 151 Pokémon; full-game parity is not yet verified.

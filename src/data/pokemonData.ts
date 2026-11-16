@@ -1284,7 +1284,7 @@ export function getPokemonSpecies(speciesId: number): PokemonSpecies {
 
 export function calculateStats(base: PokemonStats, level: number, shiny = false): PokemonStats {
   const bonus = shiny ? 1.1 : 1;
-  const hp = Math.floor(Math.floor((Math.floor(2 * base.hp * level / 100) + level + 10) * bonus) * Math.min(2.5, 1 + 1.5 * level / 100));
+  const hp = Math.floor(Math.floor((Math.floor(2 * base.hp * level / 100) + level + 10) * bonus) * Math.min(2.5, 1 + 1.5 * level / 100) * 1.1);
   const calcStat = (val: number) => Math.floor((Math.floor(2 * val * level / 100) + 5) * bonus);
   return {
     hp,

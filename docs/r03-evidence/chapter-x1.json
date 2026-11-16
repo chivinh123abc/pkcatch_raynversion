@@ -7,12 +7,12 @@
     "badges": [
       "boulder-badge"
     ],
-    "money": 6091,
+    "money": 6436,
     "team": [
       {
         "speciesId": 7,
         "level": 20,
-        "hp": 50
+        "hp": 44
       },
       {
         "speciesId": 12,
@@ -35,13 +35,14 @@
         "hp": 21
       },
       {
-        "speciesId": 10,
+        "speciesId": 11,
         "level": 15,
-        "hp": 46
+        "hp": 49
       }
     ],
     "items": {
       "exp-candy-s": 1,
+      "berry-oran": 1,
       "old-amber": 1
     },
     "watchdogs": []

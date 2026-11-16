@@ -1,4 +1,8 @@
 /* Structural adapters only; visual tokens and surfaces come from the pinned CSS. */
+/* Native pixel navigation disables tab transitions, including its shadow layers. */
+.game-shell .game-sidebar .side-nav-btn,
+.game-shell .game-sidebar .side-nav-btn::before,
+.game-shell .game-sidebar .side-nav-btn::after { animation:none; transition:none; }
 .game-shell .replica-topbar{border-bottom:2px solid var(--line)}
 .game-shell .type[data-type]{font-family:var(--font)}
 .game-shell .collection-page{font-weight:500;line-height:normal}

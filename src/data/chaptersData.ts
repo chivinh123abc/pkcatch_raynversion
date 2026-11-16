@@ -665,4 +665,5 @@ export const ALL_CHAPTERS: ChapterInfo[] = [
   ...LEGACY_CHAPTERS.filter(c=>c.isSpecial).map(c=>({...c,runtimeSupported:false})),
 ];
 export const DEFAULT_CHAPTER = ALL_CHAPTERS[0];
-export const chapterIcon = (chapter: ChapterInfo) => chapter.badgeSprite ? `/assets/badges/${chapter.badgeSprite}.png` : `/assets/trainers/${chapter.leaderSprite}.png`;
+const kantoBadges=new Set(['boulder','cascade','thunder','rainbow','soul','marsh','volcano','earth'].map(name=>`${name}-badge`));
+export const chapterIcon = (chapter: ChapterInfo) => chapter.badgeSprite ? kantoBadges.has(chapter.badgeSprite) ? `/assets/badges/kanto/${chapter.badgeSprite}.svg` : `/assets/badges/${chapter.badgeSprite}.png` : `/assets/trainers/${chapter.leaderSprite}.png`;

@@ -329,7 +329,7 @@ export function useArenaEffects({ arenaRef, fxContainerRef, playerMonRef, enemyM
             allies: null,
             count: party.length,
             slots: 6,
-            title: `${currentChapter.name} Pokémon Center`,
+            title: useGameStore.runtime.context.returnToStartAfterHeal ? 'Pokémon Center' : `${currentChapter.name} Pokémon Center`,
             msg: 'Your team is in great shape!',
             speed: () => healPresentation.speed,
             onHeal: () => { },

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { startGameplayLoop } from './game/runtime/gameLoop';
 import { applyRequestedSaveReset } from './game/runtime/resetLocalSave';
-import { addRarityTestPokemon } from './game/runtime/rarityTestSave';
+import { addRarityTestPokemon, hasPendingRarityTestGrant } from './game/runtime/rarityTestSave';
 import { useGameStore } from './store/useGameStore';
 import { TopBar } from './components/TopBar';
 import { LeftSidebar } from './components/LeftSidebar';
@@ -58,7 +58,9 @@ export function App() {
     } catch (error) { console.warn('Unable to reset local save:', error); }
     const url = new URL(window.location.href);
     let rarityTestReady = false;
-    if (import.meta.env.DEV && url.searchParams.get('rarity-test') === '1') {
+    // User requested this local-save fixture. Support local preview as well as Vite DEV.
+    const localTesting = import.meta.env.DEV || ['localhost', '127.0.0.1', '[::1]'].includes(url.hostname);
+    if (localTesting && (url.searchParams.get('rarity-test') === '1' || hasPendingRarityTestGrant(localStorage))) {
       try {
         addRarityTestPokemon(localStorage);
         rarityTestReady = true;
@@ -123,7 +125,7 @@ export function App() {
       {saveLoaded && (!starterChosen || !sessionEntered) && <StarterSelection hasSave={starterChosen} onContinue={() => { loadGame(); setSessionEntered(true); }} />}
       {sessionEntered && <AdventureGiftDialog />}
 
-      {sessionEntered && newCatchCard && <PokemonDetails speciesId={newCatchCard.speciesId} level={newCatchCard.level} shiny={newCatchCard.isShiny} isNew={newCatchCard.isNew} capture onClose={dismissNewCatchCard} />}
+      {sessionEntered && newCatchCard && <PokemonDetails speciesId={newCatchCard.speciesId} level={newCatchCard.level} shiny={newCatchCard.isShiny} isNew={newCatchCard.isNew} gift={newCatchCard.source==='gift'} capture onClose={dismissNewCatchCard} />}
     </div>
   );
 }

@@ -1,7 +1,10 @@
 import { gameplaySpeed } from '../domain/presentationTiming';
+import { currentNode } from '../data/chapterSelectors';
 import { getPokemonSpecies } from '../../data/pokemonData';
 import { applyExpToParty, nextHealthyPartyIndex } from '../domain/battle';
-import { captureOutcome, familyRoot, referenceLevel, automaticBall } from '../domain/chapterOne';
+import { currentLevelCap } from '../domain/levelCap';
+import { captureOutcome, familyRoot, automaticBall } from '../domain/chapterOne';
+import { familyCandyExperience } from '../domain/buddy';
 import type { GameState } from '../domain/GameState';
 import type { BallType } from '../../types/game';
 import type { SystemContext } from './context';
@@ -34,17 +37,17 @@ export function createCaptureActions({ set, get, runtime }: SystemContext): Pick
             let party = s.party, pcBox = s.pcBox;
             const isNew = !s.pokedexCaught.includes(enemy.speciesId), destination = party.length < 6 ? 'party' as const : 'pc' as const;
             if (roll.success && roll.duplicate) {
-              const root = familyRoot(enemy.speciesId), members = [...party, ...pcBox].filter(mon => familyRoot(mon.speciesId) === root && mon.level < 100);
+              const cap=currentLevelCap(s),root = familyRoot(enemy.speciesId), members = [...party, ...pcBox].filter(mon => familyRoot(mon.speciesId) === root && mon.level < cap);
               const feed = (mon: typeof enemy) => {
                 if (!members.some(member => member.uid === mon.uid)) return mon;
-                const amount = Math.round(referenceLevel(mon.level).candyXp / members.length);
+                const amount = Math.round(familyCandyExperience(mon.level) / members.length);
                 familyAmount += amount;
                 gains[mon.uid] = { amount, active: s.party[s.activePartyIndex]?.uid === mon.uid };
-                return applyExpToParty([mon], -1, amount).party[0];
+                return applyExpToParty([mon], -1, amount, null, cap).party[0];
               };
               party = party.map(feed); pcBox = pcBox.map(feed);
             } else if (roll.success) {
-              const captured = { ...enemy, currentHp: enemy.maxHp, caughtAt: runtime.now(), status: undefined, sleepTurns: undefined, confusedTurns: undefined };
+              const captured = { ...enemy, currentHp: enemy.maxHp, caughtAt: runtime.now(), where: currentNode(get()).name, how: 'wild', status: undefined, sleepTurns: undefined, confusedTurns: undefined };
               if (!party.some(mon => mon.uid === captured.uid) && !pcBox.some(mon => mon.uid === captured.uid)) {
                 if (destination === 'party') party = [...party, captured]; else pcBox = [...pcBox, captured];
               }

@@ -54,6 +54,7 @@ test('all native random-loot outcomes preserve their weight, chapter gate, asset
 test('League KO applies native Kanto XP multiplier before per-member rounding, only once',()=>{
  for(const league of [false,true]){
   const {store}=fixture(),enemy={...store.getState().enemy,level:20};
+  store.getState().setBuddy(null); // Isolate the League multiplier from the starter's Buddy bonus.
   store.setState({activeTrainer:{...store.getState().activeTrainer,league}});
   const expected=Math.round(api.calcBattleExp(enemy,true,false)*(league?2.4:1)*1.1);
   const ctx={get:store.getState,set:store.setState,runtime:store.runtime};

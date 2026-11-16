@@ -3,7 +3,9 @@ import type { ActiveDrop, PokemonInstance } from '../../types/game';
 import { getItemSpriteUrl, getPokemonSpecies } from '../../data/pokemonData';
 import { ALL_CHAPTERS, DEFAULT_CHAPTER } from '../../data/chaptersData';
 import { currentChapter, currentNode } from '../data/chapterSelectors';
-import { applyExpToParty, calcBattleExp } from '../domain/battle';
+import { applyExpToParty, calcBattleExp, gainExperience } from '../domain/battle';
+import { buddyGoal, familyCandyExperience } from '../domain/buddy';
+import { currentLevelCap } from '../domain/levelCap';
 import { rollChapterLoot, kantoLeagueXp } from '../domain/kantoRewards';
 import type { ActiveTrainerState } from '../domain/GameState';
 import type { GameState } from '../domain/GameState';
@@ -13,8 +15,25 @@ export function grantKnockoutReward({ runtime, set, get }: SystemContext, enemy:
     return runtime.commitReward('ko:' + enemy.uid, () => {
         const battleExp = calcBattleExp(enemy, isTrainer, get().berryBuffs.pinap > 0) * (get().activeTrainer?.league?kantoLeagueXp:1);
         set(state => {
-            const result = applyExpToParty(state.party, state.activePartyIndex, battleExp);
-            return { awardedEnemyUids: [...state.awardedEnemyUids, enemy.uid], party: result.party, sidebarExpPopup: `+${result.activeGain.toLocaleString()} XP`, sidebarExpPopups: result.gains, battleLog: getPokemonSpecies(enemy.speciesId).name + ' fainted!' };
+            const cap=currentLevelCap(state);
+            const result = applyExpToParty(state.party, state.activePartyIndex, battleExp, state.buddy.uid, cap);
+            let party = result.party.map((mon, index) => index === state.activePartyIndex ? { ...mon, wins: (mon.wins || 0) + 1 } : mon);
+            let pcBox = state.pcBox;
+            const buddyMon = [...party, ...pcBox].find(mon => mon.uid === state.buddy.uid);
+            let buddy = state.buddy;
+            if (buddyMon) {
+                const ko = buddy.ko + 1, bonus = ko >= buddyGoal(buddyMon);
+                buddy = { uid: buddyMon.uid, ko: bonus ? 0 : ko };
+                if (bonus && buddyMon.level < cap) {
+                    const amount = familyCandyExperience(buddyMon.level);
+                    const award = (mon: PokemonInstance) => mon.uid === buddyMon.uid ? gainExperience(mon, amount, cap) : mon;
+                    party = party.map(award); pcBox = pcBox.map(award);
+                    const gain = result.gains[buddyMon.uid];
+                    result.gains[buddyMon.uid] = { amount: (gain?.amount || 0) + amount, active: !!gain?.active };
+                    if (gain?.active) result.activeGain += amount;
+                }
+            }
+            return { buddy, pcBox, awardedEnemyUids: [...state.awardedEnemyUids, enemy.uid], party, sidebarExpPopup: `+${result.activeGain.toLocaleString()} XP`, sidebarExpPopups: result.gains, battleLog: getPokemonSpecies(enemy.speciesId).name + ' fainted!' };
         });
         get().saveGame(true);
     });

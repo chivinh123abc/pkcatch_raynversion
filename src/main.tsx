@@ -18,6 +18,11 @@ import './styles/trainer.css';
 import './styles/ui-polish-reference.css';
 import './styles/ui-polish.css';
 import './styles/layout-parity.css';
+import './styles/team-pc-reference.css';
+import './styles/inspect-reference.css';
+import './styles/inspect.css';
+import './styles/gift-reference.css';
+import './styles/gift.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

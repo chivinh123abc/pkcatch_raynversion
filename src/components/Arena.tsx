@@ -156,15 +156,16 @@ export const Arena: React.FC = () => {
     return () => window.clearInterval(clockTimer);
   }, []);
 
-  // Auto-scroll timeline to keep active step smoothly centered without any scrollbar
+  // Scroll only the timeline: scrollIntoView also scrolls document ancestors,
+  // including while this arena stays mounted behind Team/PC or Pokédex.
   useEffect(() => {
-    if (activeNodeRef.current && railContainerRef.current) {
-      activeNodeRef.current.scrollIntoView({
-        behavior: 'smooth',
-        inline: 'center',
-        block: 'nearest',
-      });
-    }
+    const node = activeNodeRef.current, rail = railContainerRef.current;
+    if (!node || !rail) return;
+    const nodeRect = node.getBoundingClientRect(), railRect = rail.getBoundingClientRect();
+    rail.scrollTo({
+      left: rail.scrollLeft + nodeRect.left - railRect.left - (rail.clientWidth - nodeRect.width) / 2,
+      behavior: 'smooth',
+    });
   }, [currentStep]);
 
   const currentChapter =
@@ -186,8 +187,10 @@ export const Arena: React.FC = () => {
     return `${m}:${s < 10 ? '0' : ''}${s}`;
   };
 
-  const currentZoneTitle = currentChapter.steps[currentStep-1]?.name || currentChapter.name;
-  const stageBackground = currentChapter.steps[currentStep-1]?.scene || currentChapter.bgScene;
+  const stepNode = currentChapter.steps[currentStep-1];
+  const currentZoneTitle = nodeType === 'center' && stepNode?.type !== 'center' ? 'Pokémon Center' : stepNode?.name || currentChapter.name;
+  // A defeat heals without moving the route cursor until the heal completes.
+  const stageBackground = nodeType === 'center' ? '/assets/bg/scenes/50-centre-pokemon-v2-710x400.webp' : stepNode?.scene || currentChapter.bgScene;
 
   // Use a single transition when the chapter or actual scene changes
   const previousSceneKey = useRef(`${currentChapterId}:${stageBackground}`);

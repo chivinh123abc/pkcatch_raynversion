@@ -41,6 +41,11 @@ export interface PokemonSpecies {
 }
 
 export interface PokemonInstance {
+  where?: string;
+  how?: string;
+  ot?: string;
+  orig?: { how?: string; where?: string; ot?: string };
+  wins?: number;
   status?: 'sleep' | 'freeze' | 'paralysis' | 'burn' | 'poison';
   sleepTurns?: number;
   confusedTurns?: number;

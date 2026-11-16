@@ -1,0 +1,1799 @@
+{
+  "config": {
+    "mult": 1.3,
+    "kos": [
+      5,
+      10,
+      20,
+      50,
+      50
+    ],
+    "ramp": 20,
+    "candyShare": 3,
+    "candies": {
+      "exp-candy-s": {
+        "xp": 1000,
+        "price": 1200,
+        "badges": 0
+      },
+      "exp-candy-m": {
+        "xp": 15000,
+        "price": 7200,
+        "badges": 3
+      },
+      "exp-candy-xl": {
+        "xp": 250000,
+        "price": 48000,
+        "badges": 6
+      },
+      "exp-candy-big": {
+        "xp": 1000000,
+        "price": 96000,
+        "badges": 8
+      }
+    }
+  },
+  "uiKeys": [
+    "monSrc",
+    "buddyIcon",
+    "monName",
+    "dexCard",
+    "showDexCard",
+    "monDetail"
+  ],
+  "icon": "<img class=\"buddy-ic\" src=\"assets/items/love-ball.png\" alt=\"Buddy\" title=\"Buddy\">",
+  "family": [
+    129,
+    130
+  ],
+  "goals": [
+    {
+      "id": 1,
+      "levels": [
+        5,
+        5,
+        10,
+        19,
+        20,
+        20
+      ]
+    },
+    {
+      "id": 4,
+      "levels": [
+        5,
+        5,
+        10,
+        19,
+        20,
+        20
+      ]
+    },
+    {
+      "id": 19,
+      "levels": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "id": 129,
+      "levels": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "id": 130,
+      "levels": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "id": 144,
+      "levels": [
+        5,
+        13,
+        25,
+        48,
+        50,
+        50
+      ]
+    },
+    {
+      "id": 150,
+      "levels": [
+        5,
+        13,
+        25,
+        48,
+        50,
+        50
+      ]
+    }
+  ],
+  "species": {
+    "1": {
+      "family": [
+        1,
+        2,
+        3
+      ],
+      "goal": 20,
+      "evolutions": [
+        {
+          "to": 2,
+          "level": 16
+        }
+      ]
+    },
+    "2": {
+      "family": [
+        1,
+        2,
+        3
+      ],
+      "goal": 20,
+      "evolutions": [
+        {
+          "to": 3,
+          "level": 32
+        }
+      ]
+    },
+    "3": {
+      "family": [
+        1,
+        2,
+        3
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "4": {
+      "family": [
+        4,
+        5,
+        6
+      ],
+      "goal": 20,
+      "evolutions": [
+        {
+          "to": 5,
+          "level": 16
+        }
+      ]
+    },
+    "5": {
+      "family": [
+        4,
+        5,
+        6
+      ],
+      "goal": 20,
+      "evolutions": [
+        {
+          "to": 6,
+          "level": 36
+        }
+      ]
+    },
+    "6": {
+      "family": [
+        4,
+        5,
+        6
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "7": {
+      "family": [
+        7,
+        8,
+        9
+      ],
+      "goal": 20,
+      "evolutions": [
+        {
+          "to": 8,
+          "level": 16
+        }
+      ]
+    },
+    "8": {
+      "family": [
+        7,
+        8,
+        9
+      ],
+      "goal": 20,
+      "evolutions": [
+        {
+          "to": 9,
+          "level": 36
+        }
+      ]
+    },
+    "9": {
+      "family": [
+        7,
+        8,
+        9
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "10": {
+      "family": [
+        10,
+        11,
+        12
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 11,
+          "level": 7
+        }
+      ]
+    },
+    "11": {
+      "family": [
+        10,
+        11,
+        12
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 12,
+          "level": 10
+        }
+      ]
+    },
+    "12": {
+      "family": [
+        10,
+        11,
+        12
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "13": {
+      "family": [
+        13,
+        14,
+        15
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 14,
+          "level": 7
+        }
+      ]
+    },
+    "14": {
+      "family": [
+        13,
+        14,
+        15
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 15,
+          "level": 10
+        }
+      ]
+    },
+    "15": {
+      "family": [
+        13,
+        14,
+        15
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "16": {
+      "family": [
+        16,
+        17,
+        18
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 17,
+          "level": 18
+        }
+      ]
+    },
+    "17": {
+      "family": [
+        16,
+        17,
+        18
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 18,
+          "level": 36
+        }
+      ]
+    },
+    "18": {
+      "family": [
+        16,
+        17,
+        18
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "19": {
+      "family": [
+        19,
+        20
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 20,
+          "level": 20
+        }
+      ]
+    },
+    "20": {
+      "family": [
+        19,
+        20
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "21": {
+      "family": [
+        21,
+        22
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 22,
+          "level": 20
+        }
+      ]
+    },
+    "22": {
+      "family": [
+        21,
+        22
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "23": {
+      "family": [
+        23,
+        24
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 24,
+          "level": 22
+        }
+      ]
+    },
+    "24": {
+      "family": [
+        23,
+        24
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "25": {
+      "family": [
+        172,
+        25,
+        26
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 26,
+          "item": "thunder-stone"
+        }
+      ]
+    },
+    "26": {
+      "family": [
+        172,
+        25,
+        26
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "27": {
+      "family": [
+        27,
+        28
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 28,
+          "level": 22
+        }
+      ]
+    },
+    "28": {
+      "family": [
+        27,
+        28
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "29": {
+      "family": [
+        29,
+        30,
+        31
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 30,
+          "level": 16
+        }
+      ]
+    },
+    "30": {
+      "family": [
+        29,
+        30,
+        31
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 31,
+          "item": "moon-stone"
+        }
+      ]
+    },
+    "31": {
+      "family": [
+        29,
+        30,
+        31
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "32": {
+      "family": [
+        32,
+        33,
+        34
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 33,
+          "level": 16
+        }
+      ]
+    },
+    "33": {
+      "family": [
+        32,
+        33,
+        34
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 34,
+          "item": "moon-stone"
+        }
+      ]
+    },
+    "34": {
+      "family": [
+        32,
+        33,
+        34
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "35": {
+      "family": [
+        173,
+        35,
+        36
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 36,
+          "item": "moon-stone"
+        }
+      ]
+    },
+    "36": {
+      "family": [
+        173,
+        35,
+        36
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "37": {
+      "family": [
+        37,
+        38
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 38,
+          "item": "fire-stone"
+        }
+      ]
+    },
+    "38": {
+      "family": [
+        37,
+        38
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "39": {
+      "family": [
+        174,
+        39,
+        40
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 40,
+          "item": "moon-stone"
+        }
+      ]
+    },
+    "40": {
+      "family": [
+        174,
+        39,
+        40
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "41": {
+      "family": [
+        41,
+        42,
+        169
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 42,
+          "level": 22
+        }
+      ]
+    },
+    "42": {
+      "family": [
+        41,
+        42,
+        169
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "43": {
+      "family": [
+        43,
+        44,
+        45,
+        182
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 44,
+          "level": 21
+        }
+      ]
+    },
+    "44": {
+      "family": [
+        43,
+        44,
+        45,
+        182
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 45,
+          "item": "leaf-stone"
+        }
+      ]
+    },
+    "45": {
+      "family": [
+        43,
+        44,
+        45,
+        182
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "46": {
+      "family": [
+        46,
+        47
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 47,
+          "level": 24
+        }
+      ]
+    },
+    "47": {
+      "family": [
+        46,
+        47
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "48": {
+      "family": [
+        48,
+        49
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 49,
+          "level": 31
+        }
+      ]
+    },
+    "49": {
+      "family": [
+        48,
+        49
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "50": {
+      "family": [
+        50,
+        51
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 51,
+          "level": 26
+        }
+      ]
+    },
+    "51": {
+      "family": [
+        50,
+        51
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "52": {
+      "family": [
+        52,
+        53
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 53,
+          "level": 28
+        }
+      ]
+    },
+    "53": {
+      "family": [
+        52,
+        53
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "54": {
+      "family": [
+        54,
+        55
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 55,
+          "level": 33
+        }
+      ]
+    },
+    "55": {
+      "family": [
+        54,
+        55
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "56": {
+      "family": [
+        56,
+        57
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 57,
+          "level": 28
+        }
+      ]
+    },
+    "57": {
+      "family": [
+        56,
+        57
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "58": {
+      "family": [
+        58,
+        59
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 59,
+          "item": "fire-stone"
+        }
+      ]
+    },
+    "59": {
+      "family": [
+        58,
+        59
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "60": {
+      "family": [
+        60,
+        61,
+        62,
+        186
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 61,
+          "level": 25
+        }
+      ]
+    },
+    "61": {
+      "family": [
+        60,
+        61,
+        62,
+        186
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 62,
+          "item": "water-stone"
+        }
+      ]
+    },
+    "62": {
+      "family": [
+        60,
+        61,
+        62,
+        186
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "63": {
+      "family": [
+        63,
+        64,
+        65
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 64,
+          "level": 16
+        }
+      ]
+    },
+    "64": {
+      "family": [
+        63,
+        64,
+        65
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 65,
+          "item": "link-cable"
+        }
+      ]
+    },
+    "65": {
+      "family": [
+        63,
+        64,
+        65
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "66": {
+      "family": [
+        66,
+        67,
+        68
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 67,
+          "level": 28
+        }
+      ]
+    },
+    "67": {
+      "family": [
+        66,
+        67,
+        68
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 68,
+          "item": "link-cable"
+        }
+      ]
+    },
+    "68": {
+      "family": [
+        66,
+        67,
+        68
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "69": {
+      "family": [
+        69,
+        70,
+        71
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 70,
+          "level": 21
+        }
+      ]
+    },
+    "70": {
+      "family": [
+        69,
+        70,
+        71
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 71,
+          "item": "leaf-stone"
+        }
+      ]
+    },
+    "71": {
+      "family": [
+        69,
+        70,
+        71
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "72": {
+      "family": [
+        72,
+        73
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 73,
+          "level": 30
+        }
+      ]
+    },
+    "73": {
+      "family": [
+        72,
+        73
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "74": {
+      "family": [
+        74,
+        75,
+        76
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 75,
+          "level": 25
+        }
+      ]
+    },
+    "75": {
+      "family": [
+        74,
+        75,
+        76
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 76,
+          "item": "link-cable"
+        }
+      ]
+    },
+    "76": {
+      "family": [
+        74,
+        75,
+        76
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "77": {
+      "family": [
+        77,
+        78
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 78,
+          "level": 40
+        }
+      ]
+    },
+    "78": {
+      "family": [
+        77,
+        78
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "79": {
+      "family": [
+        79,
+        80,
+        199
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 80,
+          "level": 37
+        }
+      ]
+    },
+    "80": {
+      "family": [
+        79,
+        80,
+        199
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "81": {
+      "family": [
+        81,
+        82,
+        462
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 82,
+          "level": 30
+        }
+      ]
+    },
+    "82": {
+      "family": [
+        81,
+        82,
+        462
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "83": {
+      "family": [
+        83
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "84": {
+      "family": [
+        84,
+        85
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 85,
+          "level": 31
+        }
+      ]
+    },
+    "85": {
+      "family": [
+        84,
+        85
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "86": {
+      "family": [
+        86,
+        87
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 87,
+          "level": 34
+        }
+      ]
+    },
+    "87": {
+      "family": [
+        86,
+        87
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "88": {
+      "family": [
+        88,
+        89
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 89,
+          "level": 38
+        }
+      ]
+    },
+    "89": {
+      "family": [
+        88,
+        89
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "90": {
+      "family": [
+        90,
+        91
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 91,
+          "item": "water-stone"
+        }
+      ]
+    },
+    "91": {
+      "family": [
+        90,
+        91
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "92": {
+      "family": [
+        92,
+        93,
+        94
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 93,
+          "level": 25
+        }
+      ]
+    },
+    "93": {
+      "family": [
+        92,
+        93,
+        94
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 94,
+          "item": "link-cable"
+        }
+      ]
+    },
+    "94": {
+      "family": [
+        92,
+        93,
+        94
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "95": {
+      "family": [
+        95,
+        208
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "96": {
+      "family": [
+        96,
+        97
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 97,
+          "level": 26
+        }
+      ]
+    },
+    "97": {
+      "family": [
+        96,
+        97
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "98": {
+      "family": [
+        98,
+        99
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 99,
+          "level": 28
+        }
+      ]
+    },
+    "99": {
+      "family": [
+        98,
+        99
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "100": {
+      "family": [
+        100,
+        101
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 101,
+          "level": 30
+        }
+      ]
+    },
+    "101": {
+      "family": [
+        100,
+        101
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "102": {
+      "family": [
+        102,
+        103
+      ],
+      "goal": 10,
+      "evolutions": [
+        {
+          "to": 103,
+          "item": "leaf-stone"
+        }
+      ]
+    },
+    "103": {
+      "family": [
+        102,
+        103
+      ],
+      "goal": 10,
+      "evolutions": []
+    },
+    "104": {
+      "family": [
+        104,
+        105
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 105,
+          "level": 28
+        }
+      ]
+    },
+    "105": {
+      "family": [
+        104,
+        105
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "106": {
+      "family": [
+        236,
+        106,
+        107,
+        237
+      ],
+      "goal": 10,
+      "evolutions": []
+    },
+    "107": {
+      "family": [
+        236,
+        106,
+        107,
+        237
+      ],
+      "goal": 10,
+      "evolutions": []
+    },
+    "108": {
+      "family": [
+        108,
+        463
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "109": {
+      "family": [
+        109,
+        110
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 110,
+          "level": 35
+        }
+      ]
+    },
+    "110": {
+      "family": [
+        109,
+        110
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "111": {
+      "family": [
+        111,
+        112,
+        464
+      ],
+      "goal": 10,
+      "evolutions": [
+        {
+          "to": 112,
+          "level": 42
+        }
+      ]
+    },
+    "112": {
+      "family": [
+        111,
+        112,
+        464
+      ],
+      "goal": 10,
+      "evolutions": []
+    },
+    "113": {
+      "family": [
+        440,
+        113,
+        242
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "114": {
+      "family": [
+        114,
+        465
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "115": {
+      "family": [
+        115
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "116": {
+      "family": [
+        116,
+        117,
+        230
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 117,
+          "level": 32
+        }
+      ]
+    },
+    "117": {
+      "family": [
+        116,
+        117,
+        230
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "118": {
+      "family": [
+        118,
+        119
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 119,
+          "level": 33
+        }
+      ]
+    },
+    "119": {
+      "family": [
+        118,
+        119
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "120": {
+      "family": [
+        120,
+        121
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 121,
+          "item": "water-stone"
+        }
+      ]
+    },
+    "121": {
+      "family": [
+        120,
+        121
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "122": {
+      "family": [
+        439,
+        122
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "123": {
+      "family": [
+        123,
+        212
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "124": {
+      "family": [
+        238,
+        124
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "125": {
+      "family": [
+        239,
+        125,
+        466
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "126": {
+      "family": [
+        240,
+        126,
+        467
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "127": {
+      "family": [
+        127
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "128": {
+      "family": [
+        128
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "129": {
+      "family": [
+        129,
+        130
+      ],
+      "goal": 5,
+      "evolutions": [
+        {
+          "to": 130,
+          "level": 20
+        }
+      ]
+    },
+    "130": {
+      "family": [
+        129,
+        130
+      ],
+      "goal": 5,
+      "evolutions": []
+    },
+    "131": {
+      "family": [
+        131
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "132": {
+      "family": [
+        132
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "133": {
+      "family": [
+        133,
+        134,
+        135,
+        136,
+        196,
+        197,
+        470,
+        471
+      ],
+      "goal": 20,
+      "evolutions": [
+        {
+          "to": 134,
+          "item": "water-stone"
+        },
+        {
+          "to": 135,
+          "item": "thunder-stone"
+        },
+        {
+          "to": 136,
+          "item": "fire-stone"
+        }
+      ]
+    },
+    "134": {
+      "family": [
+        133,
+        134,
+        135,
+        136,
+        196,
+        197,
+        470,
+        471
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "135": {
+      "family": [
+        133,
+        134,
+        135,
+        136,
+        196,
+        197,
+        470,
+        471
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "136": {
+      "family": [
+        133,
+        134,
+        135,
+        136,
+        196,
+        197,
+        470,
+        471
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "137": {
+      "family": [
+        137,
+        233,
+        474
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "138": {
+      "family": [
+        138,
+        139
+      ],
+      "goal": 20,
+      "evolutions": [
+        {
+          "to": 139,
+          "level": 40
+        }
+      ]
+    },
+    "139": {
+      "family": [
+        138,
+        139
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "140": {
+      "family": [
+        140,
+        141
+      ],
+      "goal": 20,
+      "evolutions": [
+        {
+          "to": 141,
+          "level": 40
+        }
+      ]
+    },
+    "141": {
+      "family": [
+        140,
+        141
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "142": {
+      "family": [
+        142
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "143": {
+      "family": [
+        446,
+        143
+      ],
+      "goal": 10,
+      "evolutions": []
+    },
+    "144": {
+      "family": [
+        144
+      ],
+      "goal": 50,
+      "evolutions": []
+    },
+    "145": {
+      "family": [
+        145
+      ],
+      "goal": 50,
+      "evolutions": []
+    },
+    "146": {
+      "family": [
+        146
+      ],
+      "goal": 50,
+      "evolutions": []
+    },
+    "147": {
+      "family": [
+        147,
+        148,
+        149
+      ],
+      "goal": 20,
+      "evolutions": [
+        {
+          "to": 148,
+          "level": 30
+        }
+      ]
+    },
+    "148": {
+      "family": [
+        147,
+        148,
+        149
+      ],
+      "goal": 20,
+      "evolutions": [
+        {
+          "to": 149,
+          "level": 55
+        }
+      ]
+    },
+    "149": {
+      "family": [
+        147,
+        148,
+        149
+      ],
+      "goal": 20,
+      "evolutions": []
+    },
+    "150": {
+      "family": [
+        150
+      ],
+      "goal": 50,
+      "evolutions": []
+    },
+    "151": {
+      "family": [
+        151
+      ],
+      "goal": 50,
+      "evolutions": []
+    }
+  },
+  "candyXp": {
+    "exp-candy-s": 600,
+    "exp-candy-m": 9000,
+    "exp-candy-xl": 150000,
+    "exp-candy-big": 600000
+  },
+  "source": {
+    "build": "b05c8cc201",
+    "app": "app.c0081498f2.js",
+    "css": "app.3e06fa8ed6.css",
+    "appSha256": "c0081498f217061d529fb18ecc4833e9490c93e0b425fc3d04b713d990fdda11",
+    "cssSha256": "3e06fa8ed6cfcca3070da71b03fe5758d6b786faba9accdb4b680590f6cc525b"
+  }
+}

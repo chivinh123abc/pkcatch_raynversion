@@ -1,0 +1,939 @@
+{
+  "functions": {
+    "team.newCount": "()=>B.ownedMons().filter(C=>i(C,B.S.pcVisit||0)).length",
+    "pokedex.newCount": "()=>Object.values(z.S.dex).filter(ce=>(ce.firstAt||0)>(z.S.dexVisit||0)).length",
+    "UI.statBars": "function ps(w,O){const de=h.DEX[w].stats,oe=O&&h.statsOf(O),xa=O?.shiny&&s.SHINY_STAT_BONUS||0,La=O?h.rankOf(O):0,Fa=s.UNDERGROUND.RANK_STAT**La,_t=160*Fa,bt=La&&{...h.statsOf({...O,rank:0}),hp:h.maxHp({...O,rank:0})},xt=O?.taste&&h.statsOf({...O,taste:null}),ys=xa?e(\"+{n} % ✨ (chromatique)\",{n:Math.round(xa*100)}):\"\",Os=as=>Math.min(100,as/_t*100),is=`linear-gradient(90deg, ${Ts.map(([as,bs])=>`${bs} ${(as/_t*100).toFixed(1)}%`).join(\", \")})`;return`<div class=\"statbars${O?\" real\":\"\"}${La?\" ranked\":\"\"}\" style=\"--g:${is};--nw:${(40/_t*100).toFixed(2)}cqw\">${[\"hp\",\"atk\",\"def\",\"spa\",\"spd\",\"spe\"].map(as=>{const bs=de[as],_s=bs*xa,R=(bs+_s)*Fa;let K=[[\"\",0,bs],[\"shiny\",bs,bs+_s],[\"rk\",bs+_s,R]];const Y=O&&a.Tastes?.barPart(O,as,R);Y?.[0]===\"gt-up\"?K.push(Y):Y&&(K=[...K.map(([es,os,ks])=>[es,Math.min(os,Y[1]),Math.min(ks,Y[1])]),Y]);const W=K.map(([es,os,ks])=>[es,Os(os),Os(ks)]).filter(([,es,os])=>os-es>.05),fa=W.map(([es,os,ks],ze)=>`<i${es||ze===W.length-1?` class=\"${[es,ze===W.length-1&&\"end\"].filter(Boolean).join(\" \")}\"`:\"\"} style=\"left:${os.toFixed(2)}%;width:${(ks-os).toFixed(2)}%;--x:${(-os).toFixed(2)}cqw\"></i>`).join(\"\"),Ta=as===\"hp\"?O&&h.maxHp(O):oe?.[as],_a=La?Ta-bt[as]:0,It=O?as===\"hp\"?`${h.curHp(O)}/${Ta}`:Ta:bs,Kt=Y&&as!==\"hp\"?Ta-xt[as]:0,Ft=[ys,_a&&e(\"Rang {r} : +{n}\",{r:ea[La],n:_a}),Kt&&e(\"Goûts : {n}\",{n:(Kt>0?\"+\":\"−\")+Sa(Math.abs(Kt))})].filter(Boolean).join(\" · \"),pt=ys?\"shiny-up\":\"\";return`<span>${ws()[as]}</span><b${pt?` class=\"${pt}\"`:\"\"}${Ft?` title=\"${P(Ft)}\"`:\"\"}>${It}${_a?`<small class=\"rk-gain\">+${Sa(_a)}</small>`:\"\"}${Kt?`<small class=\"gt ${Kt>0?\"up\":\"dn\"}\">${Kt>0?\"+\":\"−\"}${Sa(Math.abs(Kt))}</small>`:\"\"}</b><div class=\"bar\">${La?`<i class=\"lim\" style=\"left:${Os(160).toFixed(2)}%\"></i>`:\"\"}${fa}</div>`}).join(\"\")}</div>`}",
+    "UI.showDexCard": "function rn(w,O={}){const de=!O.actions;return Tt({className:\"dexcard-modal\",body:tn(w,{...O,closable:de}),actions:O.actions||[],onOpen:(oe,xa,La)=>{if((h.S.dex[w]||O.mon||h.S.seen?.[w])&&oe.style.setProperty(\"--c\",Kn[h.DEX[w].types[0]].color),oe.querySelector(\".dc-x\")?.addEventListener(\"click\",()=>xa(null)),oe.querySelectorAll(\"details[data-fold]\").forEach(Fa=>Fa.addEventListener(\"toggle\",()=>{ms[Fa.dataset.fold]=Fa.open})),O.nav)for(const[Fa,_t]of[[\"prev\",\"‹\"],[\"next\",\"›\"]]){const bt=H(`<button class=\"dc-nav ${Fa}\" aria-label=\"${Fa===\"prev\"?\"Précédent\":\"Suivant\"}\">${_t}</button>`);O.nav[Fa]?bt.onclick=()=>xa(Fa):bt.disabled=!0,oe.appendChild(bt)}return O.nav&&$e(oe),O.onOpen?.(oe,xa,La)}}).then(oe=>(oe!==\"prev\"&&oe!==\"next\"&&oe!==\"shiny\"&&Jt(),oe))}",
+    "UI.modal": "function Tt(w){return ct(()=>new Promise(O=>{const de=Ya(),oe=H(`<div class=\"modal ${w.className||\"\"}\"><div class=\"modal-body\"></div><div class=\"modal-actions\"></div></div>`),xa=m(\".modal-body\",oe),La=oe.lastElementChild;typeof w.body==\"string\"?xa.innerHTML=w.body:w.body&&xa.appendChild(w.body);let Fa=!1;const _t=new AbortController,bt=is=>{Fa||(Fa=!0,clearTimeout(ys),_t.abort(),de.classList.remove(\"open\"),de.innerHTML=\"\",de.onclick=null,document.removeEventListener(\"keydown\",xt),O(is))},xt=is=>{is.key===\"Escape\"&&w.dismissable!==!1&&bt(null)};for(const is of w.actions||[]){const as=H(`<button class=\"btn ${is.cls||\"\"}\">${is.label}</button>`);is.disabled&&(as.disabled=!0),as.onclick=async()=>{is.onClick&&await is.onClick(as)===!1||bt(\"value\"in is?is.value:is.label)},La.appendChild(as)}(w.actions||[]).length?w.actions.length===1&&!/\\bghost\\b/.test(w.actions[0].cls||\"\")?La.classList.add(\"solo\"):w.actions.length===2&&La.classList.add(\"duo\"):La.remove(),de.style.animation=oe.style.animation=w.swap?\"none\":\"\",de.innerHTML=\"\",de.appendChild(oe),de.classList.add(\"open\"),de.onclick=is=>{is.target===de&&w.dismissable!==!1&&bt(null)},document.addEventListener(\"keydown\",xt);const ys=w.autoClose&&Ut(()=>bt(null),w.autoClose),Os=w.onOpen?.(oe,bt,_t.signal);Os&&typeof Os.catch==\"function\"&&Os.catch(is=>{console.error(is);const as=H(`<div class=\"modal-actions\"><button class=\"btn gold\">${e(\"Continuer\")}</button></div>`);as.querySelector(\"button\").onclick=()=>bt(null),oe.appendChild(as)})}))}"
+  },
+  "cases": [
+    {
+      "label": "received in party",
+      "team": 0,
+      "pokedex": 1
+    },
+    {
+      "label": "six in party",
+      "team": 0,
+      "pokedex": 6
+    },
+    {
+      "label": "seventh goes to PC",
+      "team": 0,
+      "pokedex": 7
+    },
+    {
+      "label": "new shiny in PC",
+      "team": 1,
+      "pokedex": 8
+    },
+    {
+      "label": "same shiny moved into party",
+      "team": 1,
+      "pokedex": 8
+    },
+    {
+      "label": "traded shiny excluded",
+      "team": 0,
+      "pokedex": 8
+    }
+  ],
+  "source": {
+    "build": "b05c8cc201",
+    "app": "c0081498f217061d529fb18ecc4833e9490c93e0b425fc3d04b713d990fdda11",
+    "css": "3e06fa8ed6cfcca3070da71b03fe5758d6b786faba9accdb4b680590f6cc525b",
+    "capturedAt": "2026-11-16T06:28:54.103Z"
+  },
+  "screens": {
+    "team": {
+      ".side-nav>button.active": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "20px",
+          "fontWeight": "600",
+          "lineHeight": "normal",
+          "color": "rgb(255, 255, 255)",
+          "textShadow": "oklch(0.402285 0.230417 2.66113) 2px 2px 0px",
+          "boxShadow": "none",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backdropFilter": "none",
+          "borderColor": "rgb(255, 255, 255)",
+          "borderWidth": "0px",
+          "borderRadius": "0px",
+          "padding": "0px 12px",
+          "width": "238px",
+          "transform": "none",
+          "transitionDuration": "0.08s"
+        },
+        "before": {
+          "boxShadow": "none",
+          "backgroundColor": "oklch(0.397508 0.27231 352.661 / 0.5)",
+          "backgroundImage": "none",
+          "content": "\"\"",
+          "filter": "none",
+          "transform": "none",
+          "inset": "4px -4px -4px 4px",
+          "maskImage": "repeating-conic-gradient(rgb(0, 0, 0) 0deg, rgb(0, 0, 0) 25%, rgba(0, 0, 0, 0) 0deg, rgba(0, 0, 0, 0) 50%), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px)",
+          "maskSize": "4px 4px, calc(100% - 12px) 100%, calc(100% - 4px) calc(100% - 4px), 100% calc(100% - 12px)",
+          "clipPath": "none"
+        },
+        "after": {
+          "boxShadow": "none",
+          "backgroundColor": "rgb(27, 27, 34)",
+          "backgroundImage": "linear-gradient(rgb(227, 53, 59) 0px, rgb(227, 53, 59) 0px), linear-gradient(rgb(227, 53, 59) 0px, rgb(227, 53, 59) 0px), linear-gradient(rgb(227, 53, 59) 0px, rgb(227, 53, 59) 0px), linear-gradient(oklch(0.702285 0.20947 32.6611) 0px, oklch(0.702285 0.20947 32.6611) 0px), linear-gradient(oklch(0.702285 0.20947 32.6611) 0px, oklch(0.702285 0.20947 32.6611) 0px), linear-gradient(oklch(0.702285 0.20947 32.6611) 0px, oklch(0.702285 0.20947 32.6611) 0px), linear-gradient(oklch(0.402285 0.230417 2.66113) 0px, oklch(0.402285 0.230417 2.66113) 0px), linear-gradient(oklch(0.402285 0.230417 2.66113) 0px, oklch(0.402285 0.230417 2.66113) 0px), linear-gradient(oklch(0.402285 0.230417 2.66113) 0px, oklch(0.402285 0.230417 2.66113) 0px), none",
+          "content": "\"\"",
+          "filter": "none",
+          "transform": "none",
+          "inset": "0px",
+          "maskImage": "none",
+          "maskSize": "auto",
+          "clipPath": "polygon(evenodd, -48px -48px, -2px -2px, 6px -2px, 6px 2px, 2px 2px, 2px 4px, 2px 4px, 2px 6px, -2px 6px, -2px -2px, -48px -48px, calc(100% + 48px) -48px, calc(100% + 2px) -2px, calc(100% - 6px) -2px, calc(100% - 6px) 2px, calc(100% - 2px) 2px, calc(100% - 2px) 4px, calc(100% - 2px) 4px, calc(100% - 2px) 6px, calc(100% + 2px) 6px, calc(100% + 2px) -2px, calc(100% + 48px) -48px, calc(100% + 48px) calc(100% + 48px), calc(100% + 2px) calc(100% + 2px), calc(100% - 6px) calc(100% + 2px), calc(100% - 6px) calc(100% - 2px), calc(100% - 2px) calc(100% - 2px), calc(100% - 2px) calc(100% - 4px), calc(100% - 2px) calc(100% - 4px), calc(100% - 2px) calc(100% - 6px), calc(100% + 2px) calc(100% - 6px), calc(100% + 2px) calc(100% + 2px), calc(100% + 48px) calc(100% + 48px), -48px calc(100% + 48px), -2px calc(100% + 2px), 6px calc(100% + 2px), 6px calc(100% - 2px), 2px calc(100% - 2px), 2px calc(100% - 4px), 2px calc(100% - 4px), 2px calc(100% - 6px), -2px calc(100% - 6px), -2px calc(100% + 2px), -48px calc(100% + 48px))"
+        }
+      },
+      ".side-nav>button:not(.active)": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "20px",
+          "fontWeight": "600",
+          "lineHeight": "normal",
+          "color": "rgb(195, 201, 216)",
+          "textShadow": "none",
+          "boxShadow": "none",
+          "backgroundColor": "color(srgb 0.145098 0.164706 0.239216 / 0.6)",
+          "backdropFilter": "none",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "borderWidth": "2px",
+          "borderRadius": "10px",
+          "padding": "0px 12px",
+          "width": "auto",
+          "transform": "none",
+          "transitionDuration": "0.15s, 0.15s, 0.15s"
+        },
+        "before": {
+          "boxShadow": "none",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none",
+          "content": "none",
+          "filter": "none",
+          "transform": "none",
+          "inset": "auto",
+          "maskImage": "none",
+          "maskSize": "auto",
+          "clipPath": "none"
+        },
+        "after": {
+          "boxShadow": "none",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none",
+          "content": "none",
+          "filter": "none",
+          "transform": "none",
+          "inset": "auto",
+          "maskImage": "none",
+          "maskSize": "auto",
+          "clipPath": "none"
+        }
+      },
+      "hover": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "20px",
+          "fontWeight": "600",
+          "lineHeight": "normal",
+          "color": "rgb(255, 255, 255)",
+          "textShadow": "oklch(0.402285 0.230417 2.66113) 2px 2px 0px",
+          "boxShadow": "none",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backdropFilter": "none",
+          "borderColor": "rgb(255, 255, 255)",
+          "borderWidth": "0px",
+          "borderRadius": "0px",
+          "padding": "0px 12px",
+          "width": "238px",
+          "transform": "none",
+          "transitionDuration": "0.08s"
+        },
+        "before": {
+          "boxShadow": "none",
+          "backgroundColor": "oklch(0.397508 0.27231 352.661 / 0.5)",
+          "backgroundImage": "none",
+          "content": "\"\"",
+          "filter": "none",
+          "transform": "none",
+          "inset": "4px -4px -4px 4px",
+          "maskImage": "repeating-conic-gradient(rgb(0, 0, 0) 0deg, rgb(0, 0, 0) 25%, rgba(0, 0, 0, 0) 0deg, rgba(0, 0, 0, 0) 50%), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px)",
+          "maskSize": "4px 4px, calc(100% - 12px) 100%, calc(100% - 4px) calc(100% - 4px), 100% calc(100% - 12px)",
+          "clipPath": "none"
+        },
+        "after": {
+          "boxShadow": "none",
+          "backgroundColor": "rgb(27, 27, 34)",
+          "backgroundImage": "linear-gradient(oklch(0.662285 0.20947 24.6611) 0px, oklch(0.662285 0.20947 24.6611) 0px), linear-gradient(oklch(0.662285 0.20947 24.6611) 0px, oklch(0.662285 0.20947 24.6611) 0px), linear-gradient(oklch(0.662285 0.20947 24.6611) 0px, oklch(0.662285 0.20947 24.6611) 0px), linear-gradient(oklch(0.702285 0.20947 32.6611) 0px, oklch(0.702285 0.20947 32.6611) 0px), linear-gradient(oklch(0.702285 0.20947 32.6611) 0px, oklch(0.702285 0.20947 32.6611) 0px), linear-gradient(oklch(0.702285 0.20947 32.6611) 0px, oklch(0.702285 0.20947 32.6611) 0px), linear-gradient(oklch(0.402285 0.230417 2.66113) 0px, oklch(0.402285 0.230417 2.66113) 0px), linear-gradient(oklch(0.402285 0.230417 2.66113) 0px, oklch(0.402285 0.230417 2.66113) 0px), linear-gradient(oklch(0.402285 0.230417 2.66113) 0px, oklch(0.402285 0.230417 2.66113) 0px), none",
+          "content": "\"\"",
+          "filter": "none",
+          "transform": "none",
+          "inset": "0px",
+          "maskImage": "none",
+          "maskSize": "auto",
+          "clipPath": "polygon(evenodd, -48px -48px, -2px -2px, 6px -2px, 6px 2px, 2px 2px, 2px 4px, 2px 4px, 2px 6px, -2px 6px, -2px -2px, -48px -48px, calc(100% + 48px) -48px, calc(100% + 2px) -2px, calc(100% - 6px) -2px, calc(100% - 6px) 2px, calc(100% - 2px) 2px, calc(100% - 2px) 4px, calc(100% - 2px) 4px, calc(100% - 2px) 6px, calc(100% + 2px) 6px, calc(100% + 2px) -2px, calc(100% + 48px) -48px, calc(100% + 48px) calc(100% + 48px), calc(100% + 2px) calc(100% + 2px), calc(100% - 6px) calc(100% + 2px), calc(100% - 6px) calc(100% - 2px), calc(100% - 2px) calc(100% - 2px), calc(100% - 2px) calc(100% - 4px), calc(100% - 2px) calc(100% - 4px), calc(100% - 2px) calc(100% - 6px), calc(100% + 2px) calc(100% - 6px), calc(100% + 2px) calc(100% + 2px), calc(100% + 48px) calc(100% + 48px), -48px calc(100% + 48px), -2px calc(100% + 2px), 6px calc(100% + 2px), 6px calc(100% - 2px), 2px calc(100% - 2px), 2px calc(100% - 4px), 2px calc(100% - 4px), 2px calc(100% - 6px), -2px calc(100% - 6px), -2px calc(100% + 2px), -48px calc(100% + 48px))"
+        }
+      }
+    },
+    "pokedex": {
+      ".side-nav>button.active": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "20px",
+          "fontWeight": "600",
+          "lineHeight": "normal",
+          "color": "rgb(255, 255, 255)",
+          "textShadow": "oklch(0.402285 0.230417 2.66113) 2px 2px 0px",
+          "boxShadow": "none",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backdropFilter": "none",
+          "borderColor": "rgb(255, 255, 255)",
+          "borderWidth": "0px",
+          "borderRadius": "0px",
+          "padding": "0px 12px",
+          "width": "238px",
+          "transform": "none",
+          "transitionDuration": "0.08s"
+        },
+        "before": {
+          "boxShadow": "none",
+          "backgroundColor": "oklch(0.397508 0.27231 352.661 / 0.5)",
+          "backgroundImage": "none",
+          "content": "\"\"",
+          "filter": "none",
+          "transform": "none",
+          "inset": "4px -4px -4px 4px",
+          "maskImage": "repeating-conic-gradient(rgb(0, 0, 0) 0deg, rgb(0, 0, 0) 25%, rgba(0, 0, 0, 0) 0deg, rgba(0, 0, 0, 0) 50%), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px)",
+          "maskSize": "4px 4px, calc(100% - 12px) 100%, calc(100% - 4px) calc(100% - 4px), 100% calc(100% - 12px)",
+          "clipPath": "none"
+        },
+        "after": {
+          "boxShadow": "none",
+          "backgroundColor": "rgb(27, 27, 34)",
+          "backgroundImage": "linear-gradient(rgb(227, 53, 59) 0px, rgb(227, 53, 59) 0px), linear-gradient(rgb(227, 53, 59) 0px, rgb(227, 53, 59) 0px), linear-gradient(rgb(227, 53, 59) 0px, rgb(227, 53, 59) 0px), linear-gradient(oklch(0.702285 0.20947 32.6611) 0px, oklch(0.702285 0.20947 32.6611) 0px), linear-gradient(oklch(0.702285 0.20947 32.6611) 0px, oklch(0.702285 0.20947 32.6611) 0px), linear-gradient(oklch(0.702285 0.20947 32.6611) 0px, oklch(0.702285 0.20947 32.6611) 0px), linear-gradient(oklch(0.402285 0.230417 2.66113) 0px, oklch(0.402285 0.230417 2.66113) 0px), linear-gradient(oklch(0.402285 0.230417 2.66113) 0px, oklch(0.402285 0.230417 2.66113) 0px), linear-gradient(oklch(0.402285 0.230417 2.66113) 0px, oklch(0.402285 0.230417 2.66113) 0px), none",
+          "content": "\"\"",
+          "filter": "none",
+          "transform": "none",
+          "inset": "0px",
+          "maskImage": "none",
+          "maskSize": "auto",
+          "clipPath": "polygon(evenodd, -48px -48px, -2px -2px, 6px -2px, 6px 2px, 2px 2px, 2px 4px, 2px 4px, 2px 6px, -2px 6px, -2px -2px, -48px -48px, calc(100% + 48px) -48px, calc(100% + 2px) -2px, calc(100% - 6px) -2px, calc(100% - 6px) 2px, calc(100% - 2px) 2px, calc(100% - 2px) 4px, calc(100% - 2px) 4px, calc(100% - 2px) 6px, calc(100% + 2px) 6px, calc(100% + 2px) -2px, calc(100% + 48px) -48px, calc(100% + 48px) calc(100% + 48px), calc(100% + 2px) calc(100% + 2px), calc(100% - 6px) calc(100% + 2px), calc(100% - 6px) calc(100% - 2px), calc(100% - 2px) calc(100% - 2px), calc(100% - 2px) calc(100% - 4px), calc(100% - 2px) calc(100% - 4px), calc(100% - 2px) calc(100% - 6px), calc(100% + 2px) calc(100% - 6px), calc(100% + 2px) calc(100% + 2px), calc(100% + 48px) calc(100% + 48px), -48px calc(100% + 48px), -2px calc(100% + 2px), 6px calc(100% + 2px), 6px calc(100% - 2px), 2px calc(100% - 2px), 2px calc(100% - 4px), 2px calc(100% - 4px), 2px calc(100% - 6px), -2px calc(100% - 6px), -2px calc(100% + 2px), -48px calc(100% + 48px))"
+        }
+      },
+      ".side-nav>button:not(.active)": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "20px",
+          "fontWeight": "600",
+          "lineHeight": "normal",
+          "color": "rgb(195, 201, 216)",
+          "textShadow": "none",
+          "boxShadow": "none",
+          "backgroundColor": "color(srgb 0.145098 0.164706 0.239216 / 0.6)",
+          "backdropFilter": "none",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "borderWidth": "2px",
+          "borderRadius": "10px",
+          "padding": "0px 12px",
+          "width": "auto",
+          "transform": "none",
+          "transitionDuration": "0.15s, 0.15s, 0.15s"
+        },
+        "before": {
+          "boxShadow": "none",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none",
+          "content": "none",
+          "filter": "none",
+          "transform": "none",
+          "inset": "auto",
+          "maskImage": "none",
+          "maskSize": "auto",
+          "clipPath": "none"
+        },
+        "after": {
+          "boxShadow": "none",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none",
+          "content": "none",
+          "filter": "none",
+          "transform": "none",
+          "inset": "auto",
+          "maskImage": "none",
+          "maskSize": "auto",
+          "clipPath": "none"
+        }
+      },
+      "hover": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "20px",
+          "fontWeight": "600",
+          "lineHeight": "normal",
+          "color": "rgb(255, 255, 255)",
+          "textShadow": "oklch(0.402285 0.230417 2.66113) 2px 2px 0px",
+          "boxShadow": "none",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backdropFilter": "none",
+          "borderColor": "rgb(255, 255, 255)",
+          "borderWidth": "0px",
+          "borderRadius": "0px",
+          "padding": "0px 12px",
+          "width": "238px",
+          "transform": "none",
+          "transitionDuration": "0.08s"
+        },
+        "before": {
+          "boxShadow": "none",
+          "backgroundColor": "oklch(0.397508 0.27231 352.661 / 0.5)",
+          "backgroundImage": "none",
+          "content": "\"\"",
+          "filter": "none",
+          "transform": "none",
+          "inset": "4px -4px -4px 4px",
+          "maskImage": "repeating-conic-gradient(rgb(0, 0, 0) 0deg, rgb(0, 0, 0) 25%, rgba(0, 0, 0, 0) 0deg, rgba(0, 0, 0, 0) 50%), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px)",
+          "maskSize": "4px 4px, calc(100% - 12px) 100%, calc(100% - 4px) calc(100% - 4px), 100% calc(100% - 12px)",
+          "clipPath": "none"
+        },
+        "after": {
+          "boxShadow": "none",
+          "backgroundColor": "rgb(27, 27, 34)",
+          "backgroundImage": "linear-gradient(oklch(0.662285 0.20947 24.6611) 0px, oklch(0.662285 0.20947 24.6611) 0px), linear-gradient(oklch(0.662285 0.20947 24.6611) 0px, oklch(0.662285 0.20947 24.6611) 0px), linear-gradient(oklch(0.662285 0.20947 24.6611) 0px, oklch(0.662285 0.20947 24.6611) 0px), linear-gradient(oklch(0.702285 0.20947 32.6611) 0px, oklch(0.702285 0.20947 32.6611) 0px), linear-gradient(oklch(0.702285 0.20947 32.6611) 0px, oklch(0.702285 0.20947 32.6611) 0px), linear-gradient(oklch(0.702285 0.20947 32.6611) 0px, oklch(0.702285 0.20947 32.6611) 0px), linear-gradient(oklch(0.402285 0.230417 2.66113) 0px, oklch(0.402285 0.230417 2.66113) 0px), linear-gradient(oklch(0.402285 0.230417 2.66113) 0px, oklch(0.402285 0.230417 2.66113) 0px), linear-gradient(oklch(0.402285 0.230417 2.66113) 0px, oklch(0.402285 0.230417 2.66113) 0px), none",
+          "content": "\"\"",
+          "filter": "none",
+          "transform": "none",
+          "inset": "0px",
+          "maskImage": "none",
+          "maskSize": "auto",
+          "clipPath": "polygon(evenodd, -48px -48px, -2px -2px, 6px -2px, 6px 2px, 2px 2px, 2px 4px, 2px 4px, 2px 6px, -2px 6px, -2px -2px, -48px -48px, calc(100% + 48px) -48px, calc(100% + 2px) -2px, calc(100% - 6px) -2px, calc(100% - 6px) 2px, calc(100% - 2px) 2px, calc(100% - 2px) 4px, calc(100% - 2px) 4px, calc(100% - 2px) 6px, calc(100% + 2px) 6px, calc(100% + 2px) -2px, calc(100% + 48px) -48px, calc(100% + 48px) calc(100% + 48px), calc(100% + 2px) calc(100% + 2px), calc(100% - 6px) calc(100% + 2px), calc(100% - 6px) calc(100% - 2px), calc(100% - 2px) calc(100% - 2px), calc(100% - 2px) calc(100% - 4px), calc(100% - 2px) calc(100% - 4px), calc(100% - 2px) calc(100% - 6px), calc(100% + 2px) calc(100% - 6px), calc(100% + 2px) calc(100% + 2px), calc(100% + 48px) calc(100% + 48px), -48px calc(100% + 48px), -2px calc(100% + 2px), 6px calc(100% + 2px), 6px calc(100% - 2px), 2px calc(100% - 2px), 2px calc(100% - 4px), 2px calc(100% - 4px), 2px calc(100% - 6px), -2px calc(100% - 6px), -2px calc(100% + 2px), -48px calc(100% + 48px))"
+        }
+      }
+    }
+  },
+  "inspect": {
+    ".modal-root": {
+      "style": {
+        "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+        "fontSize": "20px",
+        "fontWeight": "500",
+        "lineHeight": "normal",
+        "color": "rgb(238, 241, 248)",
+        "textShadow": "none",
+        "boxShadow": "none",
+        "backgroundColor": "rgba(5, 7, 12, 0.72)",
+        "backdropFilter": "blur(3px)",
+        "borderColor": "rgb(238, 241, 248)",
+        "borderWidth": "0px",
+        "borderRadius": "0px",
+        "padding": "16px",
+        "width": "1430px",
+        "transform": "matrix(1, 0, 0, 1, 0, 5.88106)",
+        "transitionDuration": "0s"
+      },
+      "before": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      },
+      "after": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      }
+    },
+    ".modal": {
+      "style": {
+        "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+        "fontSize": "20px",
+        "fontWeight": "500",
+        "lineHeight": "normal",
+        "color": "rgb(238, 241, 248)",
+        "textShadow": "none",
+        "boxShadow": "rgba(0, 0, 0, 0.6) 0px 20px 60px 0px",
+        "backgroundColor": "rgb(28, 32, 48)",
+        "backdropFilter": "none",
+        "borderColor": "color(srgb 0.303529 0.412941 0.662353)",
+        "borderWidth": "3px",
+        "borderRadius": "18px",
+        "padding": "0px",
+        "width": "460px",
+        "transform": "matrix(0.872951, 0, 0, 0.872951, 0, 0)",
+        "transitionDuration": "0s"
+      },
+      "before": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      },
+      "after": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      }
+    },
+    ".mon-card": {
+      "style": {
+        "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+        "fontSize": "20px",
+        "fontWeight": "500",
+        "lineHeight": "normal",
+        "color": "rgb(238, 241, 248)",
+        "textShadow": "none",
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backdropFilter": "none",
+        "borderColor": "rgb(238, 241, 248)",
+        "borderWidth": "0px",
+        "borderRadius": "18px",
+        "padding": "0px",
+        "width": "422px",
+        "transform": "none",
+        "transitionDuration": "0s"
+      },
+      "before": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      },
+      "after": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      }
+    },
+    ".mon-card .dc-head h2": {
+      "style": {
+        "fontFamily": "\"Jersey 15\", system-ui, sans-serif",
+        "fontSize": "28px",
+        "fontWeight": "700",
+        "lineHeight": "normal",
+        "color": "rgb(255, 255, 255)",
+        "textShadow": "none",
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backdropFilter": "none",
+        "borderColor": "rgb(255, 255, 255)",
+        "borderWidth": "0px",
+        "borderRadius": "0px",
+        "padding": "0px",
+        "width": "119.719px",
+        "transform": "none",
+        "transitionDuration": "0s"
+      },
+      "before": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      },
+      "after": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      }
+    }
+  },
+  "stats": "<div class=\"statbars real\" style=\"--g:linear-gradient(90deg, #f97316 0.0%, #f97316 34.4%, #eab308 53.1%, #22c55e 68.8%, #22b8a6 87.5%, #3b82f6 112.5%, #8b5cf6 140.6%, #d946ef 171.9%, #ffc83d 206.3%);--nw:25.00cqw\"><span>HP</span><b class=\"shiny-up\" title=\"+10% ✨ (shiny)\">907/907</b><div class=\"bar\"><i style=\"left:0.00%;width:59.38%;--x:0.00cqw\"></i><i class=\"shiny end\" style=\"left:59.38%;width:5.94%;--x:-59.38cqw\"></i></div><span>Attack</span><b class=\"shiny-up\" title=\"+10% ✨ (shiny)\">280</b><div class=\"bar\"><i style=\"left:0.00%;width:78.13%;--x:0.00cqw\"></i><i class=\"shiny end\" style=\"left:78.13%;width:7.81%;--x:-78.13cqw\"></i></div><span>Defense</span><b class=\"shiny-up\" title=\"+10% ✨ (shiny)\">179</b><div class=\"bar\"><i style=\"left:0.00%;width:49.38%;--x:0.00cqw\"></i><i class=\"shiny end\" style=\"left:49.38%;width:4.94%;--x:-49.38cqw\"></i></div><span>Sp. Atk</span><b class=\"shiny-up\" title=\"+10% ✨ (shiny)\">137</b><div class=\"bar\"><i style=\"left:0.00%;width:37.50%;--x:0.00cqw\"></i><i class=\"shiny end\" style=\"left:37.50%;width:3.75%;--x:-37.50cqw\"></i></div><span>Sp. Def</span><b class=\"shiny-up\" title=\"+10% ✨ (shiny)\">225</b><div class=\"bar\"><i style=\"left:0.00%;width:62.50%;--x:0.00cqw\"></i><i class=\"shiny end\" style=\"left:62.50%;width:6.25%;--x:-62.50cqw\"></i></div><span>Speed</span><b class=\"shiny-up\" title=\"+10% ✨ (shiny)\">183</b><div class=\"bar\"><i style=\"left:0.00%;width:50.63%;--x:0.00cqw\"></i><i class=\"shiny end\" style=\"left:50.63%;width:5.06%;--x:-50.63cqw\"></i></div></div>",
+  "capture": {
+    ".modal-root": {
+      "style": {
+        "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+        "fontSize": "20px",
+        "fontWeight": "500",
+        "lineHeight": "normal",
+        "color": "rgb(238, 241, 248)",
+        "textShadow": "none",
+        "boxShadow": "none",
+        "backgroundColor": "rgba(5, 7, 12, 0.72)",
+        "backdropFilter": "blur(3px)",
+        "borderColor": "rgb(238, 241, 248)",
+        "borderWidth": "0px",
+        "borderRadius": "0px",
+        "padding": "16px",
+        "width": "1430px",
+        "transform": "none",
+        "transitionDuration": "0s"
+      },
+      "before": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      },
+      "after": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      }
+    },
+    ".modal": {
+      "style": {
+        "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+        "fontSize": "20px",
+        "fontWeight": "500",
+        "lineHeight": "normal",
+        "color": "rgb(238, 241, 248)",
+        "textShadow": "none",
+        "boxShadow": "rgba(0, 0, 0, 0.6) 0px 20px 60px 0px",
+        "backgroundColor": "rgb(28, 32, 48)",
+        "backdropFilter": "none",
+        "borderColor": "color(srgb 0.622745 0.55098 0.239608)",
+        "borderWidth": "3px",
+        "borderRadius": "18px",
+        "padding": "0px",
+        "width": "460px",
+        "transform": "none",
+        "transitionDuration": "0s"
+      },
+      "before": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      },
+      "after": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      }
+    },
+    ".dexcard.v2": {
+      "style": {
+        "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+        "fontSize": "20px",
+        "fontWeight": "500",
+        "lineHeight": "normal",
+        "color": "rgb(238, 241, 248)",
+        "textShadow": "none",
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backdropFilter": "none",
+        "borderColor": "rgb(238, 241, 248)",
+        "borderWidth": "0px",
+        "borderRadius": "18px",
+        "padding": "0px",
+        "width": "422px",
+        "transform": "none",
+        "transitionDuration": "0s"
+      },
+      "before": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      },
+      "after": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      }
+    },
+    ".dc-head h2": {
+      "style": {
+        "fontFamily": "\"Jersey 15\", system-ui, sans-serif",
+        "fontSize": "28px",
+        "fontWeight": "700",
+        "lineHeight": "normal",
+        "color": "rgb(255, 255, 255)",
+        "textShadow": "none",
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backdropFilter": "none",
+        "borderColor": "rgb(255, 255, 255)",
+        "borderWidth": "0px",
+        "borderRadius": "0px",
+        "padding": "0px",
+        "width": "100px",
+        "transform": "none",
+        "transitionDuration": "0s"
+      },
+      "before": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      },
+      "after": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      }
+    },
+    ".dc-new": {
+      "style": {
+        "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "normal",
+        "color": "rgb(27, 27, 34)",
+        "textShadow": "none",
+        "boxShadow": "none",
+        "backgroundColor": "rgb(255, 203, 5)",
+        "backdropFilter": "none",
+        "borderColor": "rgb(27, 27, 34)",
+        "borderWidth": "0px",
+        "borderRadius": "999px",
+        "padding": "2px 8px",
+        "width": "38.7812px",
+        "transform": "none",
+        "transitionDuration": "0s"
+      },
+      "before": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      },
+      "after": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      }
+    },
+    ".genus": {
+      "style": {
+        "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+        "fontSize": "18px",
+        "fontWeight": "500",
+        "lineHeight": "normal",
+        "color": "rgb(195, 201, 216)",
+        "textShadow": "none",
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backdropFilter": "none",
+        "borderColor": "rgb(195, 201, 216)",
+        "borderWidth": "0px",
+        "borderRadius": "0px",
+        "padding": "0px",
+        "width": "258px",
+        "transform": "none",
+        "transitionDuration": "0s"
+      },
+      "before": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      },
+      "after": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      }
+    },
+    ".dc-fact": {
+      "style": {
+        "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+        "fontSize": "14px",
+        "fontWeight": "500",
+        "lineHeight": "normal",
+        "color": "rgb(154, 163, 187)",
+        "textShadow": "none",
+        "boxShadow": "none",
+        "backgroundColor": "rgb(37, 42, 61)",
+        "backdropFilter": "none",
+        "borderColor": "rgb(154, 163, 187)",
+        "borderWidth": "0px",
+        "borderRadius": "10px",
+        "padding": "6px 8px",
+        "width": "83.3281px",
+        "transform": "none",
+        "transitionDuration": "0s"
+      },
+      "before": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      },
+      "after": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      }
+    },
+    ".dc-fact b": {
+      "style": {
+        "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+        "fontSize": "18px",
+        "fontWeight": "600",
+        "lineHeight": "normal",
+        "color": "rgb(238, 241, 248)",
+        "textShadow": "none",
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backdropFilter": "none",
+        "borderColor": "rgb(238, 241, 248)",
+        "borderWidth": "0px",
+        "borderRadius": "0px",
+        "padding": "0px",
+        "width": "67.3281px",
+        "transform": "none",
+        "transitionDuration": "0s"
+      },
+      "before": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      },
+      "after": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      }
+    },
+    ".flavor": {
+      "style": {
+        "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+        "fontSize": "14px",
+        "fontWeight": "500",
+        "lineHeight": "20.3px",
+        "color": "rgb(195, 201, 216)",
+        "textShadow": "none",
+        "boxShadow": "none",
+        "backgroundColor": "rgb(16, 19, 31)",
+        "backdropFilter": "none",
+        "borderColor": "rgb(195, 201, 216)",
+        "borderWidth": "0px",
+        "borderRadius": "10px",
+        "padding": "12px",
+        "width": "422px",
+        "transform": "none",
+        "transitionDuration": "0s"
+      },
+      "before": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      },
+      "after": {
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "none",
+        "content": "none",
+        "filter": "none",
+        "transform": "none",
+        "inset": "auto",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "none"
+      }
+    },
+    ".modal-actions .btn": {
+      "style": {
+        "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+        "fontSize": "20px",
+        "fontWeight": "700",
+        "lineHeight": "normal",
+        "color": "rgb(27, 27, 34)",
+        "textShadow": "none",
+        "boxShadow": "none",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backdropFilter": "none",
+        "borderColor": "rgb(27, 27, 34)",
+        "borderWidth": "0px",
+        "borderRadius": "0px",
+        "padding": "0px 24px",
+        "width": "418px",
+        "transform": "none",
+        "transitionDuration": "0.08s"
+      },
+      "before": {
+        "boxShadow": "none",
+        "backgroundColor": "oklch(0.569801 0.228597 57.8217 / 0.5)",
+        "backgroundImage": "none",
+        "content": "\"\"",
+        "filter": "none",
+        "transform": "none",
+        "inset": "4px -4px -4px 4px",
+        "maskImage": "repeating-conic-gradient(rgb(0, 0, 0) 0deg, rgb(0, 0, 0) 25%, rgba(0, 0, 0, 0) 0deg, rgba(0, 0, 0, 0) 50%), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px)",
+        "maskSize": "4px 4px, calc(100% - 20px) 100%, calc(100% - 12px) calc(100% - 4px), calc(100% - 8px) calc(100% - 8px), calc(100% - 4px) calc(100% - 12px), 100% calc(100% - 20px)",
+        "clipPath": "none"
+      },
+      "after": {
+        "boxShadow": "none",
+        "backgroundColor": "rgb(27, 27, 34)",
+        "backgroundImage": "linear-gradient(rgb(255, 203, 5) 0px, rgb(255, 203, 5) 0px), linear-gradient(rgb(255, 203, 5) 0px, rgb(255, 203, 5) 0px), linear-gradient(rgb(255, 203, 5) 0px, rgb(255, 203, 5) 0px), linear-gradient(rgb(255, 203, 5) 0px, rgb(255, 203, 5) 0px), linear-gradient(oklch(0.963335 0.175844 97.8217) 0px, oklch(0.963335 0.175844 97.8217) 0px), linear-gradient(oklch(0.963335 0.175844 97.8217) 0px, oklch(0.963335 0.175844 97.8217) 0px), linear-gradient(oklch(0.963335 0.175844 97.8217) 0px, oklch(0.963335 0.175844 97.8217) 0px), linear-gradient(oklch(0.963335 0.175844 97.8217) 0px, oklch(0.963335 0.175844 97.8217) 0px), linear-gradient(oklch(0.663335 0.193428 67.8217) 0px, oklch(0.663335 0.193428 67.8217) 0px), linear-gradient(oklch(0.663335 0.193428 67.8217) 0px, oklch(0.663335 0.193428 67.8217) 0px), linear-gradient(oklch(0.663335 0.193428 67.8217) 0px, oklch(0.663335 0.193428 67.8217) 0px), linear-gradient(oklch(0.663335 0.193428 67.8217) 0px, oklch(0.663335 0.193428 67.8217) 0px), none",
+        "content": "\"\"",
+        "filter": "none",
+        "transform": "none",
+        "inset": "0px",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "clipPath": "polygon(evenodd, -48px -48px, -2px -2px, 10px -2px, 10px 2px, 6px 2px, 6px 4px, 4px 4px, 4px 6px, 2px 6px, 2px 8px, 2px 8px, 2px 10px, -2px 10px, -2px -2px, -48px -48px, calc(100% + 48px) -48px, calc(100% + 2px) -2px, calc(100% - 10px) -2px, calc(100% - 10px) 2px, calc(100% - 6px) 2px, calc(100% - 6px) 4px, calc(100% - 4px) 4px, calc(100% - 4px) 6px, calc(100% - 2px) 6px, calc(100% - 2px) 8px, calc(100% - 2px) 8px, calc(100% - 2px) 10px, calc(100% + 2px) 10px, calc(100% + 2px) -2px, calc(100% + 48px) -48px, calc(100% + 48px) calc(100% + 48px), calc(100% + 2px) calc(100% + 2px), calc(100% - 10px) calc(100% + 2px), calc(100% - 10px) calc(100% - 2px), calc(100% - 6px) calc(100% - 2px), calc(100% - 6px) calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) calc(100% - 6px), calc(100% - 2px) calc(100% - 6px), calc(100% - 2px) calc(100% - 8px), calc(100% - 2px) calc(100% - 8px), calc(100% - 2px) calc(100% - 10px), calc(100% + 2px) calc(100% - 10px), calc(100% + 2px) calc(100% + 2px), calc(100% + 48px) calc(100% + 48px), -48px calc(100% + 48px), -2px calc(100% + 2px), 10px calc(100% + 2px), 10px calc(100% - 2px), 6px calc(100% - 2px), 6px calc(100% - 4px), 4px calc(100% - 4px), 4px calc(100% - 6px), 2px calc(100% - 6px), 2px calc(100% - 8px), 2px calc(100% - 8px), 2px calc(100% - 10px), -2px calc(100% - 10px), -2px calc(100% + 2px), -48px calc(100% + 48px))"
+      }
+    }
+  },
+  "captureHtml": "<div class=\"modal dexcard-modal\" style=\"--c: #F7D02C;\"><div class=\"modal-body\"><div class=\"dexcard v2 \">\n      <div class=\"dc-head\"><h2>Pikachu <i class=\"shiny-mk\" role=\"img\" aria-label=\"Shiny\"></i></h2><span class=\"dc-new\">New</span>\n        <div class=\"dc-sum\"><span>No. <b>025</b></span><span>Kanto <b>8</b>/151</span></div></div>\n      <div class=\"dc-top\">\n        <div class=\"dc-hero caught\"><img class=\"dc-ball\" src=\"assets/items/poke-ball.png\" alt=\"Caught\"><div style=\"position: relative; transform-origin: 50% 100%;\"><img class=\"art spr\" src=\"assets/pokemon/art/shiny/25.gif\" alt=\"\" data-b=\"5,0,44,46\" style=\"visibility: hidden; transform-origin: 50% 100%;\" onload=\"pcArtFit(this, 2, 0)\"></div></div>\n        <div class=\"dc-id\">\n          <div class=\"genus\">Mouse Pokémon</div>\n          <div class=\"badges\"><span class=\"type\" data-type=\"electric\" style=\"--tc:#F7D02C;background:var(--tc)\">Electric</span> <span class=\"rarity\" style=\"color:#9aa4b1\"><span class=\"rpips r-common\" style=\"--rc:#9aa4b1\" title=\"Common\"><i></i></span>Common</span></div>\n          <div class=\"dc-facts\">\n            <div class=\"dc-fact\">Level<b>5</b></div>\n            <div class=\"dc-fact\">Height<b>0.4 m</b></div><div class=\"dc-fact\">Weight<b>6 kg</b></div>\n            <div class=\"dc-fact\">Caught<b><img src=\"assets/items/poke-ball.png\" alt=\"\">2</b></div>\n          </div>\n          \n        </div>\n      </div>\n      <p class=\"flavor\">Possesses cheek sacs in which it stores electricity. This clever forest-dweller roasts tough berries with an electric shock before consuming them.</p>\n      \n      \n      \n      \n    </div></div><div class=\"modal-actions solo\"><button class=\"btn gold\">Continue</button></div></div>"
+}

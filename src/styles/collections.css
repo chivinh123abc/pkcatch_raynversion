@@ -59,8 +59,6 @@
 .game-shell .collection-page button:focus-visible,.game-shell .collection-page select:focus-visible,.game-shell .collection-page input:focus-visible { outline:2px solid #ffcb05; outline-offset:2px; }
 .game-shell .replica-toast { position:fixed; top:16px; left:50%; translate:-50% 0; width:max-content; max-width:90vw; background:#fdfdfd; color:#222; border:4px solid #3a4a6b; box-shadow:inset 0 0 0 3px #a9c1e8,0 8px 30px #0006; pointer-events:none; animation:collection-toast 2.2s ease-out forwards; }
 @keyframes collection-toast { 0%,100% { opacity:0; transform:translateY(-12px); } 15%,85% { opacity:1; transform:translateY(0); } }
-.game-shell .replica-detail .replica-move-fact b { font-size:14px; }
-.game-shell .replica-detail button:focus-visible,.game-shell .replica-detail summary:focus-visible { outline:2px solid #ffcb05; outline-offset:2px; }
 @media (max-width:1100px) and (min-width:641px) {
   .game-shell .collection-page .team-panel .map-head { flex-wrap:wrap; height:auto; min-height:62px; }
   .game-shell .collection-page .team-sets { order:3; flex-basis:100%; margin:0; max-width:216px; }
@@ -111,27 +109,8 @@
   .game-shell .collection-page .dex-cell .nm { font-size:14px; }
   .game-shell .collection-page .dex-cell .num { font-size:12px; }
   .game-shell .collection-page .dex-new { top:4px; left:3px; padding:1px 4px; font-size:11px; }
-  .game-shell .replica-detail { max-height:calc(100dvh - 32px); overflow:auto; }
-  .game-shell .replica-detail .replica-mon-actions { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .game-shell .replica-detail .replica-mon-actions .btn:last-child { grid-column:1/-1; }
 }
-.game-shell .replica-detail .replica-action-status { color:#ffe066; font-size:16px; margin:12px 0 0; }
-.game-shell .replica-detail .dexcard.v2 .dc-top { display:grid; grid-template-columns:148px minmax(0,1fr); gap:10px 16px; align-items:start; }
-.game-shell .replica-detail .dexcard.v2 .dc-hero { grid-column:1; grid-row:1 / span 2; min-height:148px; }
-.game-shell .replica-detail .dexcard.v2 .dc-id { display:flex; grid-column:2; grid-row:1; flex-direction:column; min-width:0; gap:8px; align-self:start; }
-.game-shell .replica-detail .dexcard.v2 .genus { margin:0; line-height:1.15; overflow-wrap:anywhere; }
-.game-shell .replica-detail .dexcard.v2 .badges { display:flex; flex-wrap:wrap; align-items:center; gap:4px; margin:0; }
-.game-shell .replica-detail .dexcard.v2 .dc-facts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); grid-column:2; grid-row:2; gap:6px; margin:0; }
-.game-shell .replica-detail .dexcard.v2 .dc-fact { display:flex; flex-direction:column; align-items:stretch; min-width:0; overflow:hidden; gap:2px; }
-.game-shell .replica-detail .dexcard.v2 .dc-fact b { overflow-wrap:anywhere; }
-.game-shell .replica-detail .dexcard.v2 .replica-move-fact b { display:block; }
 @media (max-width:640px) {
-  .game-shell .replica-detail .dexcard.v2 .dc-top { grid-template-columns:120px minmax(0,1fr); gap:12px; }
-  .game-shell .replica-detail .dexcard.v2 .dc-hero { grid-row:1; }
-  .game-shell .replica-detail .dexcard.v2 .dc-id { align-self:center; }
-  .game-shell .replica-detail .dexcard.v2 .genus { margin:0; align-self:stretch; }
-  .game-shell .replica-detail .dexcard.v2 .badges { margin:0; align-self:stretch; }
-  .game-shell .replica-detail .dexcard.v2 .dc-facts { grid-column:1/-1; grid-row:2; }
 }
 @media (prefers-reduced-motion:no-preference) {
   .game-shell .collection-page .slot.filled:not([data-fainted]) .replica-team-art .replica-sprite { transform-origin:50% 90%; animation:pen-idle 2.4s ease-in-out infinite; }

@@ -1,0 +1,5 @@
+/* Native routines append full-screen roots to body; adapter supplies inherited tokens. */
+.native-gift { font-family:var(--font);color:var(--text); }
+.native-gift button { position:relative;font-family:inherit; }
+.native-gift .type { font-family:var(--font);font-size:14px;padding:2px 5px;border-radius:4px; }
+.game-shell .native-gift.gift .gb-mon,.game-shell .native-gift.gift .gb-art { display:grid;place-items:center; }

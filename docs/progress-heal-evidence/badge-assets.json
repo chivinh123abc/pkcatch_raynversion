@@ -1,0 +1,57 @@
+{
+  "source": {
+    "build": "b05c8cc201",
+    "app": "c0081498f217061d529fb18ecc4833e9490c93e0b425fc3d04b713d990fdda11",
+    "css": "3e06fa8ed6cfcca3070da71b03fe5758d6b786faba9accdb4b680590f6cc525b"
+  },
+  "sources": [
+    {
+      "src": "public/assets/badges/frlg-1.png",
+      "output": "public/assets/badges/kanto/boulder-badge.svg",
+      "tile": 1,
+      "sha256": "262559252ac37b5b4efeb870233c1bc0604743ad8d4969eee0282887aadc488c"
+    },
+    {
+      "src": "public/assets/badges/frlg-2.png",
+      "output": "public/assets/badges/kanto/cascade-badge.svg",
+      "tile": 2,
+      "sha256": "3be8046a9b4e50cb684d40c642c1db47d45f214fdec83c719bd774e1a6bbab38"
+    },
+    {
+      "src": "public/assets/badges/frlg-3.png",
+      "output": "public/assets/badges/kanto/thunder-badge.svg",
+      "tile": 3,
+      "sha256": "bfdaab90c07e8bbdf984ec46c8c2a54d0c7f0efc90804c5761ca2363e1745458"
+    },
+    {
+      "src": "public/assets/badges/frlg-4.png",
+      "output": "public/assets/badges/kanto/rainbow-badge.svg",
+      "tile": 4,
+      "sha256": "09ea8bc13868989cf1a2074cc7e13cb80ce710541ec2f191e5967285d7a416ed"
+    },
+    {
+      "src": "public/assets/badges/frlg-5.png",
+      "output": "public/assets/badges/kanto/soul-badge.svg",
+      "tile": 5,
+      "sha256": "61741663d88b358b54e35b1f955d0d47b0bfb838819bca5fec438ce84b8a942f"
+    },
+    {
+      "src": "public/assets/badges/frlg-6.png",
+      "output": "public/assets/badges/kanto/marsh-badge.svg",
+      "tile": 6,
+      "sha256": "a725312aaff253f6061fe16b9e1c4f7d79e5d0d4a8429513f1ffca4623fc5d32"
+    },
+    {
+      "src": "public/assets/badges/frlg-7.png",
+      "output": "public/assets/badges/kanto/volcano-badge.svg",
+      "tile": 7,
+      "sha256": "799596065b38a25cae45be3b041e19cf9645d4fada309ef734268d5107e8695b"
+    },
+    {
+      "src": "public/assets/badges/frlg-8.png",
+      "output": "public/assets/badges/kanto/earth-badge.svg",
+      "tile": 8,
+      "sha256": "b4698af6e767dd418a8213b36565c54afddc13ed779457771a23b52992329dd2"
+    }
+  ]
+}

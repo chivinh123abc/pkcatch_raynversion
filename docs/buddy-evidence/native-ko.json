@@ -1,0 +1,20 @@
+{
+  "sameBuddyKo": 1,
+  "changedBuddyKo": 0,
+  "noTeam": true,
+  "bonus": [
+    null,
+    null,
+    null,
+    null,
+    [
+      {
+        "amount": 144,
+        "levels": 1
+      }
+    ]
+  ],
+  "counter": 0,
+  "level": 6,
+  "xp": 0
+}

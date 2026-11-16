@@ -1,0 +1,61 @@
+/* Native mon-card adapter; shared Dex/capture styling is generated from the same source. */
+.game-shell .modal.replica-inspect { width:460px; max-width:calc(100vw - 28px); max-height:calc(100dvh - 32px); padding:0; border:3px solid #506caf; border-radius:20px; background:#1c2030; overflow:auto; color:#eef1f8; font:500 20px var(--font); }
+.game-shell .replica-inspect .modal-body { padding:0 16px 16px; overflow:visible; max-height:none; }
+.game-shell .replica-inspect .dexcard.v2 { padding:0; }
+.game-shell .replica-inspect .dc-head h2 { display:flex; align-items:center; gap:8px; min-width:0; }
+.game-shell .replica-inspect .shiny-mk { color:#ffe277; font-size:18px; text-shadow:1px 1px #282232; }
+.game-shell .replica-inspect .dc-x { color:#ff9299; font-size:24px; line-height:1; }
+.game-shell .replica-inspect .dc-hero .w { width:100%;height:100%; min-width:0;min-height:0;display:grid;grid-template-columns:minmax(0,1fr);place-items:center; }
+.game-shell .replica-inspect .dc-move { display:flex; justify-content:space-between; align-items:center; text-align:left; list-style:none; }
+.game-shell .replica-inspect .dc-move>span:first-child { display:flex; align-items:center;gap:4px;flex-wrap:wrap; }
+.game-shell .replica-inspect .dc-move .pw { white-space:nowrap; flex:none; }
+.game-shell .replica-inspect .xpbar.big { position:relative; overflow:hidden; }
+.game-shell .replica-inspect .xpbar.big>span { position:absolute; inset:0; display:grid;place-items:center; }
+.game-shell .replica-inspect .dc-bud-gauge .end { color:#36c964; font:600 14px/20px var(--font); }
+.game-shell .replica-inspect .dc-candy:disabled { cursor:default; }
+.game-shell .replica-inspect .dc-chev { font-size:12px; }
+.game-shell .replica-inspect .dc-fold[open] .dc-chev { transform:rotate(90deg); }
+.game-shell .replica-inspect .evo { position:relative; flex:1 1 0; min-width:80px; min-height:130px; font-family:var(--font); }
+.game-shell .replica-inspect .evo .sprbox { height:76px; width:100%; display:grid; place-items:center; }
+.game-shell .replica-inspect .arrow { display:flex;flex-direction:column;align-items:center;flex:none;color:#a3adc6; }
+.game-shell .replica-inspect .dc-history.two { margin-top:12px; }
+.game-shell .collection-page .slot-buddy { background:#be4087;border-color:#ff8cc6;box-shadow:0 0 0 2px #d44e9433,inset 0 0 8px #ffbde955; }
+.game-shell .collection-page .pc-buddy { position:absolute;right:4px;top:4px;width:20px;height:20px;padding:2px;border:1px solid #ff8cc6;border-radius:6px;background:#be4087;z-index:2;image-rendering:pixelated; }
+@media(max-width:480px) {
+ .game-shell .modal.replica-inspect { max-width:calc(100vw - 20px);max-height:calc(100dvh - 20px); }
+ .game-shell .replica-inspect .dc-head h2 { font-size:24px; }
+ .game-shell .replica-inspect .evo { min-width:60px; }
+ .game-shell .replica-inspect .evo .replica-sprite { --sprite-k:1!important; }
+ .game-shell .replica-inspect .buddy-sum { white-space:normal;text-align:right; }
+ .game-shell .replica-inspect .dc-hero .pokemon-art { transform:scale(.8); }
+}
+@media(max-width:360px) {
+ .game-shell .replica-inspect .dc-head h2 { font-size:20px; }
+ .game-shell .replica-inspect .dc-head { gap:6px; }
+ .game-shell .replica-inspect .dc-sum { gap:6px;font-size:12px; }
+ .game-shell .replica-inspect .dc-top { grid-template-columns:90px minmax(0,1fr);gap:10px; }
+ .game-shell .replica-inspect .dc-hero { width:90px;height:116px; }
+ .game-shell .replica-inspect .dc-hero .pokemon-art { transform:scale(.65); }
+ .game-shell .replica-inspect .dc-id .dc-facts { grid-template-columns:1fr 1fr; }
+ .game-shell .replica-inspect .gt-tile { grid-column:1/-1; }
+ .game-shell .replica-inspect .dc-move { padding:6px;flex-wrap:wrap; }
+}
+
+.game-shell .replica-inspect button.dc-move { position:relative; width:100%; font:inherit; color:inherit; border:0; }
+.game-shell .replica-inspect .statbars.real { grid-template-columns:70px minmax(64px,auto) minmax(0,1fr); }
+.game-shell .replica-inspect .arrow>img { width:20px; height:20px; image-rendering:pixelated; }
+.game-shell .mvd button { position:relative; }
+
+/* UI.modal / modal-root native values; retain the local portal's stacking context. */
+.game-shell .replica-modal-backdrop { padding:16px; background:#05070cb8; backdrop-filter:blur(3px); font:500 20px var(--font); line-height:normal; }
+.game-shell .modal:is(.replica-inspect,.replica-detail) { box-shadow:0 20px 60px #0009; border-width:3px; border-radius:18px; font:500 20px var(--font); line-height:normal; }
+.game-shell .modal.replica-detail { width:min(460px,100%); max-height:calc(100dvh - 32px); margin:0; background:var(--panel); color:var(--text); outline:none; }
+.game-shell .replica-detail .modal-actions { display:flex; gap:8px; justify-content:flex-end; flex-wrap:wrap; padding:var(--s3) 18px 18px; }
+.game-shell .replica-detail .modal-actions.solo .btn { flex:1; font:700 20px var(--font); text-transform:uppercase; }
+.game-shell .replica-detail .dc-head h2 { line-height:normal; }
+.game-shell .replica-detail .dc-head .shiny-mk { display:inline-block; margin-left:4px; }
+.game-shell .replica-detail button { position:relative; isolation:isolate; cursor:pointer; }
+.game-shell .replica-detail .dc-hero { display:flex; align-items:center; justify-content:center; }
+.game-shell .replica-detail .dc-hero .capture-pokemon-idle { display:flex; }
+.game-shell .replica-detail .replica-mon-actions { display:flex; flex-wrap:wrap; gap:8px; }
+.game-shell .modal.replica-detail .modal-actions .btn.gold:not(#_) { color:var(--ink); text-shadow:none; }
