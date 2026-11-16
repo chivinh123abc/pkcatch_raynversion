@@ -1,0 +1,26 @@
+/* Structural adapters only; visual tokens and surfaces come from the pinned CSS. */
+.game-shell .replica-topbar{border-bottom:2px solid var(--line)}
+.game-shell .type[data-type]{font-family:var(--font)}
+.game-shell .collection-page{font-weight:500;line-height:normal}
+.game-shell :is(#screen-team,#screen-pokedex) :is(.slot,.pc-cell,.dex-cell){font-weight:500;line-height:normal;color:var(--text)}
+.game-shell :is(#screen-team,#screen-pokedex) .map-head h2{line-height:normal}
+.game-shell :is(#screen-team,#screen-pokedex) .slot .name{font-family:var(--font);line-height:normal}
+.game-shell :is(#screen-team,#screen-pokedex) .slot .lv{font-weight:500;line-height:normal}
+.game-shell :is(#screen-team,#screen-pokedex) .dex-cell .nm{font-family:var(--font);font-weight:500;line-height:normal}
+.game-shell :is(#screen-team,#screen-pokedex) .dex-cell .num{font-weight:500}
+.game-shell .collection-page .replica-sprite.unknown{filter:none;opacity:1}
+.game-shell .collection-page .replica-shiny{color:#ffe183;text-shadow:1px 1px #302b18}
+.game-shell .collection-page .dex-hero-body{height:223px;min-height:223px}
+@media(max-width:640px){.game-shell .collection-page .dex-hero-body{height:auto;min-height:0}.game-shell .collection-page .dex-last button{height:40px}}
+.game-shell .collection-page .slot-types{z-index:3}
+.game-shell .collection-page .pc-cell .lvl{position:relative;z-index:1}
+.game-shell .collection-page .dex-cell .replica-dex-art{position:relative;z-index:1}
+.game-shell .collection-page .dex-cell.seen .replica-sprite img{filter:grayscale(1) brightness(.75);opacity:.5}
+.game-shell .collection-page .dex-cell.unknown .replica-sprite img{filter:brightness(0);opacity:.35}
+.game-shell .collection-page .pc-filters .replica-filter{display:inline-flex;align-items:center;min-height:40px;padding:0;font-weight:600}
+.game-shell .collection-page .pc-filters .replica-filter-control{width:100%;min-width:0;height:40px;border:0;border-radius:0;background:transparent;color:inherit;font:inherit;line-height:normal;text-transform:uppercase;padding:6px 12px;cursor:pointer}
+.game-shell .collection-page .replica-filter-control option{background:var(--panel-2);color:var(--text);text-transform:none}
+.game-shell .collection-page .replica-filter:focus-within{outline:2px solid var(--yellow);outline-offset:2px}
+.game-shell .collection-page .replica-dex-owned{display:none}
+.game-shell .collection-page .dex-cell.caught::after{content:'';position:absolute;top:2px;right:2px;width:26px;height:26px;z-index:2;pointer-events:none;background:url('/assets/items/poke-ball.png') center/contain no-repeat}
+@media(max-width:640px){.game-shell .collection-page .pc-filters .replica-filter-control{font-size:13px;padding-inline:4px}}

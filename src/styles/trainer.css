@@ -1,0 +1,10 @@
+.game-shell .battle-stage .boss-intro,.game-shell .battle-stage .vs-intro { z-index:55; pointer-events:none; }
+.game-shell .battle-stage .bi-info { opacity:0; }
+.game-shell .battle-stage .bi-tags > img { width:48px; height:48px; object-fit:contain; image-rendering:pixelated; }
+.game-shell .battle-stage .bi-trainer { max-width:none; max-height:none; object-fit:contain; image-rendering:pixelated; }
+.game-shell .battle-stage .bi-trainer.sil { filter:brightness(0); }
+.game-shell .battle-stage .vs-name { font-family:var(--font-title); }
+.game-shell .battle-stage .vs-intro,.game-shell .battle-stage .vs-card,.game-shell .battle-stage .vs-text { animation:none; }
+.game-shell .battle-stage .vs-text { opacity:0; }
+.game-shell .battle-stage .battle-team-rail { padding-top:var(--rail-top-gap); }
+@media(max-width:640px) { .game-shell .battle-stage .battle-team-rail { left:6px; } }

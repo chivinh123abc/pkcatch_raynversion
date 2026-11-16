@@ -1,0 +1,170 @@
+{
+  "scrollWidth": 320,
+  "metrics": {
+    ".battle-stage": {
+      "x": 16,
+      "y": 112,
+      "width": 288,
+      "height": 288,
+      "font": "20px / 30px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "normal",
+      "grid": "none",
+      "borderRadius": "16px"
+    },
+    ".battle-team-rail": {
+      "x": 27,
+      "y": 125,
+      "width": 35,
+      "height": 262,
+      "font": "20px / 30px \"Jersey 10\", sans-serif",
+      "padding": "32px 0px 0px",
+      "gap": "3px",
+      "grid": "none",
+      "borderRadius": "0px"
+    },
+    ".tr-row": {
+      "x": 27,
+      "y": 157,
+      "width": 35,
+      "height": 35,
+      "font": "20px / 30px \"Jersey 10\", sans-serif",
+      "padding": "0px 0px 8px",
+      "gap": "normal",
+      "grid": "none",
+      "borderRadius": "7px 7px 7px 16px"
+    },
+    ".tr-lv": {
+      "x": 34,
+      "y": 166.609375,
+      "width": 21,
+      "height": 15.390625,
+      "font": "700 14px / 15.4px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "normal",
+      "grid": "none",
+      "borderRadius": "0px"
+    },
+    ".tr-hp": {
+      "x": 29,
+      "y": 182,
+      "width": 31,
+      "height": 4,
+      "font": "20px / 30px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "normal",
+      "grid": "none",
+      "borderRadius": "0px"
+    },
+    ".tr-xp": {
+      "x": 29,
+      "y": 187,
+      "width": 31,
+      "height": 3,
+      "font": "20px / 30px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "normal",
+      "grid": "none",
+      "borderRadius": "0px"
+    },
+    ".battle-panels": {
+      "x": 16,
+      "y": 568,
+      "width": 288,
+      "height": 446.796875,
+      "font": "500 20px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "12px",
+      "grid": "none",
+      "borderRadius": "0px"
+    },
+    "[aria-label=\"Consumables\"]": {
+      "x": 16,
+      "y": 568,
+      "width": 288,
+      "height": 122,
+      "font": "500 20px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "normal",
+      "grid": "none",
+      "borderRadius": "0px"
+    },
+    "[aria-label=\"Found here\"]": {
+      "x": 16,
+      "y": 702,
+      "width": 288,
+      "height": 312.796875,
+      "font": "500 20px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "normal",
+      "grid": "none",
+      "borderRadius": "0px"
+    },
+    ".zone-head": {
+      "x": 34,
+      "y": 582,
+      "width": 252,
+      "height": 40,
+      "font": "500 20px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "8px",
+      "grid": "none",
+      "borderRadius": "0px"
+    },
+    ".bag-grid": {
+      "x": 34,
+      "y": 632,
+      "width": 252,
+      "height": 44,
+      "font": "500 20px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "6px",
+      "grid": "45.5938px 45.5938px 45.6094px 45.5938px 45.5938px",
+      "borderRadius": "0px"
+    },
+    ".bag-cell": {
+      "x": 34,
+      "y": 632,
+      "width": 45.59375,
+      "height": 44,
+      "font": "500 20px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "normal",
+      "grid": "41.5938px",
+      "borderRadius": "10px"
+    },
+    ".zone-grid": {
+      "x": 34,
+      "y": 750.796875,
+      "width": 252,
+      "height": 52,
+      "font": "500 20px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "4px",
+      "grid": "52px 52px 52px 52px",
+      "borderRadius": "0px"
+    },
+    ".zone-cell": {
+      "x": 34,
+      "y": 750.796875,
+      "width": 52,
+      "height": 52,
+      "font": "500 20px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "0px",
+      "grid": "none",
+      "borderRadius": "7px 7px 7px 16px"
+    },
+    ".zone-pct": {
+      "x": 38,
+      "y": 782.796875,
+      "width": 27.5,
+      "height": 16,
+      "font": "700 14px / 14px \"Jersey 10\", sans-serif",
+      "padding": "1px 4px",
+      "gap": "normal",
+      "grid": "none",
+      "borderRadius": "999px"
+    }
+  }
+}

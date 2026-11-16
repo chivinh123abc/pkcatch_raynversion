@@ -4,10 +4,13 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "reference:check": "node scripts/check-live-update.mjs",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "test": "node --test tests/*.test.mjs",
     "test:ui": "playwright test",
+    "audit:chapters": "node scripts/audit-chapters.mjs",
+    "assets:sync": "node scripts/sync-pokemon-sprites.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

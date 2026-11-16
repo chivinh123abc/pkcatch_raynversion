@@ -1,0 +1,97 @@
+/* Spatial adapters measured from native v0.5.02 at equal CSS viewport sizes. */
+html { scrollbar-gutter:stable; scrollbar-width:auto!important; }
+html::-webkit-scrollbar { display:block!important; width:10px!important; }
+.game-shell .adventure-view { grid-template-columns:minmax(0,1fr) 320px; }
+@media (min-width:1100px) and (max-width:1379px) {
+  .game-shell .adventure-view { grid-template-columns:minmax(0,1fr) 300px; }
+}
+@media (min-width:641px) and (max-width:1099px) {
+  .game-shell > main { grid-template-columns:208px minmax(0,1fr); }
+  .game-shell > main > aside.game-sidebar { width:224px; }
+  .game-shell .adventure-view { grid-template-columns:minmax(0,1fr); }
+  .game-shell .adventure-view[hidden] { left:240px; }
+}
+.game-shell .collection-page .pc-cell { min-height:0; height:auto; padding:0 0 6px; }
+.game-shell .collection-page .pc-grid { align-items:start; }
+.game-shell .collection-page .replica-pc-art { flex:none; width:100%; height:76px; }
+.game-shell .collection-page .pc-cell .lvl { margin-top:-6px; }
+.game-shell .collection-page .team-slots .slot.filled { height:auto; min-height:0; justify-content:center; }
+.game-shell .collection-page .replica-team-art { flex:none; width:100%; height:132px; }
+.game-shell .collection-page .slot .name { max-width:none; overflow:visible; font-size:20px; line-height:21px; }
+.game-shell .collection-page .slot .lv { width:100%; max-width:none; overflow:visible; white-space:normal; font-size:16px; line-height:17px; }
+.game-shell .collection-page .replica-shiny { display:inline-block; width:14px; height:14px; font-size:14px; line-height:14px; vertical-align:-1px; }
+.game-shell .collection-page .pc-filters > input { flex:1 1 220px; }
+.game-shell .collection-page .replica-sortbox { display:flex; flex:none; gap:8px; margin-left:auto; }
+.game-shell .collection-page .replica-sortbox > button { min-width:38px; }
+.game-shell .collection-page .pc-filters > .replica-more-filters:not(#_),.game-shell .collection-page .replica-filter-popover { display:none; }
+.game-shell .collection-page .dex-hero-body { height:auto; min-height:223px; }
+.game-shell .collection-page .dex-hero-side { display:flex; flex-direction:column; gap:14px; }
+.game-shell .collection-page .dex-last { margin-top:0; gap:10px; flex-wrap:wrap; }
+.game-shell .collection-page .dex-last > div { flex-wrap:wrap; }
+.game-shell .collection-page .replica-dex-region { margin-top:16px; padding:12px; }
+.game-shell .collection-page .replica-region-heading { width:calc(100% + 24px); margin:-12px -12px 12px; height:52px; min-height:52px; }
+.game-shell .collection-page .dex-grid { padding:0; }
+.game-shell .collection-page .dex-cell { display:block; min-height:0; height:auto; }
+.game-shell .collection-page .dex-cell .replica-dex-art { width:100%; height:96px; }
+.game-shell .collection-page .dex-cell .num,.game-shell .collection-page .dex-cell .nm { width:100%; }
+.game-shell .collection-page .dex-cell .num { margin-top:0; }
+.game-shell .collection-page .replica-region-heading { border-bottom-width:2px; }
+.game-shell .collection-page .dex-hero > .map-head { height:auto; min-height:52px; flex-wrap:wrap; }
+.game-shell .collection-page .dex-hero .map-sum { flex-wrap:wrap; }
+.game-shell .collection-page .dex-last { flex-direction:row; }
+.game-shell .collection-page .dex-last > span { position:static; width:auto; height:auto; flex:none; }
+.game-shell .collection-page .dex-last > div { gap:2px; }
+.game-shell .collection-page .dex-last button { flex:none; width:56px; height:50px; }
+.game-shell .collection-page .dex-hero > .map-head { padding:8px 16px; gap:12px; }
+@media (min-width:641px) {
+  .game-shell > main > aside.game-sidebar { margin-bottom:-16px; }
+  .game-shell .collection-page .dex-filters > input { min-width:0; }
+}
+@media (min-width:641px) and (max-width:1100px) {
+  .game-shell .collection-page .team-slots { grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; padding:16px; }
+  .game-shell .collection-page .team-sets { order:0; flex-basis:auto; }
+  .game-shell .collection-page .team-panel .map-head { min-height:62px; }
+  .game-shell .collection-page .slot .lv { white-space:normal; overflow:visible; }
+}
+@media (max-width:640px) {
+  /* Native retains a 10px scrollbar gutter and 16px below the header. */
+  html { scrollbar-gutter:stable; scrollbar-width:auto!important; }
+  html::-webkit-scrollbar { display:block!important; width:10px!important; }
+  .game-shell { --topbar-h:56px; }
+  .game-shell > .replica-topbar { height:56px; min-height:56px; }
+  .game-shell .replica-topbar .tb-prof { flex:1; min-width:0; }
+  .game-shell > main { padding-top:36px; }
+  .game-shell > main:has(.adventure-view:not([hidden])) { padding-top:14px; }
+  .game-shell .adventure-view[hidden] { top:14px; }
+  .game-shell .battle-stage { aspect-ratio:1; }
+  .game-shell .collection-page .team-slots .slot .name { font-size:14px; line-height:normal; }
+  .game-shell .collection-page .team-slots .slot .lv { font-size:16px; line-height:normal; white-space:normal; }
+  .game-shell .collection-page .team-slots .slot.filled { height:auto; min-height:0; }
+  .game-shell .collection-page .replica-team-art { flex:none; width:100%; height:88px; }
+  .game-shell .collection-page .slot .name { overflow:visible; }
+  .game-shell .collection-page .pc-cell { min-width:0; min-height:0; height:auto; padding:0; }
+  .game-shell .collection-page .replica-pc-art { height:40px; margin-top:-12px; }
+  .game-shell .collection-page .pc-cell .lvl { position:absolute; left:0; right:0; bottom:5px; margin:0; font-size:14px; line-height:1; text-align:center; }
+  .game-shell .collection-page .pc-cell .pc-xp { bottom:1px; height:3px; }
+  .game-shell .collection-page .dex-hero-body { min-height:0; padding:16px; }
+  .game-shell .collection-page .dex-hero .map-sum { flex-basis:auto; margin-left:auto; justify-content:normal; font-size:16px; gap:8px; }
+  .game-shell .collection-page .dex-last { align-items:center; }
+  .game-shell .collection-page .dex-last > div { justify-content:flex-start; }
+  .game-shell .collection-page .dex-last button { height:50px; }
+  .game-shell .collection-page .replica-region-heading { height:auto; min-height:52px; padding:8px 16px; gap:12px; }
+  .game-shell .collection-page .replica-region-heading .map-sum { flex-basis:auto; margin-left:auto; }
+  .game-shell .collection-page .dex-cell { height:58px; min-height:0; padding:0 0 14px; }
+  .game-shell .collection-page .dex-cell .replica-dex-art { height:46px; margin-top:-6px; }
+  .game-shell .collection-page .dex-cell .num { position:absolute; left:0; right:0; bottom:3px; font-size:14px; line-height:1; }
+  .game-shell .collection-page .dex-cell .nm { display:none; }
+  .game-shell .collection-page .dex-cell.caught::after { width:14px; height:14px; }
+  .game-shell .collection-page .pc-sticky { top:56px; }
+  .game-shell .collection-page .pc-sticky .pc-filters { flex-wrap:nowrap; gap:8px; }
+  .game-shell .collection-page .pc-sticky .pc-filters > input { flex:1 1 auto; width:0; min-width:0; height:40px; }
+  .game-shell .collection-page .pc-filters > :is(.replica-filter:has([aria-label="Filter by type"]),.replica-filter:has([aria-label="Pokédex region"]),.replica-evolve-filter,.replica-sortbox):not(#_) { display:none; }
+  .game-shell .collection-page .pc-sticky .pc-filters > .replica-filter { flex:0 0 80px; width:80px; }
+  .game-shell .collection-page .pc-sticky .pc-filters > :is(.replica-shiny-filter,.replica-more-filters):not(#_) { display:flex; align-items:center; justify-content:center; flex:0 0 40px; min-width:40px; width:40px; height:40px; padding:0; font-size:22px; }
+  .game-shell .collection-page .replica-shiny-filter .filter-label { display:none; }
+  .game-shell .collection-page .pc-sticky .pc-filters > .replica-filter-popover { display:flex; flex-direction:column; align-items:stretch; position:absolute; top:48px; right:0; z-index:30; width:min(260px,100%); padding:12px; gap:8px; border:2px solid var(--line); border-radius:10px; background:var(--panel); box-shadow:0 8px 20px #0008; }
+  .game-shell .collection-page .replica-filter-popover .replica-filter { width:100%; }
+}

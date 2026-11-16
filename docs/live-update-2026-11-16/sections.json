@@ -1,0 +1,40 @@
+[
+  {
+    "name": "MOVES",
+    "namespace": "a",
+    "bytes": 47234,
+    "start": 410016,
+    "end": 457250,
+    "count": 641
+  },
+  {
+    "name": "STATUS",
+    "namespace": "a",
+    "bytes": 3258,
+    "start": 717601,
+    "end": 720859,
+    "error": "e is not defined"
+  },
+  {
+    "name": "BattleFX",
+    "namespace": "a",
+    "bytes": 195727,
+    "start": 1524555,
+    "end": 1720282
+  },
+  {
+    "name": "FX_MOVES",
+    "namespace": "a",
+    "bytes": 22490,
+    "start": 1525638,
+    "end": 1548128,
+    "count": 330
+  },
+  {
+    "name": "CHANGELOG",
+    "namespace": "a",
+    "bytes": 355727,
+    "start": 2683671,
+    "end": 3039398
+  }
+]

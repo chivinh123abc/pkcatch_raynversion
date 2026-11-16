@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-16",
+  "scope": "R04.2 Kanto runtime and new-game onboarding",
+  "reference": {
+    "kantoBuild": "5598c5890a",
+    "onboardingBuild": "b05c8cc201",
+    "onboardingCssSha256": "3e06fa8ed6cfcca3070da71b03fe5758d6b786faba9accdb4b680590f6cc525b",
+    "runtimeSnapshotSha256": "3f4b57c43d4d1c20f87c2c7ae0d550c34114cd33fd41a0b9964f3faa9ea29d5a"
+  },
+  "core": { "command": "npm test", "passed": 77, "failed": 0 },
+  "audit": { "command": "npm run audit:chapters -- --strict", "templates": 14, "issues": 0 },
+  "build": { "command": "npm run build", "passed": true, "warnings": ["JavaScript chunk exceeds 500 kB"] },
+  "browserRuns": [
+    { "stage": "before final title focus and reward adjustments", "passed": 39, "failed": 0, "specs": ["arena", "battle-cadence", "collections", "kanto-runtime", "onboarding", "trainer-review"] },
+    { "stage": "after title focus, before final reward adjustments", "passed": 24, "failed": 0, "specs": ["onboarding", "chapter-one", "progress", "battle-panels", "pokemon-sprites"], "chapterOneSpeeds": [1, 2, 3] },
+    { "stage": "final after reward adjustments", "passed": 24, "failed": 0, "specs": ["kanto-runtime", "arena", "onboarding", "battle-panels", "chapter-one"], "grepInvert": "walkthrough.*x1|walkthrough.*x2", "chapterOneSpeeds": [3] }
+  ],
+  "fixtures": {
+    "chapterTwoCore": "level-40 Venusaur, real store/runtime combat at UI speeds 1/2/3",
+    "remainingChaptersCore": "fixed six level-100 Pokemon, real store/runtime combat through Champion",
+    "chapterOneBrowser": "trained level-20 Squirtle, Butterfree, Pikachu; real effects and combat",
+    "note": "These fixtures verify progression, not natural grinding balance. Browser runs overlap and must not be added as unique tests."
+  },
+  "save": { "reset": false, "key": "pokecatch_save_v1", "version": 2, "saveVersion": 4, "resetMarker": "pokecatch_reset_20261115_02" }
+}

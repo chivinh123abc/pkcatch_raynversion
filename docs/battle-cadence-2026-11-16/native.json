@@ -1,0 +1,54 @@
+{
+  "source": "v0.4.103 / BUILD5598c5890a",
+  "note": "Actual native Qn rendering plus native loop wait325/pace. Original attack/FX code; onImpact only records time.",
+  "results": [
+    {
+      "raw": 1,
+      "pace": 1,
+      "eff": 1,
+      "contactMs": 355,
+      "recoveryMs": 266,
+      "nextAttackMs": 946
+    },
+    {
+      "raw": 1,
+      "pace": 1,
+      "eff": 2,
+      "contactMs": 368,
+      "recoveryMs": 714,
+      "nextAttackMs": 1408
+    },
+    {
+      "raw": 2,
+      "pace": 2,
+      "eff": 1,
+      "contactMs": 192,
+      "recoveryMs": 133,
+      "nextAttackMs": 488
+    },
+    {
+      "raw": 2,
+      "pace": 2,
+      "eff": 2,
+      "contactMs": 185,
+      "recoveryMs": 357,
+      "nextAttackMs": 708
+    },
+    {
+      "raw": 4,
+      "pace": 2.5,
+      "eff": 1,
+      "contactMs": 148,
+      "recoveryMs": 106,
+      "nextAttackMs": 385
+    },
+    {
+      "raw": 4,
+      "pace": 2.5,
+      "eff": 2,
+      "contactMs": 131,
+      "recoveryMs": 288,
+      "nextAttackMs": 550
+    }
+  ]
+}

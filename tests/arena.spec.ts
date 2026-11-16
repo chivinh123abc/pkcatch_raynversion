@@ -1,7 +1,7 @@
 import { test, expect, Page } from '@playwright/test';
 
 async function prepare(page: Page) {
-  await page.goto('/');
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
   await page.locator('.battle-stage').waitFor();
   await page.evaluate(async () => {
     // Resolve the module used by React, including Vite's development version.
@@ -9,7 +9,7 @@ async function prepare(page: Page) {
     const { useGameStore: store } = await import(/* @vite-ignore */ url);
     (window as any).__arenaStore = store;
     store.getState().loadStepNode(1);
-    store.setState({ isBattling: false, autoCatch: false });
+    store.setState({ starterChosen: true, isBattling: false, autoCatch: false });
   });
   await page.locator('canvas[data-transition="dither"]').waitFor({ state: 'detached' });
 }
@@ -42,7 +42,7 @@ test('actual move contact updates HP and accelerates at x3', async ({ page }) =>
     timings.push(await page.evaluate(async speed => {
       const store = (window as any).__arenaStore;
       store.getState().loadStepNode(1);
-      store.setState({ isBattling: false, autoCatch: false, gameSpeed: speed });
+      store.setState({ starterChosen: true, isBattling: false, autoCatch: false, gameSpeed: speed });
       const random = Math.random;
       Math.random = () => .1;
       const hp = store.getState().enemy.currentHp;
@@ -69,7 +69,7 @@ test('capture animation finishes before rewarding or advancing the node', async 
   await prepare(page);
   const startStep = await page.evaluate(() => {
     const store = (window as any).__arenaStore;
-    store.setState({ selectedBall: 'masterball', gameSpeed: 3, berryBuffs: { greatBall: 0, ultraBall: 0, nanab: 0, pinap: 0 } });
+    store.setState({ balls: { pokeball: 0, greatball: 0, ultraball: 0, masterball: 1 }, selectedBall: 'masterball', gameSpeed: 3, berryBuffs: { greatBall: 0, ultraBall: 0, nanab: 0, pinap: 0 } });
     store.getState().catchEnemy();
     return store.getState().currentStep;
   });
@@ -106,7 +106,7 @@ test('successful duplicate captures use the original quick sequence', async ({ p
   await prepare(page);
   await page.evaluate(() => {
     const store = (window as any).__arenaStore;
-    store.setState({ pokedexCaught: [...store.getState().pokedexCaught, store.getState().enemy.speciesId], selectedBall:'masterball', gameSpeed:3, berryBuffs:{greatBall:0,ultraBall:0,nanab:0,pinap:0} });
+    store.setState({ pcBox: [{ ...store.getState().enemy, uid: 'owned-duplicate' }], pokedexCaught: [...store.getState().pokedexCaught, store.getState().enemy.speciesId], balls: { pokeball: 0, greatball: 0, ultraball: 0, masterball: 1 }, selectedBall:'masterball', gameSpeed:3, berryBuffs:{greatBall:0,ultraBall:0,nanab:0,pinap:0} });
     store.getState().catchEnemy();
   });
   await expect(page.locator('.capture-sequence .cb-pos')).toBeAttached();

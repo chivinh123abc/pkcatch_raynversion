@@ -1,0 +1,26 @@
+{
+  "source": {
+    "version": "0.4.103",
+    "build": "5598c5890a",
+    "bundle": "app.c0c995f8f9.js",
+    "snapshot": "scratch/r03/reference-runtime.json",
+    "sha256": "cf9cc4a475e6911f4e9eadc3ac30a857f17ab0354e127e9edfc4f534c4ef3f91"
+  },
+  "catalog": {
+    "chapters": 14,
+    "templateValidation": "passed",
+    "runtimeIntegrated": true
+  },
+  "runtime": {
+    "chapters": 18,
+    "validation": "passed",
+    "issues": []
+  },
+  "disabledActivities": [
+    "special-mewtwo",
+    "special-power-plant",
+    "special-seafoam",
+    "special-blazing-cave"
+  ],
+  "note": "Kanto templates are integrated. Optional item/gift nodes depend on persisted run context; preview counts are not fixed live totals. Unsupported special activities remain disabled and are excluded from the Kanto runtime gate."
+}

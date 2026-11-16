@@ -1,5 +1,9 @@
 # Phiên bản chuẩn của dự án
 
+> **Kiểm tra bổ sung16/11/2026:** live hiện quan sát là **v0.5.02 / BUILD b05c8cc201**, app `c0081498f2`, CSS `3e06fa8ed6`. Đã tích hợp phần chiêu/FX và learnset151 loài theo [báo cáo cập nhật](LIVE_MOVE_UPDATE.md). UI/chapter chưa đối chiếu lại toàn bộ; baseline v0.4.103 phía dưới vẫn là bằng chứng cho các đợt UI trước. Dùng `npm run reference:check` để kiểm tra build nhanh.
+
+Đã đối chiếu từng mục changelog trong [V0_5_02_UPDATE.md](V0_5_02_UPDATE.md); bổ sung preview chiêu Team/PC theo `mainMove` v0.5.02. Các mục thuộc vùng mới, trade và raid chưa áp dụng vì thiếu hệ thống tương ứng.
+
 Chốt ngày **14/11/2026**, trong bước R00. Đây là nguồn chuẩn để triển khai các bước tiếp theo của [kế hoạch làm lại game](KE_HOACH_LAM_LAI_TOAN_BO_GAME.md).
 
 ## Bản chuẩn chính

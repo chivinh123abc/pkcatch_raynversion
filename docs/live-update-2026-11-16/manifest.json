@@ -1,0 +1,19 @@
+{
+  "checkedAt": "2026-11-16T02:16:41.083Z",
+  "build": "b05c8cc201",
+  "css": "https://pokecatch-online.pages.dev/bundle/app.3e06fa8ed6.css",
+  "resources": [
+    {
+      "url": "https://pokecatch-online.pages.dev/bundle/lang-en.25fc015425.js",
+      "status": 200,
+      "bytes": 368875,
+      "sha256": "25fc015425eb2826cd8619cd815a382581dbb503f6675e66f006296a5c613294"
+    },
+    {
+      "url": "https://pokecatch-online.pages.dev/bundle/app.c0081498f2.js",
+      "status": 200,
+      "bytes": 3162011,
+      "sha256": "c0081498f217061d529fb18ecc4833e9490c93e0b425fc3d04b713d990fdda11"
+    }
+  ]
+}

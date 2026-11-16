@@ -1,0 +1,289 @@
+{
+  "arena": {
+    "x": 280,
+    "y": 108,
+    "width": 658,
+    "height": 370.125,
+    "top": 108,
+    "right": 938,
+    "bottom": 478.125,
+    "left": 280
+  },
+  "html": "<div class=\"arena\" id=\"arena\" style=\"--hud-bottom: 0px; --tile: 46px; --k: 2; --ks: 2; --kt: 2; background-image: url(&quot;assets/bg/scenes/26-arene-pierre-710x400.webp&quot;);\">\n            <div class=\"ally-slots\" id=\"ally-slots\"><div class=\"ally\" data-uid=\"main-4\" data-team-uid=\"main-4\" style=\"left:30%;bottom:22%;z-index:78\">\n        <div class=\"wrap\" style=\"--sprite-top: calc(0px * var(--k));\"><img alt=\"\" src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAATCAYAAAB/TkaLAAABrElEQVR4AayTr17CUBTHf9ekTRvYoGHzFVgjYoMIjb2BNH0EbS5iw0gDHsEmTeJsRuM8vzPuuNvOsMhn58/O/Z3vzh13Z/ifXxZimqAUeQv1Vp59TPqsU8+IKpQL2c9TD7SqWDsaXKgNoQXM93VuU4RiX/8rhlBTS7C5kBf91kGdH8BDdcpcl/v9eztPxHuxpOZFICbHJQ89ViQjsPeyxkW8kzvoFJo0uQBICaG1KXffwPV0ynU1PkSTunM3yUar+7iNQ+4I1WLoBv0UaZJo6QRQ1+lCIO8JddxmtZnvkUYR7ZDzyPG2ZPpOgwqhvNVteHj1ARQ0WO3VUeehzJ04hfPdnI/0K5ESMPvMB6xMWxwnDiNC9ktA7Yti0dG1ey10HkYKjK9ccQI8+BBh7SqclCzT+MexOZzY59yVNOkgEvWyoNly2McqflXBajHGYNnSiZ+7pd7iCKkwcBYUl7N7lQzGC6S7LyTzCCGQ53i73VJTfgorYhbURVGEu7cN2NiN5pg8rkGQ6DVyTXITKHXzj2KdDYURPlzmYEYKTpk1qaV38tPpGUXAB0qwr18AAAD//1alHvoAAAAGSURBVAMAJhGlJMGs/rYAAAAASUVORK5CYII=\" style=\"width: calc(21px * var(--k)); height: calc(19px * var(--k));\">\n          <div class=\"mini-hp\"><div class=\"hp\"><div style=\"width: 78.7879%; background: rgb(240, 96, 122);\"></div></div></div>\n        </div>\n        <div class=\"mini-lv\"><span class=\"lvn\">Lv.11</span></div>\n      </div></div>\n            <div class=\"trainer-slot\" id=\"trainer-slot\"></div>\n            <div class=\"enemy-slot\" id=\"enemy-slot\"><div class=\"enemy\" data-uid=\"brock-74\" style=\"left:78%;bottom:25%;z-index:75\"><div class=\"wrap\" style=\"--sprite-top: calc(0px * var(--k));\"><img alt=\"\" src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAPCAYAAAD+pA/bAAABjklEQVR4AaySO3LCQBBER76JQnwL5AxCHwMyEzp0CJk5hkOUWbqBQwh1DIfyvC6NakSpDAHU9s6/e7XLk01/vYfAzWNWCEDaL5dL+z7tYSbG3gv6M8Y5BCiI+H23to/9Sb53KO/21uo5VBwO6wPjLAIihNgLD1kIOpFEJODBZL2sd8QFWwIDgBQW4Our5cxsCBQDoRpf18/2ud/QGgTYnhx426x0JemURdu2FtfLILcRdQTIqQlyggSRQdx1nYHVqhrLQeIJHRKRgOe0QkABBHJ8g3R4MFssSoMYeEnrculk57ZcmwiUZalTMvR1OlvTNFbXDaGQBxElTl8x6R2uvcgCxXZ3FFHeDsdaIUKQEkDMPeOT50v5YmIQffhZgNh+zr+yPFxVVXpwCJX0DZ+D8HVBFG/HDSAYp/d2uxbQY0PgRflutRgOck5Mkpg8/YAcMTZwLUCe/z+QH4MEgKvgxMfDltCGOv264hSrPiegQtrGwfwvgwh4H+RutPCBArZ7BOhjqODBIQWeVM7tv+sPAAD//1OTCekAAAAGSURBVAMA+HDJHK94DT4AAAAASUVORK5CYII=\" style=\"width: calc(24px * var(--k)); height: calc(15px * var(--k));\"><div class=\"mini-hp\"><div class=\"hp\"><div style=\"width:90.47619047619048%;background:#f0607a\"></div></div></div></div>\n      <div class=\"mini-lv\">Lv.14</div></div></div><canvas class=\"weather-fx\" hidden=\"\"></canvas><div class=\"weather-strike\"></div>\n            <div class=\"enemy-hud\" id=\"enemy-hud\"><div class=\"row\"><b>Leader Brock</b></div>\n      <div class=\"rival-balls\"><img src=\"assets/items/poke-ball.png\" alt=\"\"><img src=\"assets/items/poke-ball.png\" alt=\"\"></div></div>\n            <div class=\"buff-stack\" id=\"buff-stack\" style=\"top: 78px;\"></div>\n            <div class=\"bag-tip buff-tip\" id=\"buff-tip\" role=\"tooltip\" hidden=\"\"></div>\n            <div class=\"scene-bar\" id=\"scene-bar\"><span class=\"sb-pill\" title=\"Day 19:56 · Indoors\"><span data-cond=\"day\">☀️</span><span class=\"sb-clock\">19:56</span><span class=\"sb-sep\"></span><span>🏠</span></span></div>\n            <div class=\"team-rail\" id=\"team-rail\" title=\"Battle send-out order\" style=\"padding-top: 38px;\"><div class=\"tr-row active acting\" data-uid=\"main-4\" data-team-uid=\"main-4\" title=\"Charmander — tap to send it out, drag to reorder\">\n          <div class=\"sprbox \" style=\"height:56px\"><img src=\"assets/pokemon/4.png\" alt=\"\" data-id=\"4\" data-k=\"1\" style=\"width:68px;height:56px;transform:translate(0px, -15px)\"></div><span class=\"tr-st\" hidden=\"\"></span><span class=\"tr-lv\">Lv. 11</span><div class=\"tr-hp\"><i style=\"width: 78.7879%; background: rgb(240, 96, 122);\"></i></div><div class=\"tr-xp\"><i style=\"width: 0%;\"></i></div>\n        </div><div class=\"tr-row ko\" data-uid=\"main-19\" data-team-uid=\"main-19\" title=\"Rattata — tap to send it out, drag to reorder\">\n          <div class=\"sprbox \" style=\"height:56px\"><img src=\"assets/pokemon/19.png\" alt=\"\" data-id=\"19\" data-k=\"1\" style=\"width:68px;height:56px;transform:translate(0px, -14px)\"></div><span class=\"tr-st\" hidden=\"\"></span><span class=\"tr-lv\">Lv. 20</span><div class=\"tr-hp\"><i style=\"width: 0%; background: rgb(214, 51, 79);\"></i></div><div class=\"tr-xp\"><i style=\"width: 100%;\"></i></div>\n        </div><div class=\"tr-row ko\" data-uid=\"main-20\" data-team-uid=\"main-20\" title=\"Raticate — tap to send it out, drag to reorder\">\n          <div class=\"sprbox \" style=\"height:56px\"><img src=\"assets/pokemon/20.png\" alt=\"\" data-id=\"20\" data-k=\"1\" style=\"width:68px;height:56px;transform:translate(0px, -14px)\"></div><span class=\"tr-st\" hidden=\"\"></span><span class=\"tr-lv\">Lv. 17</span><div class=\"tr-hp\"><i style=\"width: 0%; background: rgb(214, 51, 79);\"></i></div><div class=\"tr-xp\"><i style=\"width: 0%;\"></i></div>\n        </div><div class=\"tr-row ko\" data-uid=\"main-74\" data-team-uid=\"main-74\" title=\"Geodude — tap to send it out, drag to reorder\">\n          <div class=\"sprbox \" style=\"height:56px\"><img src=\"assets/pokemon/74.png\" alt=\"\" data-id=\"74\" data-k=\"1\" style=\"width:68px;height:56px;transform:translate(0px, -17px)\"></div><span class=\"tr-st\" hidden=\"\"></span><span class=\"tr-lv\">Lv. 16</span><div class=\"tr-hp\"><i style=\"width: 0%; background: rgb(214, 51, 79);\"></i></div><div class=\"tr-xp\"><i style=\"width: 0%;\"></i></div>\n        </div><div class=\"tr-row ko\" data-uid=\"main-25\" data-team-uid=\"main-25\" title=\"Pikachu — tap to send it out, drag to reorder\">\n          <div class=\"sprbox \" style=\"height:56px\"><img src=\"assets/pokemon/25.png\" alt=\"\" data-id=\"25\" data-k=\"1\" style=\"width:68px;height:56px;transform:translate(0px, -15px)\"></div><span class=\"tr-st\" hidden=\"\"></span><span class=\"tr-lv\">Lv. 12</span><div class=\"tr-hp\"><i style=\"width: 0%; background: rgb(214, 51, 79);\"></i></div><div class=\"tr-xp\"><i style=\"width: 0%;\"></i></div>\n        </div><div class=\"tr-row ko\" data-uid=\"main-8\" data-team-uid=\"main-8\" title=\"Wartortle — tap to send it out, drag to reorder\">\n          <div class=\"sprbox \" style=\"height:56px\"><img src=\"assets/pokemon/8.png\" alt=\"\" data-id=\"8\" data-k=\"1\" style=\"width:68px;height:56px;transform:translate(-2px, -14px)\"></div><span class=\"tr-st\" hidden=\"\"></span><span class=\"tr-lv\">Lv. 10</span><div class=\"tr-hp\"><i style=\"width: 0%; background: rgb(214, 51, 79);\"></i></div><div class=\"tr-xp\"><i style=\"width: 0%;\"></i></div>\n        </div></div>\n            <div class=\"fx-layer\" id=\"arena-fx\"><canvas width=\"200\" height=\"112\" style=\"position: absolute; inset: 0px; width: 100%; height: 100%; image-rendering: pixelated; pointer-events: none; z-index: 4;\"></canvas><div class=\"fx-tint\" style=\"position: absolute; inset: 0px; opacity: 0; pointer-events: none; z-index: 3; transition: opacity 0.3s linear, background-color 0.3s linear; background: rgb(26, 5, 5);\"></div></div>\n            <div class=\"banner\" id=\"banner\"></div>\n            <div class=\"battle-log\" id=\"battle-log\">Charmander used <b>Fire Spin</b>!</div>\n            <div class=\"adv-controls\">\n              <div class=\"seg\" id=\"speed-btns\"><button data-speed=\"1\" class=\"on\">×1</button><button data-speed=\"2\">×2</button><button data-speed=\"4\">×3</button></div>\n            </div>\n            <div class=\"empty-arena\" id=\"adv-empty\" hidden=\"\"><p>Your team is empty! Pick up to 6 Pokémon from your PC.</p><button class=\"btn gold\">Manage team</button></div>\n          </div>",
+  "metrics": {
+    "#enemy-hud": {
+      "rect": {
+        "x": 814.921875,
+        "y": 119,
+        "width": 107.046875,
+        "height": 62,
+        "top": 119,
+        "right": 921.96875,
+        "bottom": 181,
+        "left": 814.921875
+      },
+      "font": "500 20px \"Jersey 10\", system-ui, sans-serif",
+      "padding": "8px 12px",
+      "border": "3px solid rgb(27, 27, 34)",
+      "radius": "12px 4px"
+    },
+    "#enemy-hud .row b": {
+      "rect": {
+        "x": 829.921875,
+        "y": 130,
+        "width": 77.046875,
+        "height": 16,
+        "top": 130,
+        "right": 906.96875,
+        "bottom": 146,
+        "left": 829.921875
+      },
+      "font": "16px \"Jersey 15\", system-ui, sans-serif",
+      "padding": "0px",
+      "border": "0px none rgb(27, 27, 34)",
+      "radius": "0px"
+    },
+    ".battle-trainer-card > div": null,
+    ".battle-trainer-card span": null,
+    ".mini-hp .hp": {
+      "rect": {
+        "x": 465.5528869628906,
+        "y": 338.21044921875,
+        "width": 26.08172607421875,
+        "height": 14.95281982421875,
+        "top": 338.21044921875,
+        "right": 491.6346130371094,
+        "bottom": 353.16326904296875,
+        "left": 465.5528869628906
+      },
+      "font": "500 20px \"Jersey 10\", system-ui, sans-serif",
+      "padding": "0px",
+      "border": "3px solid rgb(27, 27, 34)",
+      "radius": "5px"
+    },
+    ".mini-lv": {
+      "rect": {
+        "x": 467.875,
+        "y": 395.03125,
+        "width": 21.4375,
+        "height": 17,
+        "top": 395.03125,
+        "right": 489.3125,
+        "bottom": 412.03125,
+        "left": 467.875
+      },
+      "font": "700 16px \"Jersey 10\", system-ui, sans-serif",
+      "padding": "0px",
+      "border": "0px none rgb(255, 255, 255)",
+      "radius": "0px"
+    },
+    ".tr-row": {
+      "rect": {
+        "x": 291,
+        "y": 159,
+        "width": 46,
+        "height": 46,
+        "top": 159,
+        "right": 337,
+        "bottom": 205,
+        "left": 291
+      },
+      "font": "500 20px \"Jersey 10\", system-ui, sans-serif",
+      "padding": "0px 0px 8px",
+      "border": "2px solid rgb(216, 175, 20)",
+      "radius": "7px 7px 7px 16px"
+    }
+  },
+  "images": [
+    {
+      "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAATCAYAAAB/TkaLAAABrElEQVR4Aa",
+      "class": "",
+      "parent": "wrap",
+      "rect": {
+        "x": 457.5277404785156,
+        "y": 357.15069580078125,
+        "width": 42.13201904296875,
+        "height": 37.88055419921875,
+        "top": 357.15069580078125,
+        "right": 499.6597595214844,
+        "bottom": 395.03125,
+        "left": 457.5277404785156
+      },
+      "natural": [
+        21,
+        19
+      ]
+    },
+    {
+      "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAPCAYAAAD+pA/bAAABjklEQVR4Aa",
+      "class": "",
+      "parent": "wrap",
+      "rect": {
+        "x": 767.35498046875,
+        "y": 352.10589599609375,
+        "width": 48.3837890625,
+        "height": 29.962615966796875,
+        "top": 352.10589599609375,
+        "right": 815.73876953125,
+        "bottom": 382.0685119628906,
+        "left": 767.35498046875
+      },
+      "natural": [
+        24,
+        15
+      ]
+    },
+    {
+      "src": "assets/items/poke-ball.png",
+      "class": "",
+      "parent": "rival-balls",
+      "rect": {
+        "x": 823.921875,
+        "y": 144,
+        "width": 32,
+        "height": 32,
+        "top": 144,
+        "right": 855.921875,
+        "bottom": 176,
+        "left": 823.921875
+      },
+      "natural": [
+        32,
+        32
+      ]
+    },
+    {
+      "src": "assets/items/poke-ball.png",
+      "class": "",
+      "parent": "rival-balls",
+      "rect": {
+        "x": 857.921875,
+        "y": 144,
+        "width": 32,
+        "height": 32,
+        "top": 144,
+        "right": 889.921875,
+        "bottom": 176,
+        "left": 857.921875
+      },
+      "natural": [
+        32,
+        32
+      ]
+    },
+    {
+      "src": "assets/pokemon/4.png",
+      "class": "",
+      "parent": "sprbox ",
+      "rect": {
+        "x": 280,
+        "y": 132.3125,
+        "width": 68,
+        "height": 56,
+        "top": 132.3125,
+        "right": 348,
+        "bottom": 188.3125,
+        "left": 280
+      },
+      "natural": [
+        68,
+        56
+      ]
+    },
+    {
+      "src": "assets/pokemon/19.png",
+      "class": "",
+      "parent": "sprbox ",
+      "rect": {
+        "x": 280,
+        "y": 184.3125,
+        "width": 68,
+        "height": 56,
+        "top": 184.3125,
+        "right": 348,
+        "bottom": 240.3125,
+        "left": 280
+      },
+      "natural": [
+        68,
+        56
+      ]
+    },
+    {
+      "src": "assets/pokemon/20.png",
+      "class": "",
+      "parent": "sprbox ",
+      "rect": {
+        "x": 280,
+        "y": 235.3125,
+        "width": 68,
+        "height": 56,
+        "top": 235.3125,
+        "right": 348,
+        "bottom": 291.3125,
+        "left": 280
+      },
+      "natural": [
+        68,
+        56
+      ]
+    },
+    {
+      "src": "assets/pokemon/74.png",
+      "class": "",
+      "parent": "sprbox ",
+      "rect": {
+        "x": 280,
+        "y": 283.3125,
+        "width": 68,
+        "height": 56,
+        "top": 283.3125,
+        "right": 348,
+        "bottom": 339.3125,
+        "left": 280
+      },
+      "natural": [
+        68,
+        56
+      ]
+    },
+    {
+      "src": "assets/pokemon/25.png",
+      "class": "",
+      "parent": "sprbox ",
+      "rect": {
+        "x": 280,
+        "y": 336.3125,
+        "width": 68,
+        "height": 56,
+        "top": 336.3125,
+        "right": 348,
+        "bottom": 392.3125,
+        "left": 280
+      },
+      "natural": [
+        68,
+        56
+      ]
+    },
+    {
+      "src": "assets/pokemon/8.png",
+      "class": "",
+      "parent": "sprbox ",
+      "rect": {
+        "x": 278,
+        "y": 388.3125,
+        "width": 68,
+        "height": 56,
+        "top": 388.3125,
+        "right": 346,
+        "bottom": 444.3125,
+        "left": 278
+      },
+      "natural": [
+        68,
+        56
+      ]
+    }
+  ]
+}

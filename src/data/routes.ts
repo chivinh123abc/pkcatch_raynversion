@@ -9,7 +9,7 @@ export const ROUTE_1_STEPS: StepNode[] = [
   { step: 2, type: 'question', name: 'Route 1 · Mystery Item' },
   { step: 3, type: 'grass', name: 'Route 1 · Wild Pokémon' },
   { step: 4, type: 'grass', name: 'Route 1 · Wild Pokémon' },
-  { step: 5, type: 'question', name: 'Viridian City · Hidden Item' },
+  { step: 5, type: 'question', name: 'Viridian City · Hidden Item', reward: { item: 'exp-candy-s', amount: 1 } },
   { step: 6, type: 'center', name: 'Viridian City · Pokémon Center' },
   { step: 7, type: 'grass', name: 'Route 2 · Wild Pokémon' },
   { step: 8, type: 'grass', name: 'Route 2 · Wild Pokémon' },
@@ -24,7 +24,7 @@ export const ROUTE_1_STEPS: StepNode[] = [
     trainer: {
       name: 'Bug Catcher Sammy',
       title: 'Bug Catcher',
-      sprite: 'bug-catcher',
+      sprite: 'bugcatcher',
       team: [
         { speciesId: 10, level: 7 }, // Caterpie Lv.7
         { speciesId: 13, level: 7 }, // Weedle Lv.7
@@ -39,7 +39,7 @@ export const ROUTE_1_STEPS: StepNode[] = [
     trainer: {
       name: 'Bug Catcher Charlie',
       title: 'Bug Catcher',
-      sprite: 'bug-catcher',
+      sprite: 'bugcatcher',
       team: [
         { speciesId: 11, level: 8 }, // Metapod Lv.8
         { speciesId: 14, level: 8 }, // Kakuna Lv.8
@@ -50,7 +50,7 @@ export const ROUTE_1_STEPS: StepNode[] = [
   { step: 15, type: 'grass', name: 'Viridian Forest · Wild Pokémon' },
   { step: 16, type: 'question', name: 'Pewter City · Hidden Item' },
   { step: 17, type: 'center', name: 'Pewter City · Pokémon Center' },
-  { step: 18, type: 'question', name: 'Pewter Museum · Ancient Fossil' },
+  { step: 18, type: 'question', name: 'Pewter Museum · Ancient Fossil', reward: { item: 'old-amber', amount: 1, once: 'old-amber' } },
   {
     step: 19,
     type: 'red',
@@ -79,7 +79,7 @@ export const ROUTE_1_STEPS: StepNode[] = [
         { speciesId: 74, level: 14 }, // Geodude Lv.14
         { speciesId: 95, level: 15 }, // Onix Lv.15 (Ace)
       ],
-      rewardMoney: 1500,
+      rewardMoney: 1400,
     },
   },
 ];
@@ -107,7 +107,7 @@ export const ROUTES: RouteConfig[] = [
       badgeName: 'Boulder Badge',
       badgeSprite: 'boulder-badge',
       sprite: 'brock',
-      rewardMoney: 1500,
+      rewardMoney: 1400,
       team: [
         { speciesId: 74, level: 14 }, // Geodude Lv.14
         { speciesId: 95, level: 15 }, // Onix Lv.15 (Ace)

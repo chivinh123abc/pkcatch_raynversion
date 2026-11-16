@@ -1,4 +1,5 @@
 import { RuntimeClock } from './GameplayRuntime';
+import { battlePollDelay } from '../domain/presentationTiming';
 interface LoopStore {
     runtime: {
         clock: RuntimeClock;
@@ -6,6 +7,7 @@ interface LoopStore {
     getState: () => {
         gameSpeed: number;
         isBattling: boolean;
+        starterChosen?: boolean;
         tickCombat: () => void;
         tickBerryBuffs: (seconds?: number) => void;
     };
@@ -22,14 +24,14 @@ export function startGameplayLoop(store: LoopStore): () => void {
                 return;
             const state = store.getState();
             try {
-                if (state.isBattling)
+                if (state.isBattling && state.starterChosen !== false)
                     state.tickCombat();
             }
             finally {
                 if (!stopped)
                     scheduleBattle();
             }
-        }, Math.max(250, Math.floor(1200 / store.getState().gameSpeed)));
+        }, battlePollDelay(store.getState().gameSpeed));
     };
     const scheduleRealTime = () => {
         realTimer = clock.setTimeout(() => {

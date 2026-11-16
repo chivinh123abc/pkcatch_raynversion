@@ -1,0 +1,308 @@
+{
+  "arena": {
+    "x": 280,
+    "y": 108,
+    "width": 658,
+    "height": 370.125,
+    "top": 108,
+    "right": 938,
+    "bottom": 478.125,
+    "left": 280
+  },
+  "html": "<div class=\"battle-stage relative w-full overflow-hidden bg-cover bg-center select-none\" style=\"background-image: url(&quot;/assets/bg/scenes/26-arene-pierre-710x400.webp&quot;); --k: 2; --tile: 46px; --rail-top-gap: 38px;\"><div id=\"arena-fx\" class=\"absolute inset-0 pointer-events-none z-30 overflow-hidden\"><canvas width=\"326\" height=\"183\" style=\"position: absolute; left: 0px; top: 0px; image-rendering: pixelated; pointer-events: none; z-index: 5; width: 652px; height: 366px;\"></canvas></div><div class=\"battle-weather absolute z-20 flex items-center text-white\"><span aria-hidden=\"true\">🌙</span><span class=\"tabular-nums\">19:57</span><span class=\"mx-0.5 h-6 w-px bg-white/30\"></span><span aria-hidden=\"true\">⛅</span><span class=\"text-slate-200\">Clear skies</span></div><div class=\"battle-trainer-card absolute top-3 right-3 z-20 flex flex-col items-end gap-1 pointer-events-none\"><div class=\"bg-[#181d2e]/95 border border-slate-600/90 rounded-2xl px-3.5 py-1.5 shadow-xl flex flex-col items-center\"><span class=\"font-bold text-white text-xs tracking-tight\">Leader Brock</span><div class=\"flex items-center gap-1.5 mt-1\"><img src=\"/assets/ui/poke-ball.png\" alt=\"Ball\" class=\"w-3.5 h-3.5 pixel-art brightness-110 drop-shadow\"><img src=\"/assets/ui/poke-ball.png\" alt=\"Ball\" class=\"w-3.5 h-3.5 pixel-art brightness-110 drop-shadow\"></div></div></div><div class=\"buff-stack absolute z-20 flex flex-col items-end pointer-events-none\"></div><div class=\"battle-team-rail team-rail\" aria-label=\"Battle send-out order\"><div class=\"rail-entry\"><button class=\"tr-row active acting\" draggable=\"true\" aria-label=\"Charmander, level 11, 26 of 33 HP\" aria-pressed=\"true\" aria-disabled=\"false\" title=\"Charmander — Lv. 11 · HP 26/33 · EXP 20/100 · tap to send out, drag to reorder\"><span class=\"sprbox\" style=\"height: 56px;\"><img src=\"/assets/pokemon/4.png\" alt=\"\" draggable=\"false\" style=\"width: 68px; height: 56px; transform: translate(0px, -15px);\"></span><span class=\"tr-lv\">Lv. 11</span><div class=\"tr-hp\" role=\"progressbar\" aria-label=\"Charmander HP\" aria-valuemin=\"0\" aria-valuemax=\"33\" aria-valuenow=\"26\"><i style=\"width: 78.7879%; background: rgb(240, 96, 122);\"></i></div><div class=\"tr-xp\" role=\"progressbar\" aria-label=\"Charmander EXP\" aria-valuemin=\"0\" aria-valuemax=\"100\" aria-valuenow=\"20\"><i style=\"width: 20%;\"></i></div></button></div><div class=\"rail-entry\"><button class=\"tr-row ko\" draggable=\"true\" aria-label=\"Rattata, level 20, fainted\" aria-pressed=\"false\" aria-disabled=\"true\" title=\"Rattata — Lv. 20 · HP 0/54 · EXP 20/100 · tap to send out, drag to reorder\"><span class=\"sprbox\" style=\"height: 56px;\"><img src=\"/assets/pokemon/19.png\" alt=\"\" draggable=\"false\" style=\"width: 68px; height: 56px; transform: translate(0px, -14px);\"></span><span class=\"tr-lv\">Lv. 20</span><div class=\"tr-hp\" role=\"progressbar\" aria-label=\"Rattata HP\" aria-valuemin=\"0\" aria-valuemax=\"54\" aria-valuenow=\"0\"><i style=\"width: 0%; background: rgb(214, 51, 79);\"></i></div><div class=\"tr-xp\" role=\"progressbar\" aria-label=\"Rattata EXP\" aria-valuemin=\"0\" aria-valuemax=\"100\" aria-valuenow=\"20\"><i style=\"width: 20%;\"></i></div></button></div><div class=\"rail-entry\"><button class=\"tr-row ko\" draggable=\"true\" aria-label=\"Raticate, level 17, fainted\" aria-pressed=\"false\" aria-disabled=\"true\" title=\"Raticate — Lv. 17 · HP 0/56 · EXP 20/100 · tap to send out, drag to reorder\"><span class=\"sprbox\" style=\"height: 56px;\"><img src=\"/assets/pokemon/20.png\" alt=\"\" draggable=\"false\" style=\"width: 68px; height: 56px; transform: translate(0px, -14px);\"></span><span class=\"tr-lv\">Lv. 17</span><div class=\"tr-hp\" role=\"progressbar\" aria-label=\"Raticate HP\" aria-valuemin=\"0\" aria-valuemax=\"56\" aria-valuenow=\"0\"><i style=\"width: 0%; background: rgb(214, 51, 79);\"></i></div><div class=\"tr-xp\" role=\"progressbar\" aria-label=\"Raticate EXP\" aria-valuemin=\"0\" aria-valuemax=\"100\" aria-valuenow=\"20\"><i style=\"width: 20%;\"></i></div></button></div><div class=\"rail-entry\"><button class=\"tr-row ko\" draggable=\"true\" aria-label=\"Geodude, level 16, fainted\" aria-pressed=\"false\" aria-disabled=\"true\" title=\"Geodude — Lv. 16 · HP 0/47 · EXP 20/100 · tap to send out, drag to reorder\"><span class=\"sprbox\" style=\"height: 56px;\"><img src=\"/assets/pokemon/74.png\" alt=\"\" draggable=\"false\" style=\"width: 68px; height: 56px; transform: translate(0px, -17px);\"></span><span class=\"tr-lv\">Lv. 16</span><div class=\"tr-hp\" role=\"progressbar\" aria-label=\"Geodude HP\" aria-valuemin=\"0\" aria-valuemax=\"47\" aria-valuenow=\"0\"><i style=\"width: 0%; background: rgb(214, 51, 79);\"></i></div><div class=\"tr-xp\" role=\"progressbar\" aria-label=\"Geodude EXP\" aria-valuemin=\"0\" aria-valuemax=\"100\" aria-valuenow=\"20\"><i style=\"width: 20%;\"></i></div></button></div><div class=\"rail-entry\"><button class=\"tr-row ko\" draggable=\"true\" aria-label=\"Pikachu, level 12, fainted\" aria-pressed=\"false\" aria-disabled=\"true\" title=\"Pikachu — Lv. 12 · HP 0/35 · EXP 20/100 · tap to send out, drag to reorder\"><span class=\"sprbox\" style=\"height: 56px;\"><img src=\"/assets/pokemon/25.png\" alt=\"\" draggable=\"false\" style=\"width: 68px; height: 56px; transform: translate(0px, -15px);\"></span><span class=\"tr-lv\">Lv. 12</span><div class=\"tr-hp\" role=\"progressbar\" aria-label=\"Pikachu HP\" aria-valuemin=\"0\" aria-valuemax=\"35\" aria-valuenow=\"0\"><i style=\"width: 0%; background: rgb(214, 51, 79);\"></i></div><div class=\"tr-xp\" role=\"progressbar\" aria-label=\"Pikachu EXP\" aria-valuemin=\"0\" aria-valuemax=\"100\" aria-valuenow=\"20\"><i style=\"width: 20%;\"></i></div></button></div><div class=\"rail-entry\"><button class=\"tr-row ko\" draggable=\"true\" aria-label=\"Wartortle, level 10, fainted\" aria-pressed=\"false\" aria-disabled=\"true\" title=\"Wartortle — Lv. 10 · HP 0/35 · EXP 20/100 · tap to send out, drag to reorder\"><span class=\"sprbox\" style=\"height: 56px;\"><img src=\"/assets/pokemon/8.png\" alt=\"\" draggable=\"false\" style=\"width: 68px; height: 56px; transform: translate(-2px, -14px);\"></span><span class=\"tr-lv\">Lv. 10</span><div class=\"tr-hp\" role=\"progressbar\" aria-label=\"Wartortle HP\" aria-valuemin=\"0\" aria-valuemax=\"35\" aria-valuenow=\"0\"><i style=\"width: 0%; background: rgb(214, 51, 79);\"></i></div><div class=\"tr-xp\" role=\"progressbar\" aria-label=\"Wartortle EXP\" aria-valuemin=\"0\" aria-valuemax=\"100\" aria-valuenow=\"20\"><i style=\"width: 20%;\"></i></div></button></div></div><div class=\"relative z-10 w-full h-full pointer-events-none\"><div class=\"battle-mon ally absolute pointer-events-auto z-10\" style=\"--sprite-top: 0px;\"><div class=\"relative\"><div class=\"mini-hp\"><div class=\"hp\"><div style=\"width: 78.7879%; background: rgb(240, 96, 122);\"></div></div></div><div class=\"cb-shadow-pixel\"></div><img alt=\"Charmander\" class=\"battle-sprite pixel-art select-none -scale-x-100 \" src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAATCAYAAAB/TkaLAAABrElEQVR4AayTr17CUBTHf9ekTRvYoGHzFVgjYoMIjb2BNH0EbS5iw0gDHsEmTeJsRuM8vzPuuNvOsMhn58/O/Z3vzh13Z/ifXxZimqAUeQv1Vp59TPqsU8+IKpQL2c9TD7SqWDsaXKgNoQXM93VuU4RiX/8rhlBTS7C5kBf91kGdH8BDdcpcl/v9eztPxHuxpOZFICbHJQ89ViQjsPeyxkW8kzvoFJo0uQBICaG1KXffwPV0ynU1PkSTunM3yUar+7iNQ+4I1WLoBv0UaZJo6QRQ1+lCIO8JddxmtZnvkUYR7ZDzyPG2ZPpOgwqhvNVteHj1ARQ0WO3VUeehzJ04hfPdnI/0K5ESMPvMB6xMWxwnDiNC9ktA7Yti0dG1ey10HkYKjK9ccQI8+BBh7SqclCzT+MexOZzY59yVNOkgEvWyoNly2McqflXBajHGYNnSiZ+7pd7iCKkwcBYUl7N7lQzGC6S7LyTzCCGQ53i73VJTfgorYhbURVGEu7cN2NiN5pg8rkGQ6DVyTXITKHXzj2KdDYURPlzmYEYKTpk1qaV38tPpGUXAB0qwr18AAAD//1alHvoAAAAGSURBVAMAJhGlJMGs/rYAAAAASUVORK5CYII=\" style=\"--sprite-width: 21px; --sprite-height: 19px;\"><div class=\"mini-lv\"><span class=\"lvn\">Lv.11</span></div></div></div><div class=\"trainer-slot absolute inset-0 pointer-events-none\"><div class=\"battle-opponent-trainer trainer absolute flex flex-col items-center\"><div class=\"cb-shadow-pixel z-0\"></div><img src=\"/assets/trainers/brock.png\" alt=\"Leader Brock\" class=\"relative z-[1] w-24 h-24 sm:w-28 sm:h-28 object-contain pixel-art\" style=\"--trainer-width: 46px; --trainer-height: 59px;\"></div></div><div class=\"battle-mon enemy absolute pointer-events-auto z-10\" style=\"--sprite-top: 0px;\"><div class=\"relative\"><div class=\"mini-hp\"><div class=\"hp\"><div style=\"width: 100%; background: rgb(240, 96, 122);\"></div></div></div><div class=\"cb-shadow-pixel\"></div><img alt=\"Geodude\" class=\"battle-sprite pixel-art select-none \" src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAPCAYAAAD+pA/bAAABjklEQVR4AaySO3LCQBBER76JQnwL5AxCHwMyEzp0CJk5hkOUWbqBQwh1DIfyvC6NakSpDAHU9s6/e7XLk01/vYfAzWNWCEDaL5dL+z7tYSbG3gv6M8Y5BCiI+H23to/9Sb53KO/21uo5VBwO6wPjLAIihNgLD1kIOpFEJODBZL2sd8QFWwIDgBQW4Our5cxsCBQDoRpf18/2ud/QGgTYnhx426x0JemURdu2FtfLILcRdQTIqQlyggSRQdx1nYHVqhrLQeIJHRKRgOe0QkABBHJ8g3R4MFssSoMYeEnrculk57ZcmwiUZalTMvR1OlvTNFbXDaGQBxElTl8x6R2uvcgCxXZ3FFHeDsdaIUKQEkDMPeOT50v5YmIQffhZgNh+zr+yPFxVVXpwCJX0DZ+D8HVBFG/HDSAYp/d2uxbQY0PgRflutRgOck5Mkpg8/YAcMTZwLUCe/z+QH4MEgKvgxMfDltCGOv264hSrPiegQtrGwfwvgwh4H+RutPCBArZ7BOhjqODBIQWeVM7tv+sPAAD//1OTCekAAAAGSURBVAMA+HDJHK94DT4AAAAASUVORK5CYII=\" style=\"--sprite-width: 24px; --sprite-height: 15px;\"><div class=\"mini-lv\"><span class=\"lvn\">Lv.14</span></div></div></div></div><div class=\"battle-bottom absolute z-30 flex pointer-events-auto\"><div class=\"battle-log flex min-w-0 flex-1 items-center bg-white text-slate-900 border-[4px] border-[#3a4a6b] rounded-[10px] px-4 py-2 shadow-[inset_0_0_0_3px_#a9c1e8] text-[16px] font-bold truncate tracking-tight font-pixel\">Leader Brock challenged you! Leader Brock sends out Geodude!</div><div class=\"battle-speed flex items-center shrink-0\"><button class=\"flex-1 py-1 rounded-lg text-xs font-black transition bg-[#e3353b] text-white shadow-sm\">x1</button><button class=\"flex-1 py-1 rounded-lg text-xs font-black transition text-slate-400 hover:text-white\">x2</button><button class=\"flex-1 py-1 rounded-lg text-xs font-black transition text-slate-400 hover:text-white\">x3</button></div></div></div>",
+  "metrics": {
+    "#enemy-hud": null,
+    "#enemy-hud .row b": null,
+    ".battle-trainer-card > div": {
+      "rect": {
+        "x": 814.921875,
+        "y": 119,
+        "width": 107.046875,
+        "height": 62,
+        "top": 119,
+        "right": 921.96875,
+        "bottom": 181,
+        "left": 814.921875
+      },
+      "font": "20px / 30px \"Jersey 10\", sans-serif",
+      "padding": "8px 12px",
+      "border": "3px solid rgb(27, 27, 34)",
+      "radius": "12px 4px"
+    },
+    ".battle-trainer-card span": {
+      "rect": {
+        "x": 829.921875,
+        "y": 130,
+        "width": 77.046875,
+        "height": 16,
+        "top": 130,
+        "right": 906.96875,
+        "bottom": 146,
+        "left": 829.921875
+      },
+      "font": "16px \"Jersey 15\", sans-serif",
+      "padding": "0px",
+      "border": "0px solid rgb(229, 231, 235)",
+      "radius": "0px"
+    },
+    ".mini-hp .hp": {
+      "rect": {
+        "x": 465.59375,
+        "y": 338.03125,
+        "width": 26,
+        "height": 15,
+        "top": 338.03125,
+        "right": 491.59375,
+        "bottom": 353.03125,
+        "left": 465.59375
+      },
+      "font": "20px / 30px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "border": "3px solid rgb(27, 27, 34)",
+      "radius": "5px"
+    },
+    ".mini-lv": {
+      "rect": {
+        "x": 467.875,
+        "y": 395.03125,
+        "width": 21.4375,
+        "height": 17,
+        "top": 395.03125,
+        "right": 489.3125,
+        "bottom": 412.03125,
+        "left": 467.875
+      },
+      "font": "700 16px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "border": "0px solid rgb(229, 231, 235)",
+      "radius": "0px"
+    },
+    ".tr-row": {
+      "rect": {
+        "x": 290.08001708984375,
+        "y": 158.0800018310547,
+        "width": 47.8399658203125,
+        "height": 47.839996337890625,
+        "top": 158.0800018310547,
+        "right": 337.91998291015625,
+        "bottom": 205.9199981689453,
+        "left": 290.08001708984375
+      },
+      "font": "20px / 30px \"Jersey 10\", sans-serif",
+      "padding": "0px 0px 8px",
+      "border": "2px solid rgb(255, 203, 5)",
+      "radius": "7px 7px 7px 16px"
+    }
+  },
+  "images": [
+    {
+      "src": "/assets/ui/poke-ball.png",
+      "class": "w-3.5 h-3.5 pixel-art brightness-110 drop-shadow",
+      "parent": "flex items-center gap-1.5 mt-1",
+      "rect": {
+        "x": 823.921875,
+        "y": 144,
+        "width": 32,
+        "height": 32,
+        "top": 144,
+        "right": 855.921875,
+        "bottom": 176,
+        "left": 823.921875
+      },
+      "natural": [
+        32,
+        32
+      ]
+    },
+    {
+      "src": "/assets/ui/poke-ball.png",
+      "class": "w-3.5 h-3.5 pixel-art brightness-110 drop-shadow",
+      "parent": "flex items-center gap-1.5 mt-1",
+      "rect": {
+        "x": 857.921875,
+        "y": 144,
+        "width": 32,
+        "height": 32,
+        "top": 144,
+        "right": 889.921875,
+        "bottom": 176,
+        "left": 857.921875
+      },
+      "natural": [
+        32,
+        32
+      ]
+    },
+    {
+      "src": "/assets/pokemon/4.png",
+      "class": "",
+      "parent": "sprbox",
+      "rect": {
+        "x": 278.6400146484375,
+        "y": 130.3249969482422,
+        "width": 70.719970703125,
+        "height": 58.24000549316406,
+        "top": 130.3249969482422,
+        "right": 349.3599853515625,
+        "bottom": 188.56500244140625,
+        "left": 278.6400146484375
+      },
+      "natural": [
+        68,
+        56
+      ]
+    },
+    {
+      "src": "/assets/pokemon/19.png",
+      "class": "",
+      "parent": "sprbox",
+      "rect": {
+        "x": 280,
+        "y": 184.3125,
+        "width": 68,
+        "height": 56,
+        "top": 184.3125,
+        "right": 348,
+        "bottom": 240.3125,
+        "left": 280
+      },
+      "natural": [
+        68,
+        56
+      ]
+    },
+    {
+      "src": "/assets/pokemon/20.png",
+      "class": "",
+      "parent": "sprbox",
+      "rect": {
+        "x": 280,
+        "y": 235.3125,
+        "width": 68,
+        "height": 56,
+        "top": 235.3125,
+        "right": 348,
+        "bottom": 291.3125,
+        "left": 280
+      },
+      "natural": [
+        68,
+        56
+      ]
+    },
+    {
+      "src": "/assets/pokemon/74.png",
+      "class": "",
+      "parent": "sprbox",
+      "rect": {
+        "x": 280,
+        "y": 283.3125,
+        "width": 68,
+        "height": 56,
+        "top": 283.3125,
+        "right": 348,
+        "bottom": 339.3125,
+        "left": 280
+      },
+      "natural": [
+        68,
+        56
+      ]
+    },
+    {
+      "src": "/assets/pokemon/25.png",
+      "class": "",
+      "parent": "sprbox",
+      "rect": {
+        "x": 280,
+        "y": 336.3125,
+        "width": 68,
+        "height": 56,
+        "top": 336.3125,
+        "right": 348,
+        "bottom": 392.3125,
+        "left": 280
+      },
+      "natural": [
+        68,
+        56
+      ]
+    },
+    {
+      "src": "/assets/pokemon/8.png",
+      "class": "",
+      "parent": "sprbox",
+      "rect": {
+        "x": 278,
+        "y": 388.3125,
+        "width": 68,
+        "height": 56,
+        "top": 388.3125,
+        "right": 346,
+        "bottom": 444.3125,
+        "left": 278
+      },
+      "natural": [
+        68,
+        56
+      ]
+    },
+    {
+      "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAATCAYAAAB/TkaLAAABrElEQVR4Aa",
+      "class": "battle-sprite pixel-art select-none -scale-x-100 ",
+      "parent": "relative",
+      "rect": {
+        "x": 457.59375,
+        "y": 357.03125,
+        "width": 42,
+        "height": 38,
+        "top": 357.03125,
+        "right": 499.59375,
+        "bottom": 395.03125,
+        "left": 457.59375
+      },
+      "natural": [
+        21,
+        19
+      ]
+    },
+    {
+      "src": "/assets/trainers/brock.png",
+      "class": "relative z-[1] w-24 h-24 sm:w-28 sm:h-28 object-contain pixel-art",
+      "parent": "battle-opponent-trainer trainer absolute flex flex-col items-center",
+      "rect": {
+        "x": 823.453125,
+        "y": 258.8125,
+        "width": 92,
+        "height": 118,
+        "top": 258.8125,
+        "right": 915.453125,
+        "bottom": 376.8125,
+        "left": 823.453125
+      },
+      "natural": [
+        46,
+        59
+      ]
+    },
+    {
+      "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAPCAYAAAD+pA/bAAABjklEQVR4Aa",
+      "class": "battle-sprite pixel-art select-none ",
+      "parent": "relative",
+      "rect": {
+        "x": 767.546875,
+        "y": 354.09375,
+        "width": 48,
+        "height": 30,
+        "top": 354.09375,
+        "right": 815.546875,
+        "bottom": 384.09375,
+        "left": 767.546875
+      },
+      "natural": [
+        24,
+        15
+      ]
+    }
+  ]
+}

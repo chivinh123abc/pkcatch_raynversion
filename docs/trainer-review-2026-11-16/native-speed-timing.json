@@ -1,0 +1,21 @@
+{
+  "source": "live v0.4.103 / BUILD5598c5890a",
+  "note": "demoIntro has an additional 250 / pace lead-in; WAAPI frame scheduling adds small overhead.",
+  "timing": [
+    {
+      "rawSpeed": 1,
+      "pace": 1,
+      "elapsed": 2068
+    },
+    {
+      "rawSpeed": 2,
+      "pace": 2,
+      "elapsed": 1576
+    },
+    {
+      "rawSpeed": 4,
+      "pace": 2.5,
+      "elapsed": 1457
+    }
+  ]
+}

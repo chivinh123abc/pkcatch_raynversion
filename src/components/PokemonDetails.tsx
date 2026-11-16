@@ -1,21 +1,16 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { getPokemonSpecies, getPokemonSpriteUrl } from '../data/pokemonData';
+import { getPokemonSpecies } from '../data/pokemonData';
 import { TYPE_COLORS } from '../data/typeChart';
 import DETAILS from '../data/pokemonDetails.json';
-import BOUNDS from '../data/spriteBounds.json';
 import { useGameStore } from '../store/useGameStore';
 import { PokemonInstance } from '../types/game';
 import { collectionMove } from './collectionUtils';
+import { PokemonArt } from './PokemonArt';
+import { pokemonRarity } from '../game/presentation/pokemonRarity';
+import { TypeBadge } from './TypeBadge';
 
-export function PokemonSprite({ id, shiny = false, size = 132, scale: fixedScale, unknown = false }: { id: number; shiny?: boolean; size?: number; scale?: number; unknown?: boolean }) {
-  const bounds = BOUNDS[`assets/pokemon/${id}.png`] || [0, 0, 68, 56];
-  const width = bounds[2] - bounds[0], height = bounds[3] - bounds[1];
-  const scale = fixedScale || Math.max(1, Math.floor(size / Math.max(width, height)));
-  return <span className={`replica-sprite ${unknown ? 'unknown' : ''}`} style={{ '--sprite-k': scale, width: `calc(${width}px * var(--sprite-k))`, height: `calc(${height}px * var(--sprite-k))` } as React.CSSProperties}>
-    <img src={getPokemonSpriteUrl(id, shiny)} alt="" draggable={false} style={{ width: 'calc(68px * var(--sprite-k))', height: 'calc(56px * var(--sprite-k))', left: `calc(${-bounds[0]}px * var(--sprite-k))`, top: `calc(${-bounds[1]}px * var(--sprite-k))` }} />
-  </span>;
-}
+export { PokemonSprite } from './PokemonSprite';
 
 export function PokemonDetails({ speciesId, level, shiny = false, isNew = false, capture = false, onClose, actions, mon, notice }: {
   speciesId: number; level?: number; shiny?: boolean; isNew?: boolean; capture?: boolean; onClose: () => void; actions?: React.ReactNode; mon?: PokemonInstance; notice?: string;
@@ -29,6 +24,7 @@ export function PokemonDetails({ speciesId, level, shiny = false, isNew = false,
   const known = isNew || caught.includes(speciesId) || seen.includes(speciesId);
   const info = DETAILS[speciesId];
   const color = TYPE_COLORS[species.types[0]];
+  const rarity = pokemonRarity(speciesId);
   const stats = mon?.stats || species.baseStats;
   useEffect(() => {
     const previous = document.activeElement as HTMLElement | null;
@@ -58,11 +54,11 @@ export function PokemonDetails({ speciesId, level, shiny = false, isNew = false,
           <div className={`dc-hero ${caught.includes(speciesId) ? 'caught' : 'not-caught'}`}>
             {caught.includes(speciesId) && <img className="dc-ball" src="/assets/items/poke-ball.png" alt="Caught" />}
             <span className={capture ? 'capture-pokemon-idle' : undefined}>
-              <PokemonSprite id={speciesId} shiny={shiny} size={128} unknown={!known} />
+              <PokemonArt id={speciesId} shiny={shiny} size={128} unknown={!known} />
             </span>
           </div>
           <div className="dc-id"><div className="genus">{known ? info?.genus || 'Pokémon' : 'Unknown Pokémon'}</div>
-            {known && <div className="badges">{species.types.map(type => <span className="type" key={type} style={{ '--tc': TYPE_COLORS[type], background: TYPE_COLORS[type] } as React.CSSProperties}>{type}</span>)}<span className="rarity">● {species.catchRate > 120 ? 'Common' : species.catchRate > 45 ? 'Uncommon' : 'Rare'}</span></div>}
+            {known && <div className="badges">{species.types.map(type => <TypeBadge key={type} type={type}/>)}<span className="rarity" style={{color:rarity.color}}>● {rarity.label}</span></div>}
           </div>
             <div className="dc-facts">
               {level !== undefined && <div className="dc-fact">Level<b>{level}</b></div>}

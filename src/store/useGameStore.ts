@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import { PokemonInstance } from '../types/game';
 import { ALL_CHAPTERS, DEFAULT_CHAPTER } from '../data/chaptersData';
+import { currentChapter, currentNode, chapterCompleted } from '../game/data/chapterSelectors';
+import { restoreChapterRun } from '../game/data/chapterGenerator';
 import { GameplayRuntime, RuntimeDependencies } from '../game/runtime/GameplayRuntime';
 import type { GameState } from '../game/domain/GameState';
 import { createPokemonInstance } from '../game/domain/pokemon';
@@ -42,12 +44,30 @@ export function createGameStore(dependencies: RuntimeDependencies = {}) {
         const context = { set, get, runtime, createInstance };
         return {
             encounter: runtime.snapshot(),
+            starterChosen: false,
+            chapterRun: null,
+            completedChapters: [],
+            pendingAdventureGift: null,
+            resolvedNode: null,
+            awardedEnemyUids: [],
+            items: {},
+            gifts: [],
+            captureRoll: null,
+            chooseStarter: (id, profile) => {
+                if (get().starterChosen || ![1, 4, 7, 25].includes(id)) return;
+                const mon = createInstance(id, 5);
+                set({ starterChosen: true, party: [mon], pcBox: [], pokedexCaught: [id], pokedexSeen: [id], currentStep: 1,
+                    ...(profile ? {trainerName:profile.name.trim().slice(0,10)||'Red',trainerSprite:profile.sprite==='leaf'?'leaf':'red'} : {}) });
+                get().loadStepNode(1);
+                get().saveGame(true);
+            },
             ...createBattleActions(context), ...createCaptureActions(context), ...createRewardActions(context), ...createEncounterActions(context),
             // Player state matches gameplay video
             trainerName: 'Ray',
+            trainerSprite: 'red',
             trainerTag: '#0910',
-            money: 30808,
-            tokens: 3017,
+            money: 3000,
+            tokens: 0,
             // Starter party: Charmander Lv. 5 only
             party: [
                 createInstance(4, 5), // Charmander Lv. 5
@@ -66,33 +86,33 @@ export function createGameStore(dependencies: RuntimeDependencies = {}) {
             currentStep: 1,
             badges: [],
             isAdventureModalOpen: false,
-            selectedBall: 'ultraball',
+            selectedBall: 'pokeball',
             balls: {
-                pokeball: 48,
-                greatball: 25,
-                ultraball: 95,
-                masterball: 1,
+                pokeball: 0,
+                greatball: 0,
+                ultraball: 0,
+                masterball: 0,
             },
-            // Berries matching gameplay video
+            // Fresh saves do not inherit demo inventory or active boosts.
             berries: {
-                razz: 22,
-                nanab: 1,
-                pinap: 1,
-                goldenRazz: 2,
+                razz: 0,
+                nanab: 0,
+                pinap: 0,
+                goldenRazz: 0,
             },
-            // Active Buffs matching gameplay video (5:55:01 and 55:05)
             berryBuffs: {
-                greatBall: 21301, // 5h 55m 01s
-                nanab: 3305, // 55m 05s
+                greatBall: 0,
+                nanab: 0,
                 ultraBall: 0,
                 pinap: 0,
             },
             autoCatch: true,
-            gameSpeed: 3, // Matches gameplay video (x3 in red)
+            gameSpeed: 1,
             nodeType: 'grass',
             isCatchable: true,
             activeTrainer: null,
             bossIntroActive: false,
+            trainerPresentation: null,
             allyRecalling: false,
             allySendingOut: false,
             enemyRecalling: false,
@@ -121,13 +141,16 @@ export function createGameStore(dependencies: RuntimeDependencies = {}) {
             trainerOnField: false,
             capturePresentation: null,
             transitionTick: 0,
-            setGameSpeed: (speed) => set({ gameSpeed: speed }),
+            setGameSpeed: (speed) => { if ([1,2,3].includes(speed)) set({ gameSpeed: speed }); },
             setSelectedBall: (ball) => set({ selectedBall: ball }),
             toggleAutoCatch: () => set((s) => ({ autoCatch: !s.autoCatch })),
             markCollectionVisited: (tab) => {
                 const state = get();
                 if (tab === 'team') set({ teamReviewedUids: [...state.party, ...state.pcBox].map(mon => mon.uid) });
-                else set({ dexNotifiedSpecies: [...new Set(state.pokedexCaught)] });
+                else {
+                    const reviewed = [...new Set(state.pokedexCaught)];
+                    set({ dexNotifiedSpecies: reviewed, pokedexReviewed: reviewed });
+                }
                 get().saveGame(true);
             },
             reviewPokedexEntry: (id) => {
@@ -173,13 +196,13 @@ export function createGameStore(dependencies: RuntimeDependencies = {}) {
                 return true;
             },
             setActivePartyIndex: (idx) => {
-                if (runtime.busy || get().isCatchSequenceActive || !get().party[idx]?.currentHp)
+                  if (runtime.busy || get().trainerPresentation || get().isCatchSequenceActive || !get().party[idx]?.currentHp)
                     return;
                 set({ activePartyIndex: idx });
             },
             movePartyMember: (uid, direction) => {
                 const s = get();
-                if (runtime.busy || s.healPulse || s.isCatchSequenceActive || s.playerAttacking || s.enemyAttacking)
+                  if (runtime.busy || s.trainerPresentation || s.healPulse || s.isCatchSequenceActive || s.playerAttacking || s.enemyAttacking)
                     return false;
                 const index = s.party.findIndex((mon) => mon.uid === uid);
                 const next = index + direction;
@@ -257,7 +280,7 @@ export function createGameStore(dependencies: RuntimeDependencies = {}) {
                     set({
                         berries: { ...berries, razz: berries.razz - 1 },
                         berryBuffs: { ...berryBuffs, greatBall: next },
-                        battleLog: `Ate Razz Berry! Poké Balls upgraded to Great Balls (+30m)!`,
+                        battleLog: `Ate Razz Berry! Catch chance +25% for 30m!`,
                     });
                 }
                 else if (berryType === 'goldenRazz') {
@@ -266,7 +289,7 @@ export function createGameStore(dependencies: RuntimeDependencies = {}) {
                     set({
                         berries: { ...berries, goldenRazz: berries.goldenRazz - 1 },
                         berryBuffs: { ...berryBuffs, ultraBall: next },
-                        battleLog: `Ate Golden Razz Berry! Poké Balls upgraded to Ultra Balls (+30m)!`,
+                        battleLog: `Ate Golden Razz Berry! Catch chance +50% for 30m!`,
                     });
                 }
                 else if (berryType === 'nanab') {
@@ -275,7 +298,7 @@ export function createGameStore(dependencies: RuntimeDependencies = {}) {
                     set({
                         berries: { ...berries, nanab: berries.nanab - 1 },
                         berryBuffs: { ...berryBuffs, nanab: next },
-                        battleLog: `Ate Nanab Berry! Wild Pokémon pacified (+catch rate) for +30m!`,
+                        battleLog: `Ate Nanab Berry! Rare encounter boost ×2 for 30m!`,
                     });
                 }
                 else if (berryType === 'pinap') {
@@ -284,7 +307,7 @@ export function createGameStore(dependencies: RuntimeDependencies = {}) {
                     set({
                         berries: { ...berries, pinap: berries.pinap - 1 },
                         berryBuffs: { ...berryBuffs, pinap: next },
-                        battleLog: `Ate Pinap Berry! Double Rewards boost active for +30m!`,
+                        battleLog: `Ate Pinap Berry! Battle XP +25% for 30m!`,
                     });
                 }
             },
@@ -297,8 +320,16 @@ export function createGameStore(dependencies: RuntimeDependencies = {}) {
                     const saveObj = {
                         version: 2,
                         saveVersion: 4,
+                        starterChosen: state.starterChosen,
+                        resolvedNode: state.resolvedNode,
+                        chapterRun: state.chapterRun,
+                        completedChapters: state.completedChapters,
+                        items: state.items,
+                        gifts: state.gifts,
+                        encounterCheckpoint: state.enemy && !state.resolvedNode ? { chapterId: state.currentChapterId, step: state.currentStep, source:currentNode(state).source, enemy: state.enemy, trainer: state.activeTrainer, enemyStatus: state.enemyStatus, awarded: state.awardedEnemyUids, captureRoll: state.captureRoll } : null,
                         savedAt: Date.now(),
                         trainerName: state.trainerName,
+                        trainerSprite: state.trainerSprite,
                         trainerTag: state.trainerTag,
                         money: state.money,
                         tokens: state.tokens,
@@ -332,21 +363,33 @@ export function createGameStore(dependencies: RuntimeDependencies = {}) {
                     console.error(e);
                 }
             },
-            loadGame: () => {
+            loadGame: (options) => {
                 let restoredActivePartyIndex: number | null = null;
+                let checkpoint: any = null;
+                let terminal: GameState['resolvedNode'] = null;
                 try {
                     const saved = localStorage.getItem('pokecatch_save_v1');
                     if (saved) {
                         const obj = JSON.parse(saved);
                         if (!obj || typeof obj !== 'object' || Array.isArray(obj))
                             throw new Error('Invalid save');
+                        set({ starterChosen: obj.starterChosen !== false });
+                        checkpoint = obj.encounterCheckpoint;
                         const savedChapter = ALL_CHAPTERS.find((chapter) => chapter.id === obj.currentChapterId);
-                        const chapter = savedChapter || DEFAULT_CHAPTER;
+                        const restoredRun = restoreChapterRun(obj.chapterRun, savedChapter?.id || DEFAULT_CHAPTER.id);
+                        let chapter = currentChapter({currentChapterId:savedChapter?.id || DEFAULT_CHAPTER.id,chapterRun:restoredRun});
                         const savedStep = Number.isFinite(Number(obj.currentStep)) ? Math.floor(Number(obj.currentStep)) : 1;
                         let currentStep = Math.max(1, Math.min(chapter.totalSteps, savedStep));
+                        const resolved = obj.resolvedNode;
+                        if (resolved?.chapterId === chapter.id && resolved.step === currentStep) {
+                            if (currentStep >= chapter.totalSteps && chapterCompleted(chapter, {badges:obj.badges,completedChapters:obj.completedChapters})) {
+                                const next=ALL_CHAPTERS.find(value => value.chapterNumber === chapter.chapterNumber + 1 && !value.isSpecial);
+                                if(next){chapter=next;currentStep=1;}else terminal=resolved;
+                            } else currentStep = currentStep >= chapter.totalSteps ? 1 : currentStep + 1;
+                        }
                         // Question nodes grant their reward on entry. Resume after them so loading
                         // a save cannot roll and award the same item a second time.
-                        if (chapter.steps[currentStep - 1]?.type === 'question') {
+                        if (!(resolved?.chapterId === chapter.id && resolved.step === savedStep) && chapter.steps[currentStep - 1]?.type === 'question') {
                             currentStep = currentStep >= chapter.totalSteps ? 1 : currentStep + 1;
                         }
                         const isOldDemoParty = obj.saveVersion !== 3 &&
@@ -370,7 +413,10 @@ export function createGameStore(dependencies: RuntimeDependencies = {}) {
                         else {
                             set({
                                 trainerName: obj.trainerName || 'Ray',
+                                trainerSprite: obj.trainerSprite === 'leaf' ? 'leaf' : 'red',
                                 trainerTag: typeof obj.trainerTag === 'string' ? obj.trainerTag : get().trainerTag,
+                                items: obj.items && typeof obj.items === 'object' && !Array.isArray(obj.items) ? Object.fromEntries(Object.entries(obj.items).filter(([key, value]) => /^[a-z0-9-]+$/.test(key) && Number.isFinite(value) && Number(value) >= 0).map(([key, value]) => [key, Math.floor(Number(value))])) : {},
+                                gifts: Array.isArray(obj.gifts) ? obj.gifts.filter(value => typeof value === 'string') : [],
                                 money: Number.isFinite(obj.money) && obj.money >= 0 ? Math.floor(obj.money) : get().money,
                                 tokens: Number.isFinite(obj.tokens) && obj.tokens >= 0 ? Math.floor(obj.tokens) : get().tokens,
                                 party: isOldDemoParty
@@ -393,6 +439,8 @@ export function createGameStore(dependencies: RuntimeDependencies = {}) {
                                 autoCatch: typeof obj.autoCatch === 'boolean' ? obj.autoCatch : get().autoCatch,
                                 gameSpeed: [1, 2, 3].includes(obj.gameSpeed) ? obj.gameSpeed : get().gameSpeed,
                                 currentChapterId: chapter.id,
+                                chapterRun: restoredRun?.chapterId===chapter.id?restoredRun:null,
+                                completedChapters: Array.isArray(obj.completedChapters) ? obj.completedChapters.filter(id=>ALL_CHAPTERS.some(c=>c.id===id&&c.runtimeSupported)) : [],
                                 currentStep,
                                 berries: restoreCounters(get().berries, obj.berries),
                                 berryBuffs: restoreCounters(get().berryBuffs, obj.berryBuffs, 28800),
@@ -414,9 +462,25 @@ export function createGameStore(dependencies: RuntimeDependencies = {}) {
                 catch (e) {
                     console.error(e);
                 }
+                // Title can inspect the saved profile without starting FX, rewards or timers.
+                // Continue reloads the untouched payload and restores its encounter once.
+                if (options?.deferEncounter) return;
                 // Initialize the route on a fresh install too. Without this, the placeholder
                 // enemy remains on screen and no encounter is actually active.
-                get().loadStepNode(get().currentStep);
+                if(terminal){runtime.beginEncounter();runtime.setPhase('awaiting-continue');set({enemy:null,activeTrainer:null,trainerPresentation:null,resolvedNode:terminal,nodeType:'badge',isBattling:false,battleLog:'You are the Kanto Pokémon League Champion!'});}
+                else if (get().starterChosen) get().loadStepNode(get().currentStep);
+                const matchingSource=checkpoint&&((!checkpoint.source&&get().currentChapterId==='kanto-1')||JSON.stringify(checkpoint.source)===JSON.stringify(currentNode(get()).source));
+                if (!terminal && matchingSource && checkpoint?.chapterId === get().currentChapterId && checkpoint.step === get().currentStep && isValidSavedPokemon(checkpoint.enemy)) {
+                    const trainer = checkpoint.trainer;
+                    const validTrainer = trainer && typeof trainer.name === 'string' && typeof trainer.rewardMoney === 'number' && trainer.rewardMoney >= 0 && Array.isArray(trainer.team) && trainer.team.length > 0 && trainer.team.length <= 6 && trainer.team.every(mon => Number.isInteger(mon.speciesId) && mon.speciesId >= 1 && mon.speciesId <= 151 && Number.isInteger(mon.level) && mon.level >= 1 && mon.level <= 100) && Number.isInteger(trainer.currentMonIndex) && trainer.currentMonIndex >= 0 && trainer.currentMonIndex < trainer.team.length;
+                    if (get().nodeType === 'grass' || validTrainer) {
+                        const roll = checkpoint.captureRoll;
+                        const validRoll = roll?.enemyUid === checkpoint.enemy.uid && typeof roll.success === 'boolean' && Number.isFinite(roll.probability) && roll.probability >= 0 && roll.probability <= 1 && Number.isInteger(roll.shakes) && roll.shakes >= 0 && roll.shakes <= 4 && ['pokeball','greatball','ultraball','masterball'].includes(roll.ball);
+                        set({ enemy: checkpoint.enemy, activeTrainer: validTrainer ? trainer : null, bossIntroActive: false, trainerPresentation: null, enemyStatus: checkpoint.enemyStatus === 'SLP' ? 'SLP' : null, awardedEnemyUids: Array.isArray(checkpoint.awarded) ? checkpoint.awarded.filter(uid => typeof uid === 'string') : [], captureRoll: validRoll ? roll : null });
+                        runtime.cancelTag('trainer-presentation');runtime.busy=false;runtime.setPhase('battle');
+                        if (validRoll) get().catchEnemy();
+                    }
+                }
                 if (restoredActivePartyIndex !== null) {
                     set({ activePartyIndex: restoredActivePartyIndex });
                 }

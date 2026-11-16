@@ -1,0 +1,8 @@
+{
+  "speed": 2,
+  "resisted": false,
+  "contactMs": 180.80000001192093,
+  "nextAttackMs": 319.69999998807907,
+  "gapMs": 138.89999997615814,
+  "move": "tackle"
+}

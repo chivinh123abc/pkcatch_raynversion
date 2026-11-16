@@ -1,7 +1,8 @@
 import { test, expect, Page } from '@playwright/test';
+import fs from 'node:fs/promises';
 
 async function prepare(page: Page) {
-  await page.goto('/');
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
   await page.locator('.battle-stage').waitFor();
   await page.evaluate(async () => {
     const url = performance.getEntriesByType('resource').find(entry => entry.name.includes('/src/store/useGameStore.ts'))!.name;
@@ -9,13 +10,47 @@ async function prepare(page: Page) {
     (window as any).__uiStore = store;
     store.getState().loadStepNode(1);
     const base = store.getState().party[0];
-    store.setState({ isBattling: false, allyRecalling: false, allySendingOut: false, enemyRecalling: false, newCatchCard: null,
+    store.setState({ starterChosen: true, isBattling: false, allyRecalling: false, allySendingOut: false, enemyRecalling: false, newCatchCard: null,
       pcBox: [{ ...base, uid: 'ui-pikachu', speciesId: 25, level: 12, caughtAt: Date.now() }, { ...base, uid: 'ui-rattata', speciesId: 19, level: 8, caughtAt: Date.now() - 1000 }],
       pokedexCaught: [...new Set([...store.getState().pokedexCaught, 25, 19])],
       pokedexSeen: [...new Set([...store.getState().pokedexSeen, 25, 19])],
     });
   });
 }
+
+test('rarity backgrounds match native colors, respect unknown/seen states, sort and reduced motion',async({page})=>{
+  await prepare(page);
+  await page.evaluate(()=>{
+    const store=(window as any).__uiStore,base=store.getState().party[0],ids=[19,20,3,144];
+    store.setState({pcBox:ids.map((id,i)=>({...base,uid:'rarity-'+id,speciesId:id,level:12,caughtAt:i})),pokedexCaught:[4,...ids],pokedexSeen:[4,...ids,2]});
+  });
+  const native=JSON.parse(await fs.readFile('docs/rarity-evidence/native.json','utf8'));
+  await page.getByRole('button',{name:'Team/PC',exact:true}).click();
+  for(const [index,name] of ['Rattata','Raticate','Venusaur','Articuno'].entries()){
+    const glow=page.getByRole('button',{name:`PC ${name}, level 12`,exact:true}).locator('.tglow');
+    await expect(glow).toHaveCSS('background-image',native.fixture[index].background);
+    await expect(glow).toHaveCSS('animation-name',native.fixture[index].animation);
+    await expect(glow).toHaveCSS('pointer-events','none');
+  }
+  await page.getByLabel('Sort PC',{exact:true}).selectOption('rarity');
+  await expect(page.locator('.replica-pc-art img').first()).toHaveJSProperty('naturalWidth',68,{timeout:15000});
+  expect(await page.locator('.pc-cell').evaluateAll(cells=>cells.map(cell=>cell.getAttribute('aria-label')))).toEqual(['PC Articuno, level 12','PC Venusaur, level 12','PC Raticate, level 12','PC Rattata, level 12']);
+  await fs.mkdir('docs/rarity-evidence',{recursive:true});
+  await page.locator('.pc-grid').screenshot({path:'docs/rarity-evidence/local-pc.png'});
+  await page.getByRole('button',{name:'PC Articuno, level 12',exact:true}).click();
+  await expect(page.getByRole('dialog').locator('.rarity')).toHaveText('● Legendary');
+  await page.getByRole('button',{name:'Close Pokémon details',exact:true}).click();
+  await page.getByRole('button',{name:'Pokédex',exact:true}).click();
+  await expect(page.locator('.dex-cell.unknown > .tglow').first()).toBeHidden();
+  await expect(page.locator('.dex-cell.seen > .tglow').first()).toHaveCSS('opacity','0.5');
+  await expect(page.locator('.dex-cell.seen > .tglow').first()).toHaveCSS('animation-name','none');
+  await page.setViewportSize({width:390,height:844});await page.getByRole('searchbox',{name:'Search Pokédex'}).fill('Articuno');
+  await page.locator('.dex-cell').scrollIntoViewIfNeeded();
+  await expect(page.locator('.dex-cell .replica-dex-art img')).toHaveJSProperty('naturalWidth',68,{timeout:15000});
+  await page.screenshot({path:'docs/rarity-evidence/local-dex-mobile.png'});
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await expect(page.locator('.dex-cell.caught > .tglow')).toHaveCSS('animation-name','none');
+});
 
 test('Team/PC uses the main page, filters storage and adds a Pokémon to the team', async ({ page }) => {
   await prepare(page);
@@ -55,6 +90,28 @@ test('Pokédex shows actual progress, type filters and the original detail layou
   await page.keyboard.press('Escape');
   await expect(dialog).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Number 25, Pikachu, caught', exact: true })).toBeFocused();
+});
+
+test('Team and detail move previews follow the v0.5.02 learnset after leveling', async ({ page }) => {
+  await prepare(page);
+  await page.evaluate(() => {
+    const store = (window as any).__uiStore, base = store.getState().party[0];
+    store.setState({ party: [{ ...base, uid: 'preview-charmander', speciesId: 4, level: 64 }] });
+  });
+  await page.getByRole('button', { name: 'Team/PC', exact: true }).click();
+  for (const [level, move] of [[64, 'Flamethrower'], [65, 'Fire Blast'], [84, 'Fire Blast'], [85, 'Overheat']] as const) {
+    await page.evaluate(level => {
+      const store = (window as any).__uiStore;
+      store.setState({ party: store.getState().party.map((mon: any) => ({ ...mon, level })) });
+    }, level);
+    const slot = page.getByRole('button', { name: `Team Charmander, level ${level}`, exact: true });
+    await expect(slot.locator('.lv')).toHaveText(`Lv. ${level} · ${move}`);
+    await slot.click();
+    const dialog = page.getByRole('dialog');
+    await expect(dialog.locator('.replica-move-fact b')).toHaveText(move);
+    await dialog.getByRole('button', { name: 'Close Pokémon details' }).click();
+    await expect(dialog).toHaveCount(0);
+  }
 });
 
 test('new catch card has the reference content and waits for Continue', async ({ page }) => {
@@ -126,11 +183,11 @@ test('PC dragging fills a slot, and a full team swaps through the details card',
   expect(state.team).toHaveLength(6); expect(state.team[0]).toBe('swap-pc'); expect(state.pc).toContain(4);
 });
 
-test('dex unread markers persist and dialogs isolate background keyboard focus', async ({ page }) => {
+test('dex has no individual NEW markers and dialogs isolate background keyboard focus', async ({ page }) => {
   await prepare(page);
   await page.getByRole('button', { name: 'Pokédex', exact: true }).click();
   const pikachu = page.getByRole('button', { name: 'Number 25, Pikachu, caught', exact: true });
-  await expect(pikachu.locator('.dex-new')).toHaveText('NEW');
+  await expect(page.locator('.dex-new,.dex-unread')).toHaveCount(0);
   await pikachu.click();
   await expect(page.locator('main')).toHaveAttribute('inert', '');
   await page.keyboard.press('Tab');
@@ -154,7 +211,17 @@ test('menu notifications clear on entering their own collection and persist acro
   await dex.click();
   await expect(dex.locator('.sidebar-collection-unread')).toHaveCount(0);
   await expect(team.locator('.sidebar-collection-unread')).toHaveText('3');
-  await expect(page.getByRole('button', { name: 'Number 25, Pikachu, caught', exact: true }).locator('.dex-new')).toHaveText('NEW');
+  await expect(page.locator('.dex-new,.dex-unread')).toHaveCount(0);
+  expect(await page.evaluate(() => {
+    const s=(window as any).__uiStore.getState();
+    return s.pokedexCaught.every((id:number)=>s.pokedexReviewed.includes(id));
+  })).toBe(true);
+  await page.evaluate(()=>{
+    const s=(window as any).__uiStore;
+    s.setState({pokedexCaught:[...s.getState().pokedexCaught,7],pokedexSeen:[...s.getState().pokedexSeen,7]});
+  });
+  await expect.poll(()=>page.evaluate(()=>(window as any).__uiStore.getState().pokedexReviewed.includes(7))).toBe(true);
+  await expect(page.locator('.dex-new,.dex-unread')).toHaveCount(0);
   await team.click();
   await expect(team.locator('.sidebar-collection-unread')).toHaveCount(0);
   await expect(dex.locator('.sidebar-collection-unread')).toHaveCount(0);
@@ -163,7 +230,7 @@ test('menu notifications clear on entering their own collection and persist acro
   await expect(page.locator('.sidebar-collection-unread')).toHaveCount(0);
 });
 
-test('collection geometry matches the desktop baseline and filters wrap on narrow screens', async ({ page }) => {
+test('collection geometry matches the desktop baseline and mobile filters stay compact', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await prepare(page);
   await page.getByRole('button', { name: 'Team/PC', exact: true }).click();
@@ -171,11 +238,17 @@ test('collection geometry matches the desktop baseline and filters wrap on narro
   expect(panel).toMatchObject({ x: 280, y: 72, width: 1134, height: 308 });
   expect((await page.locator('.team-slots .slot').first().boundingBox())!.height).toBe(210);
   await page.getByRole('button', { name: 'Pokédex', exact: true }).click();
-  expect((await page.locator('.dex-hero').boundingBox())!.height).toBe(252);
+  // v0.5.02 has five region rows, including the locked Unova row.
+  expect((await page.locator('.dex-hero').boundingBox())!.height).toBe(279);
   await page.setViewportSize({ width: 320, height: 568 });
   const input = await page.getByRole('searchbox', { name: 'Search Pokédex' }).boundingBox();
   const status = await page.getByRole('combobox', { name: 'Pokédex status' }).boundingBox();
-  expect(input!.y + input!.height).toBeLessThanOrEqual(status!.y);
+  expect(input!.y).toBe(status!.y);
+  await page.getByRole('button',{name:'More filters',exact:true}).click();
+  await expect(page.getByRole('group',{name:'Additional filters'})).toBeVisible();
+  await page.getByRole('combobox',{name:'Filter by type',exact:true}).selectOption('Water');
+  await page.getByRole('button',{name:'Done',exact:true}).click();
+  await expect(page.getByRole('group',{name:'Additional filters'})).toHaveCount(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
 });
 

@@ -1,40 +1,36 @@
 import { useEffect, useState } from 'react';
-import { ALL_CHAPTERS, ChapterInfo, DEFAULT_CHAPTER } from '../data/chaptersData';
+import { ALL_CHAPTERS, ChapterInfo, DEFAULT_CHAPTER, chapterIcon } from '../data/chaptersData';
 import { ALL_SPECIES, getPokemonSpecies } from '../data/pokemonData';
 import { TYPE_COLORS } from '../data/typeChart';
 import { useGameStore } from '../store/useGameStore';
 import { PokemonDetails, PokemonSprite } from './PokemonDetails';
+import { chapterUnlocked, chapterCompleted, currentChapter as getCurrentChapter } from '../game/data/chapterSelectors';
 
 const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Paldea'];
 const badgeColors = ['#9a8b6a', '#48a4d3', '#c9ae39', '#78ad55', '#bd7598', '#9c7bb6', '#d27c48', '#80a578'];
 const weather = { day: ['☀️', 'Day'], night: ['🌙', 'Night'], rain: ['🌧️', 'Rain'] };
 
 /** Only the unlocks backed by the current save are exposed here; chapter content remains in chaptersData. */
-function lockReason(chapter: ChapterInfo, currentChapterId: string, badges: string[], caught: Set<number>) {
-  if (chapter.id === currentChapterId || badges.includes(chapter.badgeSprite) && !chapter.isSpecial) return '';
-  if (chapter.id === DEFAULT_CHAPTER.id) return '';
-  const requiredType = chapter.id === 'special-power-plant' ? 'Electric' : chapter.id === 'special-seafoam' ? 'Ice' : chapter.id === 'special-blazing-cave' ? 'Fire' : null;
-  if (requiredType) {
-    const species = ALL_SPECIES.filter(species => species.types.some(type => type === requiredType));
-    return species.every(species => caught.has(species.id)) ? '' : `Catch every ${requiredType}-type Pokémon · ${species.filter(species => caught.has(species.id)).length}/${species.length}`;
-  }
-  if (chapter.isSpecial) return 'Beat the Pokémon League';
+function lockReason(chapter: ChapterInfo, currentChapterId: string, badges: string[], caught: Set<number>, completedChapters: string[]) {
+  if(chapter.runtimeSupported===false) return 'This activity is not implemented yet';
+  if(chapterUnlocked(chapter.id,{badges,completedChapters}))return '';
+  if (chapter.id === currentChapterId) return '';
   const previous = ALL_CHAPTERS.find(value => value.chapterNumber === chapter.chapterNumber - 1 && !value.isSpecial);
-  return previous && badges.includes(previous.badgeSprite) ? '' : `Earn the ${previous?.badgeName || 'previous badge'}`;
+  return `Complete ${previous?.name || 'the previous chapter'}`;
 }
 
 export function AdventurePage({ onContinue }: { onContinue: (chapterId: string) => void }) {
-  const { currentChapterId, badges, pokedexCaught, pokedexSeen, newCatchCard } = useGameStore();
+  const { currentChapterId, chapterRun, completedChapters, badges, pokedexCaught, pokedexSeen, newCatchCard } = useGameStore();
   const [selectedId, setSelectedId] = useState(currentChapterId);
   const [detail, setDetail] = useState<number | null>(null);
   useEffect(() => { setSelectedId(currentChapterId); }, [currentChapterId]);
-  const selected = ALL_CHAPTERS.find(chapter => chapter.id === selectedId) || DEFAULT_CHAPTER;
+  const selected = selectedId===currentChapterId ? getCurrentChapter({currentChapterId,chapterRun}) : ALL_CHAPTERS.find(chapter => chapter.id === selectedId) || DEFAULT_CHAPTER;
   const caught = new Set(pokedexCaught);
   const seen = new Set([...pokedexSeen, ...pokedexCaught]);
-  const reason = lockReason(selected, currentChapterId, badges, caught);
+  const reason = lockReason(selected, currentChapterId, badges, caught,completedChapters);
   const current = selected.id === currentChapterId;
-  const completed = !selected.isSpecial && badges.includes(selected.badgeSprite);
-  const color = selected.isSpecial ? '#8779b5' : badgeColors[Math.max(0, selected.chapterNumber - 1)] || '#9a8b6a';
+  const completed = chapterCompleted(selected,{badges,completedChapters});
+  const color = selected.themeColor || (selected.isSpecial ? '#8779b5' : badgeColors[Math.max(0, selected.chapterNumber - 1)] || '#9a8b6a');
   const found = [...new Set(Object.values(selected.pokemonFound).flat().map(mon => mon.speciesId))];
   const time = new Date().getHours();
   const condition = selected.weather === 'rain' || selected.weather === 'thunderstorm' ? 'rain' : time >= 6 && time < 18 ? 'day' : 'night';
@@ -54,20 +50,20 @@ export function AdventurePage({ onContinue }: { onContinue: (chapterId: string) 
         <div className="pg-regions" aria-label="Regions">
           {regions.map((name, index) => index === 0 ? <button className="rg open active" key={name} aria-current="true" style={{ '--c': '#e3353b' } as React.CSSProperties}>
             <span className="rg-top"><img src="/assets/ui/town-map.png" alt="" /><b>Kanto</b></span><small className="rg-caught"><img src="/assets/items/poke-ball.png" alt="" />{[...caught].filter(id => id <= 151).length}/151 caught</small>
-            <span className="rg-badges">{ALL_CHAPTERS.filter(chapter => chapter.chapterNumber >= 1 && chapter.chapterNumber <= 8).map(chapter => <img key={chapter.id} className={badges.includes(chapter.badgeSprite) ? '' : 'off'} src={`/assets/badges/${chapter.badgeSprite}.png`} alt={chapter.badgeName} />)}</span>
+            <span className="rg-badges">{ALL_CHAPTERS.filter(chapter => chapter.chapterNumber >= 1 && chapter.chapterNumber <= 8).map(chapter => <img key={chapter.id} className={badges.includes(chapter.badgeSprite) ? '' : 'off'} src={chapterIcon(chapter)} alt={chapter.badgeName} />)}</span>
           </button> : <div key={name} className={`rg soon ${index < 4 ? 'lock' : ''}`}><span className="rg-top"><b>{name}</b></span><small>{index < 4 ? <><img className="lock-ic" src="/assets/sidebar/padlock_pixel.svg" alt="" />Finish {regions[index - 1]} to unlock</> : 'Coming soon…'}</small></div>)}
         </div>
         <div className="pg-cols">
           <div className="mp-list" aria-label="Chapters"><h4 className="pg-h">Gyms</h4>
             {ALL_CHAPTERS.map(chapter => {
-              const locked = lockReason(chapter, currentChapterId, badges, caught);
+              const locked = lockReason(chapter, currentChapterId, badges, caught,completedChapters);
               const isCurrent = chapter.id === currentChapterId;
               return <button key={chapter.id} className={`mp-row ${isCurrent ? 'current gym-bg' : ''} ${chapter.id === selected.id ? 'sel' : ''} ${locked ? 'locked' : ''}`} aria-label={`Preview ${chapter.name}`} aria-pressed={chapter.id === selected.id} onClick={() => setSelectedId(chapter.id)} style={{ '--c': badgeColors[Math.max(0, chapter.chapterNumber - 1)] || '#8779b5' } as React.CSSProperties}>
                 {isCurrent && <span className="row-scene" style={{ backgroundImage: `url(${chapter.gymBackdrop})` }} />}
                 <span className="n">{chapter.isSpecial ? <img className="lock-ic" src="/assets/sidebar/padlock_pixel.svg" alt="" /> : String(chapter.chapterNumber).padStart(2, '0')}</span>
-                <span className="bd"><span className={`ch-av ${badges.includes(chapter.badgeSprite) && !chapter.isSpecial ? '' : 'sil'}`}><img className="progress-leader-thumb" src={`/assets/trainers/still/${chapter.leaderSprite}.png`} alt="" /><img className="progress-chapter-badge" src={`/assets/badges/${chapter.badgeSprite}.png`} alt="" /></span></span>
+                <span className="bd"><span className={`ch-av ${badges.includes(chapter.badgeSprite) && !chapter.isSpecial ? '' : 'sil'}`}><img className="progress-leader-thumb" src={`/assets/trainers/still/${chapter.leaderSprite}.png`} alt="" /><img className="progress-chapter-badge" src={chapterIcon(chapter)} alt="" /></span></span>
                 <span className="t"><b>{chapter.id === 'special-mewtwo' ? 'Cerulean Cave' : chapter.name}</b><small>{locked ? chapter.isSpecial ? locked : 'Locked' : <span className="pg-lv">Recommended {chapter.recommendedLevel}</span>}</small></span>
-                {badges.includes(chapter.badgeSprite) && !chapter.isSpecial && <span className="progress-completed" aria-label="Completed">✓</span>}
+                {chapterCompleted(chapter,{badges,completedChapters}) && !chapter.isSpecial && <span className="progress-completed" aria-label="Completed">✓</span>}
               </button>;
             })}
           </div>
@@ -75,7 +71,7 @@ export function AdventurePage({ onContinue }: { onContinue: (chapterId: string) 
             <div className="mp-det ch-det" style={{ '--c': color } as React.CSSProperties}>
               <div className="mp-hero" style={{ backgroundImage: `url(${selected.gymBackdrop})` }}><span className={`st ${current ? 'cur' : ''}`}>{current ? '▶ In progress' : reason ? '🔒 Locked' : completed ? '✓ Completed' : 'Ready'}</span><span className={`faces ${completed ? '' : 'sil'}`}><img src={`/assets/trainers/${selected.leaderSprite}.png`} alt={selected.leaderName} /></span></div>
               <div className="mp-in">
-                <div className="ttl"><img className="progress-detail-badge" src={`/assets/badges/${selected.badgeSprite}.png`} alt="" /><div className="ttl-t"><span className="ttl-who">{selected.leaderName}<span className="ty" style={{ '--c': TYPE_COLORS[selected.leaderType] || color } as React.CSSProperties}>{selected.leaderType}</span></span><h3>{selected.name}</h3></div></div>
+                <div className="ttl"><img className="progress-detail-badge" src={chapterIcon(selected)} alt="" /><div className="ttl-t"><span className="ttl-who">{selected.leaderName}<span className="ty" style={{ '--c': TYPE_COLORS[selected.leaderType] || color, '--tc': TYPE_COLORS[selected.leaderType] || color, background:'var(--tc)' } as React.CSSProperties}>{selected.leaderType}</span></span><h3>{selected.name}</h3></div></div>
                 <div className="mp-chips"><span className="pg-lv">Recommended <b>{selected.recommendedLevel}</b></span>{maxLevel && <span className="cap-chip">Lv. <b>{maxLevel}</b> cap</span>}<span>Reward <b>{selected.rewardMoneyRange}</b></span><span className="wx">{weather[condition][0]} {selected.weatherLabel || weather[condition][1]}</span></div>
                 {reason && <p className="progress-lock-reason">{reason}</p>}
                 <div className="mp-pk"><h5>Items found here <small>{selected.items.length} items</small></h5><div className="mp-items">{selected.items.map(item => <span className="mp-it" key={item.name} title={item.name}><img src={item.icon.replace('/assets/ui/poke-ball.png', '/assets/items/poke-ball.png')} alt={item.name} /></span>)}</div></div>
@@ -83,7 +79,7 @@ export function AdventurePage({ onContinue }: { onContinue: (chapterId: string) 
                   {(['day', 'night', 'rain'] as const).map(group => selected.pokemonFound[group]?.length ? <div key={group}><div className={`zone-cond ${condition === group ? 'now' : ''}`}><span className="zone-cond-ic">{weather[group][0]}</span>{weather[group][1]}{condition === group && <span className="zone-cond-now">now</span>}</div>{speciesGrid(selected.pokemonFound[group])}</div> : null)}
                 </div>
               </div>
-              <div className="progress-actions"><button className="btn primary lg progress-continue" disabled={!!reason} onClick={() => onContinue(selected.id)}>{reason ? 'Locked' : current ? 'Continue' : completed ? 'Replay the chapter' : 'Start the chapter'}</button></div>
+              <div className="progress-actions"><button className="btn primary lg progress-continue" disabled={!!reason} onClick={() => onContinue(selected.id)}>{reason ? 'Locked' : current && !(completed && selected.chapterNumber===14) ? 'Continue' : completed ? 'Replay the chapter' : 'Start the chapter'}</button></div>
             </div>
           </div>
         </div>

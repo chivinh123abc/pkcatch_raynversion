@@ -1,3 +1,10 @@
+import { currentChapter as getCurrentChapter } from '../game/data/chapterSelectors';
+import { gameplaySpeed } from '../game/domain/presentationTiming';
+import { BattlePartyRail } from './BattlePartyRail';
+import { BattleSprite } from './BattleSprite';
+import { TrainerPresentation } from './TrainerPresentation';
+import { railLayout } from '../game/presentation/railLayout';
+import { automaticBall } from '../game/domain/chapterOne';
 import { useArenaEffects } from '../game/presentation/useArenaEffects';
 import React, { useState, useEffect, useRef } from 'react';
 import { useGameStore } from '../store/useGameStore';
@@ -7,7 +14,7 @@ import {
   getPokemonSpriteUrl,
   getPokemonSpecies,
 } from '../data/pokemonData';
-import { ALL_CHAPTERS, DEFAULT_CHAPTER } from '../data/chaptersData';
+import { ALL_CHAPTERS, DEFAULT_CHAPTER, chapterIcon } from '../data/chaptersData';
 import { runDitherTransition } from '../utils/ditherTransition';
 import SPRITE_BOUNDS from '../data/spriteBounds.json';
 
@@ -75,6 +82,7 @@ export const Arena: React.FC = () => {
     setActivePartyIndex,
     enemy,
     currentChapterId,
+    chapterRun,
     currentStep,
     battleLog,
     gameSpeed,
@@ -117,25 +125,25 @@ export const Arena: React.FC = () => {
   } = useGameStore();
 
   const activeCatchBall = React.useMemo(() => {
-    if (berryBuffs.ultraBall > 0) return '/assets/items/ultra-ball.png';
-    if (berryBuffs.greatBall > 0) return '/assets/items/great-ball.png';
-    if (selectedBall === 'ultraball') return '/assets/items/ultra-ball.png';
-    if (selectedBall === 'greatball') return '/assets/items/great-ball.png';
-    if (selectedBall === 'masterball') return '/assets/items/master-ball.png';
+    const ball = capturePresentation?.ball || (enemy ? automaticBall(enemy.speciesId) : selectedBall);
+    if (ball === 'ultraball') return '/assets/items/ultra-ball.png';
+    if (ball === 'greatball') return '/assets/items/great-ball.png';
+    if (ball === 'masterball') return '/assets/items/master-ball.png';
     return '/assets/items/poke-ball.png';
-  }, [berryBuffs.ultraBall, berryBuffs.greatBall, selectedBall]);
+  }, [capturePresentation?.ball, enemy?.speciesId, selectedBall]);
 
   const arenaRef = useRef<HTMLDivElement | null>(null);
   const [stageWidth, setStageWidth] = useState(710);
+  const [stageHeight, setStageHeight] = useState(400);
   useEffect(() => {
     if (!arenaRef.current) return;
-    const observer = new ResizeObserver(([entry]) => setStageWidth(entry.contentRect.width));
+    const observer = new ResizeObserver(([entry]) => { setStageWidth(entry.contentRect.width); setStageHeight(entry.contentRect.height); });
     observer.observe(arenaRef.current);
     return () => observer.disconnect();
   }, []);
   const spriteScale = Math.max(2, Math.round(stageWidth * .24 / 68));
-  const partyTile = Math.max(38, Math.min(60, Math.floor((stageWidth * 9 / 16 - 85) / party.length) - 5));
-  const spriteTop = (speciesId: number) => (SPRITE_BOUNDS[`assets/pokemon/${speciesId}.png`]?.[1] || 0) * spriteScale;
+  const { tile:partyTile,padding:railTopGap } = railLayout(stageWidth,stageHeight,party.length,window.innerWidth);
+  const spriteTop = (_speciesId: number) => 0;
   const railContainerRef = useRef<HTMLDivElement | null>(null);
   const activeNodeRef = useRef<HTMLDivElement | null>(null);
   const fxContainerRef = useRef<HTMLDivElement | null>(null);
@@ -160,7 +168,7 @@ export const Arena: React.FC = () => {
   }, [currentStep]);
 
   const currentChapter =
-    ALL_CHAPTERS.find((c) => c.id === currentChapterId) || DEFAULT_CHAPTER;
+    getCurrentChapter({currentChapterId,chapterRun});
   const steps = currentChapter.steps;
   const activeMon = party[activePartyIndex];
   const activeSpecies = activeMon ? getPokemonSpecies(activeMon.speciesId) : null;
@@ -178,45 +186,8 @@ export const Arena: React.FC = () => {
     return `${m}:${s < 10 ? '0' : ''}${s}`;
   };
 
-  // Dynamic zone title
-  const currentZoneTitle = React.useMemo(() => {
-    if (currentChapterId === 'special-mewtwo') {
-      return currentStep === 10 ? 'Cerulean Cave · Mewtwo' : `Cerulean Cave · Floor ${currentStep}`;
-    }
-    if (currentChapterId === 'kanto-7') {
-      if (currentStep <= 5) return 'Routes 19-20';
-      if (currentStep <= 9) return 'Power Plant';
-      if (currentStep <= 16) return 'Seafoam Islands';
-      if (currentStep === 17 || currentStep === 25) return 'Cinnabar Island';
-      if (currentStep <= 24) return 'Pokémon Mansion';
-      return 'Cinnabar Gym';
-    }
-    if (currentStep <= 4) return 'Route 1';
-    if (currentStep <= 8) return 'Route 2';
-    if (currentStep <= 15) return 'Viridian Forest';
-    if (currentStep <= 18) return 'Pewter City';
-    return 'Pewter Gym';
-  }, [currentChapterId, currentStep]);
-
-  // Stage background
-  const stageBackground = React.useMemo(() => {
-    if (currentChapterId === 'special-mewtwo') {
-      return '/assets/bg/scenes/25-caverne-azuree-710x400.webp';
-    }
-    if (nodeType === 'center') {
-      return '/assets/bg/scenes/50-centre-pokemon-v2-710x400.webp';
-    }
-    if (currentChapterId === 'kanto-7') {
-      if (currentStep <= 5) return '/assets/bg/scenes/sea-travel.webp';
-      if (currentStep <= 9) return '/assets/bg/scenes/19-centrale-abandonnee-710x400.webp';
-      if (currentStep <= 16) return '/assets/bg/scenes/20-iles-ecume-v2-710x400.webp';
-      if (currentStep <= 25) return '/assets/bg/scenes/21-manoir-pokemon-710x400.webp';
-      return '/assets/bg/scenes/32-arene-auguste-710x400.webp';
-    }
-    if (currentStep >= 19) return '/assets/bg/scenes/26-arene-pierre-710x400.webp';
-    if (currentStep >= 9 && currentStep <= 15) return '/assets/bg/scenes/12-foret-jade-v2-710x400.webp';
-    return currentChapter.bgScene;
-  }, [nodeType, currentChapterId, currentStep, currentChapter.bgScene]);
+  const currentZoneTitle = currentChapter.steps[currentStep-1]?.name || currentChapter.name;
+  const stageBackground = currentChapter.steps[currentStep-1]?.scene || currentChapter.bgScene;
 
   // Use a single transition when the chapter or actual scene changes
   const previousSceneKey = useRef(`${currentChapterId}:${stageBackground}`);
@@ -231,7 +202,7 @@ export const Arena: React.FC = () => {
     runDitherTransition(arenaRef.current, {
       color: '#0b0d14',
       sweep: 'diag',
-      durationMs: (chapterChanged ? 460 : 380) / gameSpeed,
+      durationMs: (chapterChanged ? 460 : 380) / gameplaySpeed(gameSpeed),
     });
   }, [currentChapterId, stageBackground, gameSpeed]);
 
@@ -247,7 +218,7 @@ export const Arena: React.FC = () => {
     runDitherTransition(arenaRef.current, {
       color: '#0b0d14',
       sweep: 'diag',
-      durationMs: 380 / gameSpeed,
+      durationMs: 380 / gameplaySpeed(gameSpeed),
     });
   }, [transitionTick, gameSpeed]);
 
@@ -347,7 +318,7 @@ export const Arena: React.FC = () => {
                       {node.type === 'badge' && (
                         <div className="w-[20px] h-[20px] rounded-md border border-[#ffcb05] bg-[#1a1a24] flex items-center justify-center p-0.5">
                           <img
-                            src={`/assets/badges/${currentChapter.badgeSprite}.png`}
+                            src={chapterIcon(currentChapter)}
                             alt="Badge"
                             className="w-3.5 h-3.5 pixel-art object-contain"
                           />
@@ -385,7 +356,7 @@ export const Arena: React.FC = () => {
       <div
         ref={arenaRef}
         className="battle-stage relative w-full overflow-hidden bg-cover bg-center select-none"
-        style={{ backgroundImage: `url("${stageBackground}")`, '--k': spriteScale, '--tile': `${partyTile}px` } as React.CSSProperties}
+        style={{ backgroundImage: `url("${stageBackground}")`, '--k': spriteScale, '--tile': `${partyTile}px`, '--rail-top-gap': `${railTopGap}px` } as React.CSSProperties}
       >
         {/* Animated Pixel Rain Layer */}
         {isRaining && nodeType !== 'center' && <RainEffect />}
@@ -431,48 +402,7 @@ export const Arena: React.FC = () => {
           </div>
         )}
 
-        {/* Trainer VS Intro before trainer battles */}
-        {bossIntroActive && nodeType === 'red' && activeTrainer && (
-          <div className="vs-intro" aria-live="polite">
-            <div className="vs-card left">
-              <img src="/assets/trainers/red.png" alt="Red" />
-              <span className="vs-name">Red</span>
-            </div>
-            <div className="vs-card right">
-              <img src={`/assets/trainers/${activeTrainer.sprite}.png`} alt={activeTrainer.name} />
-              <span className="vs-name">
-                {activeTrainer.name}
-                {activeTrainer.title && <small>{activeTrainer.title}</small>}
-              </span>
-            </div>
-            <div className="vs-text">VS</div>
-          </div>
-        )}
-
-        {/* Gym leader reveal before combat */}
-        {bossIntroActive && nodeType === 'badge' && activeTrainer && (
-          <div className="gym-boss-intro" aria-live="polite" style={{ '--boss-color': '#ffcb05' } as React.CSSProperties}>
-            <i className="gym-boss-band gym-boss-band-top" />
-            <i className="gym-boss-band gym-boss-band-bottom" />
-            <div className="gym-boss-who">
-              <img
-                src={`/assets/trainers/${currentChapter.leaderSprite}.png`}
-                alt={currentChapter.leaderName}
-                className="gym-boss-portrait pixel-art"
-              />
-            </div>
-            <div className="gym-boss-info">
-              <small>GYM LEADER</small>
-              <strong>{currentChapter.leaderName}</strong>
-              <span className="gym-boss-tags">
-                <img src={`/assets/badges/${currentChapter.badgeSprite}.png`} alt="" />
-                <em>{currentChapter.leaderType}</em>
-                <em>{currentChapter.badgeName}</em>
-              </span>
-            </div>
-            <div className="gym-boss-flash" />
-          </div>
-        )}
+        <TrainerPresentation arena={arenaRef} fx={fxContainerRef} />
 
         {nodeType === 'badge' && activeTrainer && battleLog.startsWith('Defeated ') && (
           <div className="gym-victory-banner" aria-live="polite">
@@ -516,68 +446,7 @@ export const Arena: React.FC = () => {
           )}
         </div>
 
-        {/* 6 Left Party Slots Column (Compact 52x52px cards matching .team-rail) */}
-        <div className="battle-team-rail absolute z-20 flex flex-col pointer-events-auto">
-          {party.map((mon, idx) => {
-            const sp = POKEMON_SPECIES_MAP[mon.speciesId];
-            const isCurrent = idx === activePartyIndex;
-            const isKo = mon.currentHp <= 0;
-            const hpPct = Math.max(0, Math.min(100, (mon.currentHp / mon.maxHp) * 100));
-
-            const expPop = sidebarExpPopups?.[mon.uid];
-
-            return (
-              <div
-                key={mon.uid}
-                className="relative flex-none"
-                style={{ width: 'var(--tile)', height: 'var(--tile)' }}
-              >
-                <button
-                  onClick={() => setActivePartyIndex(idx)}
-                  className={`battle-team-slot rounded-xl border-2 flex flex-col items-center justify-between relative ${
-                    isKo
-                      ? 'slot-ko bg-[#141722]/90 border-[#222638] opacity-85'
-                      : isCurrent
-                        ? 'bg-[#2b2824]/95 border-[#ffcb05] shadow-[0_2px_0_rgba(0,0,0,0.45),0_0_10px_rgba(255,203,5,0.45)] scale-105 z-10'
-                        : 'bg-[#151825]/90 border-[#252a3e] hover:border-slate-400'
-                  }`}
-                  title={`${sp?.name || 'Mon'} — Lv.${mon.level}`}
-                >
-                  <img
-                    src={getPokemonSpriteUrl(mon.speciesId, mon.isShiny)}
-                    alt={sp?.name || 'Mon'}
-                    className={`object-contain pixel-art ${isKo ? 'grayscale brightness-75 opacity-75' : ''}`}
-                  />
-                  <span className={`font-black leading-none font-game ${isKo ? 'text-[#a0a4ae]' : 'text-white'}`}>
-                    Lv.{mon.level}
-                  </span>
-                  <div className="w-[88%] h-[5px] bg-black/35 rounded-full overflow-hidden mb-0.5">
-                    {!isKo && (
-                      <div
-                        className={`h-full transition-all duration-300 shadow-[inset_0_1px_rgba(255,255,255,0.3)] ${
-                          hpPct > 20 ? 'bg-[#f0607a]' : 'bg-[#d6334f]'
-                        }`}
-                        style={{ width: `${hpPct}%` }}
-                      />
-                    )}
-                  </div>
-                </button>
-                {expPop && (
-                  <div
-                    key={`${mon.uid}-${expPop.amount}`}
-                    className={`xp-pop rail-xp${expPop.active ? ' bonus' : ''}`}
-                    style={{
-                      left: 'calc(100% + 8px)',
-                      top: '50%',
-                    }}
-                  >
-                    +{expPop.amount.toLocaleString()} <small>XP{expPop.active ? ' ×1.1' : ''}</small>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
+        <BattlePartyRail tile={partyTile} />
 
         {/* Floating Damage Numbers */}
         {damagePopups.map((dmg) => (
@@ -615,7 +484,7 @@ export const Arena: React.FC = () => {
             {trainerOnField && !bossIntroActive && (
               <div className="capture-trainer hero absolute left-[19%] bottom-[22%] -translate-x-1/2 flex flex-col items-center z-20 pointer-events-auto">
                 <img
-                  src="/assets/trainers/red.png"
+                  src={`/assets/trainers/${useGameStore.getState().trainerSprite}.png`}
                   alt="Red"
                   className="h-32 sm:h-36 w-auto object-contain pixel-art -scale-x-100"
                 />
@@ -654,8 +523,8 @@ export const Arena: React.FC = () => {
                   )}
 
                   {/* Clean sprite with KO red-glow silhouette (stays visible until recalled into Pokéball) */}
-                  <img
-                    src={getPokemonSpriteUrl(activeMon.speciesId, activeMon.isShiny)}
+                  <BattleSprite
+                    idNumber={activeMon.speciesId} shiny={activeMon.isShiny}
                     alt={activeSpecies.name}
                     className={`battle-sprite pixel-art select-none -scale-x-100 ${
                       activeMon.currentHp <= 0
@@ -683,6 +552,7 @@ export const Arena: React.FC = () => {
                   <div className="cb-shadow-pixel z-0" />
                   <img
                     src={`/assets/trainers/${activeTrainer.sprite}.png`}
+                    onLoad={event => { const image=event.currentTarget,scale=image.naturalHeight>100?80/image.naturalHeight:1;image.style.setProperty('--trainer-width',`${Math.round(image.naturalWidth*scale)}px`);image.style.setProperty('--trainer-height',`${Math.round(image.naturalHeight*scale)}px`); }}
                     alt={activeTrainer.name}
                     className="relative z-[1] w-24 h-24 sm:w-28 sm:h-28 object-contain pixel-art"
                   />
@@ -729,9 +599,9 @@ export const Arena: React.FC = () => {
                   )}
 
                   {/* Clean sprite with KO fade-out (wild) or KO red glow (trainer) */}
-                  <img
+                  <BattleSprite
                     ref={enemySpriteRef}
-                    src={getPokemonSpriteUrl(enemy.speciesId, enemy.isShiny)}
+                    idNumber={enemy.speciesId} shiny={enemy.isShiny}
                     alt={enemySpecies.name}
                     className={`battle-sprite pixel-art select-none ${
                       enemy.currentHp <= 0

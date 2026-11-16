@@ -1,3 +1,4 @@
+import { gameplaySpeed } from '../domain/presentationTiming';
 import { useEffect, RefObject } from 'react';
 import { useGameStore } from '../../store/useGameStore';
 import { getPokemonSpecies } from '../../data/pokemonData';
@@ -20,7 +21,8 @@ interface ArenaEffectsProps {
  * Speed is sampled by each request; a speed change cannot restart an active effect.
  */
 export function useArenaEffects({ arenaRef, fxContainerRef, playerMonRef, enemyMonRef, enemySpriteRef, currentChapter }: ArenaEffectsProps) {
-    const { encounter, enemy, party, activeTrainer, activePartyIndex, nodeType, bossIntroActive, allyRecalling, allySendingOut, enemyRecalling, gameSpeed, combatEffect, resolveCombatImpact, finishCombatEffect, capturePresentation, finishCapturePresentation, healPresentation, finishHealPresentation, skipHeal, activeDrop, finishItemDrop } = useGameStore();
+    const { encounter, enemy, party, activeTrainer, activePartyIndex, nodeType, bossIntroActive, trainerPresentation, allyRecalling, allySendingOut, enemyRecalling, gameSpeed, combatEffect, resolveCombatImpact, finishCombatEffect, capturePresentation, finishCapturePresentation, healPresentation, finishHealPresentation, skipHeal, activeDrop, finishItemDrop } = useGameStore();
+    const effectSpeed=gameplaySpeed(gameSpeed);
     // One animation engine owns movement and reports the actual contact frame.
     useEffect(() => {
         BattleFX.cancel();
@@ -30,6 +32,7 @@ export function useArenaEffects({ arenaRef, fxContainerRef, playerMonRef, enemyM
         if (!combatEffect)
             return;
         let cancelled = false;
+        let completed = false;
         const moveKey = combatEffect.moveKey || combatEffect.moveName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
         const isTargetEnemy = combatEffect.target === 'enemy';
         const attEl = isTargetEnemy ? playerMonRef.current : enemyMonRef.current;
@@ -43,7 +46,7 @@ export function useArenaEffects({ arenaRef, fxContainerRef, playerMonRef, enemyM
                 fxEl: fxContainerRef.current,
                 shakeEl: arenaRef.current,
                 mirror: !isTargetEnemy,
-                speed: combatEffect.speed || gameSpeed,
+                speed: combatEffect.speed || effectSpeed,
                 miss: combatEffect.miss,
                 crit: combatEffect.crit,
                 onImpact: () => {
@@ -51,6 +54,7 @@ export function useArenaEffects({ arenaRef, fxContainerRef, playerMonRef, enemyM
                         resolveCombatImpact(combatEffect.key);
                 },
             }).then(() => {
+                completed = true;
                 if (!cancelled)
                     finishCombatEffect(combatEffect.key);
             })
@@ -62,7 +66,7 @@ export function useArenaEffects({ arenaRef, fxContainerRef, playerMonRef, enemyM
         else {
             finishCombatEffect(combatEffect.key);
         }
-        return () => { cancelled = true; BattleFX.cancel(); };
+        return () => { cancelled = true; if (!completed) BattleFX.cancel(); };
     }, [combatEffect, resolveCombatImpact, finishCombatEffect]);
     // Keep the ball trajectory, absorption, bounce and shakes on one clock.
     useEffect(() => {
@@ -103,8 +107,9 @@ export function useArenaEffects({ arenaRef, fxContainerRef, playerMonRef, enemyM
             }
         };
     }, [capturePresentation, finishCapturePresentation]);
-    // Reset enemy visibility/opacity whenever a new enemy spawns, and animate trainer Pokéball send-out
+    // Trainer requests own their send-out; other encounters still reset visibility here.
     useEffect(() => {
+        if (trainerPresentation) return;
         if (enemyMonRef.current) {
             enemyMonRef.current.style.opacity = '';
             enemyMonRef.current.style.visibility = '';
@@ -118,8 +123,8 @@ export function useArenaEffects({ arenaRef, fxContainerRef, playerMonRef, enemyM
             sprite.style.transform = '';
             sprite.style.filter = '';
             if (activeTrainer && !bossIntroActive && enemy && enemy.currentHp > 0) {
-                const bounceDur = Math.max(180, 360 / gameSpeed);
-                const revealDur = Math.max(140, 260 / gameSpeed);
+                const bounceDur = Math.max(180, 360 / effectSpeed);
+                const revealDur = Math.max(140, 260 / effectSpeed);
                 if (arenaRef.current && fxContainerRef.current) {
                     const aRect = arenaRef.current.getBoundingClientRect();
                     const sRect = sprite.getBoundingClientRect();
@@ -151,7 +156,7 @@ export function useArenaEffects({ arenaRef, fxContainerRef, playerMonRef, enemyM
         if (!enemyRecalling || !enemySpriteRef.current)
             return;
         const sprite = enemySpriteRef.current;
-        const dur = Math.max(120, 240 / gameSpeed);
+        const dur = 240 / effectSpeed;
         if (arenaRef.current && fxContainerRef.current) {
             const aRect = arenaRef.current.getBoundingClientRect();
             const sRect = sprite.getBoundingClientRect();
@@ -174,7 +179,7 @@ export function useArenaEffects({ arenaRef, fxContainerRef, playerMonRef, enemyM
         const sprite = playerMonRef.current.querySelector('img.battle-sprite') as HTMLElement | null;
         if (!sprite)
             return;
-        const totalDur = Math.max(200, 380 / gameSpeed);
+        const totalDur = Math.max(200, 380 / effectSpeed);
         const flyDur = Math.round(totalDur * 0.45);
         const shrinkDur = totalDur - flyDur;
         let cancelled = false;
@@ -245,7 +250,7 @@ export function useArenaEffects({ arenaRef, fxContainerRef, playerMonRef, enemyM
         const sprite = playerMonRef.current.querySelector('img.battle-sprite') as HTMLElement | null;
         if (!sprite)
             return;
-        const totalDur = Math.max(200, 400 / gameSpeed);
+        const totalDur = Math.max(200, 400 / effectSpeed);
         const flyDur = Math.round(totalDur * 0.45);
         const popDur = totalDur - flyDur;
         let cancelled = false;

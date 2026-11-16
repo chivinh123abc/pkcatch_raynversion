@@ -1,13 +1,18 @@
 # Poké'Catch Online Clone
 
+For AI/contributor handoff, start with [AGENTS.md](AGENTS.md) and [current state](docs/AI_HANDOFF.md). Read only the report relevant to your task; older implementation notes are archived in [project history](docs/PROJECT_HISTORY.md). Check live builds cheaply with `npm run reference:check`.
+
 A 100% client-side retro pixel art clone of Poké'Catch Online built with React 18, TypeScript, Vite, and Tailwind CSS.
+
+Học từ đầu bằng tiếng Việt: [Học làm webgame từ dự án này](docs/HOC_LAM_GAME_TU_DAU.md). Trạng thái mới: [runtime 14 chương Kanto](docs/R04_2_KANTO_RUNTIME.md) và [màn mở đầu/chọn starter](docs/ONBOARDING_PARITY.md).
 
 ## Features
 - **Authentic Pixel Art**: Gen 8 box sprites (68x56) from PokéSprite and original retro UI fonts (Jersey 15 & 10).
 - **Procedural Move Visuals (BattleFX)**: Over 500 move animations rendered dynamically on Canvas matching the original game.
 - **Combat Mechanics**: Full type advantages/disadvantages, critical hits, status conditions, and STAB calculations based on `mechanics.json`.
 - **HealFX & CaptureFX**: Authentic Pokémon Center recovery sequences and Pokéball capture / duplicate conversion animations.
-- **Progress & Management**: 20-node chapter progression, Team & PC management, full 151 Kanto Pokédex, local save system with autosave.
+- **Progress & Management**: 14 Kanto chapters with seeded routes, Gym/League progression, Team & PC management, 151 Kanto Pokédex, local saves and autosave. Chapter 1 preserves its verified 20-node route.
+- **New game**: title animation, Professor Oak introduction, Red/Leaf and name selection, animated starter choice using local Gen5ani artwork.
 - **100% Client-side**: Zero backend or proxy dependencies.
 
 ## Quick Start

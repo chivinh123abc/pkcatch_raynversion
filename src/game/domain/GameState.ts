@@ -1,6 +1,9 @@
-import type { ActiveDrop, BallType, CombatEffect, CombatLog, MysteryReward, PokemonInstance, StepNodeType } from '../../types/game';
+import type { ActiveDrop, AdventureGift, BallType, CombatEffect, CombatLog, MysteryReward, PokemonInstance, StepNodeType } from '../../types/game';
+import type { ChapterRun } from '../data/chapterGenerator';
 import type { RuntimeSnapshot } from '../runtime/GameplayRuntime';
 export interface ActiveTrainerState {
+    power?: number;
+    league?: boolean;
     name: string;
     title: string;
     sprite: string;
@@ -20,8 +23,16 @@ export interface DamagePopupItem {
 }
 export interface GameState {
     encounter: RuntimeSnapshot;
+    starterChosen: boolean;
+    chooseStarter: (speciesId: number, profile?: {name: string; sprite: 'red' | 'leaf'}) => void;
+    resolvedNode: { chapterId: string; step: number } | null;
+    awardedEnemyUids: string[];
+    items: Record<string, number>;
+    gifts: string[];
+    captureRoll: { enemyUid: string; success: boolean; shakes: number; probability: number; ball: BallType; duplicate: boolean } | null;
     // Player state
     trainerName: string;
+    trainerSprite: 'red' | 'leaf';
     trainerTag: string;
     money: number;
     tokens: number;
@@ -41,6 +52,11 @@ export interface GameState {
     movePcPokemon: (uid: string, beforeUid: string) => boolean;
     // Chapter & Route & Timeline
     currentChapterId: string;
+    chapterRun: ChapterRun | null;
+    completedChapters: string[];
+    pendingAdventureGift: AdventureGift | null;
+    chooseAdventureGift: (choice: string | number) => void;
+    finishStaticEncounter: () => boolean;
     currentStep: number;
     badges: string[];
     isAdventureModalOpen: boolean;
@@ -67,6 +83,9 @@ export interface GameState {
     isCatchable: boolean;
     activeTrainer: ActiveTrainerState | null;
     bossIntroActive: boolean;
+    trainerPresentation: { key: number; speed: number; kind: 'trainer' | 'gym'; stage: 'intro' | 'sendout'; sendAlly: boolean; enterTrainer?: boolean } | null;
+    finishTrainerIntro: (key: number) => void;
+    finishTrainerPresentation: (key: number) => void;
     allyRecalling: boolean;
     allySendingOut: boolean;
     enemyRecalling: boolean;
@@ -149,5 +168,5 @@ export interface GameState {
     tickBerryBuffs: (seconds?: number) => void;
     catchEnemy: () => void;
     saveGame: (silent?: boolean) => void;
-    loadGame: () => void;
+    loadGame: (options?: { deferEncounter?: boolean }) => void;
 }

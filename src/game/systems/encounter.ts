@@ -1,16 +1,76 @@
 import { getPokemonSpecies } from '../../data/pokemonData';
 import { ALL_CHAPTERS, DEFAULT_CHAPTER } from '../../data/chaptersData';
 import { bestPartyIndexForEnemy } from '../domain/battle';
+import { currentChapter, currentNode, nodePool, encounterContext, chapterCompleted, chapterUnlocked } from '../data/chapterSelectors';
+import { defaultChapterRun, weightedPick, evolutionChain, stageDistribution } from '../data/chapterGenerator';
+import type { AdventureGift } from '../../types/game';
+import { familyRoot, referenceLevel } from '../domain/chapterOne';
+import { applyExpToParty } from '../domain/battle';
 import type { GameState } from '../domain/GameState';
 import type { SystemContext } from './context';
-export function createEncounterActions(context: SystemContext): Pick<GameState, 'selectChapter' | 'loadStepNode' | 'advanceStep' | 'skipHeal' | 'finishHealPresentation'> {
+import { gameplaySpeed } from '../domain/presentationTiming';
+import { kantoTrainerPayout } from '../domain/kantoRewards';
+export function createEncounterActions(context: SystemContext): Pick<GameState, 'selectChapter' | 'loadStepNode' | 'advanceStep' | 'skipHeal' | 'finishHealPresentation' | 'finishTrainerIntro' | 'finishTrainerPresentation' | 'chooseAdventureGift' | 'finishStaticEncounter'> {
     const { set, get, runtime, createInstance } = context;
     const scheduleNodeTimeout = runtime.schedule.bind(runtime);
     const lockTurnFor = runtime.lockFor.bind(runtime);
+    const showGift = (gift: AdventureGift) => {
+        runtime.setPhase('awaiting-continue');
+        set({ nodeType:'gift',pendingAdventureGift:gift,enemy:null,isCatchable:false,battleLog:gift.text });
+    };
     return {
+        chooseAdventureGift: (choice) => {
+            const gift=get().pendingAdventureGift;
+            if(!gift || !gift.trade && get().gifts.includes(gift.key)) return;
+            const species=typeof choice==='number'?choice:null;
+            if(species!==null ? !gift.choices?.includes(species) : !gift.items?.includes(String(choice))) return;
+            const cost=species!==null?gift.trade?.[species]:undefined;
+            if(cost && !(get().items[cost]>0)) return;
+            runtime.commitReward('story-gift:'+gift.key,()=>{
+                const mon=species!==null?createInstance(species,gift.level||5):null;
+                const duplicate=mon&&[...get().party,...get().pcBox].some(m=>m.speciesId===mon.speciesId&&m.isShiny===mon.isShiny);
+                const members=mon?[...get().party,...get().pcBox].filter(m=>familyRoot(m.speciesId)===familyRoot(mon.speciesId)&&m.level<100):[];
+                const feed=(m:typeof mon)=>duplicate&&members.some(member=>member.uid===m.uid)?applyExpToParty([m],-1,Math.round(referenceLevel(m.level).candyXp/members.length)).party[0]:m;
+                set(state=>({
+                    pendingAdventureGift:null,gifts:gift.trade?state.gifts:[...new Set([...state.gifts,gift.key])],
+                    items:{...state.items,...(cost?{[cost]:state.items[cost]-1}:{}),...(species===null?{[String(choice)]:(state.items[String(choice)]||0)+1}:{})},
+                    party:duplicate?state.party.map(feed):mon&&state.party.length<6?[...state.party,mon]:state.party,
+                    pcBox:duplicate?state.pcBox.map(feed):mon&&state.party.length>=6?[...state.pcBox,mon]:state.pcBox,
+                    newCatchCard:mon&&!duplicate&&!state.pokedexCaught.includes(mon.speciesId)?{speciesId:mon.speciesId,level:mon.level,isShiny:false,isNew:true,destination:state.party.length<6?'party':'pc'}:null,
+                    pokedexCaught:species!==null?[...new Set([...state.pokedexCaught,species])]:state.pokedexCaught,
+                    pokedexSeen:species!==null?[...new Set([...state.pokedexSeen,species])]:state.pokedexSeen,
+                    resolvedNode:{chapterId:state.currentChapterId,step:state.currentStep},
+                }));
+                get().saveGame(true);
+            });
+            if(get().newCatchCard)runtime.setPhase('awaiting-continue');else get().advanceStep();
+        },
+        finishStaticEncounter: () => {
+            const node=currentNode(get()),story=node.static;
+            if(!story?.spirit) return false;
+            if(story.once) set(state=>({gifts:[...new Set([...state.gifts,story.once!])]}));
+            if(story.reward && !get().gifts.includes(story.reward.key)) showGift(story.reward);
+            else get().advanceStep();
+            get().saveGame(true);return true;
+        },
+        finishTrainerIntro: (key) => {
+            const request=get().trainerPresentation;
+            if (!request || request.key !== key || request.stage !== 'intro') return;
+            set({ bossIntroActive:false,trainerPresentation:{...request,speed:gameplaySpeed(get().gameSpeed),stage:'sendout'} });
+        },
+        finishTrainerPresentation: (key) => {
+            const request=get().trainerPresentation;
+            if (!request || request.key !== key) return;
+            runtime.cancelTag('trainer-presentation');
+            set({ bossIntroActive:false,trainerPresentation:null });
+            runtime.setPhase('battle');runtime.lockFor(325/gameplaySpeed(get().gameSpeed));
+        },
         selectChapter: (chapterId: string) => {
+            if (!chapterUnlocked(chapterId,get())) return;
             runtime.beginEncounter();
+            const run={...defaultChapterRun(chapterId),seed:Math.floor(runtime.random()*4294967296),gifts:[...get().gifts,'starter'],items:{...get().items}};
             set({
+                chapterRun:run,
                 currentChapterId: chapterId,
                 currentStep: 1,
                 activeDrop: null,
@@ -32,14 +92,18 @@ export function createEncounterActions(context: SystemContext): Pick<GameState, 
         loadStepNode: (stepNumber: number) => {
             runtime.beginEncounter();
             const { currentChapterId } = get();
-            const chapter = ALL_CHAPTERS.find((c) => c.id === currentChapterId) || DEFAULT_CHAPTER;
+            set({ currentStep: stepNumber, resolvedNode: null, awardedEnemyUids: [], captureRoll: null });
+            const chapter = currentChapter(get());
             const steps = chapter.steps;
-            const node = steps.find((s) => s.step === stepNumber) || steps[0];
+            const node = steps.find((s) => s.step === stepNumber);
+            if (!node) throw Error(`Invalid node ${stepNumber} in ${currentChapterId}`);
             set({
                 activeDrop: null,
+                pendingAdventureGift:null,
                 mysteryReward: null,
                 activeTrainer: null,
                 bossIntroActive: false,
+                trainerPresentation: null,
                 allyRecalling: false,
                 allySendingOut: false,
                 enemyRecalling: false,
@@ -62,82 +126,21 @@ export function createEncounterActions(context: SystemContext): Pick<GameState, 
             // 1. TALL GRASS NODE
             if (node.type === 'grass') {
                 const { pokedexSeen } = get();
-                let speciesId = 73; // Tentacruel default for Ch7
-                let minLv = 52;
-                let maxLv = 58;
-                let status: 'SLP' | null = null;
-                if (currentChapterId === 'kanto-7') {
-                    if (stepNumber <= 5) {
-                        // Routes 19-20 (Sea encounter)
-                        const pool = [
-                            { id: 72, min: 50, max: 54 }, // Tentacool
-                            { id: 73, min: 52, max: 56 }, // Tentacruel
-                            { id: 90, min: 54, max: 58 }, // Shellder
-                            { id: 130, min: 55, max: 60 }, // Gyarados
-                        ];
-                        const pick = pool[Math.floor(runtime.random() * pool.length)];
-                        speciesId = pick.id;
-                        minLv = pick.min;
-                        maxLv = pick.max;
-                        // Sometimes enemy appears asleep (like frame 18-20s)
-                        if (stepNumber === 2 || runtime.random() < 0.3) {
-                            status = 'SLP';
-                        }
-                    }
-                    else if (stepNumber <= 9) {
-                        // Power Plant
-                        const pool = [100, 101, 25, 81, 82];
-                        speciesId = pool[Math.floor(runtime.random() * pool.length)];
-                        minLv = 50;
-                        maxLv = 55;
-                    }
-                    else if (stepNumber <= 16) {
-                        // Seafoam Islands (Dewgong, Seel, Shellder, Cloyster)
-                        const pool = [86, 87, 90, 91];
-                        speciesId = pool[Math.floor(runtime.random() * pool.length)];
-                        minLv = 55;
-                        maxLv = 60;
-                    }
-                    else {
-                        // Pokemon Mansion
-                        const pool = [58, 77, 126, 37];
-                        speciesId = pool[Math.floor(runtime.random() * pool.length)];
-                        minLv = 56;
-                        maxLv = 60;
-                    }
+                const env=encounterContext(get(),runtime.now());
+                const pool=nodePool(node,currentChapterId,env.phase,env.weather,get().berryBuffs.nanab>0?2:1).filter(entry=>entry.on);
+                const selected=weightedPick(pool,runtime.random);
+                const encounterLevel=selected.min+Math.floor(runtime.random()*(selected.max-selected.min+1));
+                const speciesId=node.static?selected.id:weightedPick(stageDistribution(evolutionChain(selected.id,encounterLevel)),runtime.random).id;
+                const status: 'SLP' | null = null;
+                const enemyMon=createInstance(speciesId,encounterLevel,runtime.random()<1/4096);
+                if(node.static?.once && get().gifts.includes(node.static.once)){
+                    if(node.static.reward&&!get().gifts.includes(node.static.reward.key))showGift(node.static.reward);
+                    else get().advanceStep();return;
                 }
-                else if (currentChapterId === 'special-mewtwo') {
-                    const cavePool = [42, 42, 64, 64, 93, 93, 42, 64];
-                    speciesId = cavePool[Math.floor(runtime.random() * cavePool.length)];
-                    minLv = 65;
-                    maxLv = 75;
-                }
-                else {
-                    // Chapter 1 (Route 1 / Viridian Forest)
-                    if (stepNumber <= 4) {
-                        speciesId = runtime.random() < 0.55 ? 16 : 19;
-                        minLv = 2;
-                        maxLv = 5;
-                    }
-                    else if (stepNumber <= 8) {
-                        const pool = [16, 19, 29, 32];
-                        speciesId = pool[Math.floor(runtime.random() * pool.length)];
-                        minLv = 4;
-                        maxLv = 7;
-                    }
-                    else {
-                        const pool = [10, 13, 11, 14, 25];
-                        speciesId = pool[Math.floor(runtime.random() * pool.length)];
-                        minLv = 6;
-                        maxLv = 9;
-                    }
-                }
-                const lvl = Math.floor(runtime.random() * (maxLv - minLv + 1)) + minLv;
-                const enemyMon = createInstance(speciesId, lvl, false);
                 const enemySpecies = getPokemonSpecies(speciesId);
                 set({
                     nodeType: 'grass',
-                    isCatchable: true,
+                    isCatchable: !node.static?.spirit,
                     activeTrainer: null,
                     mysteryReward: null,
                     healPulse: false,
@@ -150,11 +153,19 @@ export function createEncounterActions(context: SystemContext): Pick<GameState, 
                 });
                 return;
             }
+            if (node.type==='gift' && node.gift) {
+                if(!node.gift.trade&&get().gifts.includes(node.gift.key)){get().advanceStep();return;}
+                showGift(node.gift);return;
+            }
+            if(node.unlock){
+                set(state=>({gifts:[...new Set([...state.gifts,node.unlock!])],resolvedNode:{chapterId:state.currentChapterId,step:state.currentStep}}));
+                get().saveGame(true);get().advanceStep();return;
+            }
             // 2. POKÉMON CENTER HEAL NODE
             if (node.type === 'center') {
                 runtime.setPhase('heal');
                 const healKey = runtime.nextId();
-                const speed = get().gameSpeed;
+                const speed = gameplaySpeed(get().gameSpeed);
                 set({
                     nodeType: 'center',
                     isCatchable: false,
@@ -171,6 +182,7 @@ export function createEncounterActions(context: SystemContext): Pick<GameState, 
             }
             // 3. MYSTERY ITEM NODE ('?')
             if (node.type === 'question') {
+                if (node.reward?.once && get().gifts.includes(node.reward.once)) { get().advanceStep(); return; }
                 const drop = get().triggerRandomGift('🎁 Found an item along the path!', 65);
                 set({
                     nodeType: 'question',
@@ -185,6 +197,7 @@ export function createEncounterActions(context: SystemContext): Pick<GameState, 
             // 4. TRAINER BATTLE (RED NODE)
             if (node.type === 'red' && node.trainer) {
                 runtime.setPhase('intro');
+                runtime.busy=true;
                 const t = node.trainer;
                 const firstMonData = t.team[0];
                 const firstEnemy = createInstance(firstMonData.speciesId, firstMonData.level, false);
@@ -200,22 +213,28 @@ export function createEncounterActions(context: SystemContext): Pick<GameState, 
                         sprite: t.sprite,
                         team: t.team.map((m) => ({ ...m, fainted: false })),
                         currentMonIndex: 0,
-                        rewardMoney: t.rewardMoney,
+                        rewardMoney: kantoTrainerPayout(t.rewardMoney,chapter.chapterNumber,false,false,get().completedChapters.includes('kanto-14')),
+                        power:t.power,league:t.league,
                     },
                     activePartyIndex: bestPartyIndexForEnemy(get().party, get().activePartyIndex, firstEnemy),
                     bossIntroActive: true,
+                    trainerPresentation: { key:runtime.nextId(),speed:gameplaySpeed(get().gameSpeed),kind:'trainer',stage:'intro',sendAlly:true,enterTrainer:true },
                     enemy: firstEnemy,
                     battleLog: `${t.name} wants to battle! ${t.name} sends out ${enemySpecies.name}!`,
                 });
-                scheduleNodeTimeout(() => { runtime.setPhase('battle'); set({ bossIntroActive: false }); }, 1500 / get().gameSpeed);
+                const trainerKey=get().trainerPresentation!.key;
+                scheduleNodeTimeout(() => get().finishTrainerPresentation(trainerKey),20000,'trainer-presentation');
                 return;
             }
             // 5. GYM LEADER BATTLE (BADGE NODE)
             if (node.type === 'badge' && node.trainer) {
                 runtime.setPhase('intro');
+                runtime.busy=true;
                 const t = node.trainer;
                 const firstMonData = t.team[0];
                 const bossEnemy = createInstance(firstMonData.speciesId, firstMonData.level, false);
+                const hpMultiplier = 1.3 * (t.power ?? 1) * Math.pow(Math.max(1, 6 / t.team.length), .7);
+                bossEnemy.maxHp = bossEnemy.currentHp = Math.floor(bossEnemy.maxHp * hpMultiplier);
                 const enemySpecies = getPokemonSpecies(bossEnemy.speciesId);
                 set({
                     nodeType: 'badge',
@@ -228,22 +247,30 @@ export function createEncounterActions(context: SystemContext): Pick<GameState, 
                         sprite: t.sprite,
                         team: t.team.map((m) => ({ ...m, fainted: false })),
                         currentMonIndex: 0,
-                        rewardMoney: t.rewardMoney,
+                        rewardMoney: kantoTrainerPayout(t.rewardMoney,chapter.chapterNumber,true,chapterCompleted(chapter,get()),get().completedChapters.includes('kanto-14')),
+                        power:t.power,league:t.league,
                     },
                     bossIntroActive: true,
+                    trainerPresentation: { key:runtime.nextId(),speed:gameplaySpeed(get().gameSpeed),kind:'gym',stage:'intro',sendAlly:true,enterTrainer:true },
                     chapterCompleteBanner: null,
                     activePartyIndex: bestPartyIndexForEnemy(get().party, get().activePartyIndex, bossEnemy),
                     enemy: bossEnemy,
                     battleLog: `${t.name} challenged you! ${t.name} sends out ${enemySpecies.name}!`,
                 });
-                scheduleNodeTimeout(() => { runtime.setPhase('battle'); set({ bossIntroActive: false }); }, 2900);
+                const gymKey=get().trainerPresentation!.key;
+                scheduleNodeTimeout(() => get().finishTrainerPresentation(gymKey),20000,'trainer-presentation');
                 return;
             }
         },
         advanceStep: () => {
             const { currentChapterId, currentStep } = get();
-            const chapter = ALL_CHAPTERS.find((c) => c.id === currentChapterId) || DEFAULT_CHAPTER;
+            const chapter = currentChapter(get());
             const total = chapter.totalSteps;
+            if (currentStep >= total && chapterCompleted(chapter,get())) {
+                const next = ALL_CHAPTERS.find(value => value.chapterNumber === chapter.chapterNumber + 1 && !value.isSpecial);
+                if (next) { get().selectChapter(next.id); get().saveGame(true); return; }
+                set({isBattling:false,battleLog:'You are the Kanto Pokémon League Champion!'});get().saveGame(true);return;
+            }
             const nextStep = currentStep >= total ? 1 : currentStep + 1;
             set((s) => ({
                 currentStep: nextStep,
@@ -280,7 +307,7 @@ export function createEncounterActions(context: SystemContext): Pick<GameState, 
             const shouldReturnToStart = runtime.context.returnToStartAfterHeal;
             runtime.context.returnToStartAfterHeal = false;
             set((state) => ({
-                party: state.party.map((mon) => ({ ...mon, currentHp: mon.maxHp })),
+                party: state.party.map((mon) => ({ ...mon, currentHp: mon.maxHp, status: undefined, sleepTurns: undefined, confusedTurns: undefined })),
                 healPulse: false,
                 healPresentation: null,
                 ...(shouldReturnToStart

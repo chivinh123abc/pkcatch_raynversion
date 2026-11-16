@@ -5,6 +5,7 @@ import { getItemSpriteUrl, getPokemonSpriteUrl } from '../data/pokemonData';
 export const TopBar: React.FC = () => {
   const {
     trainerName,
+    trainerSprite,
     trainerTag,
     pokedexCaught,
     money,
@@ -16,7 +17,7 @@ export const TopBar: React.FC = () => {
   return (
     <header className="topbar replica-topbar">
       <div className="tb-prof has-new">
-        <span className="tr-face side-av"><span className="tr-win"><img src="/assets/trainers/red.png" alt="Trainer Red" /></span></span>
+        <span className="tr-face side-av"><span className="tr-win"><img src={`/assets/trainers/${trainerSprite}.png`} alt={`Trainer ${trainerSprite === 'leaf' ? 'Leaf' : 'Red'}`} /></span></span>
         <span className="tb-who"><b>{trainerName}<small className="tag">{trainerTag}</small></b><small>Pokédex <em>{new Set(pokedexCaught).size} / 151</em></small></span>
       </div>
       <div className="side-wallet"><div className="side-money"><b>{money.toLocaleString()} ₽</b></div><div className="side-money tb-cur" title="Coins"><img src="/assets/ui/coin-case.png" alt="Coins" /><b>{tokens.toLocaleString()}</b></div></div>

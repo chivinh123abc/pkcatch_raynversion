@@ -1,0 +1,1058 @@
+[
+  {
+    "width": 2560,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "x",
+    "native": 625,
+    "local": 345
+  },
+  {
+    "width": 2560,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "width",
+    "native": 1564,
+    "local": 1860
+  },
+  {
+    "width": 2560,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "height",
+    "native": 548.765625,
+    "local": 840
+  },
+  {
+    "width": 2560,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "x",
+    "native": 625,
+    "local": 345
+  },
+  {
+    "width": 2560,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "width",
+    "native": 1564,
+    "local": 1860
+  },
+  {
+    "width": 1920,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "x",
+    "native": 305,
+    "local": 25
+  },
+  {
+    "width": 1920,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "width",
+    "native": 1564,
+    "local": 1860
+  },
+  {
+    "width": 1920,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "height",
+    "native": 548.765625,
+    "local": 840
+  },
+  {
+    "width": 1920,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "x",
+    "native": 305,
+    "local": 25
+  },
+  {
+    "width": 1920,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "width",
+    "native": 1564,
+    "local": 1860
+  },
+  {
+    "width": 1440,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "x",
+    "native": 280,
+    "local": 0
+  },
+  {
+    "width": 1440,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "width",
+    "native": 1134,
+    "local": 1430
+  },
+  {
+    "width": 1440,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "height",
+    "native": 553.78125,
+    "local": 840
+  },
+  {
+    "width": 1440,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "x",
+    "native": 280,
+    "local": 0
+  },
+  {
+    "width": 1440,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "width",
+    "native": 1134,
+    "local": 1430
+  },
+  {
+    "width": 1100,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "x",
+    "native": 280,
+    "local": 0
+  },
+  {
+    "width": 1100,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "width",
+    "native": 794,
+    "local": 1090
+  },
+  {
+    "width": 1100,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "height",
+    "native": 833,
+    "local": 840
+  },
+  {
+    "width": 1100,
+    "screen": "team",
+    "sel": "screen",
+    "prop": "height",
+    "native": 805,
+    "local": 757
+  },
+  {
+    "width": 1100,
+    "screen": "team",
+    "sel": ".pc-filters",
+    "prop": "height",
+    "native": 88,
+    "local": 40
+  },
+  {
+    "width": 1100,
+    "screen": "team",
+    "sel": ".pc-grid",
+    "prop": "y",
+    "native": 728,
+    "local": 680
+  },
+  {
+    "width": 1100,
+    "screen": "team",
+    "sel": ".pc-cell",
+    "prop": "y",
+    "native": 742,
+    "local": 694
+  },
+  {
+    "width": 1100,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "x",
+    "native": 280,
+    "local": 0
+  },
+  {
+    "width": 1100,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "width",
+    "native": 794,
+    "local": 1090
+  },
+  {
+    "width": 1000,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "x",
+    "native": 240,
+    "local": 0
+  },
+  {
+    "width": 1000,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "width",
+    "native": 734,
+    "local": 990
+  },
+  {
+    "width": 1000,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "height",
+    "native": 823,
+    "local": 840
+  },
+  {
+    "width": 1000,
+    "screen": "team",
+    "sel": "screen",
+    "prop": "height",
+    "native": 795,
+    "local": 747
+  },
+  {
+    "width": 1000,
+    "screen": "team",
+    "sel": ".pc-filters",
+    "prop": "height",
+    "native": 88,
+    "local": 40
+  },
+  {
+    "width": 1000,
+    "screen": "team",
+    "sel": ".pc-grid",
+    "prop": "y",
+    "native": 728,
+    "local": 680
+  },
+  {
+    "width": 1000,
+    "screen": "team",
+    "sel": ".pc-cell",
+    "prop": "y",
+    "native": 742,
+    "local": 694
+  },
+  {
+    "width": 1000,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "x",
+    "native": 240,
+    "local": 0
+  },
+  {
+    "width": 1000,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "width",
+    "native": 734,
+    "local": 990
+  },
+  {
+    "width": 800,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "x",
+    "native": 240,
+    "local": 0
+  },
+  {
+    "width": 800,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "width",
+    "native": 534,
+    "local": 790
+  },
+  {
+    "width": 800,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "height",
+    "native": 832.5,
+    "local": 840
+  },
+  {
+    "width": 800,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "x",
+    "native": 240,
+    "local": 0
+  },
+  {
+    "width": 800,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "width",
+    "native": 534,
+    "local": 790
+  },
+  {
+    "width": 641,
+    "screen": "team",
+    "sel": "#app",
+    "prop": "height",
+    "native": 1158.671875,
+    "local": 1110.671875
+  },
+  {
+    "width": 641,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "x",
+    "native": 240,
+    "local": 0
+  },
+  {
+    "width": 641,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "width",
+    "native": 375,
+    "local": 631
+  },
+  {
+    "width": 641,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "height",
+    "native": 1098.671875,
+    "local": 1050.671875
+  },
+  {
+    "width": 641,
+    "screen": "team",
+    "sel": "screen",
+    "prop": "height",
+    "native": 1070.671875,
+    "local": 1022.671875
+  },
+  {
+    "width": 641,
+    "screen": "team",
+    "sel": ".pc-filters",
+    "prop": "height",
+    "native": 136,
+    "local": 88
+  },
+  {
+    "width": 641,
+    "screen": "team",
+    "sel": ".pc-grid",
+    "prop": "y",
+    "native": 886,
+    "local": 838
+  },
+  {
+    "width": 641,
+    "screen": "team",
+    "sel": ".pc-cell",
+    "prop": "y",
+    "native": 900,
+    "local": 852
+  },
+  {
+    "width": 641,
+    "screen": "pokedex",
+    "sel": "#app",
+    "prop": "height",
+    "native": 12678.09375,
+    "local": 12578
+  },
+  {
+    "width": 641,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "x",
+    "native": 240,
+    "local": 0
+  },
+  {
+    "width": 641,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "width",
+    "native": 375,
+    "local": 631
+  },
+  {
+    "width": 641,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "height",
+    "native": 12618.09375,
+    "local": 12518
+  },
+  {
+    "width": 641,
+    "screen": "pokedex",
+    "sel": "screen",
+    "prop": "height",
+    "native": 12590.09375,
+    "local": 12490
+  },
+  {
+    "width": 641,
+    "screen": "pokedex",
+    "sel": ".map-head",
+    "prop": "height",
+    "native": 80.09375,
+    "local": 82
+  },
+  {
+    "width": 641,
+    "screen": "pokedex",
+    "sel": ".pc-filters",
+    "prop": "y",
+    "native": 534.09375,
+    "local": 536
+  },
+  {
+    "width": 641,
+    "screen": "pokedex",
+    "sel": ".dex-hero",
+    "prop": "height",
+    "native": 438.09375,
+    "local": 440
+  },
+  {
+    "width": 641,
+    "screen": "pokedex",
+    "sel": ".dex-hero-body",
+    "prop": "y",
+    "native": 154.09375,
+    "local": 156
+  },
+  {
+    "width": 641,
+    "screen": "pokedex",
+    "sel": ".dex-ring",
+    "prop": "y",
+    "native": 267.09375,
+    "local": 269
+  },
+  {
+    "width": 641,
+    "screen": "pokedex",
+    "sel": ".dex-grid",
+    "prop": "y",
+    "native": 736.09375,
+    "local": 716
+  },
+  {
+    "width": 641,
+    "screen": "pokedex",
+    "sel": ".dex-cell",
+    "prop": "y",
+    "native": 736.09375,
+    "local": 716
+  },
+  {
+    "width": 641,
+    "screen": "pokedex",
+    "sel": ".dex-cell .num",
+    "prop": "y",
+    "native": 840.09375,
+    "local": 820
+  },
+  {
+    "width": 641,
+    "screen": "pokedex",
+    "sel": ".dex-cell .nm",
+    "prop": "y",
+    "native": 855.09375,
+    "local": 835
+  },
+  {
+    "width": 640,
+    "screen": "team",
+    "sel": "#app",
+    "prop": "height",
+    "native": 854.40625,
+    "local": 900
+  },
+  {
+    "width": 640,
+    "screen": "team",
+    "sel": ".side",
+    "prop": "x",
+    "native": 16,
+    "local": 0
+  },
+  {
+    "width": 640,
+    "screen": "team",
+    "sel": ".side",
+    "prop": "y",
+    "native": 64,
+    "local": 0
+  },
+  {
+    "width": 640,
+    "screen": "team",
+    "sel": ".side",
+    "prop": "width",
+    "native": 598,
+    "local": 0
+  },
+  {
+    "width": 640,
+    "screen": "team",
+    "sel": ".side",
+    "prop": "height",
+    "native": 16,
+    "local": 0
+  },
+  {
+    "width": 640,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "x",
+    "native": 16,
+    "local": 0
+  },
+  {
+    "width": 640,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "y",
+    "native": 80,
+    "local": 56
+  },
+  {
+    "width": 640,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "width",
+    "native": 598,
+    "local": 630
+  },
+  {
+    "width": 640,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "height",
+    "native": 774.40625,
+    "local": 844
+  },
+  {
+    "width": 640,
+    "screen": "pokedex",
+    "sel": "#app",
+    "prop": "height",
+    "native": 3010,
+    "local": 3006
+  },
+  {
+    "width": 640,
+    "screen": "pokedex",
+    "sel": ".side",
+    "prop": "x",
+    "native": 16,
+    "local": 0
+  },
+  {
+    "width": 640,
+    "screen": "pokedex",
+    "sel": ".side",
+    "prop": "y",
+    "native": 64,
+    "local": 0
+  },
+  {
+    "width": 640,
+    "screen": "pokedex",
+    "sel": ".side",
+    "prop": "width",
+    "native": 598,
+    "local": 0
+  },
+  {
+    "width": 640,
+    "screen": "pokedex",
+    "sel": ".side",
+    "prop": "height",
+    "native": 16,
+    "local": 0
+  },
+  {
+    "width": 640,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "x",
+    "native": 16,
+    "local": 0
+  },
+  {
+    "width": 640,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "y",
+    "native": 80,
+    "local": 56
+  },
+  {
+    "width": 640,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "width",
+    "native": 598,
+    "local": 630
+  },
+  {
+    "width": 640,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "height",
+    "native": 2930,
+    "local": 2950
+  },
+  {
+    "width": 390,
+    "screen": "team",
+    "sel": "#app",
+    "prop": "height",
+    "native": 874,
+    "local": 900
+  },
+  {
+    "width": 390,
+    "screen": "team",
+    "sel": ".side",
+    "prop": "x",
+    "native": 16,
+    "local": 0
+  },
+  {
+    "width": 390,
+    "screen": "team",
+    "sel": ".side",
+    "prop": "y",
+    "native": 64,
+    "local": 0
+  },
+  {
+    "width": 390,
+    "screen": "team",
+    "sel": ".side",
+    "prop": "width",
+    "native": 348,
+    "local": 0
+  },
+  {
+    "width": 390,
+    "screen": "team",
+    "sel": ".side",
+    "prop": "height",
+    "native": 16,
+    "local": 0
+  },
+  {
+    "width": 390,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "x",
+    "native": 16,
+    "local": 0
+  },
+  {
+    "width": 390,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "y",
+    "native": 80,
+    "local": 56
+  },
+  {
+    "width": 390,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "width",
+    "native": 348,
+    "local": 380
+  },
+  {
+    "width": 390,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "height",
+    "native": 794,
+    "local": 844
+  },
+  {
+    "width": 390,
+    "screen": "pokedex",
+    "sel": "#app",
+    "prop": "height",
+    "native": 3192.09375,
+    "local": 3088
+  },
+  {
+    "width": 390,
+    "screen": "pokedex",
+    "sel": ".side",
+    "prop": "x",
+    "native": 16,
+    "local": 0
+  },
+  {
+    "width": 390,
+    "screen": "pokedex",
+    "sel": ".side",
+    "prop": "y",
+    "native": 64,
+    "local": 0
+  },
+  {
+    "width": 390,
+    "screen": "pokedex",
+    "sel": ".side",
+    "prop": "width",
+    "native": 348,
+    "local": 0
+  },
+  {
+    "width": 390,
+    "screen": "pokedex",
+    "sel": ".side",
+    "prop": "height",
+    "native": 16,
+    "local": 0
+  },
+  {
+    "width": 390,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "x",
+    "native": 16,
+    "local": 0
+  },
+  {
+    "width": 390,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "y",
+    "native": 80,
+    "local": 56
+  },
+  {
+    "width": 390,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "width",
+    "native": 348,
+    "local": 380
+  },
+  {
+    "width": 390,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "height",
+    "native": 3112.09375,
+    "local": 3032
+  },
+  {
+    "width": 390,
+    "screen": "pokedex",
+    "sel": "screen",
+    "prop": "height",
+    "native": 3008.09375,
+    "local": 2908
+  },
+  {
+    "width": 390,
+    "screen": "pokedex",
+    "sel": ".map-head",
+    "prop": "height",
+    "native": 80.09375,
+    "local": 82
+  },
+  {
+    "width": 390,
+    "screen": "pokedex",
+    "sel": ".pc-filters",
+    "prop": "y",
+    "native": 646.09375,
+    "local": 648
+  },
+  {
+    "width": 390,
+    "screen": "pokedex",
+    "sel": ".dex-hero",
+    "prop": "height",
+    "native": 530.09375,
+    "local": 532
+  },
+  {
+    "width": 390,
+    "screen": "pokedex",
+    "sel": ".dex-hero-body",
+    "prop": "y",
+    "native": 174.09375,
+    "local": 176
+  },
+  {
+    "width": 390,
+    "screen": "pokedex",
+    "sel": ".dex-ring",
+    "prop": "y",
+    "native": 190.09375,
+    "local": 192
+  },
+  {
+    "width": 390,
+    "screen": "pokedex",
+    "sel": ".dex-grid",
+    "prop": "y",
+    "native": 800.09375,
+    "local": 780
+  },
+  {
+    "width": 390,
+    "screen": "pokedex",
+    "sel": ".dex-cell",
+    "prop": "y",
+    "native": 800.09375,
+    "local": 780
+  },
+  {
+    "width": 390,
+    "screen": "pokedex",
+    "sel": ".dex-cell .num",
+    "prop": "y",
+    "native": 839.09375,
+    "local": 819
+  },
+  {
+    "width": 320,
+    "screen": "team",
+    "sel": "#app",
+    "prop": "height",
+    "native": 944,
+    "local": 940
+  },
+  {
+    "width": 320,
+    "screen": "team",
+    "sel": ".side",
+    "prop": "x",
+    "native": 16,
+    "local": 0
+  },
+  {
+    "width": 320,
+    "screen": "team",
+    "sel": ".side",
+    "prop": "y",
+    "native": 64,
+    "local": 0
+  },
+  {
+    "width": 320,
+    "screen": "team",
+    "sel": ".side",
+    "prop": "width",
+    "native": 278,
+    "local": 0
+  },
+  {
+    "width": 320,
+    "screen": "team",
+    "sel": ".side",
+    "prop": "height",
+    "native": 16,
+    "local": 0
+  },
+  {
+    "width": 320,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "x",
+    "native": 16,
+    "local": 0
+  },
+  {
+    "width": 320,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "y",
+    "native": 80,
+    "local": 56
+  },
+  {
+    "width": 320,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "width",
+    "native": 278,
+    "local": 310
+  },
+  {
+    "width": 320,
+    "screen": "team",
+    "sel": "#app>main",
+    "prop": "height",
+    "native": 864,
+    "local": 884
+  },
+  {
+    "width": 320,
+    "screen": "pokedex",
+    "sel": "#app",
+    "prop": "height",
+    "native": 3227.09375,
+    "local": 3142
+  },
+  {
+    "width": 320,
+    "screen": "pokedex",
+    "sel": ".side",
+    "prop": "x",
+    "native": 16,
+    "local": 0
+  },
+  {
+    "width": 320,
+    "screen": "pokedex",
+    "sel": ".side",
+    "prop": "y",
+    "native": 64,
+    "local": 0
+  },
+  {
+    "width": 320,
+    "screen": "pokedex",
+    "sel": ".side",
+    "prop": "width",
+    "native": 278,
+    "local": 0
+  },
+  {
+    "width": 320,
+    "screen": "pokedex",
+    "sel": ".side",
+    "prop": "height",
+    "native": 16,
+    "local": 0
+  },
+  {
+    "width": 320,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "x",
+    "native": 16,
+    "local": 0
+  },
+  {
+    "width": 320,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "y",
+    "native": 80,
+    "local": 56
+  },
+  {
+    "width": 320,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "width",
+    "native": 278,
+    "local": 310
+  },
+  {
+    "width": 320,
+    "screen": "pokedex",
+    "sel": "#app>main",
+    "prop": "height",
+    "native": 3147.09375,
+    "local": 3086
+  },
+  {
+    "width": 320,
+    "screen": "pokedex",
+    "sel": "screen",
+    "prop": "height",
+    "native": 3043.09375,
+    "local": 2962
+  },
+  {
+    "width": 320,
+    "screen": "pokedex",
+    "sel": ".map-head",
+    "prop": "height",
+    "native": 115.09375,
+    "local": 109
+  },
+  {
+    "width": 320,
+    "screen": "pokedex",
+    "sel": ".pc-filters",
+    "prop": "y",
+    "native": 681.09375,
+    "local": 675
+  },
+  {
+    "width": 320,
+    "screen": "pokedex",
+    "sel": ".dex-hero",
+    "prop": "height",
+    "native": 565.09375,
+    "local": 559
+  },
+  {
+    "width": 320,
+    "screen": "pokedex",
+    "sel": ".dex-hero-body",
+    "prop": "y",
+    "native": 209.09375,
+    "local": 203
+  },
+  {
+    "width": 320,
+    "screen": "pokedex",
+    "sel": ".dex-ring",
+    "prop": "y",
+    "native": 225.09375,
+    "local": 219
+  },
+  {
+    "width": 320,
+    "screen": "pokedex",
+    "sel": ".dex-grid",
+    "prop": "y",
+    "native": 835.09375,
+    "local": 834
+  },
+  {
+    "width": 320,
+    "screen": "pokedex",
+    "sel": ".dex-cell",
+    "prop": "y",
+    "native": 835.09375,
+    "local": 834
+  },
+  {
+    "width": 320,
+    "screen": "pokedex",
+    "sel": ".dex-cell .num",
+    "prop": "y",
+    "native": 874.09375,
+    "local": 873
+  }
+]

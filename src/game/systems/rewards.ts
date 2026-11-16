@@ -1,29 +1,38 @@
+import { gameplaySpeed } from '../domain/presentationTiming';
 import type { ActiveDrop, PokemonInstance } from '../../types/game';
 import { getItemSpriteUrl, getPokemonSpecies } from '../../data/pokemonData';
 import { ALL_CHAPTERS, DEFAULT_CHAPTER } from '../../data/chaptersData';
+import { currentChapter, currentNode } from '../data/chapterSelectors';
 import { applyExpToParty, calcBattleExp } from '../domain/battle';
+import { rollChapterLoot, kantoLeagueXp } from '../domain/kantoRewards';
 import type { ActiveTrainerState } from '../domain/GameState';
 import type { GameState } from '../domain/GameState';
 import type { SystemContext } from './context';
 export function grantKnockoutReward({ runtime, set, get }: SystemContext, enemy: PokemonInstance, isTrainer: boolean) {
+    if (get().awardedEnemyUids.includes(enemy.uid)) return false;
     return runtime.commitReward('ko:' + enemy.uid, () => {
-        const battleExp = calcBattleExp(enemy, isTrainer, get().berryBuffs.pinap > 0);
+        const battleExp = calcBattleExp(enemy, isTrainer, get().berryBuffs.pinap > 0) * (get().activeTrainer?.league?kantoLeagueXp:1);
         set(state => {
             const result = applyExpToParty(state.party, state.activePartyIndex, battleExp);
-            return { party: result.party, sidebarExpPopup: `+${result.activeGain.toLocaleString()} XP`, sidebarExpPopups: result.gains, battleLog: getPokemonSpecies(enemy.speciesId).name + ' fainted!' };
+            return { awardedEnemyUids: [...state.awardedEnemyUids, enemy.uid], party: result.party, sidebarExpPopup: `+${result.activeGain.toLocaleString()} XP`, sidebarExpPopups: result.gains, battleLog: getPokemonSpecies(enemy.speciesId).name + ' fainted!' };
         });
+        get().saveGame(true);
     });
 }
 export function grantTrainerReward({ runtime, set, get }: SystemContext, enemyUid: string, trainer: ActiveTrainerState) {
     return runtime.commitReward('trainer:' + enemyUid, () => {
-        const chapter = ALL_CHAPTERS.find(c => c.id === get().currentChapterId) || DEFAULT_CHAPTER;
-        const badge = get().nodeType === 'badge' ? chapter.badgeSprite : null;
+        const chapter = currentChapter(get());
+        const finished = get().nodeType === 'badge';
+        const badge = finished && chapter.chapterNumber<=8 ? chapter.badgeSprite : null;
         set(state => ({
+            resolvedNode: { chapterId: state.currentChapterId, step: state.currentStep },
             money: state.money + trainer.rewardMoney,
             badges: badge && !state.badges.includes(badge) ? [...state.badges, badge] : state.badges,
-            chapterCompleteBanner: badge ? chapter.badgeName : null,
+            completedChapters: finished ? [...new Set([...state.completedChapters,chapter.id])] : state.completedChapters,
+            chapterCompleteBanner: finished ? chapter.badgeName : null,
             battleLog: 'Defeated ' + trainer.name + '! Received ₽' + trainer.rewardMoney.toLocaleString() + '!',
         }));
+        get().saveGame(true);
     });
 }
 export function createRewardActions(context: SystemContext): Pick<GameState, 'triggerRandomGift' | 'finishItemDrop'> {
@@ -34,52 +43,33 @@ export function createRewardActions(context: SystemContext): Pick<GameState, 'tr
         triggerRandomGift: (customTitle?: string, xPos?: number) => {
             runtime.setPhase('item');
             const rewardId = 'item:' + runtime.nextId();
-            const roll = runtime.random();
             let drop: ActiveDrop;
-            if (roll < 0.55) {
-                const berryTypes = ['razz', 'nanab', 'pinap', 'goldenRazz'] as const;
-                const b = berryTypes[Math.floor(runtime.random() * berryTypes.length)];
-                const count = 1;
-                const berryName = b === 'razz'
-                    ? 'Razz Berry'
-                    : b === 'nanab'
-                        ? 'Nanab Berry'
-                        : b === 'pinap'
-                            ? 'Pinap Berry'
-                            : 'Golden Razz Berry';
-                const iconUrl = b === 'goldenRazz' ? '/assets/ui/golden-razz-berry.png' : getItemSpriteUrl(b);
-                runtime.commitReward(rewardId, () => set((s) => ({
-                    berries: {
-                        ...s.berries,
-                        [b]: s.berries[b] + count,
-                    },
-                })));
-                drop = {
-                    id: `drop-${runtime.nextId()}-${runtime.random()}`,
-                    type: 'berry',
-                    title: `${count}x ${berryName}`,
-                    amount: count,
-                    iconUrl,
-                    xPercent: xPos ?? Math.floor(55 + runtime.random() * 20),
-                };
+            const current = get();
+            const fixed = currentNode(current).reward;
+            if (fixed) {
+                runtime.commitReward(rewardId, () => set(state => ({ items: { ...state.items, [fixed.item]: (state.items[fixed.item] || 0) + fixed.amount }, gifts: [...new Set([...state.gifts,...(fixed.once?[fixed.once]:[]),...(fixed.item.endsWith('-stone')?['found-stone:'+fixed.item]:[])])] })));
+                drop = { id: rewardId, type: 'item', title: fixed.item.split('-').map(word => word[0].toUpperCase() + word.slice(1)).join(' '), amount: fixed.amount, iconUrl: getItemSpriteUrl(fixed.item), xPercent: xPos ?? 65 };
+            } else {
+                const stonesSeen = [...current.gifts.filter(g=>g.startsWith('found-stone:')).map(g=>g.slice('found-stone:'.length)),...Object.keys(current.items).filter(key=>key.endsWith('-stone')&&current.items[key]>0)];
+                const loot = rollChapterLoot(currentChapter(current).chapterNumber,stonesSeen,runtime.random);
+                if(loot.money!==undefined){
+                    runtime.commitReward(rewardId,()=>set(state=>({money:state.money+loot.money!})));
+                    drop={id:rewardId,type:'money',title:`₽${loot.money.toLocaleString()}`,amount:loot.money,iconUrl:'/assets/ui/coin-spin-frames.png',xPercent:xPos??65};
+                }else{
+                    const item=loot.item!,keys:Record<string,'razz'|'nanab'|'pinap'|'goldenRazz'>={'razz-berry':'razz','nanab-berry':'nanab','pinap-berry':'pinap','golden-razz-berry':'goldenRazz'},berry=keys[item];
+                    runtime.commitReward(rewardId,()=>set(state=>berry?{berries:{...state.berries,[berry]:state.berries[berry]+loot.amount}}:{items:{...state.items,[item]:(state.items[item]||0)+loot.amount},gifts:loot.discoveredStone?[...new Set([...state.gifts,'found-stone:'+loot.discoveredStone])]:state.gifts}));
+                    const words=item.startsWith('berry-')?item.slice(6)+'-berry':item;
+                    const title=words.split('-').map(word=>word[0].toUpperCase()+word.slice(1)).join(' ');
+                    drop={id:rewardId,type:berry?'berry':'item',title:`${loot.amount}x ${title}`,amount:loot.amount,iconUrl:getItemSpriteUrl(item),xPercent:xPos??65};
+                }
             }
-            else {
-                const foundMoney = Math.floor(runtime.random() * 350) + 150;
-                runtime.commitReward(rewardId, () => set((s) => ({ money: s.money + foundMoney })));
-                drop = {
-                    id: `drop-${runtime.nextId()}-${runtime.random()}`,
-                    type: 'money',
-                    title: `₽${foundMoney.toLocaleString()}`,
-                    amount: foundMoney,
-                    iconUrl: '/assets/ui/coin-spin-frames.png',
-                    xPercent: xPos ?? Math.floor(55 + runtime.random() * 20),
-                };
-            }
-            drop.speed = get().gameSpeed;
+            drop.speed = gameplaySpeed(get().gameSpeed);
             set({
                 activeDrop: drop,
+                resolvedNode: { chapterId: get().currentChapterId, step: get().currentStep },
                 battleLog: customTitle || `🎁 Found ${drop.title}!`,
             });
+            get().saveGame(true);
             scheduleNodeTimeout(() => get().finishItemDrop(drop.id), 20000 / drop.speed, 'item');
             return drop;
         },
@@ -93,7 +83,7 @@ export function createRewardActions(context: SystemContext): Pick<GameState, 'tr
             runtime.setPhase('battle');
             if (shouldRecall) {
                 set({ allyRecalling: true });
-                scheduleNodeTimeout(() => get().advanceStep(), Math.max(160, 260 / get().gameSpeed));
+                scheduleNodeTimeout(() => get().advanceStep(), Math.max(160, 260 / gameplaySpeed(get().gameSpeed)));
             }
             else if (advance) {
                 get().advanceStep();

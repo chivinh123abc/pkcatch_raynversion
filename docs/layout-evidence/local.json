@@ -1,0 +1,1892 @@
+{
+  "320": {
+    "team": {
+      "shell": {
+        "#app": {
+          "x": 0,
+          "y": 0,
+          "width": 310,
+          "height": 940
+        },
+        ".topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 310,
+          "height": 56
+        },
+        ".side": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "#app>main": {
+          "x": 0,
+          "y": 56,
+          "width": 310,
+          "height": 884
+        }
+      },
+      "elements": {
+        "screen": {
+          "x": 16,
+          "y": 92,
+          "width": 278,
+          "height": 760
+        },
+        ".team-panel": {
+          "x": 16,
+          "y": 92,
+          "width": 278,
+          "height": 566
+        },
+        ".map-head": {
+          "x": 18,
+          "y": 94,
+          "width": 274,
+          "height": 142
+        },
+        ".team-slots": {
+          "x": 18,
+          "y": 236,
+          "width": 274,
+          "height": 420
+        },
+        ".slot.filled": {
+          "x": 34,
+          "y": 252,
+          "width": 70,
+          "height": 186
+        },
+        ".slot .name": {
+          "x": 38.625,
+          "y": 360.5,
+          "width": 60.75,
+          "height": 15
+        },
+        ".pc-filters": {
+          "x": 16,
+          "y": 682,
+          "width": 278,
+          "height": 40
+        },
+        ".pc-grid": {
+          "x": 16,
+          "y": 732,
+          "width": 278,
+          "height": 120
+        },
+        ".pc-cell": {
+          "x": 26,
+          "y": 742,
+          "width": 48.390625,
+          "height": 48.390625
+        },
+        ".dex-hero": null,
+        ".dex-hero-body": null,
+        ".dex-ring": null,
+        ".dex-grid": null,
+        ".dex-cell": null,
+        ".dex-cell .num": null,
+        ".dex-cell .nm": null
+      }
+    },
+    "pokedex": {
+      "shell": {
+        "#app": {
+          "x": 0,
+          "y": 0,
+          "width": 310,
+          "height": 3142
+        },
+        ".topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 310,
+          "height": 56
+        },
+        ".side": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "#app>main": {
+          "x": 0,
+          "y": 56,
+          "width": 310,
+          "height": 3086
+        }
+      },
+      "elements": {
+        "screen": {
+          "x": 16,
+          "y": 92,
+          "width": 278,
+          "height": 2962
+        },
+        ".team-panel": null,
+        ".map-head": {
+          "x": 18,
+          "y": 94,
+          "width": 274,
+          "height": 109
+        },
+        ".team-slots": null,
+        ".slot.filled": null,
+        ".slot .name": null,
+        ".pc-filters": {
+          "x": 16,
+          "y": 675,
+          "width": 278,
+          "height": 40
+        },
+        ".pc-grid": null,
+        ".pc-cell": null,
+        ".dex-hero": {
+          "x": 16,
+          "y": 92,
+          "width": 278,
+          "height": 559
+        },
+        ".dex-hero-body": {
+          "x": 18,
+          "y": 203,
+          "width": 274,
+          "height": 446
+        },
+        ".dex-ring": {
+          "x": 91,
+          "y": 219,
+          "width": 128,
+          "height": 128
+        },
+        ".dex-grid": {
+          "x": 30,
+          "y": 834,
+          "width": 250,
+          "height": 1918
+        },
+        ".dex-cell": {
+          "x": 30,
+          "y": 834,
+          "width": 46.796875,
+          "height": 58
+        },
+        ".dex-cell .num": {
+          "x": 32,
+          "y": 873,
+          "width": 42.796875,
+          "height": 14
+        },
+        ".dex-cell .nm": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      }
+    }
+  },
+  "390": {
+    "team": {
+      "shell": {
+        "#app": {
+          "x": 0,
+          "y": 0,
+          "width": 380,
+          "height": 900
+        },
+        ".topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 380,
+          "height": 56
+        },
+        ".side": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "#app>main": {
+          "x": 0,
+          "y": 56,
+          "width": 380,
+          "height": 844
+        }
+      },
+      "elements": {
+        "screen": {
+          "x": 16,
+          "y": 92,
+          "width": 348,
+          "height": 690
+        },
+        ".team-panel": {
+          "x": 16,
+          "y": 92,
+          "width": 348,
+          "height": 496
+        },
+        ".map-head": {
+          "x": 18,
+          "y": 94,
+          "width": 344,
+          "height": 106
+        },
+        ".team-slots": {
+          "x": 18,
+          "y": 200,
+          "width": 344,
+          "height": 386
+        },
+        ".slot.filled": {
+          "x": 34,
+          "y": 216,
+          "width": 93.328125,
+          "height": 169
+        },
+        ".slot .name": {
+          "x": 50.28125,
+          "y": 316,
+          "width": 60.75,
+          "height": 15
+        },
+        ".pc-filters": {
+          "x": 16,
+          "y": 612,
+          "width": 348,
+          "height": 40
+        },
+        ".pc-grid": {
+          "x": 16,
+          "y": 662,
+          "width": 348,
+          "height": 120
+        },
+        ".pc-cell": {
+          "x": 26,
+          "y": 672,
+          "width": 62.390625,
+          "height": 62.390625
+        },
+        ".dex-hero": null,
+        ".dex-hero-body": null,
+        ".dex-ring": null,
+        ".dex-grid": null,
+        ".dex-cell": null,
+        ".dex-cell .num": null,
+        ".dex-cell .nm": null
+      }
+    },
+    "pokedex": {
+      "shell": {
+        "#app": {
+          "x": 0,
+          "y": 0,
+          "width": 380,
+          "height": 3088
+        },
+        ".topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 380,
+          "height": 56
+        },
+        ".side": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "#app>main": {
+          "x": 0,
+          "y": 56,
+          "width": 380,
+          "height": 3032
+        }
+      },
+      "elements": {
+        "screen": {
+          "x": 16,
+          "y": 92,
+          "width": 348,
+          "height": 2908
+        },
+        ".team-panel": null,
+        ".map-head": {
+          "x": 18,
+          "y": 94,
+          "width": 344,
+          "height": 82
+        },
+        ".team-slots": null,
+        ".slot.filled": null,
+        ".slot .name": null,
+        ".pc-filters": {
+          "x": 16,
+          "y": 648,
+          "width": 348,
+          "height": 40
+        },
+        ".pc-grid": null,
+        ".pc-cell": null,
+        ".dex-hero": {
+          "x": 16,
+          "y": 92,
+          "width": 348,
+          "height": 532
+        },
+        ".dex-hero-body": {
+          "x": 18,
+          "y": 176,
+          "width": 344,
+          "height": 446
+        },
+        ".dex-ring": {
+          "x": 126,
+          "y": 192,
+          "width": 128,
+          "height": 128
+        },
+        ".dex-grid": {
+          "x": 30,
+          "y": 780,
+          "width": 320,
+          "height": 1918
+        },
+        ".dex-cell": {
+          "x": 30,
+          "y": 780,
+          "width": 60.796875,
+          "height": 58
+        },
+        ".dex-cell .num": {
+          "x": 32,
+          "y": 819,
+          "width": 56.796875,
+          "height": 14
+        },
+        ".dex-cell .nm": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      }
+    }
+  },
+  "640": {
+    "team": {
+      "shell": {
+        "#app": {
+          "x": 0,
+          "y": 0,
+          "width": 630,
+          "height": 900
+        },
+        ".topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 630,
+          "height": 56
+        },
+        ".side": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "#app>main": {
+          "x": 0,
+          "y": 56,
+          "width": 630,
+          "height": 844
+        }
+      },
+      "elements": {
+        "screen": {
+          "x": 16,
+          "y": 92,
+          "width": 598,
+          "height": 669.40625
+        },
+        ".team-panel": {
+          "x": 16,
+          "y": 92,
+          "width": 598,
+          "height": 463
+        },
+        ".map-head": {
+          "x": 18,
+          "y": 94,
+          "width": 594,
+          "height": 106
+        },
+        ".team-slots": {
+          "x": 18,
+          "y": 200,
+          "width": 594,
+          "height": 353
+        },
+        ".slot.filled": {
+          "x": 34,
+          "y": 216,
+          "width": 176.65625,
+          "height": 152
+        },
+        ".slot .name": {
+          "x": 91.953125,
+          "y": 316,
+          "width": 60.75,
+          "height": 15
+        },
+        ".pc-filters": {
+          "x": 16,
+          "y": 579,
+          "width": 598,
+          "height": 40
+        },
+        ".pc-grid": {
+          "x": 16,
+          "y": 629,
+          "width": 598,
+          "height": 132.40625
+        },
+        ".pc-cell": {
+          "x": 26,
+          "y": 639,
+          "width": 112.390625,
+          "height": 112.390625
+        },
+        ".dex-hero": null,
+        ".dex-hero-body": null,
+        ".dex-ring": null,
+        ".dex-grid": null,
+        ".dex-cell": null,
+        ".dex-cell .num": null,
+        ".dex-cell .nm": null
+      }
+    },
+    "pokedex": {
+      "shell": {
+        "#app": {
+          "x": 0,
+          "y": 0,
+          "width": 630,
+          "height": 3006
+        },
+        ".topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 630,
+          "height": 56
+        },
+        ".side": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "#app>main": {
+          "x": 0,
+          "y": 56,
+          "width": 630,
+          "height": 2950
+        }
+      },
+      "elements": {
+        "screen": {
+          "x": 16,
+          "y": 92,
+          "width": 598,
+          "height": 2826
+        },
+        ".team-panel": null,
+        ".map-head": {
+          "x": 18,
+          "y": 94,
+          "width": 594,
+          "height": 52
+        },
+        ".team-slots": null,
+        ".slot.filled": null,
+        ".slot .name": null,
+        ".pc-filters": {
+          "x": 16,
+          "y": 566,
+          "width": 598,
+          "height": 40
+        },
+        ".pc-grid": null,
+        ".pc-cell": null,
+        ".dex-hero": {
+          "x": 16,
+          "y": 92,
+          "width": 598,
+          "height": 450
+        },
+        ".dex-hero-body": {
+          "x": 18,
+          "y": 146,
+          "width": 594,
+          "height": 394
+        },
+        ".dex-ring": {
+          "x": 251,
+          "y": 162,
+          "width": 128,
+          "height": 128
+        },
+        ".dex-grid": {
+          "x": 30,
+          "y": 698,
+          "width": 570,
+          "height": 1918
+        },
+        ".dex-cell": {
+          "x": 30,
+          "y": 698,
+          "width": 110.796875,
+          "height": 58
+        },
+        ".dex-cell .num": {
+          "x": 32,
+          "y": 737,
+          "width": 106.796875,
+          "height": 14
+        },
+        ".dex-cell .nm": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      }
+    }
+  },
+  "641": {
+    "team": {
+      "shell": {
+        "#app": {
+          "x": 0,
+          "y": 0,
+          "width": 631,
+          "height": 1110.671875
+        },
+        ".topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 631,
+          "height": 60
+        },
+        ".side": {
+          "x": 0,
+          "y": 60,
+          "width": 224,
+          "height": 840
+        },
+        "#app>main": {
+          "x": 0,
+          "y": 60,
+          "width": 631,
+          "height": 1050.671875
+        }
+      },
+      "elements": {
+        "screen": {
+          "x": 240,
+          "y": 72,
+          "width": 375,
+          "height": 1022.671875
+        },
+        ".team-panel": {
+          "x": 240,
+          "y": 72,
+          "width": 375,
+          "height": 644
+        },
+        ".map-head": {
+          "x": 242,
+          "y": 74,
+          "width": 371,
+          "height": 138
+        },
+        ".team-slots": {
+          "x": 242,
+          "y": 212,
+          "width": 371,
+          "height": 502
+        },
+        ".slot.filled": {
+          "x": 258,
+          "y": 228,
+          "width": 102.328125,
+          "height": 227
+        },
+        ".slot .name": {
+          "x": 265.765625,
+          "y": 376,
+          "width": 86.796875,
+          "height": 21
+        },
+        ".pc-filters": {
+          "x": 240,
+          "y": 740,
+          "width": 375,
+          "height": 88
+        },
+        ".pc-grid": {
+          "x": 240,
+          "y": 838,
+          "width": 375,
+          "height": 256.671875
+        },
+        ".pc-cell": {
+          "x": 254,
+          "y": 852,
+          "width": 110.328125,
+          "height": 110.328125
+        },
+        ".dex-hero": null,
+        ".dex-hero-body": null,
+        ".dex-ring": null,
+        ".dex-grid": null,
+        ".dex-cell": null,
+        ".dex-cell .num": null,
+        ".dex-cell .nm": null
+      }
+    },
+    "pokedex": {
+      "shell": {
+        "#app": {
+          "x": 0,
+          "y": 0,
+          "width": 631,
+          "height": 12578
+        },
+        ".topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 631,
+          "height": 60
+        },
+        ".side": {
+          "x": 0,
+          "y": 60,
+          "width": 224,
+          "height": 840
+        },
+        "#app>main": {
+          "x": 0,
+          "y": 60,
+          "width": 631,
+          "height": 12518
+        }
+      },
+      "elements": {
+        "screen": {
+          "x": 240,
+          "y": 72,
+          "width": 375,
+          "height": 12490
+        },
+        ".team-panel": null,
+        ".map-head": {
+          "x": 242,
+          "y": 74,
+          "width": 371,
+          "height": 82
+        },
+        ".team-slots": null,
+        ".slot.filled": null,
+        ".slot .name": null,
+        ".pc-filters": {
+          "x": 240,
+          "y": 536,
+          "width": 375,
+          "height": 88
+        },
+        ".pc-grid": null,
+        ".pc-cell": null,
+        ".dex-hero": {
+          "x": 240,
+          "y": 72,
+          "width": 375,
+          "height": 440
+        },
+        ".dex-hero-body": {
+          "x": 242,
+          "y": 156,
+          "width": 371,
+          "height": 354
+        },
+        ".dex-ring": {
+          "x": 258,
+          "y": 269,
+          "width": 128,
+          "height": 128
+        },
+        ".dex-grid": {
+          "x": 254,
+          "y": 716,
+          "width": 347,
+          "height": 11544
+        },
+        ".dex-cell": {
+          "x": 254,
+          "y": 716,
+          "width": 169.5,
+          "height": 144
+        },
+        ".dex-cell .num": {
+          "x": 260,
+          "y": 820,
+          "width": 157.5,
+          "height": 15
+        },
+        ".dex-cell .nm": {
+          "x": 260,
+          "y": 835,
+          "width": 157.5,
+          "height": 17
+        }
+      }
+    }
+  },
+  "800": {
+    "team": {
+      "shell": {
+        "#app": {
+          "x": 0,
+          "y": 0,
+          "width": 790,
+          "height": 900
+        },
+        ".topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 790,
+          "height": 60
+        },
+        ".side": {
+          "x": 0,
+          "y": 60,
+          "width": 224,
+          "height": 840
+        },
+        "#app>main": {
+          "x": 0,
+          "y": 60,
+          "width": 790,
+          "height": 840
+        }
+      },
+      "elements": {
+        "screen": {
+          "x": 240,
+          "y": 72,
+          "width": 534,
+          "height": 804.5
+        },
+        ".team-panel": {
+          "x": 240,
+          "y": 72,
+          "width": 534,
+          "height": 534
+        },
+        ".map-head": {
+          "x": 242,
+          "y": 74,
+          "width": 530,
+          "height": 62
+        },
+        ".team-slots": {
+          "x": 242,
+          "y": 136,
+          "width": 530,
+          "height": 468
+        },
+        ".slot.filled": {
+          "x": 258,
+          "y": 152,
+          "width": 155.328125,
+          "height": 210
+        },
+        ".slot .name": {
+          "x": 292.265625,
+          "y": 300,
+          "width": 86.796875,
+          "height": 21
+        },
+        ".pc-filters": {
+          "x": 240,
+          "y": 630,
+          "width": 534,
+          "height": 88
+        },
+        ".pc-grid": {
+          "x": 240,
+          "y": 728,
+          "width": 534,
+          "height": 148.5
+        },
+        ".pc-cell": {
+          "x": 254,
+          "y": 742,
+          "width": 120.5,
+          "height": 120.5
+        },
+        ".dex-hero": null,
+        ".dex-hero-body": null,
+        ".dex-ring": null,
+        ".dex-grid": null,
+        ".dex-cell": null,
+        ".dex-cell .num": null,
+        ".dex-cell .nm": null
+      }
+    },
+    "pokedex": {
+      "shell": {
+        "#app": {
+          "x": 0,
+          "y": 0,
+          "width": 790,
+          "height": 8696
+        },
+        ".topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 790,
+          "height": 60
+        },
+        ".side": {
+          "x": 0,
+          "y": 60,
+          "width": 224,
+          "height": 840
+        },
+        "#app>main": {
+          "x": 0,
+          "y": 60,
+          "width": 790,
+          "height": 8636
+        }
+      },
+      "elements": {
+        "screen": {
+          "x": 240,
+          "y": 72,
+          "width": 534,
+          "height": 8608
+        },
+        ".team-panel": null,
+        ".map-head": {
+          "x": 242,
+          "y": 74,
+          "width": 530,
+          "height": 52
+        },
+        ".team-slots": null,
+        ".slot.filled": null,
+        ".slot .name": null,
+        ".pc-filters": {
+          "x": 240,
+          "y": 454,
+          "width": 534,
+          "height": 88
+        },
+        ".pc-grid": null,
+        ".pc-cell": null,
+        ".dex-hero": {
+          "x": 240,
+          "y": 72,
+          "width": 534,
+          "height": 358
+        },
+        ".dex-hero-body": {
+          "x": 242,
+          "y": 126,
+          "width": 530,
+          "height": 302
+        },
+        ".dex-ring": {
+          "x": 258,
+          "y": 213,
+          "width": 128,
+          "height": 128
+        },
+        ".dex-grid": {
+          "x": 254,
+          "y": 634,
+          "width": 506,
+          "height": 7744
+        },
+        ".dex-cell": {
+          "x": 254,
+          "y": 634,
+          "width": 163.328125,
+          "height": 144
+        },
+        ".dex-cell .num": {
+          "x": 260,
+          "y": 738,
+          "width": 151.328125,
+          "height": 15
+        },
+        ".dex-cell .nm": {
+          "x": 260,
+          "y": 753,
+          "width": 151.328125,
+          "height": 17
+        }
+      }
+    }
+  },
+  "1000": {
+    "team": {
+      "shell": {
+        "#app": {
+          "x": 0,
+          "y": 0,
+          "width": 990,
+          "height": 900
+        },
+        ".topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 990,
+          "height": 60
+        },
+        ".side": {
+          "x": 0,
+          "y": 60,
+          "width": 224,
+          "height": 840
+        },
+        "#app>main": {
+          "x": 0,
+          "y": 60,
+          "width": 990,
+          "height": 840
+        }
+      },
+      "elements": {
+        "screen": {
+          "x": 240,
+          "y": 72,
+          "width": 734,
+          "height": 747
+        },
+        ".team-panel": {
+          "x": 240,
+          "y": 72,
+          "width": 734,
+          "height": 534
+        },
+        ".map-head": {
+          "x": 242,
+          "y": 74,
+          "width": 730,
+          "height": 62
+        },
+        ".team-slots": {
+          "x": 242,
+          "y": 136,
+          "width": 730,
+          "height": 468
+        },
+        ".slot.filled": {
+          "x": 258,
+          "y": 152,
+          "width": 222,
+          "height": 210
+        },
+        ".slot .name": {
+          "x": 325.59375,
+          "y": 300,
+          "width": 86.796875,
+          "height": 21
+        },
+        ".pc-filters": {
+          "x": 240,
+          "y": 630,
+          "width": 734,
+          "height": 40
+        },
+        ".pc-grid": {
+          "x": 240,
+          "y": 680,
+          "width": 734,
+          "height": 139
+        },
+        ".pc-cell": {
+          "x": 254,
+          "y": 694,
+          "width": 111,
+          "height": 111
+        },
+        ".dex-hero": null,
+        ".dex-hero-body": null,
+        ".dex-ring": null,
+        ".dex-grid": null,
+        ".dex-cell": null,
+        ".dex-cell .num": null,
+        ".dex-cell .nm": null
+      }
+    },
+    "pokedex": {
+      "shell": {
+        "#app": {
+          "x": 0,
+          "y": 0,
+          "width": 990,
+          "height": 5556
+        },
+        ".topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 990,
+          "height": 60
+        },
+        ".side": {
+          "x": 0,
+          "y": 60,
+          "width": 224,
+          "height": 840
+        },
+        "#app>main": {
+          "x": 0,
+          "y": 60,
+          "width": 990,
+          "height": 5496
+        }
+      },
+      "elements": {
+        "screen": {
+          "x": 240,
+          "y": 72,
+          "width": 734,
+          "height": 5468
+        },
+        ".team-panel": null,
+        ".map-head": {
+          "x": 242,
+          "y": 74,
+          "width": 730,
+          "height": 52
+        },
+        ".team-slots": null,
+        ".slot.filled": null,
+        ".slot .name": null,
+        ".pc-filters": {
+          "x": 240,
+          "y": 402,
+          "width": 734,
+          "height": 40
+        },
+        ".pc-grid": null,
+        ".pc-cell": null,
+        ".dex-hero": {
+          "x": 240,
+          "y": 72,
+          "width": 734,
+          "height": 306
+        },
+        ".dex-hero-body": {
+          "x": 242,
+          "y": 126,
+          "width": 730,
+          "height": 250
+        },
+        ".dex-ring": {
+          "x": 258,
+          "y": 187,
+          "width": 128,
+          "height": 128
+        },
+        ".dex-grid": {
+          "x": 254,
+          "y": 534,
+          "width": 706,
+          "height": 4704
+        },
+        ".dex-cell": {
+          "x": 254,
+          "y": 534,
+          "width": 134.796875,
+          "height": 144
+        },
+        ".dex-cell .num": {
+          "x": 260,
+          "y": 638,
+          "width": 122.796875,
+          "height": 15
+        },
+        ".dex-cell .nm": {
+          "x": 260,
+          "y": 653,
+          "width": 122.796875,
+          "height": 17
+        }
+      }
+    }
+  },
+  "1100": {
+    "team": {
+      "shell": {
+        "#app": {
+          "x": 0,
+          "y": 0,
+          "width": 1090,
+          "height": 900
+        },
+        ".topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 1090,
+          "height": 60
+        },
+        ".side": {
+          "x": 0,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        "#app>main": {
+          "x": 0,
+          "y": 60,
+          "width": 1090,
+          "height": 840
+        }
+      },
+      "elements": {
+        "screen": {
+          "x": 280,
+          "y": 72,
+          "width": 794,
+          "height": 757
+        },
+        ".team-panel": {
+          "x": 280,
+          "y": 72,
+          "width": 794,
+          "height": 534
+        },
+        ".map-head": {
+          "x": 282,
+          "y": 74,
+          "width": 790,
+          "height": 62
+        },
+        ".team-slots": {
+          "x": 282,
+          "y": 136,
+          "width": 790,
+          "height": 468
+        },
+        ".slot.filled": {
+          "x": 298,
+          "y": 152,
+          "width": 242,
+          "height": 210
+        },
+        ".slot .name": {
+          "x": 375.59375,
+          "y": 300,
+          "width": 86.796875,
+          "height": 21
+        },
+        ".pc-filters": {
+          "x": 280,
+          "y": 630,
+          "width": 794,
+          "height": 40
+        },
+        ".pc-grid": {
+          "x": 280,
+          "y": 680,
+          "width": 794,
+          "height": 149
+        },
+        ".pc-cell": {
+          "x": 294,
+          "y": 694,
+          "width": 121,
+          "height": 121
+        },
+        ".dex-hero": null,
+        ".dex-hero-body": null,
+        ".dex-ring": null,
+        ".dex-grid": null,
+        ".dex-cell": null,
+        ".dex-cell .num": null,
+        ".dex-cell .nm": null
+      }
+    },
+    "pokedex": {
+      "shell": {
+        "#app": {
+          "x": 0,
+          "y": 0,
+          "width": 1090,
+          "height": 5529
+        },
+        ".topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 1090,
+          "height": 60
+        },
+        ".side": {
+          "x": 0,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        "#app>main": {
+          "x": 0,
+          "y": 60,
+          "width": 1090,
+          "height": 5469
+        }
+      },
+      "elements": {
+        "screen": {
+          "x": 280,
+          "y": 72,
+          "width": 794,
+          "height": 5441
+        },
+        ".team-panel": null,
+        ".map-head": {
+          "x": 282,
+          "y": 74,
+          "width": 790,
+          "height": 52
+        },
+        ".team-slots": null,
+        ".slot.filled": null,
+        ".slot .name": null,
+        ".pc-filters": {
+          "x": 280,
+          "y": 375,
+          "width": 794,
+          "height": 40
+        },
+        ".pc-grid": null,
+        ".pc-cell": null,
+        ".dex-hero": {
+          "x": 280,
+          "y": 72,
+          "width": 794,
+          "height": 279
+        },
+        ".dex-hero-body": {
+          "x": 282,
+          "y": 126,
+          "width": 790,
+          "height": 223
+        },
+        ".dex-ring": {
+          "x": 298,
+          "y": 173.5,
+          "width": 128,
+          "height": 128
+        },
+        ".dex-grid": {
+          "x": 294,
+          "y": 507,
+          "width": 766,
+          "height": 4704
+        },
+        ".dex-cell": {
+          "x": 294,
+          "y": 507,
+          "width": 146.796875,
+          "height": 144
+        },
+        ".dex-cell .num": {
+          "x": 300,
+          "y": 611,
+          "width": 134.796875,
+          "height": 15
+        },
+        ".dex-cell .nm": {
+          "x": 300,
+          "y": 626,
+          "width": 134.796875,
+          "height": 17
+        }
+      }
+    }
+  },
+  "1440": {
+    "team": {
+      "shell": {
+        "#app": {
+          "x": 0,
+          "y": 0,
+          "width": 1430,
+          "height": 900
+        },
+        ".topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 1430,
+          "height": 60
+        },
+        ".side": {
+          "x": 0,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        "#app>main": {
+          "x": 0,
+          "y": 60,
+          "width": 1430,
+          "height": 840
+        }
+      },
+      "elements": {
+        "screen": {
+          "x": 280,
+          "y": 72,
+          "width": 1134,
+          "height": 525.78125
+        },
+        ".team-panel": {
+          "x": 280,
+          "y": 72,
+          "width": 1134,
+          "height": 308
+        },
+        ".map-head": {
+          "x": 282,
+          "y": 74,
+          "width": 1130,
+          "height": 62
+        },
+        ".team-slots": {
+          "x": 282,
+          "y": 136,
+          "width": 1130,
+          "height": 242
+        },
+        ".slot.filled": {
+          "x": 298,
+          "y": 152,
+          "width": 169.65625,
+          "height": 210
+        },
+        ".slot .name": {
+          "x": 339.421875,
+          "y": 300,
+          "width": 86.796875,
+          "height": 21
+        },
+        ".pc-filters": {
+          "x": 280,
+          "y": 404,
+          "width": 1134,
+          "height": 40
+        },
+        ".pc-grid": {
+          "x": 280,
+          "y": 454,
+          "width": 1134,
+          "height": 143.78125
+        },
+        ".pc-cell": {
+          "x": 294,
+          "y": 468,
+          "width": 115.765625,
+          "height": 115.765625
+        },
+        ".dex-hero": null,
+        ".dex-hero-body": null,
+        ".dex-ring": null,
+        ".dex-grid": null,
+        ".dex-cell": null,
+        ".dex-cell .num": null,
+        ".dex-cell .nm": null
+      }
+    },
+    "pokedex": {
+      "shell": {
+        "#app": {
+          "x": 0,
+          "y": 0,
+          "width": 1430,
+          "height": 3705
+        },
+        ".topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 1430,
+          "height": 60
+        },
+        ".side": {
+          "x": 0,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        "#app>main": {
+          "x": 0,
+          "y": 60,
+          "width": 1430,
+          "height": 3645
+        }
+      },
+      "elements": {
+        "screen": {
+          "x": 280,
+          "y": 72,
+          "width": 1134,
+          "height": 3617
+        },
+        ".team-panel": null,
+        ".map-head": {
+          "x": 282,
+          "y": 74,
+          "width": 1130,
+          "height": 52
+        },
+        ".team-slots": null,
+        ".slot.filled": null,
+        ".slot .name": null,
+        ".pc-filters": {
+          "x": 280,
+          "y": 375,
+          "width": 1134,
+          "height": 40
+        },
+        ".pc-grid": null,
+        ".pc-cell": null,
+        ".dex-hero": {
+          "x": 280,
+          "y": 72,
+          "width": 1134,
+          "height": 279
+        },
+        ".dex-hero-body": {
+          "x": 282,
+          "y": 126,
+          "width": 1130,
+          "height": 223
+        },
+        ".dex-ring": {
+          "x": 298,
+          "y": 173.5,
+          "width": 128,
+          "height": 128
+        },
+        ".dex-grid": {
+          "x": 294,
+          "y": 507,
+          "width": 1106,
+          "height": 2880
+        },
+        ".dex-cell": {
+          "x": 294,
+          "y": 507,
+          "width": 131.25,
+          "height": 144
+        },
+        ".dex-cell .num": {
+          "x": 300,
+          "y": 611,
+          "width": 119.25,
+          "height": 15
+        },
+        ".dex-cell .nm": {
+          "x": 300,
+          "y": 626,
+          "width": 119.25,
+          "height": 17
+        }
+      }
+    }
+  },
+  "1920": {
+    "team": {
+      "shell": {
+        "#app": {
+          "x": 25,
+          "y": 0,
+          "width": 1860,
+          "height": 900
+        },
+        ".topbar": {
+          "x": 25,
+          "y": 0,
+          "width": 1860,
+          "height": 60
+        },
+        ".side": {
+          "x": 25,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        "#app>main": {
+          "x": 25,
+          "y": 60,
+          "width": 1860,
+          "height": 840
+        }
+      },
+      "elements": {
+        "screen": {
+          "x": 305,
+          "y": 72,
+          "width": 1564,
+          "height": 520.765625
+        },
+        ".team-panel": {
+          "x": 305,
+          "y": 72,
+          "width": 1564,
+          "height": 308
+        },
+        ".map-head": {
+          "x": 307,
+          "y": 74,
+          "width": 1560,
+          "height": 62
+        },
+        ".team-slots": {
+          "x": 307,
+          "y": 136,
+          "width": 1560,
+          "height": 242
+        },
+        ".slot.filled": {
+          "x": 323,
+          "y": 152,
+          "width": 241.328125,
+          "height": 210
+        },
+        ".slot .name": {
+          "x": 400.265625,
+          "y": 300,
+          "width": 86.796875,
+          "height": 21
+        },
+        ".pc-filters": {
+          "x": 305,
+          "y": 404,
+          "width": 1564,
+          "height": 40
+        },
+        ".pc-grid": {
+          "x": 305,
+          "y": 454,
+          "width": 1564,
+          "height": 138.765625
+        },
+        ".pc-cell": {
+          "x": 319,
+          "y": 468,
+          "width": 110.765625,
+          "height": 110.765625
+        },
+        ".dex-hero": null,
+        ".dex-hero-body": null,
+        ".dex-ring": null,
+        ".dex-grid": null,
+        ".dex-cell": null,
+        ".dex-cell .num": null,
+        ".dex-cell .nm": null
+      }
+    },
+    "pokedex": {
+      "shell": {
+        "#app": {
+          "x": 25,
+          "y": 0,
+          "width": 1860,
+          "height": 2945
+        },
+        ".topbar": {
+          "x": 25,
+          "y": 0,
+          "width": 1860,
+          "height": 60
+        },
+        ".side": {
+          "x": 25,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        "#app>main": {
+          "x": 25,
+          "y": 60,
+          "width": 1860,
+          "height": 2885
+        }
+      },
+      "elements": {
+        "screen": {
+          "x": 305,
+          "y": 72,
+          "width": 1564,
+          "height": 2857
+        },
+        ".team-panel": null,
+        ".map-head": {
+          "x": 307,
+          "y": 74,
+          "width": 1560,
+          "height": 52
+        },
+        ".team-slots": null,
+        ".slot.filled": null,
+        ".slot .name": null,
+        ".pc-filters": {
+          "x": 305,
+          "y": 375,
+          "width": 1564,
+          "height": 40
+        },
+        ".pc-grid": null,
+        ".pc-cell": null,
+        ".dex-hero": {
+          "x": 305,
+          "y": 72,
+          "width": 1564,
+          "height": 279
+        },
+        ".dex-hero-body": {
+          "x": 307,
+          "y": 126,
+          "width": 1560,
+          "height": 223
+        },
+        ".dex-ring": {
+          "x": 323,
+          "y": 173.5,
+          "width": 128,
+          "height": 128
+        },
+        ".dex-grid": {
+          "x": 319,
+          "y": 507,
+          "width": 1536,
+          "height": 2120
+        },
+        ".dex-cell": {
+          "x": 319,
+          "y": 507,
+          "width": 132.359375,
+          "height": 144
+        },
+        ".dex-cell .num": {
+          "x": 325,
+          "y": 611,
+          "width": 120.359375,
+          "height": 15
+        },
+        ".dex-cell .nm": {
+          "x": 325,
+          "y": 626,
+          "width": 120.359375,
+          "height": 17
+        }
+      }
+    }
+  },
+  "2560": {
+    "team": {
+      "shell": {
+        "#app": {
+          "x": 345,
+          "y": 0,
+          "width": 1860,
+          "height": 900
+        },
+        ".topbar": {
+          "x": 345,
+          "y": 0,
+          "width": 1860,
+          "height": 60
+        },
+        ".side": {
+          "x": 345,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        "#app>main": {
+          "x": 345,
+          "y": 60,
+          "width": 1860,
+          "height": 840
+        }
+      },
+      "elements": {
+        "screen": {
+          "x": 625,
+          "y": 72,
+          "width": 1564,
+          "height": 520.765625
+        },
+        ".team-panel": {
+          "x": 625,
+          "y": 72,
+          "width": 1564,
+          "height": 308
+        },
+        ".map-head": {
+          "x": 627,
+          "y": 74,
+          "width": 1560,
+          "height": 62
+        },
+        ".team-slots": {
+          "x": 627,
+          "y": 136,
+          "width": 1560,
+          "height": 242
+        },
+        ".slot.filled": {
+          "x": 643,
+          "y": 152,
+          "width": 241.328125,
+          "height": 210
+        },
+        ".slot .name": {
+          "x": 720.265625,
+          "y": 300,
+          "width": 86.796875,
+          "height": 21
+        },
+        ".pc-filters": {
+          "x": 625,
+          "y": 404,
+          "width": 1564,
+          "height": 40
+        },
+        ".pc-grid": {
+          "x": 625,
+          "y": 454,
+          "width": 1564,
+          "height": 138.765625
+        },
+        ".pc-cell": {
+          "x": 639,
+          "y": 468,
+          "width": 110.765625,
+          "height": 110.765625
+        },
+        ".dex-hero": null,
+        ".dex-hero-body": null,
+        ".dex-ring": null,
+        ".dex-grid": null,
+        ".dex-cell": null,
+        ".dex-cell .num": null,
+        ".dex-cell .nm": null
+      }
+    },
+    "pokedex": {
+      "shell": {
+        "#app": {
+          "x": 345,
+          "y": 0,
+          "width": 1860,
+          "height": 2945
+        },
+        ".topbar": {
+          "x": 345,
+          "y": 0,
+          "width": 1860,
+          "height": 60
+        },
+        ".side": {
+          "x": 345,
+          "y": 60,
+          "width": 264,
+          "height": 840
+        },
+        "#app>main": {
+          "x": 345,
+          "y": 60,
+          "width": 1860,
+          "height": 2885
+        }
+      },
+      "elements": {
+        "screen": {
+          "x": 625,
+          "y": 72,
+          "width": 1564,
+          "height": 2857
+        },
+        ".team-panel": null,
+        ".map-head": {
+          "x": 627,
+          "y": 74,
+          "width": 1560,
+          "height": 52
+        },
+        ".team-slots": null,
+        ".slot.filled": null,
+        ".slot .name": null,
+        ".pc-filters": {
+          "x": 625,
+          "y": 375,
+          "width": 1564,
+          "height": 40
+        },
+        ".pc-grid": null,
+        ".pc-cell": null,
+        ".dex-hero": {
+          "x": 625,
+          "y": 72,
+          "width": 1564,
+          "height": 279
+        },
+        ".dex-hero-body": {
+          "x": 627,
+          "y": 126,
+          "width": 1560,
+          "height": 223
+        },
+        ".dex-ring": {
+          "x": 643,
+          "y": 173.5,
+          "width": 128,
+          "height": 128
+        },
+        ".dex-grid": {
+          "x": 639,
+          "y": 507,
+          "width": 1536,
+          "height": 2120
+        },
+        ".dex-cell": {
+          "x": 639,
+          "y": 507,
+          "width": 132.359375,
+          "height": 144
+        },
+        ".dex-cell .num": {
+          "x": 645,
+          "y": 611,
+          "width": 120.359375,
+          "height": 15
+        },
+        ".dex-cell .nm": {
+          "x": 645,
+          "y": 626,
+          "width": 120.359375,
+          "height": 17
+        }
+      }
+    }
+  }
+}

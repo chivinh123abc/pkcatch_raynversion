@@ -1,5 +1,7 @@
 # Kế hoạch làm lại toàn bộ Poké’Catch
 
+> AI vào sau: bắt đầu từ [trạng thái bàn giao](AI_HANDOFF.md) và [rule làm việc](../AGENTS.md). Các cập nhật theo ngày bên dưới là lịch sử triển khai; trạng thái hiện tại và kiểm tra theo phạm vi nằm trong handoff.
+
 Ngày lập: **14/11/2026**. Trạng thái: **kế hoạch triển khai, chưa phải danh sách đã hoàn thành**.
 
 **Cập nhật R00 — 14/11/2026:** Đã chốt baseline bản live v0.4.103 / BUILD `5598c5890a`, lưu ảnh/DOM/hash và ma trận đối chiếu. Xem [phiên bản chuẩn](reference-version.md) và [checklist R00](REFERENCE_CHECKLIST.md). Bước tiếp theo là R01.1: làm lại Progress/Adventure theo màn riêng. Các tính năng khóa, online sau đăng nhập và timing toàn bộ FX chưa được nghiệm thu.
@@ -9,6 +11,14 @@ Ngày lập: **14/11/2026**. Trạng thái: **kế hoạch triển khai, chưa p
 **Cập nhật R01.3–R01.5 — 15/11/2026:** Đã căn Team/PC và Pokédex theo CSS live, có preset/PC order lưu thật, NEW đã xem, thẻ chi tiết dùng dữ liệu UID hiện tại; sửa modal/focus/toast và card 320px. Xem [báo cáo cùng giới hạn](R01_COLLECTIONS_OVERLAYS.md). Kiểm tra 16 test store và 19 test browser đạt; dữ liệu vẫn Kanto 151. Bước tiếp theo R02, không coi dữ liệu chương và các hệ thống chưa tích hợp là hoàn thành.
 
 **Cập nhật R02 — 15/11/2026:** Đã tách runtime theo encounter, các hệ thống battle/capture/reward/node và adapter FX. Có phase, clock/RNG inject, hủy timer/callback cũ, ledger chống thưởng lặp và speed snapshot. Xem [báo cáo R02](R02_RUNTIME.md) và kết quả kiểm tra trong nhật ký dự án. Bước tiếp theo R03: hoàn chỉnh vòng Chương 1; công thức và dữ liệu chưa được coi là đã đúng toàn bộ.
+
+**Cập nhật R03 — 15/11/2026:** Đã nối vòng save mới → chọn starter → wild/trainer/item/Center → Brock → Boulder Badge → Chương 2; bổ sung checkpoint chống nhận EXP/thưởng lặp khi refresh. Core48/48, browser toàn bộ30/30; sau chỉnh cuối chạy lại2/2 ca contact/capture. Có video native x1/x2/x3 và đo ba move mẫu so với bundle chuẩn (lệch tối đa3ms trong lần đo). Xem [R03 và các giới hạn](R03_CHAPTER_1.md); chưa coi generator route, battle đôi, tiến hóa hay toàn bộ move/FX là đã nghiệm thu. Tiếp theo R04 — adapter và validator dữ liệu chapter.
+
+**Cập nhật R03.1 — 15/11/2026:** Theo ưu tiên giao diện, đã đối chiếu và căn hai panel chiến đấu trước R04: rail HP/EXP/status, sprite, Consumables/Bag và Found here theo pool Chương 1. Desktop khớp số đo khung/slot; mobile fit 390px/320px nhưng shell/gutter còn sai khác ghi rõ trong [báo cáo R03.1](R03_1_BATTLE_PANELS.md). Core48/48, browser33/33, sau căn cuối chạy lại7/7 panel, build đạt. Bag dùng vật phẩm đầy đủ vẫn ở R06. Tiếp theo R04.
+
+**R04.2 — cập nhật 16/11/2026:** 14 template Kanto đã nối generator/runtime và selector chung; strict audit đạt 0 vấn đề. Có gift/fossil/static/unlock, đội Gym đã scale, League và save theo seed. Xem [R04.2 và giới hạn](R04_2_KANTO_RUNTIME.md). Đã bổ sung [màn mở đầu và starter](ONBOARDING_PARITY.md), cùng [hướng dẫn học từ đầu](HOC_LAM_GAME_TU_DAU.md). Chưa coi mọi NPC, weather tự động hoặc cơ chế tiến hóa/Shop là hoàn chỉnh.
+
+**Bổ sung hình ảnh R03.1 — 15/11/2026:** Đã thay art PNG phóng lớn bằng GIF Showdown gen5ani local từ nguồn người dùng; tổ chức lại resources/public và xóa bộ ani cũ. Sửa scale icon rail ở sân nhỏ, crop sprite trên sân và geometry desktop trung bình. Xem [cấu trúc sprite và bằng chứng](SPRITE_ASSETS.md). Core/asset55/55; browser33 ca cũ và4 ca GIF đạt; build đạt. Không coi R04 hoặc mọi sai khác mobile đã hoàn tất.
 
 ## 1. Mục tiêu và cách thực hiện
 
@@ -197,7 +207,8 @@ Các lệnh hiện có để kiểm tra khi triển khai: `npm test`, `npm run t
 | R01 | Chốt shell, Arena, modal/toast, responsive | R00 | Bộ ảnh đối chiếu và CSS token |
 | R02 | Tách battle/capture/reward runtime khỏi UI | R01 | Hệ thống phase, clock/RNG, giữ kiểm tra cũ |
 | R03 | Hoàn chỉnh Chương 1 từ starter đến Brock | R02 | Vòng chơi end-to-end và video x1/x2/x3 |
-| R04 | Chuẩn hóa dữ liệu, toàn bộ chapter thuộc phạm vi | R03 | Validator + chapter/encounter/reward riêng |
+| R03.1 | Đối chiếu và hoàn thiện hai panel chiến đấu | R03 | Rail/Consumables/Found here, ảnh desktop/mobile và giới hạn có bằng chứng |
+| R04 | Chuẩn hóa dữ liệu, toàn bộ chapter thuộc phạm vi | R03, R03.1 | Validator + chapter/encounter/reward riêng |
 | R05 | Team/PC, EXP gia đình, tiến hóa, Pokédex | R03, adapter R04 | Quản lý và tiến triển Pokémon hoàn chỉnh |
 | R06 | Shop/Bag, berry, Settings, save migration | R03 | Giao dịch/vật phẩm/save có kiểm tra |
 | R07 | Achievements và Day Care | R05, R06 | Hai vòng chức năng bền vững |
@@ -211,6 +222,12 @@ Không cần đợi cuối dự án mới chỉnh UI hoặc FX: mỗi R03–R09 
 **Bước đầu khi bắt đầu triển khai:** thực hiện R00, rồi R01. Kế hoạch này chưa tự khởi động việc viết lại code, chạy server hoặc đổi save.
 
 ## Tài liệu liên quan
+
+- [Cập nhật chiêu/FX live v0.5.02](LIVE_MOVE_UPDATE.md):661 chiêu,160 entry mới,116 chiêu mới gây damage; đồng bộ learnset151 loài. Kiểm tra thay đổi nhanh bằng `npm run reference:check`; không tự đánh dấu các hệ thống vùng/raid/trade mới đã hoàn tất.
+
+- [Sửa nhịp chiến đấu sau phản hồi đánh quá nhanh](BATTLE_CADENCE_REVIEW.md): đã bổ sung recovery và325/pace sau từng actor; so số đo native/clone ở cả ba nút.
+
+- [Rà panel, tốc độ và trainer —16/11/2026](R03_1_TRAINER_SPEED_REVIEW.md): ×3 native là nhịp2,5; chuỗi intro/send-out khóa combat tới khi hiển thị xong. Dữ liệu chapter đã nối ở [R04.2](R04_2_KANTO_RUNTIME.md).
 
 - [Kiểm tra khoảng thiếu hệ thống](CLONE_PARITY_AUDIT.md) — báo cáo lịch sử, phải đối soát với mã mới.
 - [Các đợt căn giao diện đã làm](VISUAL_ALIGNMENT.md).

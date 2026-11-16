@@ -1,0 +1,59 @@
+/* R03.1 React adapters. Keep generated reference rules in battle-panels-reference.css. */
+.game-shell .battle-stage { --mon-lines:repeating-linear-gradient(0deg,#00000024 0 1px,transparent 1px 3px); --ink:#1b1b22; }
+.game-shell .battle-stage .battle-team-rail { top:10px; bottom:10px; left:8px; width:var(--tile); gap:5px; padding-top:var(--rail-top-gap,38px); justify-content:flex-start; pointer-events:none; z-index:20; }
+.game-shell .battle-stage .rail-entry { position:relative; flex:none; width:var(--tile); height:var(--tile); }
+.game-shell .battle-stage .tr-row { font-family:var(--font); border-radius:7px 7px 7px 16px; }
+.game-shell .battle-stage .tr-row .sprbox { position:relative; display:flex; align-items:center; justify-content:center; width:100%; overflow:hidden; }
+.game-shell .battle-stage .tr-row .sprbox img { flex:none; max-width:none; max-height:none; object-fit:fill; image-rendering:pixelated; }
+.game-shell .battle-stage .tr-row:not(.ko) .sprbox img { transform-origin:50% 80%; animation:pen-idle 2.4s ease-in-out infinite; }
+.game-shell .battle-stage .rail-entry:nth-child(2n) .tr-row:not(.ko) .sprbox img { animation-delay:-.8s; }
+.game-shell .battle-stage .rail-entry:nth-child(3n) .tr-row:not(.ko) .sprbox img { animation-delay:-1.6s; }
+.game-shell .battle-stage .tr-hp i,.game-shell .battle-stage .tr-xp i { display:block; height:100%; transition:width .18s ease; }
+.game-shell .battle-stage .tr-xp i { background:linear-gradient(90deg,#2fae4f,#7fd63a 60%,#c8ec3c); }
+.game-shell .battle-stage .tr-row:focus-visible { outline:2px solid #ffcb05; outline-offset:2px; }
+.game-shell .battle-stage .rail-shiny { position:absolute; right:3px; top:1px; color:#ffdf55; font:14px/1 var(--font); text-shadow:0 0 4px #ad7315; }
+.game-shell .battle-panels { --ink:#1b1b22; --text-2:#9aa3bb; --line-hover:#596683; --r-md:14px; --mon-lines:repeating-linear-gradient(0deg,#00000024 0 1px,transparent 1px 3px); min-width:0; display:flex; flex-direction:column; gap:12px; font:500 20px var(--font); }
+.game-shell .battle-panels .panel-group { min-width:0; }
+.game-shell .battle-panels .zone-box { padding:12px 16px; border-radius:14px; }
+.game-shell .battle-panels .zone-head { flex-wrap:nowrap; }
+.game-shell .battle-panels .panel-fold-title { flex:none; border:0; background:none; padding:0; text-align:left; color:var(--text); font:400 24px/1 var(--font-title); }
+.game-shell .battle-panels .panel-fold-title > b { font:inherit; }
+.game-shell .battle-panels .panel-fold { flex:none; min-width:10px; border:0; background:none; padding:0; color:var(--muted); font:14px/1 var(--font); }
+.game-shell .battle-panels .bag-open { position:relative; isolation:isolate; margin-left:auto; min-height:40px; height:40px; border:0; outline:0; border-radius:8px; background:var(--panel); box-shadow:none; }
+.game-shell .battle-panels .bag-open:focus-visible { outline:2px solid var(--yellow); outline-offset:2px; }
+.game-shell .battle-panels .info-tip { flex:none; }
+.game-shell .battle-panels .info-tip .info-tip-box { width:280px; max-width:calc(100vw - 24px); z-index:100; background:var(--panel); border:2px solid var(--line); border-radius:10px; }
+.game-shell .battle-panels .zone-head .muted,.game-shell .battle-panels .found-area-select { min-width:0; flex:1; font:500 14px/1.2 var(--font); }
+.game-shell .battle-panels .found-area-select { width:0; background:transparent; color:var(--muted); text-overflow:ellipsis; }
+.game-shell .battle-panels .found-area-select option { background:var(--panel); color:var(--text); }
+.game-shell .battle-panels .bag-grid { grid-template-columns:repeat(auto-fill,minmax(44px,1fr)); gap:6px; }
+.game-shell .battle-panels .bag-cell { width:auto; min-width:0; }
+.game-shell .battle-panels .bag-none { margin:0; color:var(--muted); font-size:18px; }
+.game-shell .battle-panels .zone-grid { display:grid; grid-template-columns:repeat(auto-fill,52px); gap:4px; }
+.game-shell .battle-panels .zone-cell { position:relative; width:52px; height:52px; min-width:0; padding:0; gap:0; overflow:hidden; border-radius:7px 7px 7px 16px; font:inherit; }
+.game-shell .battle-panels .zone-cell .sprbox { flex:none; max-width:none; width:100%; display:flex; align-items:center; justify-content:center; }
+.game-shell .battle-panels .zone-cell .sprbox img { flex:none; max-width:none; max-height:none; object-fit:fill; }
+.game-shell .battle-panels .zone-pct { position:absolute; top:auto; left:2px; bottom:2px; margin:0; padding:1px 4px; border-radius:999px; background:#0009; color:#fff; font:700 14px/14px var(--font); text-shadow:none; }
+.game-shell .battle-panels .zone-cell:focus-visible,.game-shell .battle-panels .bag-cell:focus-visible,.game-shell .battle-panels .panel-fold-title:focus-visible,.game-shell .battle-panels .panel-fold:focus-visible { outline:2px solid #ffcb05; outline-offset:2px; }
+.game-shell .battle-panels [hidden] { display:none!important; }
+.game-shell .inventory-dialog { display:block; width:min(560px,calc(100vw - 32px)); padding:0; max-height:calc(100dvh - 32px); overflow:auto; background:var(--panel); border:2px solid var(--line); border-radius:14px; }
+.game-shell .inventory-dialog > header { display:flex; align-items:center; gap:12px; padding:16px 20px; border-bottom:2px solid var(--line); }
+.game-shell .inventory-dialog h2 { margin:0; font:700 28px/1 var(--font-title); }
+.game-shell .inventory-dialog header > span { margin-left:auto; color:var(--muted); font-size:16px; }
+.game-shell .inventory-dialog .dc-x { flex:none; }
+.game-shell .inventory-body { padding:20px; }
+.game-shell .inventory-dialog .bag-grid { grid-template-columns:repeat(auto-fill,minmax(100px,1fr)); gap:10px; }
+.game-shell .inventory-dialog .inventory-cell { height:92px; padding:8px 4px 24px; }
+.game-shell .inventory-dialog .inventory-cell img { width:32px; height:32px; }
+.game-shell .inventory-dialog .inventory-name { position:absolute; bottom:6px; left:4px; right:4px; text-align:center; font:16px/1 var(--font); }
+.game-shell .inventory-dialog .bag-qty { top:4px; bottom:auto; }
+@media(min-width:641px) {
+  .game-shell .adventure-view > aside.battle-panels { height:calc(100dvh - 88px); }
+  .game-shell .battle-panels > .panel-group { flex:none; }
+  .game-shell .battle-panels > .found-panel:not(.folded) { flex:1; min-height:0; }
+  .game-shell .battle-panels > .found-panel:not(.folded) > .zone-box { height:100%; }
+  .game-shell .battle-panels .zone-scroll { min-height:0; overflow:auto; scrollbar-width:thin; }
+}
+@media(max-width:640px) { .game-shell .battle-stage { aspect-ratio:1; } .game-shell .adventure-view > aside.battle-panels { width:100%; gap:12px; align-self:stretch; } }
+@media(max-width:640px) { .game-shell .battle-stage .battle-team-rail { gap:3px; } }
+@media(prefers-reduced-motion:reduce) { .game-shell .battle-stage .tr-row .sprbox img { animation:none!important; } }

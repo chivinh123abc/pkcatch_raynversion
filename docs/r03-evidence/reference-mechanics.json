@@ -1,0 +1,3876 @@
+{
+  "source": "archived live v0.4.103 / BUILD5598c5890a",
+  "chapter": {
+    "name": "Badge Roche",
+    "region": "Bourg Palette → Argenta",
+    "day": true,
+    "aceUp": 2,
+    "capMargin": 4,
+    "zoneFrom": 5,
+    "steps": [
+      {
+        "kind": "gift",
+        "name": "Labo du Prof. Chen",
+        "bg": "town",
+        "gift": {
+          "key": "starter",
+          "choices": [
+            1,
+            4,
+            7
+          ],
+          "level": 5,
+          "text": "Le Prof. Chen te propose un Pokémon !"
+        }
+      },
+      {
+        "kind": "route",
+        "name": "Route 1",
+        "bg": "prairie",
+        "areas": [
+          "kanto-route-1-area"
+        ],
+        "lv": [
+          2,
+          3
+        ],
+        "wild": 3,
+        "trainers": 0,
+        "item": true
+      },
+      {
+        "kind": "heal",
+        "name": "Jadielle",
+        "bg": "town"
+      },
+      {
+        "kind": "route",
+        "name": "Route 2",
+        "bg": "prairie",
+        "areas": [
+          "kanto-route-2-south-towards-viridian-city"
+        ],
+        "lv": [
+          4,
+          7
+        ],
+        "wild": 2,
+        "trainers": 0
+      },
+      {
+        "kind": "route",
+        "name": "Forêt de Jade",
+        "bg": "forest",
+        "areas": [
+          "viridian-forest-area"
+        ],
+        "wild": 4,
+        "trainers": 2,
+        "item": true
+      },
+      {
+        "kind": "heal",
+        "name": "Argenta",
+        "bg": "town"
+      },
+      {
+        "kind": "find",
+        "name": "Musée d'Argenta",
+        "bg": "town",
+        "item": "old-amber",
+        "once": "old-amber"
+      },
+      {
+        "kind": "gym",
+        "name": "Arène d'Argenta",
+        "bg": "gym-rock",
+        "fallback": "mountain",
+        "leader": "Pierre",
+        "sprite": "brock",
+        "type": "rock",
+        "badge": "Roche",
+        "color": "#9a8b6a",
+        "reward": 1400,
+        "power": 1.22,
+        "ace": 15,
+        "team": [
+          [
+            74,
+            14
+          ],
+          [
+            95,
+            15
+          ]
+        ]
+      }
+    ]
+  },
+  "route": [
+    {
+      "name": "Labo du Prof. Chen",
+      "bg": "town",
+      "ch": 0,
+      "type": "gift",
+      "gift": {
+        "key": "starter",
+        "choices": [
+          1,
+          4,
+          7
+        ],
+        "level": 5,
+        "text": "Le Prof. Chen te propose un Pokémon !"
+      }
+    },
+    {
+      "name": "Route 1",
+      "bg": "prairie",
+      "ch": 0,
+      "lv": [
+        2,
+        3
+      ],
+      "type": "wild",
+      "areas": [
+        "kanto-route-1-area"
+      ]
+    },
+    {
+      "name": "Route 1",
+      "bg": "prairie",
+      "ch": 0,
+      "lv": [
+        2,
+        3
+      ],
+      "type": "wild",
+      "areas": [
+        "kanto-route-1-area"
+      ]
+    },
+    {
+      "name": "Route 1",
+      "bg": "prairie",
+      "ch": 0,
+      "lv": [
+        2,
+        3
+      ],
+      "type": "wild",
+      "areas": [
+        "kanto-route-1-area"
+      ]
+    },
+    {
+      "name": "Route 1",
+      "bg": "prairie",
+      "ch": 0,
+      "lv": [
+        2,
+        3
+      ],
+      "type": "item"
+    },
+    {
+      "name": "Jadielle",
+      "bg": "town",
+      "ch": 0,
+      "town": true,
+      "type": "item",
+      "find": {
+        "item": "exp-candy-s",
+        "n": 1
+      }
+    },
+    {
+      "name": "Jadielle",
+      "bg": "pokecenter",
+      "fallback": "town",
+      "ch": 0,
+      "type": "heal"
+    },
+    {
+      "name": "Route 2",
+      "bg": "prairie",
+      "ch": 0,
+      "lv": [
+        4,
+        7
+      ],
+      "type": "wild",
+      "areas": [
+        "kanto-route-2-south-towards-viridian-city"
+      ]
+    },
+    {
+      "name": "Route 2",
+      "bg": "prairie",
+      "ch": 0,
+      "lv": [
+        4,
+        7
+      ],
+      "type": "wild",
+      "areas": [
+        "kanto-route-2-south-towards-viridian-city"
+      ]
+    },
+    {
+      "name": "Forêt de Jade",
+      "bg": "forest",
+      "ch": 0,
+      "lv": [
+        11,
+        15
+      ],
+      "type": "wild",
+      "areas": [
+        "viridian-forest-area"
+      ]
+    },
+    {
+      "name": "Forêt de Jade",
+      "bg": "forest",
+      "ch": 0,
+      "lv": [
+        11,
+        15
+      ],
+      "type": "trainer",
+      "areas": [
+        "viridian-forest-area"
+      ]
+    },
+    {
+      "name": "Forêt de Jade",
+      "bg": "forest",
+      "ch": 0,
+      "lv": [
+        11,
+        15
+      ],
+      "type": "item"
+    },
+    {
+      "name": "Forêt de Jade",
+      "bg": "forest",
+      "ch": 0,
+      "lv": [
+        11,
+        15
+      ],
+      "type": "wild",
+      "areas": [
+        "viridian-forest-area"
+      ]
+    },
+    {
+      "name": "Forêt de Jade",
+      "bg": "forest",
+      "ch": 0,
+      "lv": [
+        11,
+        15
+      ],
+      "type": "wild",
+      "areas": [
+        "viridian-forest-area"
+      ]
+    },
+    {
+      "name": "Forêt de Jade",
+      "bg": "forest",
+      "ch": 0,
+      "lv": [
+        11,
+        15
+      ],
+      "type": "trainer",
+      "areas": [
+        "viridian-forest-area"
+      ]
+    },
+    {
+      "name": "Forêt de Jade",
+      "bg": "forest",
+      "ch": 0,
+      "lv": [
+        11,
+        15
+      ],
+      "type": "wild",
+      "areas": [
+        "viridian-forest-area"
+      ]
+    },
+    {
+      "name": "Argenta",
+      "bg": "town",
+      "ch": 0,
+      "town": true,
+      "type": "item",
+      "find": {
+        "item": "pinap-berry",
+        "n": 1
+      }
+    },
+    {
+      "name": "Argenta",
+      "bg": "pokecenter",
+      "fallback": "town",
+      "ch": 0,
+      "type": "heal"
+    },
+    {
+      "name": "Musée d'Argenta",
+      "bg": "town",
+      "ch": 0,
+      "type": "item",
+      "find": {
+        "item": "old-amber",
+        "once": "old-amber"
+      }
+    },
+    {
+      "name": "Arène d'Argenta",
+      "bg": "gym-rock",
+      "fallback": "mountain",
+      "ch": 0,
+      "type": "trainer",
+      "gymTrainer": true,
+      "classes": [
+        "camper"
+      ],
+      "pool": [
+        {
+          "id": 74,
+          "min": 11,
+          "max": 11,
+          "w": 1
+        },
+        {
+          "id": 95,
+          "min": 11,
+          "max": 11,
+          "w": 1
+        }
+      ],
+      "lv": [
+        11,
+        11
+      ]
+    },
+    {
+      "name": "Arène d'Argenta",
+      "bg": "gym-rock",
+      "fallback": "mountain",
+      "ch": 0,
+      "type": "gym",
+      "gym": {
+        "kind": "gym",
+        "name": "Arène d'Argenta",
+        "bg": "gym-rock",
+        "fallback": "mountain",
+        "leader": "Pierre",
+        "sprite": "brock",
+        "type": "rock",
+        "badge": "Roche",
+        "color": "#9a8b6a",
+        "reward": 1400,
+        "power": 1.22,
+        "ace": 15,
+        "team": [
+          [
+            74,
+            14
+          ],
+          [
+            95,
+            15
+          ]
+        ]
+      }
+    }
+  ],
+  "config": {
+    "SAVE_KEY": "gachamon-save-v1",
+    "VERSION": "0.4.103",
+    "CLOUD_PAUSE": false,
+    "DEVICE_MARK": false,
+    "START_MONEY": 3000,
+    "START_ITEMS": {},
+    "TEAM_SIZE": 6,
+    "RAIL_TILE_MAX": 60,
+    "SHINY_RATE": 0.000244140625,
+    "SHINY_STAT_BONUS": 0.1,
+    "MAX_LEVEL": 100,
+    "LEVEL_CAP_MARGIN": 0,
+    "LEAGUE_DONE_CAP": 100,
+    "LEAGUE_CAP_MARGIN": 3,
+    "TIME_WEIGHTS": {
+      "10": [
+        1.5,
+        1,
+        0.3
+      ],
+      "11": [
+        1.5,
+        1,
+        0.3
+      ],
+      "13": [
+        1.5,
+        1,
+        0.3
+      ],
+      "14": [
+        1.5,
+        1,
+        0.3
+      ],
+      "16": [
+        1.5,
+        1,
+        0.2
+      ],
+      "17": [
+        1.5,
+        1,
+        0.2
+      ],
+      "19": [
+        0.6,
+        0.6,
+        1.8
+      ],
+      "20": [
+        0.6,
+        0.6,
+        1.8
+      ],
+      "21": [
+        1,
+        1,
+        0.2
+      ],
+      "22": [
+        1,
+        1,
+        0.2
+      ],
+      "35": [
+        0.5,
+        0.5,
+        2
+      ],
+      "41": [
+        0.7,
+        0.7,
+        1.5
+      ],
+      "43": [
+        0.3,
+        0.3,
+        2
+      ],
+      "44": [
+        0.3,
+        0.3,
+        2
+      ],
+      "48": [
+        0.3,
+        0.3,
+        2
+      ],
+      "49": [
+        0.3,
+        0.3,
+        2
+      ],
+      "52": [
+        0.5,
+        0.5,
+        2
+      ],
+      "69": [
+        1,
+        1,
+        0.3
+      ],
+      "70": [
+        1,
+        1,
+        0.3
+      ],
+      "92": [
+        0.5,
+        0.5,
+        2
+      ],
+      "93": [
+        0.5,
+        0.5,
+        2
+      ],
+      "96": [
+        0.5,
+        0.5,
+        1.8
+      ]
+    },
+    "TIME_EVOLUTIONS": {
+      "113": "day",
+      "196": "day",
+      "197": "night",
+      "315": "day",
+      "358": "night",
+      "413": "day",
+      "414": "night",
+      "448": "day",
+      "461": "night",
+      "472": "night",
+      "41301": "day",
+      "41302": "day"
+    },
+    "WEATHER": {
+      "SLOT_MS": 3600000,
+      "CHANCE": 0.54,
+      "CLIMATES": {
+        "prairie": {
+          "rain": 2,
+          "sun": 2,
+          "storm": 0.5
+        },
+        "town": {
+          "rain": 2,
+          "sun": 1
+        },
+        "forest": {
+          "rain": 3,
+          "sun": 1,
+          "storm": 0.5
+        },
+        "lake": {
+          "rain": 3,
+          "sun": 1,
+          "storm": 1
+        },
+        "pier": {
+          "rain": 3,
+          "sun": 1,
+          "storm": 1
+        },
+        "beach": {
+          "sun": 3,
+          "rain": 1,
+          "storm": 0.5
+        },
+        "mountain": {
+          "rain": 2,
+          "sun": 1,
+          "snow": 1,
+          "storm": 0.5
+        }
+      },
+      "REGION_OFF": {
+        "kanto": [
+          "sun"
+        ],
+        "johto": [
+          "sun"
+        ]
+      },
+      "REGION_WEIGHTS": {
+        "sinnoh": {
+          "all": {
+            "sun": 0.5
+          },
+          "mountain": {
+            "snow": 2
+          }
+        }
+      },
+      "TRANSLATE": {
+        "rain": [
+          "snow"
+        ],
+        "storm": [
+          "rain",
+          "snow"
+        ],
+        "snow": [
+          "rain",
+          "blizzard"
+        ],
+        "sun": [],
+        "sand": [],
+        "ash": [],
+        "fog": [],
+        "blizzard": [
+          "snow",
+          "rain"
+        ],
+        "breeze": []
+      },
+      "TYPES": {
+        "rain": {
+          "name": "Rain",
+          "icon": "🌧️",
+          "encounters": {
+            "water": 1.6,
+            "electric": 1.2,
+            "fire": 0.6
+          },
+          "damage": {
+            "water": 1.1,
+            "fire": 0.9
+          }
+        },
+        "storm": {
+          "name": "Thunderstorm",
+          "icon": "⛈️",
+          "encounters": {
+            "electric": 1.8,
+            "water": 1.4,
+            "fire": 0.5
+          },
+          "damage": {
+            "water": 1.1,
+            "electric": 1.1,
+            "fire": 0.9
+          }
+        },
+        "sun": {
+          "name": "Harsh sunlight",
+          "icon": "🔆",
+          "daylight": true,
+          "encounters": {
+            "fire": 1.6,
+            "grass": 1.3,
+            "water": 0.7
+          },
+          "damage": {
+            "fire": 1.1,
+            "water": 0.9
+          }
+        },
+        "sand": {
+          "name": "Sandstorm",
+          "icon": "🌪️",
+          "encounters": {
+            "ground": 1.6,
+            "rock": 1.6,
+            "steel": 1.4,
+            "grass": 0.7
+          }
+        },
+        "snow": {
+          "name": "Snow",
+          "icon": "❄️",
+          "encounters": {
+            "ice": 2,
+            "water": 1.2,
+            "fire": 0.6,
+            "grass": 0.7
+          }
+        },
+        "ash": {
+          "name": "Ashfall",
+          "icon": "🌋",
+          "encounters": {
+            "fire": 1.4,
+            "ground": 1.2,
+            "grass": 0.6,
+            "water": 0.7
+          }
+        },
+        "fog": {
+          "name": "Fog",
+          "icon": "🌫️",
+          "encounters": {
+            "ghost": 1.8,
+            "psychic": 1.3,
+            "flying": 0.6
+          },
+          "damage": {
+            "ghost": 1.1
+          }
+        },
+        "blizzard": {
+          "name": "Blizzard",
+          "icon": "🌨️",
+          "encounters": {
+            "ice": 2.6,
+            "water": 1.1,
+            "fire": 0.25,
+            "grass": 0.5,
+            "bug": 0.5
+          },
+          "damage": {
+            "ice": 1.1,
+            "fire": 0.9
+          }
+        },
+        "breeze": {
+          "name": "Light breeze",
+          "icon": "🍃",
+          "encounters": {
+            "flying": 1.5,
+            "dragon": 1.2
+          }
+        }
+      }
+    },
+    "CONDITIONAL_WILD": {
+      "OFF": 0,
+      "DROP": 0.2,
+      "RULES": [
+        {
+          "bg": "prairie",
+          "when": [
+            "morning"
+          ],
+          "add": [
+            [
+              165,
+              0.06
+            ],
+            [
+              187,
+              0.06
+            ]
+          ]
+        },
+        {
+          "bg": "prairie",
+          "when": [
+            "day"
+          ],
+          "add": [
+            [
+              128,
+              0.03
+            ],
+            [
+              203,
+              0.05
+            ]
+          ]
+        },
+        {
+          "bg": "prairie",
+          "when": [
+            "night"
+          ],
+          "add": [
+            [
+              163,
+              0.07
+            ],
+            [
+              43,
+              0.06
+            ],
+            [
+              228,
+              0.05
+            ]
+          ],
+          "drop": [
+            16,
+            21,
+            10
+          ]
+        },
+        {
+          "bg": "forest",
+          "when": [
+            "morning"
+          ],
+          "add": [
+            [
+              10,
+              0.06
+            ],
+            [
+              13,
+              0.06
+            ],
+            [
+              191,
+              0.05
+            ]
+          ]
+        },
+        {
+          "bg": "forest",
+          "when": [
+            "day"
+          ],
+          "add": [
+            [
+              123,
+              0.03
+            ],
+            [
+              127,
+              0.03
+            ]
+          ]
+        },
+        {
+          "bg": "forest",
+          "when": [
+            "night"
+          ],
+          "add": [
+            [
+              92,
+              0.08
+            ],
+            [
+              167,
+              0.06
+            ],
+            [
+              164,
+              0.04
+            ],
+            [
+              198,
+              0.03
+            ]
+          ],
+          "drop": [
+            10,
+            11,
+            13,
+            14,
+            16,
+            17
+          ]
+        },
+        {
+          "bg": "town",
+          "when": [
+            "night"
+          ],
+          "add": [
+            [
+              52,
+              0.06
+            ],
+            [
+              198,
+              0.05
+            ],
+            [
+              200,
+              0.03
+            ]
+          ]
+        },
+        {
+          "bg": "lake",
+          "when": [
+            "night"
+          ],
+          "add": [
+            [
+              170,
+              0.06
+            ],
+            [
+              211,
+              0.05
+            ]
+          ]
+        },
+        {
+          "bg": "pier",
+          "when": [
+            "night"
+          ],
+          "add": [
+            [
+              170,
+              0.06
+            ],
+            [
+              211,
+              0.05
+            ]
+          ]
+        },
+        {
+          "bg": "beach",
+          "when": [
+            "day"
+          ],
+          "add": [
+            [
+              90,
+              0.06
+            ]
+          ]
+        },
+        {
+          "bg": "beach",
+          "when": [
+            "night"
+          ],
+          "add": [
+            [
+              120,
+              0.06
+            ],
+            [
+              170,
+              0.05
+            ]
+          ]
+        },
+        {
+          "bg": "mountain",
+          "when": [
+            "day"
+          ],
+          "add": [
+            [
+              74,
+              0.06
+            ]
+          ]
+        },
+        {
+          "bg": "mountain",
+          "when": [
+            "night"
+          ],
+          "add": [
+            [
+              35,
+              0.05
+            ],
+            [
+              229,
+              0.03
+            ],
+            [
+              200,
+              0.03
+            ]
+          ]
+        },
+        {
+          "area": "gsc:celadon-city-area",
+          "when": [
+            "day"
+          ],
+          "only": true,
+          "add": [
+            [
+              133,
+              0.005
+            ]
+          ]
+        },
+        {
+          "area": "kanto-route-1-area",
+          "when": [
+            "rain"
+          ],
+          "only": true,
+          "evolve": true,
+          "add": [
+            [
+              7,
+              0.05
+            ]
+          ]
+        }
+      ]
+    },
+    "NIGHT_DAMAGE": {
+      "ghost": 1.1,
+      "dark": 1.1
+    },
+    "NIGHT_SLEEP": 0.35,
+    "TIER_MIN": {
+      "283": 1,
+      "349": 1,
+      "350": 2
+    },
+    "TIERS": [
+      {
+        "key": "common",
+        "label": "Commun",
+        "ball": "poke-ball",
+        "color": "#9aa4b1",
+        "sell": 40,
+        "level": [
+          2,
+          8
+        ]
+      },
+      {
+        "key": "uncommon",
+        "label": "Peu commun",
+        "ball": "great-ball",
+        "color": "#3b82f6",
+        "sell": 120,
+        "level": [
+          8,
+          18
+        ]
+      },
+      {
+        "key": "rare",
+        "label": "Rare",
+        "ball": "ultra-ball",
+        "color": "#a855f7",
+        "sell": 350,
+        "level": [
+          15,
+          30
+        ]
+      },
+      {
+        "key": "legendary",
+        "label": "Légendaire",
+        "ball": "ultra-ball",
+        "color": "#f5c518",
+        "sell": 5000,
+        "level": [
+          50,
+          60
+        ]
+      },
+      {
+        "key": "unique",
+        "label": "Unique",
+        "ball": "master-ball",
+        "color": "#ff5fa2",
+        "sell": 0,
+        "level": [
+          5,
+          100
+        ]
+      }
+    ],
+    "CAPTURE_BONUS": 0.6,
+    "CAPTURE_MAX": 0.6,
+    "LEGENDARY_CAPTURE_RATE": 3,
+    "ROAMING": {
+      "GROUPS": [
+        {
+          "ids": [
+            243,
+            244,
+            245
+          ],
+          "unlock": "Maître Johto",
+          "regions": [
+            "johto"
+          ]
+        },
+        {
+          "ids": [
+            380,
+            381
+          ],
+          "unlock": "Maître Hoenn",
+          "regions": [
+            "hoenn"
+          ]
+        },
+        {
+          "ids": [
+            481
+          ],
+          "unlock": "Maître Sinnoh",
+          "regions": [
+            "sinnoh"
+          ]
+        }
+      ],
+      "STAY_MIN": 15,
+      "CATCH": 0.04,
+      "MIN_LEVEL": 100,
+      "WEATHER": {
+        "243": "storm",
+        "244": "sun",
+        "245": "rain",
+        "380": "breeze",
+        "381": "breeze"
+      }
+    },
+    "STEP_MS": 650,
+    "SPEEDS": [
+      1,
+      2,
+      4
+    ],
+    "SPEED_PACE": {
+      "4": 2.5
+    },
+    "OFFLINE_MAX_MS": 28800000,
+    "OFFLINE_ITEM_RATE": 0.25,
+    "OFFLINE_STEP_MS": 1500,
+    "ACTION_MS": 2800,
+    "OFFLINE_MAX_LEVELS": 12,
+    "OFFLINE_XP_MULT": 0.5,
+    "CEREMONY_MS": 8000,
+    "PACE": {
+      "firstMin": 10,
+      "lastMin": 400,
+      "chapters": 14
+    },
+    "CHAPTER_TIME_RATIO": 1.328114089336069,
+    "XP_WINS_PER_LEVEL": 15,
+    "XP_GROWTH_FROM": 10,
+    "XP_SCALE": 3,
+    "REGION_XP": {
+      "johto": 1.25,
+      "hoenn": 1.25,
+      "sinnoh": 1.35
+    },
+    "XP_GROWTH_EXTRA": 1,
+    "XP_LEVEL_GROWTH": 1.0361065590264538,
+    "XP_BASE_REF": 60,
+    "XP_ACTIVE_BONUS": 1.1,
+    "CANDY_LEVEL_SHARE": 3,
+    "EXP_CANDY_MULT": 0.6,
+    "DUPLICATE_CANDIES": 1,
+    "DRAIN": {
+      "absorb": 0.25,
+      "mega-drain": 0.25,
+      "giga-drain": 0.25,
+      "leech-life": 0.25,
+      "drain-punch": 0.25,
+      "draining-kiss": 0.5
+    },
+    "BUDDY_XP_MULT": 1.3,
+    "BUDDY_KOS": [
+      5,
+      10,
+      20,
+      50,
+      50
+    ],
+    "BUDDY_RAMP_LEVEL": 20,
+    "PENSION": {
+      "LAYS": {
+        "489": 489,
+        "490": 489
+      },
+      "BERRIES": {
+        "berry-oran": {
+          "name": "Baie Oran",
+          "minutes": 5,
+          "weight": 18,
+          "rarity": "Commune",
+          "src": "assets/ui/berry-oran.png",
+          "bounds": [
+            7,
+            7,
+            26,
+            25
+          ]
+        },
+        "berry-pecha": {
+          "name": "Baie Pêcha",
+          "minutes": 15,
+          "weight": 8,
+          "rarity": "Peu commune",
+          "src": "assets/ui/berry-pecha.png",
+          "bounds": [
+            6,
+            6,
+            26,
+            26
+          ]
+        },
+        "berry-sitrus": {
+          "name": "Baie Sitrus",
+          "minutes": 30,
+          "weight": 3,
+          "rarity": "Rare",
+          "src": "assets/ui/berry-sitrus.png",
+          "bounds": [
+            7,
+            6,
+            25,
+            26
+          ]
+        }
+      },
+      "SLOTS": 4,
+      "OFFLINE_MS": 28800000,
+      "INCUBATOR": 4,
+      "SLOT_SHOP": [
+        {
+          "price": 50000
+        },
+        {
+          "price": 500000
+        },
+        {
+          "price": 2500000
+        }
+      ],
+      "INCUBATOR_SHOP": [
+        {
+          "price": 50000
+        },
+        {
+          "price": 500000
+        },
+        {
+          "price": 2500000
+        }
+      ],
+      "CANDY_MIN": [
+        2,
+        5,
+        10,
+        30,
+        30
+      ],
+      "EGG_MIN": [
+        360,
+        180,
+        90
+      ],
+      "HATCH_MIN": 240,
+      "EGG_LEVEL": 5,
+      "SHINY_RATE": 0.001953125,
+      "SHINY_PARENT_RATE": 0.1,
+      "NO_EGG": [
+        137,
+        442,
+        479,
+        47901,
+        47902,
+        47903,
+        47904,
+        47905
+      ],
+      "SHINY_CANDY_MULT": 10,
+      "DUPLICATE_CANDIES": 3,
+      "UNLOCK_TEXT": "Se débloque avec le Badge Cascade (Ondine)"
+    },
+    "BERRY_BADGES": {
+      "berry-pecha": 3,
+      "golden-razz-berry": 3,
+      "berry-sitrus": 6,
+      "nanab-berry": 6,
+      "enigma-berry": 6,
+      "starf-berry": 8
+    },
+    "MONEY_GAIN": 0.9,
+    "TRAINER_LEVEL_BONUS": [
+      0,
+      1
+    ],
+    "TRAINER_EVOLVED_CHANCE": 0.75,
+    "DOUBLE_CHANCE": 0.3,
+    "WILD_EVOLVED_LEVELS": 2,
+    "STAGE_ODDS": [
+      70,
+      25,
+      5
+    ],
+    "TRAINER_ITEM_EVO_LEVEL": 40,
+    "GYM_TRAINERS": {
+      "counts": [
+        1,
+        2,
+        2,
+        3
+      ],
+      "below": [
+        4,
+        2,
+        2
+      ],
+      "damage": 0.8
+    },
+    "LEAGUE_TRAINERS": {
+      "below": [
+        6,
+        5,
+        4,
+        3
+      ],
+      "sizes": [
+        2,
+        2,
+        3,
+        3
+      ],
+      "money": 1.8,
+      "moneyWon": 0.5,
+      "reward": 1.25,
+      "xp": {
+        "kanto": 2.4,
+        "johto": 2.2,
+        "hoenn": 2,
+        "sinnoh": 2
+      },
+      "replayMoney": 0.5
+    },
+    "BEHIND_MONEY": [
+      0.75,
+      0.6,
+      0.5
+    ],
+    "LEADER_REPLAY_MONEY": 0.1,
+    "ENEMY_DAMAGE": {
+      "wild": 0.85,
+      "trainer": 0.9,
+      "static": 1
+    },
+    "POWER_SLOPE": 2,
+    "TYPE_POWER": {
+      "strong": 3,
+      "weak": -3,
+      "immune": -5,
+      "exposed": -2,
+      "resists": 2
+    },
+    "ENCOUNTER_EDGE": {
+      "wild": 0,
+      "trainer": 0,
+      "static": -4,
+      "gym": -7
+    },
+    "DUEL_RUNS": 200,
+    "SPEED_WEAR": [
+      0.6,
+      1.4
+    ],
+    "TYPE_EFF_MAX": 4,
+    "TYPE_EFF_MIN": 0,
+    "CRIT_CHANCE": 0.041666666666666664,
+    "CRIT_MULT": 1.5,
+    "HP_LEVEL_SCALE": 1.5,
+    "HP_LEVEL_MAX": 2.5,
+    "LEVEL_GAP": 1.06,
+    "COUNTER_READY": 5,
+    "GYM_DAMAGE": 1.3,
+    "GYM_HP_MULT": 1.3,
+    "GYM_TEAM_EXP": 0.7,
+    "ENEMY_HP_PER_ALLY": 0.7,
+    "BOSS_ZONE_TOTAL": 1,
+    "BOSS_STATUS": {
+      "HURT": 40,
+      "BURN_ATK": 0.75,
+      "SLEEP_CD": 2
+    },
+    "STATUS_SURE": 0.15,
+    "STATUS_TEAM": [
+      1,
+      0.5
+    ],
+    "STATUS_PARA_COST": 1,
+    "TOWER": {
+      "STEPS": {
+        "from": "2026-11-09",
+        "EVERY": 10,
+        "BP": 15,
+        "EGG": 80,
+        "FRAME": 90,
+        "GOLD": 100
+      },
+      "LOOK_FLOOR": 100,
+      "SHOP": [
+        {
+          "id": "golden-razz-berry",
+          "price": 75
+        },
+        {
+          "id": "nanab-berry",
+          "price": 75
+        },
+        {
+          "id": "enigma-berry",
+          "price": 75
+        },
+        {
+          "id": "rare-candy",
+          "price": 100,
+          "desc": "Fait monter un Pokémon d'un niveau."
+        },
+        {
+          "id": "exp-candy-xl",
+          "price": 15,
+          "desc": "Donne énormément d'XP à un Pokémon."
+        },
+        {
+          "id": "exp-candy-big",
+          "price": 50,
+          "desc": "Une montagne d'XP pour un Pokémon."
+        },
+        {
+          "id": "starf-berry",
+          "price": 400,
+          "minFloor": 75
+        },
+        {
+          "id": "auroraticket",
+          "price": 1000,
+          "once": true,
+          "minFloor": 40,
+          "desc": "Ouvre l'Île Aurore, où Deoxys attend : une de ses formes chaque semaine."
+        }
+      ],
+      "MARGIN": 10,
+      "LOG_EVERY": 10,
+      "SIZE": 3,
+      "LEVEL_START": 50,
+      "LEVEL_STEP": 1.5,
+      "LEVEL_MAX": 100,
+      "BP_FLOOR": 5,
+      "BP_BOSS": 20,
+      "OVER": [
+        [
+          30,
+          0.005
+        ],
+        [
+          20,
+          0.01
+        ],
+        [
+          20,
+          0.02
+        ],
+        [
+          20,
+          0.03
+        ],
+        [
+          null,
+          0.04
+        ]
+      ],
+      "THEME_FLOORS": 10,
+      "BOSS_EVERY": 10,
+      "BOSS_LEVEL": 3,
+      "BOSS_MULT": 1.1,
+      "BOSS_TOP": 8,
+      "MAX_DEX": 493
+    },
+    "CANDY_RUN": {
+      "UNLOCK": "Maître Hoenn",
+      "TEAM": 6,
+      "SIZE": 6,
+      "CURVE": [
+        [
+          1,
+          80
+        ],
+        [
+          56,
+          100
+        ]
+      ],
+      "RANK_FROM": 60,
+      "RANK_EVERY": 5,
+      "OVER_AFTER": 0.04,
+      "CAMP": 5,
+      "STARTS": [
+        1
+      ],
+      "STEP": 5,
+      "K": 1,
+      "K2": 1,
+      "OVER_PAY": 0.21,
+      "SIZES": [
+        [
+          90,
+          "exp-candy-xl"
+        ],
+        [
+          null,
+          "exp-candy-big"
+        ]
+      ],
+      "SB_N": 5,
+      "SB_AT": 10,
+      "SB_EVERY": 10,
+      "SKIP_PAY": 10,
+      "SB_DAY": 25
+    },
+    "DAILY_SPOTS": [
+      {
+        "id": 349,
+        "share": 0.01,
+        "zones": [
+          "Route 119|rse:hoenn-route-119-area",
+          "Route 120|rse:hoenn-route-120-area",
+          "Route 118|rse:hoenn-route-118-area",
+          "Route 117|rse:hoenn-route-117-area",
+          "Route 114|rse:hoenn-route-114-area"
+        ]
+      },
+      {
+        "id": 349,
+        "share": 0.01,
+        "zones": [
+          "Mont Couronné|dppt:mt-coronet-1f-route-207+dppt:mt-coronet-b1f"
+        ]
+      },
+      {
+        "pool": {
+          "190": 8,
+          "214": 5,
+          "265": 10,
+          "412": 30,
+          "415": 25,
+          "420": 20,
+          "446": 2
+        },
+        "share": 0.15,
+        "babies": true,
+        "honey": true,
+        "zones": [
+          "Route 205 (sud)",
+          "Route 206",
+          "Route 208",
+          "Route 209",
+          "Route 210 (sud)",
+          "Route 211",
+          "Route 212 (nord)",
+          "Route 214",
+          "Route 215",
+          "Route 218",
+          "Pré de Floraville",
+          "Les Éoliennes",
+          "Forêt Vestigion",
+          "Square Paisible"
+        ],
+        "rare": [
+          [
+            "Square Paisible"
+          ],
+          [
+            "Route 206",
+            "Route 211"
+          ]
+        ],
+        "gap": [
+          7,
+          14
+        ],
+        "from": "2026-11-02"
+      }
+    ],
+    "SOULS": {
+      "item": "soul",
+      "rate": 0.1,
+      "need": 108,
+      "region": "sinnoh",
+      "type": "ghost",
+      "once": "spiritomb"
+    },
+    "ZONE_EXTRAS": {
+      "Jardin Trophée": {
+        "share": 0.1,
+        "pool": {
+          "25": 1,
+          "35": 1,
+          "39": 1,
+          "52": 1,
+          "77": 1,
+          "113": 0.5,
+          "183": 1,
+          "311": 1,
+          "312": 1,
+          "352": 1
+        }
+      }
+    },
+    "LEGEND_ZONE": {
+      "ROAM_HP": 4,
+      "ROAM_POWER": 0.6,
+      "WILD": 4,
+      "WILD_LV": [
+        12,
+        6
+      ],
+      "HP": 3,
+      "POWER": 0.5,
+      "COUNTER": 0.3,
+      "RAGE": 8,
+      "BURST": 1,
+      "RIDDLE_WAIT": 120000,
+      "AURA": 1
+    },
+    "ELITE": {
+      "ON": true,
+      "FREEZE_MS": 900000,
+      "TIERS": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "REWARDS": {
+        "1": "gem",
+        "2": "gem",
+        "3": "frame",
+        "4": "gem",
+        "5": "frame"
+      },
+      "HURT": {
+        "1": 44,
+        "2": 48,
+        "3": 52,
+        "4": 56,
+        "5": 60
+      },
+      "RESIST": {
+        "1": 0.92,
+        "2": 0.84,
+        "3": 0.76,
+        "4": 0.68,
+        "5": 0.6
+      },
+      "HP": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1
+      },
+      "POWER": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1
+      },
+      "LEAGUE": {
+        "POWER": {
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1
+        },
+        "FRAMES": [
+          3,
+          5
+        ]
+      }
+    },
+    "STALL_ROUNDS": 8,
+    "STATUS_MOVE_CHANCE": 0.3,
+    "FULL_PARA_CHANCE": 0.25,
+    "THAW_CHANCE": 0.2,
+    "CONFUSION_SELF_HIT": 0.33,
+    "MAX_ROUNDS": 200,
+    "ITEM_EVENT_CHANCE": 0.7,
+    "TOWN_EVENT": {
+      "chance": 1,
+      "pickedMs": 600000,
+      "minMs": 120000,
+      "weights": {
+        "item": 70,
+        "money": 20,
+        "rare": 10
+      },
+      "money": [
+        800,
+        2500
+      ],
+      "rareAbove": 2,
+      "newBonus": 3,
+      "candySizes": [
+        60,
+        30,
+        10
+      ],
+      "itemWeights": {
+        "expCandy": 38,
+        "stone": 5,
+        "berry-oran": 20,
+        "berry-pecha": 5,
+        "berry-sitrus": 2,
+        "razz-berry": 4,
+        "golden-razz-berry": 1.5,
+        "nanab-berry": 1.5,
+        "enigma-berry": 1.5,
+        "pinap-berry": 3,
+        "lansat-berry": 3,
+        "starf-berry": 0.5
+      }
+    },
+    "BERRY_HEAL": 0.25,
+    "BUFF_MIN": 60,
+    "BUFF_STACK": 8,
+    "BUFF_BERRIES": {
+      "razz-berry": {
+        "name": "Baie Framby",
+        "family": "capture",
+        "mult": 1.25,
+        "rank": 1
+      },
+      "golden-razz-berry": {
+        "name": "Baie Framby dorée",
+        "family": "capture",
+        "mult": 1.5,
+        "rank": 2
+      },
+      "nanab-berry": {
+        "name": "Baie Nanab",
+        "family": "rare",
+        "mult": 2
+      },
+      "enigma-berry": {
+        "name": "Baie Enigma",
+        "family": "dex",
+        "mult": 3
+      },
+      "pinap-berry": {
+        "name": "Baie Nanana",
+        "family": "xp",
+        "mult": 1.25
+      },
+      "lansat-berry": {
+        "name": "Baie Lansat",
+        "family": "money",
+        "mult": 1.25
+      },
+      "starf-berry": {
+        "name": "Baie Frista",
+        "family": "shiny",
+        "mult": 2
+      }
+    },
+    "UNDERGROUND": {
+      "OPEN_BADGE": "Forêt",
+      "TEAM": 3,
+      "PER_DAY": 8,
+      "PER_BOUGHT": [
+        1,
+        1,
+        2
+      ],
+      "SLOTS": 1,
+      "SLOT_BUY": [
+        150,
+        500,
+        1000
+      ],
+      "LV0": 30,
+      "STEP": 0.7,
+      "OVER": 0.007,
+      "FLOORS": 300,
+      "CAMP": 0.17,
+      "GUARD_EVERY": 10,
+      "GUARD_MULT": 2,
+      "GUARD_POOL": 10,
+      "STEP_MS": 2800,
+      "FLOOR_EXTRA": 0.83,
+      "WALL_MS": 45000,
+      "WALL_SLOW": [
+        1.8,
+        1.8,
+        1.2,
+        1
+      ],
+      "START_FLOORS": [
+        25,
+        50,
+        75,
+        100
+      ],
+      "SCENE": "sinnoh-souterrains-sinnoh",
+      "PLACE": "Souterrains",
+      "THEMES": [
+        {
+          "key": "flooded",
+          "name": "Inondés",
+          "types": [
+            "water",
+            "grass",
+            "electric"
+          ]
+        },
+        {
+          "key": "volcanic",
+          "name": "Volcaniques",
+          "types": [
+            "fire",
+            "rock",
+            "ground"
+          ]
+        },
+        {
+          "key": "crystal",
+          "name": "Cristaux",
+          "types": [
+            "ice",
+            "psychic",
+            "steel"
+          ]
+        },
+        {
+          "key": "dark",
+          "name": "Obscurs",
+          "types": [
+            "ghost",
+            "dark",
+            "poison"
+          ]
+        },
+        {
+          "key": "ancient",
+          "name": "Anciens",
+          "types": [
+            "dragon",
+            "fighting"
+          ]
+        },
+        {
+          "key": "galleries",
+          "name": "Galeries",
+          "types": [
+            "normal",
+            "bug",
+            "flying"
+          ]
+        }
+      ],
+      "LOOT": {
+        "BANDS": [
+          1,
+          25,
+          50,
+          75,
+          100,
+          150
+        ],
+        "MONEY": [
+          150,
+          300,
+          450,
+          600,
+          800,
+          1000
+        ],
+        "FIGHT": [
+          100,
+          150,
+          200,
+          250,
+          300,
+          350
+        ],
+        "SHARDS": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          2
+        ],
+        "GUARD_SHARDS": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          3
+        ],
+        "GUARD_MULT": 3,
+        "WALL_ROLLS": 2,
+        "GUARD_ROLLS": 2,
+        "PLATE_THEME": 4,
+        "ITEMS": [
+          {
+            "id": "money",
+            "kind": "money",
+            "w": [
+              800,
+              770,
+              735,
+              715,
+              665,
+              630
+            ]
+          },
+          {
+            "id": "shards",
+            "kind": "shards",
+            "w": [
+              20,
+              20,
+              20,
+              20,
+              20,
+              20
+            ]
+          },
+          {
+            "id": "rare-candy",
+            "kind": "item",
+            "guard": true,
+            "w": [
+              2,
+              2,
+              6,
+              6,
+              12,
+              12
+            ]
+          },
+          {
+            "id": "exp-candy-s",
+            "kind": "item",
+            "guard": true,
+            "w": [
+              30,
+              15,
+              5,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "exp-candy-m",
+            "kind": "item",
+            "guard": true,
+            "w": [
+              0,
+              15,
+              15,
+              10,
+              5,
+              0
+            ]
+          },
+          {
+            "id": "exp-candy-xl",
+            "kind": "item",
+            "guard": true,
+            "w": [
+              0,
+              0,
+              10,
+              15,
+              15,
+              15
+            ]
+          },
+          {
+            "id": "exp-candy-big",
+            "kind": "item",
+            "guard": true,
+            "w": [
+              0,
+              0,
+              0,
+              0,
+              10,
+              15
+            ]
+          },
+          {
+            "id": "stone",
+            "kind": "item",
+            "of": [
+              "fire-stone",
+              "water-stone",
+              "thunder-stone",
+              "leaf-stone",
+              "moon-stone"
+            ],
+            "guard": true,
+            "w": [
+              3,
+              3,
+              1.5,
+              1.5,
+              0.5,
+              0.5
+            ]
+          },
+          {
+            "id": "stone2",
+            "kind": "item",
+            "of": [
+              "sun-stone",
+              "shiny-stone",
+              "dusk-stone",
+              "dawn-stone",
+              "ice-stone"
+            ],
+            "guard": true,
+            "w": [
+              0,
+              2,
+              2,
+              2,
+              0.7,
+              0.7
+            ]
+          },
+          {
+            "id": "evo-item",
+            "kind": "item",
+            "of": [
+              "kings-rock",
+              "metal-coat",
+              "dragon-scale",
+              "prism-scale",
+              "deep-sea-tooth",
+              "deep-sea-scale"
+            ],
+            "guard": true,
+            "w": [
+              0,
+              0,
+              0.25,
+              0.75,
+              1,
+              1
+            ]
+          },
+          {
+            "id": "evo-item-sinnoh",
+            "kind": "item",
+            "of": [
+              "oval-stone",
+              "protector",
+              "electirizer",
+              "magmarizer",
+              "reaper-cloth",
+              "razor-claw",
+              "razor-fang"
+            ],
+            "guard": true,
+            "w": [
+              0,
+              0.3,
+              1.4,
+              2.6,
+              3,
+              3
+            ]
+          },
+          {
+            "id": "berry",
+            "kind": "item",
+            "of": [
+              "razz-berry",
+              "pinap-berry",
+              "lansat-berry"
+            ],
+            "guard": true,
+            "w": [
+              8,
+              8,
+              8,
+              4,
+              4,
+              2
+            ]
+          },
+          {
+            "id": "berry2",
+            "kind": "item",
+            "of": [
+              "golden-razz-berry",
+              "nanab-berry",
+              "enigma-berry"
+            ],
+            "guard": true,
+            "w": [
+              0,
+              0,
+              5,
+              5,
+              10,
+              10
+            ]
+          },
+          {
+            "id": "starf-berry",
+            "kind": "item",
+            "guard": true,
+            "w": [
+              0,
+              0,
+              0,
+              0.5,
+              2,
+              3
+            ]
+          },
+          {
+            "id": "geode0",
+            "kind": "geode",
+            "tier": 0,
+            "guard": true,
+            "w": [
+              3.2,
+              2.8,
+              2,
+              2,
+              1,
+              1
+            ]
+          },
+          {
+            "id": "geode1",
+            "kind": "geode",
+            "tier": 1,
+            "guard": true,
+            "w": [
+              0.6,
+              2,
+              2.8,
+              3.2,
+              2.8,
+              2.8
+            ]
+          },
+          {
+            "id": "geode2",
+            "kind": "geode",
+            "tier": 2,
+            "guard": true,
+            "w": [
+              0,
+              0,
+              1,
+              1.6,
+              2.8,
+              3.4
+            ]
+          },
+          {
+            "id": "geode3",
+            "kind": "geode",
+            "tier": 3,
+            "guard": true,
+            "w": [
+              0,
+              0,
+              0,
+              0,
+              0.9,
+              2.4
+            ]
+          },
+          {
+            "id": "fossil",
+            "kind": "fossil",
+            "guard": true,
+            "w": [
+              0,
+              0,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "id": "plate",
+            "kind": "plate",
+            "guard": true,
+            "w": [
+              0,
+              0.15,
+              0.6,
+              0.6,
+              1.2,
+              1.2
+            ]
+          }
+        ],
+        "GEODES": [
+          "Géode commune",
+          "Géode peu commune",
+          "Géode rare",
+          "Géode légendaire"
+        ],
+        "PLATES": {
+          "fire": "Plaque Flamme",
+          "water": "Plaque Hydro",
+          "grass": "Plaque Herbe",
+          "electric": "Plaque Volt",
+          "ice": "Plaque Glace",
+          "fighting": "Plaque Poing",
+          "poison": "Plaque Toxique",
+          "ground": "Plaque Terre",
+          "flying": "Plaque Ciel",
+          "psychic": "Plaque Esprit",
+          "bug": "Plaque Insecte",
+          "rock": "Plaque Roc",
+          "ghost": "Plaque Fantôme",
+          "dragon": "Plaque Draco",
+          "dark": "Plaque Ombre",
+          "steel": "Plaque Fer"
+        },
+        "FOSSILS": {
+          "kanto": [
+            [
+              138,
+              30
+            ],
+            [
+              140,
+              30
+            ],
+            [
+              142,
+              30
+            ]
+          ],
+          "hoenn": [
+            [
+              345,
+              38
+            ],
+            [
+              347,
+              38
+            ]
+          ],
+          "sinnoh": [
+            [
+              408,
+              15
+            ],
+            [
+              410,
+              15
+            ]
+          ]
+        }
+      },
+      "GEODE_UP": [
+        0.1,
+        0.06,
+        0.03
+      ],
+      "GEM_SHARDS": [
+        1,
+        2,
+        5,
+        15
+      ],
+      "GEM_PRICE": [
+        100,
+        170,
+        340,
+        1000
+      ],
+      "OFFER": 8,
+      "OFFER_HOURS": 3,
+      "REROLL": 5000,
+      "RANK_MAX": 5,
+      "RANK_STAT": 1.15,
+      "RANK_XP": 1.5,
+      "MILESTONES": [
+        {
+          "floor": 100,
+          "geode": 3,
+          "look": "roark"
+        },
+        {
+          "floor": 150,
+          "frame": "vein"
+        },
+        {
+          "floor": 200,
+          "geode": 3,
+          "look": "byron"
+        }
+      ]
+    },
+    "STONE_SPENT_MONEY": [
+      50,
+      150
+    ],
+    "EVENT": {
+      "ENABLED": false,
+      "ANNOUNCE_MIN": 10,
+      "OPEN_MIN": 60,
+      "RIVAL_MIN": [
+        10,
+        60
+      ],
+      "RIVAL_MASTER_CHANCE": 0.3,
+      "RIVAL_MASTER_MIN": [
+        10,
+        15
+      ],
+      "LEVEL": 100,
+      "WILD_SPREAD": 4,
+      "EDGE": {
+        "wild": -3,
+        "trainer": -6
+      },
+      "SHARDS_PER_LOOP": 10,
+      "SHARDS_LEGEND": 5,
+      "RECORDS": {
+        "BASE_S": 260,
+        "FIELD": 80,
+        "TOP": 10
+      },
+      "PRIVATE": {
+        "TRACES": 50,
+        "OPEN_MIN": 60
+      }
+    },
+    "WORLDBOSS": {
+      "SHIELD_DAYS": 3,
+      "CAPTURE_H": 24,
+      "PER_DAY": 3,
+      "TEAM": 6,
+      "BARS": 4,
+      "UNLOCK": "sinnoh",
+      "RUN_S": 60,
+      "REF": 1300,
+      "RUN_EXP": 0.5,
+      "MIN_S": 20,
+      "MAX_S": 80,
+      "DPS": 1,
+      "SPREAD": 0.1,
+      "FALL_DAYS": 2,
+      "PART": 0.35,
+      "MIN_HP": 500000,
+      "BOOST": [
+        [
+          0.5,
+          2
+        ],
+        [
+          0.8,
+          1.5
+        ]
+      ],
+      "CATCH": 0.01
+    },
+    "RAID": {
+      "EPOCH": "2026-10-13",
+      "NO_BOSS": [
+        137,
+        233
+      ],
+      "NO_RARE": "2026-10-30",
+      "RARE_OUT": {
+        "from": "2026-11-08",
+        "ids": [
+          38,
+          55,
+          59,
+          65,
+          73,
+          78,
+          89,
+          91,
+          121,
+          169,
+          213,
+          217,
+          232,
+          321,
+          344,
+          350,
+          407,
+          437,
+          450,
+          473,
+          476
+        ]
+      },
+      "NO_SPECIAL": [
+        442,
+        412,
+        415,
+        420,
+        421,
+        446
+      ],
+      "THEMES": [
+        {
+          "key": "halloween",
+          "name": "Halloween",
+          "icon": "🎃",
+          "color": "#ff8a1f",
+          "light": "#5a4890",
+          "sky": "souls",
+          "days": [
+            "2026-10-30",
+            "2026-10-31",
+            "2026-11-01"
+          ],
+          "bosses": {
+            "kanto": [
+              42,
+              94,
+              96
+            ],
+            "johto": [
+              200,
+              197,
+              228
+            ],
+            "hoenn": [
+              302,
+              359,
+              355
+            ]
+          }
+        }
+      ],
+      "UNLOCK": "Maître",
+      "LEVEL": 100,
+      "MINE": 2,
+      "ALLIES": 2,
+      "BOTS": 6,
+      "BOT_LEVEL": [
+        97,
+        100
+      ],
+      "BOT_STATS": 0.9,
+      "NPC": {
+        "FILL": 20,
+        "STEPS": [
+          110,
+          200
+        ],
+        "ACTION_MS": 2800,
+        "SPEED": [
+          [
+            2.5,
+            0.6
+          ],
+          [
+            2,
+            0.25
+          ],
+          [
+            1,
+            0.15
+          ]
+        ],
+        "SHINY": 0.05
+      },
+      "RUN": [
+        "wild",
+        "trainer",
+        "wild",
+        "trainer",
+        "heal",
+        "boss"
+      ],
+      "WILD_SPREAD": 4,
+      "CATCH": 0.01,
+      "PITY": 150,
+      "CATCH_LEVEL": 5,
+      "PLACES": {
+        "water": {
+          "scene": 10,
+          "weather": "rain"
+        },
+        "electric": {
+          "scene": 1,
+          "weather": "storm"
+        },
+        "fire": {
+          "scene": 3,
+          "weather": "sun"
+        },
+        "grass": {
+          "scene": 12,
+          "weather": "sun"
+        },
+        "ice": {
+          "scene": "johto-route-glace",
+          "bg": "mountain",
+          "weather": "snow"
+        },
+        "ground": {
+          "scene": 3,
+          "weather": "sand"
+        },
+        "rock": {
+          "scene": 3,
+          "weather": "sand"
+        },
+        "steel": {
+          "scene": 3,
+          "weather": "sand"
+        },
+        "bug": {
+          "scene": 12
+        },
+        "poison": {
+          "scene": 18
+        },
+        "ghost": {
+          "scene": 16
+        },
+        "dark": {
+          "scene": 15
+        },
+        "psychic": {
+          "scene": 25
+        },
+        "fighting": {
+          "scene": 54
+        },
+        "flying": {
+          "scene": 7
+        },
+        "dragon": {
+          "scene": 18
+        },
+        "fairy": {
+          "scene": 17
+        },
+        "normal": {
+          "scene": 1
+        }
+      },
+      "PLACES_BY_REGION": {
+        "hoenn": {
+          "water": "hoenn-pleine-mer",
+          "electric": "hoenn-piste-cyclable-maritime",
+          "fire": "hoenn-sommet-mont-chimnee",
+          "grass": "hoenn-jungle-route-119",
+          "ice": "hoenn-grotte-trefonds-glace",
+          "ground": "hoenn-desert-route-111",
+          "rock": "hoenn-desert-route-111",
+          "steel": "hoenn-desert-route-111",
+          "bug": "hoenn-bois-clementi",
+          "poison": "hoenn-lisiere-humide",
+          "ghost": "hoenn-mont-memoria-interieur",
+          "dark": "hoenn-planque-aqua",
+          "psychic": "hoenn-pilier-celeste-interieur",
+          "fighting": "hoenn-grotte-granite",
+          "flying": "hoenn-cimetronelle",
+          "dragon": "hoenn-site-meteore",
+          "fairy": "hoenn-vergers-est-hoenn",
+          "normal": "hoenn-prairie-tropicale"
+        }
+      },
+      "WEATHER_BOOST": 1.2,
+      "BOSS": {
+        "HP": 3.3,
+        "POWER": 0.7,
+        "BST_REF": 500,
+        "HP_EXP": 1.8,
+        "POWER_EXP": 1,
+        "ADJ": {
+          "19": 0.91,
+          "39": 0.88,
+          "40": 0.89,
+          "56": 0.83,
+          "57": 0.9,
+          "66": 0.74,
+          "67": 0.73,
+          "80": 0.89,
+          "86": 0.81,
+          "88": 0.68,
+          "89": 0.85,
+          "96": 0.81,
+          "118": 0.92,
+          "161": 0.73,
+          "185": 0.68,
+          "206": 0.8,
+          "217": 0.71,
+          "218": 0.83,
+          "224": 0.85,
+          "261": 0.79,
+          "262": 0.98,
+          "287": 0.76,
+          "302": 0.81,
+          "328": 0.77,
+          "399": 0.87,
+          "438": 0.86
+        }
+      }
+    },
+    "COINS": {
+      "trainerChance": 0,
+      "trainer": [
+        1,
+        5
+      ]
+    },
+    "CASINOS": [
+      {
+        "name": "Casino de Céladopole",
+        "city": "Céladopole",
+        "regions": [
+          "kanto"
+        ],
+        "after": "Foudre",
+        "bet": 2500,
+        "prizes": [
+          {
+            "id": 63,
+            "level": 9,
+            "price": 24
+          },
+          {
+            "id": 35,
+            "level": 8,
+            "price": 48
+          },
+          {
+            "id": 30,
+            "level": 17,
+            "price": 100
+          },
+          {
+            "id": 147,
+            "level": 18,
+            "price": 240
+          },
+          {
+            "id": 123,
+            "level": 25,
+            "price": 360
+          },
+          {
+            "id": 137,
+            "level": 26,
+            "price": 600
+          }
+        ]
+      },
+      {
+        "name": "Casino de Doublonville",
+        "city": "Doublonville",
+        "regions": [
+          "johto"
+        ],
+        "after": "Plaine",
+        "bet": 2500,
+        "prizes": [
+          {
+            "id": 63,
+            "level": 10,
+            "price": 80
+          },
+          {
+            "id": 23,
+            "level": 12,
+            "price": 160
+          },
+          {
+            "id": 27,
+            "level": 12,
+            "price": 160
+          },
+          {
+            "id": 104,
+            "level": 18,
+            "price": 320
+          },
+          {
+            "id": 202,
+            "level": 20,
+            "price": 640
+          },
+          {
+            "id": 147,
+            "level": 25,
+            "price": 1200
+          },
+          {
+            "id": 233,
+            "level": 30,
+            "price": 2400
+          }
+        ]
+      },
+      {
+        "name": "Casino de Lavandia",
+        "city": "Lavandia",
+        "regions": [
+          "hoenn"
+        ],
+        "after": "Dynamo",
+        "bet": 2500,
+        "prizes": [
+          {
+            "id": 311,
+            "level": 25,
+            "price": 250
+          },
+          {
+            "id": 312,
+            "level": 25,
+            "price": 250
+          },
+          {
+            "id": 352,
+            "level": 27,
+            "price": 500
+          },
+          {
+            "id": 359,
+            "level": 30,
+            "price": 1000
+          },
+          {
+            "id": 371,
+            "level": 30,
+            "price": 1500
+          },
+          {
+            "id": 374,
+            "level": 32,
+            "price": 2500
+          }
+        ]
+      },
+      {
+        "name": "Casino de Voilaroc",
+        "city": "Voilaroc",
+        "regions": [
+          "sinnoh"
+        ],
+        "after": "Pavé",
+        "bet": 2500,
+        "prizes": [
+          {
+            "id": 417,
+            "level": 28,
+            "price": 300
+          },
+          {
+            "id": 441,
+            "level": 28,
+            "price": 300
+          },
+          {
+            "id": 436,
+            "level": 30,
+            "price": 1200
+          },
+          {
+            "id": 447,
+            "level": 30,
+            "price": 2000
+          },
+          {
+            "id": 474,
+            "level": 35,
+            "price": 3000,
+            "noEgg": true
+          }
+        ]
+      }
+    ],
+    "EVENT_SHOP": [
+      {
+        "id": "rare-candy",
+        "cost": "shards",
+        "price": 30,
+        "amount": 3,
+        "label": "3 Super Bonbons",
+        "desc": "Fait monter un Pokémon d'un niveau."
+      }
+    ],
+    "EXP_CANDIES": {
+      "exp-candy-s": {
+        "xp": 1000,
+        "price": 1200,
+        "badges": 0
+      },
+      "exp-candy-m": {
+        "xp": 15000,
+        "price": 7200,
+        "badges": 3
+      },
+      "exp-candy-xl": {
+        "xp": 250000,
+        "price": 48000,
+        "badges": 6
+      },
+      "exp-candy-big": {
+        "xp": 1000000,
+        "price": 96000,
+        "badges": 8
+      }
+    },
+    "SHOP_QTY": [
+      1,
+      10
+    ],
+    "SHOP": [
+      {
+        "id": "exp-candy-s",
+        "kind": "item",
+        "qty": true,
+        "desc": "Donne de l'XP à un Pokémon."
+      },
+      {
+        "id": "exp-candy-m",
+        "kind": "item",
+        "qty": true,
+        "desc": "Donne beaucoup d'XP à un Pokémon."
+      },
+      {
+        "id": "exp-candy-xl",
+        "kind": "item",
+        "qty": true,
+        "desc": "Donne énormément d'XP à un Pokémon."
+      },
+      {
+        "id": "exp-candy-big",
+        "kind": "item",
+        "qty": true,
+        "desc": "Une montagne d'XP pour un Pokémon."
+      },
+      {
+        "id": "fire-stone",
+        "kind": "item",
+        "price": 100000,
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "water-stone",
+        "kind": "item",
+        "price": 100000,
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "thunder-stone",
+        "kind": "item",
+        "price": 100000,
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "leaf-stone",
+        "kind": "item",
+        "price": 100000,
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "moon-stone",
+        "kind": "item",
+        "price": 100000,
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "sun-stone",
+        "kind": "item",
+        "price": 100000,
+        "region": "johto",
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "soothe-bell",
+        "kind": "item",
+        "price": 500000,
+        "once": "soothe-bell",
+        "desc": "Fait évoluer certains Pokémon (amitié)."
+      },
+      {
+        "id": "kings-rock",
+        "kind": "item",
+        "price": 500000,
+        "once": "kings-rock",
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "metal-coat",
+        "kind": "item",
+        "price": 500000,
+        "once": "metal-coat",
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "dragon-scale",
+        "kind": "item",
+        "price": 500000,
+        "once": "dragon-scale",
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "prism-scale",
+        "kind": "item",
+        "price": 500000,
+        "once": "prism-scale",
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "deep-sea-tooth",
+        "kind": "item",
+        "price": 500000,
+        "once": "deep-sea-tooth",
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "deep-sea-scale",
+        "kind": "item",
+        "price": 500000,
+        "once": "deep-sea-scale",
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "shiny-stone",
+        "kind": "item",
+        "price": 100000,
+        "region": "sinnoh",
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "dusk-stone",
+        "kind": "item",
+        "price": 100000,
+        "region": "sinnoh",
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "dawn-stone",
+        "kind": "item",
+        "price": 100000,
+        "region": "sinnoh",
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "ice-stone",
+        "kind": "item",
+        "price": 100000,
+        "region": "sinnoh",
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "oval-stone",
+        "kind": "item",
+        "price": 500000,
+        "once": "oval-stone",
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "protector",
+        "kind": "item",
+        "price": 500000,
+        "once": "protector",
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "electirizer",
+        "kind": "item",
+        "price": 500000,
+        "once": "electirizer",
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "magmarizer",
+        "kind": "item",
+        "price": 500000,
+        "once": "magmarizer",
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "reaper-cloth",
+        "kind": "item",
+        "price": 500000,
+        "once": "reaper-cloth",
+        "desc": "Fait évoluer certains Pokémon."
+      },
+      {
+        "id": "razor-claw",
+        "kind": "item",
+        "price": 500000,
+        "once": "razor-claw",
+        "desc": "Fait évoluer certains Pokémon (la nuit)."
+      },
+      {
+        "id": "razor-fang",
+        "kind": "item",
+        "price": 500000,
+        "once": "razor-fang",
+        "desc": "Fait évoluer certains Pokémon (la nuit)."
+      }
+    ],
+    "SELL": {
+      "RATE": 0.25,
+      "VALUE": {
+        "rare-candy": 20000,
+        "berry-oran": 2000,
+        "berry-pecha": 2000,
+        "berry-sitrus": 4000,
+        "razz-berry": 4000,
+        "pinap-berry": 4000,
+        "nanab-berry": 12000,
+        "golden-razz-berry": 12000,
+        "lansat-berry": 12000,
+        "enigma-berry": 12000,
+        "starf-berry": 40000,
+        "helix-fossil": 40000,
+        "dome-fossil": 40000,
+        "old-amber": 40000,
+        "root-fossil": 40000,
+        "claw-fossil": 40000,
+        "skull-fossil": 40000,
+        "armor-fossil": 40000
+      }
+    },
+    "PLAYER_NAMES": [
+      "Sacha_92",
+      "LéaDuBourg",
+      "xX_Dracaufeu_Xx",
+      "Mimi.ptitard",
+      "ProfChenFan",
+      "Nico_Shiny",
+      "Ondine4ever",
+      "KantoKid",
+      "Bubu",
+      "Rocket_Jessie",
+      "Margaux",
+      "TeamMystic",
+      "PikaPika",
+      "Hugo.CramoisIle",
+      "Zelda_K",
+      "Grodoudou"
+    ],
+    "ONLINE_TRADE": {
+      "LEVEL": 5,
+      "DAYS": 3,
+      "FEE": [
+        30000,
+        120000,
+        450000
+      ],
+      "SHINY_FEE": 5,
+      "REFRESH_MS": 900000,
+      "POST_COOLDOWN_MS": 600000
+    },
+    "MARKET": {
+      "OPEN": false,
+      "TAX": 0.3,
+      "FLAT": [
+        50000,
+        150000,
+        500000
+      ],
+      "SHINY_FLAT": [
+        500000,
+        1000000,
+        2500000
+      ],
+      "BUYS": 3,
+      "SHINY_BUYS": 1,
+      "MAX": 3,
+      "DAYS": 3,
+      "MIN_PRICE": 1000,
+      "LIST": 120,
+      "REFRESH_MS": 600000,
+      "LEVEL": 5
+    },
+    "ACC_CURVE": [
+      40,
+      150,
+      80
+    ],
+    "MOVE_POWER_OVERRIDES": {
+      "seismic-toss": 60,
+      "night-shade": 60,
+      "dragon-rage": 60,
+      "sonic-boom": 40,
+      "psywave": 50,
+      "super-fang": 60,
+      "bide": 0,
+      "magnitude": 70,
+      "flail": 40,
+      "reversal": 40,
+      "present": 40,
+      "hidden-power": 60,
+      "beat-up": 30,
+      "heavy-slam": 80,
+      "crush-grip": 100,
+      "low-kick": 60,
+      "grass-knot": 60,
+      "gyro-ball": 60,
+      "electro-ball": 60,
+      "fling": 40
+    },
+    "MULTI_HIT": {
+      "double-kick": 2,
+      "bonemerang": 2,
+      "twineedle": 2,
+      "double-hit": 2,
+      "dual-chop": 2,
+      "gear-grind": 2,
+      "twin-beam": 2,
+      "double-iron-bash": 2,
+      "dragon-darts": 2,
+      "dual-wingbeat": 2,
+      "surging-strikes": 3,
+      "triple-dive": 3,
+      "triple-kick": [
+        10,
+        20,
+        30
+      ],
+      "triple-axel": [
+        20,
+        40,
+        60
+      ],
+      "fury-attack": "2-5",
+      "fury-swipes": "2-5",
+      "pin-missile": "2-5",
+      "bullet-seed": "2-5",
+      "icicle-spear": "2-5",
+      "rock-blast": "2-5",
+      "arm-thrust": "2-5",
+      "bone-rush": "2-5",
+      "double-slap": "2-5",
+      "comet-punch": "2-5",
+      "spike-cannon": "2-5",
+      "barrage": "2-5",
+      "tail-slap": "2-5",
+      "water-shuriken": "2-5",
+      "scale-shot": "2-5"
+    },
+    "MULTI_HIT_ODDS": [
+      0.35,
+      0.35,
+      0.15,
+      0.15
+    ],
+    "MULTI_HIT_GAP_MS": 110,
+    "MOVE_BLACKLIST": [
+      "self-destruct",
+      "explosion",
+      "dream-eater",
+      "fissure",
+      "guillotine",
+      "horn-drill",
+      "counter",
+      "snore",
+      "last-resort",
+      "focus-punch",
+      "fake-out",
+      "belch"
+    ]
+  },
+  "functions": {
+    "WILD_MONEY": "a=>0",
+    "TRAINER_MONEY": "a=>30*a"
+  },
+  "tables": [
+    {
+      "level": 1,
+      "xp": 30,
+      "levelXp": 10,
+      "candyXp": 30,
+      "wildMoney": 0
+    },
+    {
+      "level": 2,
+      "xp": 42,
+      "levelXp": 14,
+      "candyXp": 42,
+      "wildMoney": 0
+    },
+    {
+      "level": 3,
+      "xp": 63,
+      "levelXp": 21,
+      "candyXp": 63,
+      "wildMoney": 0
+    },
+    {
+      "level": 4,
+      "xp": 96,
+      "levelXp": 32,
+      "candyXp": 96,
+      "wildMoney": 0
+    },
+    {
+      "level": 5,
+      "xp": 144,
+      "levelXp": 48,
+      "candyXp": 144,
+      "wildMoney": 0
+    },
+    {
+      "level": 6,
+      "xp": 204,
+      "levelXp": 68,
+      "candyXp": 204,
+      "wildMoney": 0
+    },
+    {
+      "level": 7,
+      "xp": 285,
+      "levelXp": 95,
+      "candyXp": 285,
+      "wildMoney": 0
+    },
+    {
+      "level": 8,
+      "xp": 381,
+      "levelXp": 127,
+      "candyXp": 381,
+      "wildMoney": 0
+    },
+    {
+      "level": 9,
+      "xp": 498,
+      "levelXp": 166,
+      "candyXp": 498,
+      "wildMoney": 0
+    },
+    {
+      "level": 10,
+      "xp": 630,
+      "levelXp": 210,
+      "candyXp": 630,
+      "wildMoney": 0
+    },
+    {
+      "level": 11,
+      "xp": 814,
+      "levelXp": 262,
+      "candyXp": 786,
+      "wildMoney": 0
+    },
+    {
+      "level": 12,
+      "xp": 1033,
+      "levelXp": 321,
+      "candyXp": 963,
+      "wildMoney": 0
+    },
+    {
+      "level": 13,
+      "xp": 1291,
+      "levelXp": 387,
+      "candyXp": 1161,
+      "wildMoney": 0
+    },
+    {
+      "level": 14,
+      "xp": 1590,
+      "levelXp": 460,
+      "candyXp": 1380,
+      "wildMoney": 0
+    },
+    {
+      "level": 15,
+      "xp": 1937,
+      "levelXp": 541,
+      "candyXp": 1623,
+      "wildMoney": 0
+    },
+    {
+      "level": 16,
+      "xp": 2338,
+      "levelXp": 630,
+      "candyXp": 1890,
+      "wildMoney": 0
+    },
+    {
+      "level": 17,
+      "xp": 2799,
+      "levelXp": 728,
+      "candyXp": 2184,
+      "wildMoney": 0
+    },
+    {
+      "level": 18,
+      "xp": 3318,
+      "levelXp": 833,
+      "candyXp": 2499,
+      "wildMoney": 0
+    },
+    {
+      "level": 19,
+      "xp": 3909,
+      "levelXp": 947,
+      "candyXp": 2841,
+      "wildMoney": 0
+    },
+    {
+      "level": 20,
+      "xp": 4576,
+      "levelXp": 1070,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 21,
+      "xp": 5326,
+      "levelXp": 1202,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 22,
+      "xp": 6166,
+      "levelXp": 1343,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 23,
+      "xp": 7102,
+      "levelXp": 1493,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 24,
+      "xp": 8143,
+      "levelXp": 1652,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 25,
+      "xp": 9300,
+      "levelXp": 1821,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 26,
+      "xp": 10583,
+      "levelXp": 2000,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 27,
+      "xp": 12001,
+      "levelXp": 2189,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 28,
+      "xp": 13565,
+      "levelXp": 2388,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 29,
+      "xp": 15285,
+      "levelXp": 2597,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 30,
+      "xp": 17172,
+      "levelXp": 2816,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 31,
+      "xp": 19246,
+      "levelXp": 3046,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 32,
+      "xp": 21512,
+      "levelXp": 3286,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 33,
+      "xp": 23991,
+      "levelXp": 3537,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 34,
+      "xp": 26706,
+      "levelXp": 3800,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 35,
+      "xp": 29658,
+      "levelXp": 4073,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 36,
+      "xp": 32871,
+      "levelXp": 4357,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 37,
+      "xp": 36364,
+      "levelXp": 4652,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 38,
+      "xp": 40164,
+      "levelXp": 4959,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 39,
+      "xp": 44282,
+      "levelXp": 5277,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 40,
+      "xp": 48759,
+      "levelXp": 5608,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 41,
+      "xp": 53592,
+      "levelXp": 5949,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 42,
+      "xp": 58831,
+      "levelXp": 6303,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 43,
+      "xp": 64495,
+      "levelXp": 6669,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 44,
+      "xp": 70601,
+      "levelXp": 7046,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 45,
+      "xp": 77199,
+      "levelXp": 7436,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 46,
+      "xp": 84322,
+      "levelXp": 7839,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 47,
+      "xp": 91980,
+      "levelXp": 8253,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 48,
+      "xp": 100232,
+      "levelXp": 8680,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 49,
+      "xp": 109116,
+      "levelXp": 9120,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 50,
+      "xp": 118671,
+      "levelXp": 9573,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 51,
+      "xp": 128941,
+      "levelXp": 10039,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 52,
+      "xp": 139958,
+      "levelXp": 10517,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 53,
+      "xp": 151781,
+      "levelXp": 11008,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 54,
+      "xp": 164476,
+      "levelXp": 11513,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 55,
+      "xp": 178082,
+      "levelXp": 12031,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 56,
+      "xp": 192656,
+      "levelXp": 12562,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 57,
+      "xp": 208272,
+      "levelXp": 13107,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 58,
+      "xp": 224979,
+      "levelXp": 13665,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 59,
+      "xp": 242860,
+      "levelXp": 14237,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 60,
+      "xp": 261986,
+      "levelXp": 14823,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 61,
+      "xp": 282414,
+      "levelXp": 15422,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 62,
+      "xp": 304261,
+      "levelXp": 16036,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 63,
+      "xp": 327573,
+      "levelXp": 16663,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 64,
+      "xp": 352477,
+      "levelXp": 17305,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 65,
+      "xp": 379027,
+      "levelXp": 17960,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 66,
+      "xp": 407363,
+      "levelXp": 18630,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 67,
+      "xp": 437568,
+      "levelXp": 19314,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 68,
+      "xp": 469775,
+      "levelXp": 20013,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 69,
+      "xp": 504102,
+      "levelXp": 20727,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 70,
+      "xp": 540623,
+      "levelXp": 21454,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 71,
+      "xp": 579542,
+      "levelXp": 22197,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 72,
+      "xp": 620946,
+      "levelXp": 22954,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 73,
+      "xp": 665032,
+      "levelXp": 23727,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 74,
+      "xp": 711899,
+      "levelXp": 24514,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 75,
+      "xp": 761734,
+      "levelXp": 25316,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 76,
+      "xp": 814740,
+      "levelXp": 26134,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 77,
+      "xp": 871032,
+      "levelXp": 26966,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 78,
+      "xp": 930862,
+      "levelXp": 27814,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 79,
+      "xp": 994397,
+      "levelXp": 28677,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 80,
+      "xp": 1061882,
+      "levelXp": 29556,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 81,
+      "xp": 1133502,
+      "levelXp": 30450,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 82,
+      "xp": 1209527,
+      "levelXp": 31360,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 83,
+      "xp": 1290164,
+      "levelXp": 32285,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 84,
+      "xp": 1375709,
+      "levelXp": 33226,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 85,
+      "xp": 1466436,
+      "levelXp": 34183,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 86,
+      "xp": 1562632,
+      "levelXp": 35156,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 87,
+      "xp": 1664600,
+      "levelXp": 36145,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 88,
+      "xp": 1772658,
+      "levelXp": 37150,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 89,
+      "xp": 1887140,
+      "levelXp": 38171,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 90,
+      "xp": 2008398,
+      "levelXp": 39208,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 91,
+      "xp": 2136854,
+      "levelXp": 40262,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 92,
+      "xp": 2272792,
+      "levelXp": 41331,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 93,
+      "xp": 2416787,
+      "levelXp": 42418,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 94,
+      "xp": 2569103,
+      "levelXp": 43520,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 95,
+      "xp": 2730308,
+      "levelXp": 44639,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 96,
+      "xp": 2900881,
+      "levelXp": 45775,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 97,
+      "xp": 3081329,
+      "levelXp": 46928,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 98,
+      "xp": 3272114,
+      "levelXp": 48097,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 99,
+      "xp": 3473857,
+      "levelXp": 49283,
+      "candyXp": 0,
+      "wildMoney": 0
+    },
+    {
+      "level": 100,
+      "xp": 3687145,
+      "levelXp": 50486,
+      "candyXp": 0,
+      "wildMoney": 0
+    }
+  ]
+}

@@ -1,14 +1,14 @@
 import { test, expect, Page } from '@playwright/test';
 
 async function prepare(page: Page) {
-  await page.goto('/');
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
   await page.locator('.battle-stage').waitFor();
   await page.evaluate(async () => {
     const url = performance.getEntriesByType('resource').find(entry => entry.name.includes('/src/store/useGameStore.ts'))!.name;
     const { useGameStore: store } = await import(/* @vite-ignore */ url);
     (window as any).__progressStore = store;
     store.getState().loadStepNode(3);
-    store.setState({ currentStep: 3, isBattling: false, autoCatch: false, allyRecalling: false, allySendingOut: false, enemyRecalling: false, badges: [], newCatchCard: null });
+    store.setState({ currentStep: 3, starterChosen: true, isBattling: false, autoCatch: false, allyRecalling: false, allySendingOut: false, enemyRecalling: false, badges: [], newCatchCard: null });
     (document.querySelector('.battle-stage') as HTMLElement).dataset.progressTest = 'same-arena';
   });
 }
@@ -93,21 +93,21 @@ test('requested save reset runs once, backs up old data and retains progress on 
     const store = (window as any).__progressStore;
     store.setState({ money: 999999, currentStep: 15 });
     store.getState().saveGame(true);
-    localStorage.removeItem('pokecatch_reset_20261115_01');
+    localStorage.removeItem('pokecatch_reset_20261115_02');
   });
   await page.reload();
   await page.locator('.battle-stage').waitFor();
   const reset = await page.evaluate(async () => {
     const url = performance.getEntriesByType('resource').find(entry => entry.name.includes('/src/store/useGameStore.ts'))!.name;
     const { useGameStore: store } = await import(/* @vite-ignore */ url);
-    store.setState({ isBattling: false });
+    store.setState({ starterChosen: true, isBattling: false });
     const state = store.getState();
     const result = { money: state.money, step: state.currentStep, party: state.party.map((mon: any) => mon.speciesId), pc: state.pcBox.length,
-      backupMoney: JSON.parse(localStorage.getItem('pokecatch_backup_before_reset_20261115_01')!).money };
+      backupMoney: JSON.parse(localStorage.getItem('pokecatch_backup_before_reset_20261115_02')!).money };
     store.setState({ money: 1234 }); store.getState().saveGame(true);
     return result;
   });
-  expect(reset).toEqual({ money: 30808, step: 1, party: [4], pc: 0, backupMoney: 999999 });
+  expect(reset).toEqual({ money: 3000, step: 1, party: [4], pc: 0, backupMoney: 999999 });
   await page.reload();
   await page.locator('.battle-stage').waitFor();
   expect(await page.evaluate(() => JSON.parse(localStorage.getItem('pokecatch_save_v1')!).money)).toBe(1234);

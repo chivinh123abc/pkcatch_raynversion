@@ -13,6 +13,7 @@ export type PokemonType =
   | 'Bug'
   | 'Rock'
   | 'Ghost'
+  | 'Dark'
   | 'Dragon'
   | 'Steel'
   | 'Fairy';
@@ -40,6 +41,9 @@ export interface PokemonSpecies {
 }
 
 export interface PokemonInstance {
+  status?: 'sleep' | 'freeze' | 'paralysis' | 'burn' | 'poison';
+  sleepTurns?: number;
+  confusedTurns?: number;
   uid: string;
   speciesId: number;
   nickname?: string;
@@ -68,6 +72,9 @@ export interface TrainerTeamMember {
 }
 
 export interface TrainerInfo {
+  power?: number;
+  gymTrainer?: boolean;
+  league?: boolean;
   name: string;
   title: string;
   sprite: string; // 'camper' | 'acetrainer-f' | 'gentleman' | 'brock'
@@ -77,9 +84,28 @@ export interface TrainerInfo {
 
 export type TrainerBattleInfo = TrainerInfo;
 
-export type StepNodeType = 'grass' | 'center' | 'question' | 'red' | 'badge';
+export type StepNodeType = 'grass' | 'center' | 'question' | 'red' | 'badge' | 'gift';
+
+export interface AdventureGift {
+  key: string;
+  choices?: number[];
+  items?: string[];
+  level?: number;
+  text: string;
+  trade?: Record<number, string>;
+}
 
 export interface StepNode {
+  source?: { chapterId: string; templateIndex: number };
+  scene?: string;
+  indoor?: boolean;
+  areas?: string[];
+  levelBand?: number[];
+  pool?: { id: number; min: number; max: number; w: number }[];
+  gift?: AdventureGift;
+  unlock?: string;
+  static?: { speciesId: number; level: number; once?: string; spirit?: boolean; after?: string; reward?: AdventureGift };
+  reward?: { item: string; amount: number; once?: string };
   step: number;
   type: StepNodeType;
   name: string;
@@ -135,7 +161,7 @@ export interface CombatEffect {
 export interface ActiveDrop {
   speed?: number;
   id: string;
-  type: 'money' | 'berry' | 'ball' | 'money-text';
+  type: 'money' | 'berry' | 'ball' | 'item' | 'money-text';
   title: string;
   amount: number;
   iconUrl: string;

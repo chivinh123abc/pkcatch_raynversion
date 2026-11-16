@@ -4,7 +4,7 @@ import { build } from 'esbuild';
 
 // Bundle the TypeScript store in memory, using the compiler already used by Vite.
 const bundle = await build({ entryPoints: ['src/store/useGameStore.ts'], bundle: true, write: false, platform: 'node', format: 'esm', define: { 'process.env.NODE_ENV': '"production"' } });
-const { useGameStore: store } = await import(`data:text/javascript;base64,${Buffer.from(bundle.outputFiles[0].text).toString('base64')}`);
+const { useGameStore: store } = await import(`data:text/javascript;base64,${Buffer.from(bundle.outputFiles[0].text + '\n//# sourceURL=runtime-test-bundle.js').toString('base64')}`);
 const baseInitial = store.getInitialState();
 const makeTestMon = (speciesId, level, suffix) => ({
   ...baseInitial.party[0],
@@ -92,7 +92,7 @@ test('custom PC order and reviewed dex entries survive save/load with old saves 
 test('save/load preserves PC, inventory, badges, dex and preferences', () => {
   const pcMon = { ...initial.party[0], uid: 'pc-test', currentHp: 15 };
   store.setState({ pcBox: [pcMon], badges: ['boulder-badge'], pokedexSeen: [16, 19],
-    activePartyIndex: 2, selectedBall: 'masterball', balls: { pokeball: 0, greatball: 3, ultraball: 4, masterball: 0 },
+    activePartyIndex: 2, balls: { pokeball: 0, greatball: 0, ultraball: 0, masterball: 1 }, selectedBall: 'masterball', balls: { pokeball: 0, greatball: 3, ultraball: 4, masterball: 0 },
     gameSpeed: 2, autoCatch: false, trainerTag: '#test', berryBuffs: { greatBall: 20, ultraBall: 0, nanab: 0, pinap: 18 } });
   store.getState().saveGame(true);
   store.setState(initial, true);
@@ -184,7 +184,8 @@ test('loading an item-node save skips its already-awarded reward', () => {
   assert.equal(store.getState().money, 100);
 });
 
-test('HP changes on the engine contact callback, exactly once', () => {
+test('HP changes on the engine contact callback, exactly once', (t) => {
+  t.mock.method(Math, 'random', () => .1);
   store.setState({ autoCatch: false, activePartyIndex: 4 }); // Charizard (Fire/Flying) deals reliable damage to Pidgey
   const hp = store.getState().enemy.currentHp;
   store.getState().tickCombat();
@@ -209,7 +210,7 @@ test('changing nodes discards the old impact callback', () => {
 });
 
 test('capture rewards wait for the presentation and cannot be applied twice', () => {
-  store.setState({ selectedBall: 'masterball', berryBuffs: { greatBall: 0, ultraBall: 0, nanab: 0, pinap: 0 }, pokedexCaught: [4] });
+  store.setState({ enemy: { ...store.getState().enemy, speciesId: 25 }, balls: { pokeball: 0, greatball: 0, ultraball: 0, masterball: 1 }, selectedBall: 'masterball', berryBuffs: { greatBall: 0, ultraBall: 0, nanab: 0, pinap: 0 }, pokedexCaught: [4] });
   store.getState().catchEnemy();
   const presentation = store.getState().capturePresentation;
   assert.equal(store.getState().catchPhase, 'throw');
@@ -221,9 +222,23 @@ test('capture rewards wait for the presentation and cannot be applied twice', ()
   assert.equal(store.getState().pcBox.length, 1);
 });
 
-test('berry ball shown by the renderer matches the capture ball without consuming inventory', () => {
+test('Razz boosts probability while the species ball remains free', () => {
+  store.setState({ berryBuffs: { greatBall: 1800, ultraBall: 0, nanab: 0, pinap: 0 }, party: [initial.party[0]] });
   const count = store.getState().balls.greatball;
   store.getState().catchEnemy();
-  assert.equal(store.getState().capturePresentation.ball, 'greatball');
+  assert.equal(store.getState().capturePresentation.ball, 'pokeball');
+  assert.equal(store.getState().captureRoll.probability, .75);
   assert.equal(store.getState().balls.greatball, count);
+});
+
+test('visiting the dex reviews the entire caught collection and persists it together', () => {
+  store.setState({ pokedexCaught: [4,16,25], pokedexReviewed: [4], dexNotifiedSpecies: [4], teamReviewedUids: [] });
+  store.getState().markCollectionVisited('pokedex');
+  assert.deepEqual(store.getState().pokedexReviewed, [4,16,25]);
+  assert.deepEqual(store.getState().dexNotifiedSpecies, [4,16,25]);
+  assert.deepEqual(store.getState().teamReviewedUids, []);
+  store.setState({ pokedexReviewed: [], dexNotifiedSpecies: [] });
+  store.getState().loadGame();
+  assert.deepEqual(store.getState().pokedexReviewed, [4,16,25]);
+  assert.deepEqual(store.getState().dexNotifiedSpecies, [4,16,25]);
 });

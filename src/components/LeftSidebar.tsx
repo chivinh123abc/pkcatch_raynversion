@@ -1,9 +1,11 @@
+import { currentChapter as getCurrentChapter } from '../game/data/chapterSelectors';
 import React, { useState } from 'react';
 import { useGameStore } from '../store/useGameStore';
-import { ALL_CHAPTERS, DEFAULT_CHAPTER } from '../data/chaptersData';
+import { ALL_CHAPTERS, DEFAULT_CHAPTER, chapterIcon } from '../data/chaptersData';
 
 export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex') => void; activeView: 'adventure' | 'progress' | 'team' | 'pokedex'; onShowAdventure: () => void; onResumeAdventure: () => void }> = ({ onOpenCollection, activeView, onShowAdventure, onResumeAdventure }) => {
   const {
+    chapterRun,
     currentChapterId,
     currentStep,
     sidebarExpPopup,
@@ -15,7 +17,7 @@ export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex')
   } = useGameStore();
 
   const currentChapter =
-    ALL_CHAPTERS.find((c) => c.id === currentChapterId) || DEFAULT_CHAPTER;
+    getCurrentChapter({currentChapterId,chapterRun});
   const [activeTab, setActiveTab] = useState<'progress' | 'team' | 'pokedex' | 'shop' | 'achievements'>('progress');
   const [activitiesOpen, setActivitiesOpen] = useState(false);
   const [socialOpen, setSocialOpen] = useState(false);
@@ -46,7 +48,7 @@ export const LeftSidebar: React.FC<{ onOpenCollection: (tab: 'team' | 'pokedex')
         <div className="flex items-center gap-2.5">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#3b2d3c] bg-[#1a1522] p-1">
             <img
-              src={`/assets/badges/${currentChapter.badgeSprite}.png`}
+              src={chapterIcon(currentChapter)}
               alt=""
               className="pixel-art max-h-8 max-w-8 object-contain"
             />

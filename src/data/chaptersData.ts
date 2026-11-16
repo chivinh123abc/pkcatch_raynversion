@@ -1,7 +1,13 @@
 import { StepNode } from '../types/game';
 import { ROUTE_1_STEPS } from './routes';
+import { chapterReference, generateChapterSteps } from '../game/data/chapterGenerator';
+import { KANTO_CHAPTER_CATALOG } from '../game/data/chapterCatalog';
+import { getPokemonSpecies } from './pokemonData';
 
 export interface ChapterInfo {
+  themeColor?: string;
+  runtimeSupported?: boolean;
+  completionKey?: string;
   id: string;
   chapterNumber: number;
   name: string;
@@ -236,7 +242,7 @@ export const CHAPTER_7_STEPS: StepNode[] = [
   },
 ];
 
-export const ALL_CHAPTERS: ChapterInfo[] = [
+const LEGACY_CHAPTERS: ChapterInfo[] = [
   {
     id: 'kanto-1',
     chapterNumber: 1,
@@ -638,4 +644,25 @@ export const ALL_CHAPTERS: ChapterInfo[] = [
   },
 ];
 
-export const DEFAULT_CHAPTER = ALL_CHAPTERS.find((chapter) => chapter.id === 'kanto-1')!;
+export const ALL_CHAPTERS: ChapterInfo[] = [
+  ...KANTO_CHAPTER_CATALOG.chapters.map(template => {
+    const ref = chapterReference(template.id), steps = generateChapterSteps(template.id), boss = steps.find(n=>n.type==='badge')!;
+    const legacy = LEGACY_CHAPTERS.find(c=>c.id===template.id) || LEGACY_CHAPTERS[0];
+    const number = template.sourceIndex+1, hasBadge = number<=8;
+    const found = new Map<number, number>();
+    for(const step of ref.steps)for(const entry of step.pools['day:clear']||[])if(entry.on)found.set(entry.id,Math.max(found.get(entry.id)||0,entry.pct));
+    return {...legacy,id:template.id,chapterNumber:number,runtimeSupported:true,isSpecial:false,
+      name:number<=8?legacy.name:number===9?'Victory Road':number===14?'Pokémon League Champion':`Elite Four: ${boss.trainer!.name}`,
+      leaderName:boss.trainer!.name,leaderSprite:boss.trainer!.sprite,
+      leaderType:boss.trainer!.team.length?String(template.definition.steps[template.definition.steps.length-1].type).replace(/^./,c=>c.toUpperCase()):legacy.leaderType,
+      badgeName:hasBadge?legacy.badgeName:number===9?'Victory Road':number===14?'League Champion':`Elite Four: ${boss.trainer!.name}`,
+      badgeSprite:hasBadge?legacy.badgeSprite:'',completionKey:hasBadge?legacy.badgeSprite:template.id,themeColor:String(template.definition.steps[template.definition.steps.length-1].color),
+      bgScene:ref.steps.find(s=>s.levelBand)?.scene?.src || ref.steps[0].scene?.src || legacy.bgScene,gymBackdrop:boss.scene!,
+      recommendedLevel:`Lv. ${ref.band[0]}–${ref.ace}`,rewardMoneyRange:`${Math.round(boss.trainer!.rewardMoney*.9*(template.definition.league?1.25:1)).toLocaleString()} ₽`,
+      totalSteps:steps.length,steps,pokemonFound:{base:[...found].map(([speciesId,rate])=>({speciesId,name:getPokemonSpecies(speciesId).name,rate:`${(rate*100).toFixed(1)}%`,caught:false}))},
+    } satisfies ChapterInfo;
+  }),
+  ...LEGACY_CHAPTERS.filter(c=>c.isSpecial).map(c=>({...c,runtimeSupported:false})),
+];
+export const DEFAULT_CHAPTER = ALL_CHAPTERS[0];
+export const chapterIcon = (chapter: ChapterInfo) => chapter.badgeSprite ? `/assets/badges/${chapter.badgeSprite}.png` : `/assets/trainers/${chapter.leaderSprite}.png`;

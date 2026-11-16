@@ -1,0 +1,50 @@
+{
+  "fixture": "trained Squirtle, Butterfree, Pikachu, level 20; real native effects; no Skip or forced completions",
+  "speed": 3,
+  "result": {
+    "chapter": "kanto-2",
+    "step": 1,
+    "badges": [
+      "boulder-badge"
+    ],
+    "money": 6436,
+    "team": [
+      {
+        "speciesId": 7,
+        "level": 20,
+        "hp": 44
+      },
+      {
+        "speciesId": 12,
+        "level": 20,
+        "hp": 70
+      },
+      {
+        "speciesId": 25,
+        "level": 20,
+        "hp": 57
+      },
+      {
+        "speciesId": 19,
+        "level": 6,
+        "hp": 20
+      },
+      {
+        "speciesId": 16,
+        "level": 6,
+        "hp": 21
+      },
+      {
+        "speciesId": 11,
+        "level": 15,
+        "hp": 49
+      }
+    ],
+    "items": {
+      "exp-candy-s": 1,
+      "berry-oran": 1,
+      "old-amber": 1
+    },
+    "watchdogs": []
+  }
+}

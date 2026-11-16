@@ -1,0 +1,56 @@
+[
+  {
+    "move": "tackle",
+    "speed": 1,
+    "elapsedMs": 341,
+    "impactMs": 341
+  },
+  {
+    "move": "tackle",
+    "speed": 2,
+    "elapsedMs": 173,
+    "impactMs": 173
+  },
+  {
+    "move": "tackle",
+    "speed": 3,
+    "elapsedMs": 118,
+    "impactMs": 118
+  },
+  {
+    "move": "scratch",
+    "speed": 1,
+    "elapsedMs": 201,
+    "impactMs": 201
+  },
+  {
+    "move": "scratch",
+    "speed": 2,
+    "elapsedMs": 103,
+    "impactMs": 103
+  },
+  {
+    "move": "scratch",
+    "speed": 3,
+    "elapsedMs": 69,
+    "impactMs": 69
+  },
+  {
+    "move": "fire-spin",
+    "speed": 1,
+    "elapsedMs": 340,
+    "impactMs": 340
+  },
+  {
+    "move": "fire-spin",
+    "speed": 2,
+    "elapsedMs": 173,
+    "impactMs": 173
+  },
+  {
+    "move": "fire-spin",
+    "speed": 3,
+    "elapsedMs": 118,
+    "impactMs": 118
+  }
+]

@@ -1,0 +1,2 @@
+/* Keep sprite/text above native tint; HP/EXP retain their existing positioning. */
+.game-shell .collection-page :is(.replica-pc-art,.replica-dex-art,.dex-cell>.num,.dex-cell>.nm){position:relative}

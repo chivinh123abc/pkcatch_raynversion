@@ -1,0 +1,1039 @@
+{
+  "build": "b05c8cc201",
+  "title": {
+    "nativeRegion": {
+      "key": "unova",
+      "dex": [
+        494,
+        649
+      ]
+    },
+    "localRegion": {
+      "key": "sinnoh",
+      "dex": [
+        387,
+        493
+      ]
+    },
+    "pool": [
+      387,
+      388,
+      389,
+      390,
+      391,
+      392,
+      393,
+      394,
+      395,
+      396,
+      397,
+      398,
+      399,
+      400,
+      401,
+      402,
+      403,
+      404,
+      405,
+      406,
+      407,
+      408,
+      409,
+      410,
+      411,
+      412,
+      413,
+      414,
+      415,
+      416,
+      417,
+      418,
+      419,
+      420,
+      421,
+      422,
+      423,
+      424,
+      425,
+      426,
+      427,
+      428,
+      429,
+      430,
+      431,
+      432,
+      433,
+      434,
+      435,
+      436,
+      437,
+      438,
+      439,
+      440,
+      441,
+      442,
+      443,
+      444,
+      445,
+      446,
+      447,
+      448,
+      449,
+      450,
+      451,
+      452,
+      453,
+      454,
+      455,
+      456,
+      457,
+      458,
+      459,
+      460,
+      461,
+      462,
+      463,
+      464,
+      465,
+      466,
+      467,
+      468,
+      469,
+      470,
+      471,
+      472,
+      473,
+      474,
+      475,
+      476,
+      477,
+      478,
+      479
+    ]
+  },
+  "typeHtml": {
+    "Normal": "<span class=\"type\" data-type=\"normal\" style=\"--tc:#A8A77A;background:var(--tc)\">Normal</span>",
+    "Fire": "<span class=\"type\" data-type=\"fire\" style=\"--tc:#EE8130;background:var(--tc)\">Fire</span>",
+    "Water": "<span class=\"type\" data-type=\"water\" style=\"--tc:#6390F0;background:var(--tc)\">Water</span>",
+    "Electric": "<span class=\"type\" data-type=\"electric\" style=\"--tc:#F7D02C;background:var(--tc)\">Electric</span>",
+    "Grass": "<span class=\"type\" data-type=\"grass\" style=\"--tc:#7AC74C;background:var(--tc)\">Grass</span>",
+    "Ice": "<span class=\"type\" data-type=\"ice\" style=\"--tc:#96D9D6;background:var(--tc)\">Ice</span>",
+    "Fighting": "<span class=\"type\" data-type=\"fighting\" style=\"--tc:#C22E28;background:var(--tc)\">Fighting</span>",
+    "Poison": "<span class=\"type\" data-type=\"poison\" style=\"--tc:#A33EA1;background:var(--tc)\">Poison</span>",
+    "Ground": "<span class=\"type\" data-type=\"ground\" style=\"--tc:#E2BF65;background:var(--tc)\">Ground</span>",
+    "Flying": "<span class=\"type\" data-type=\"flying\" style=\"--tc:#A98FF3;background:var(--tc)\">Flying</span>",
+    "Psychic": "<span class=\"type\" data-type=\"psychic\" style=\"--tc:#F95587;background:var(--tc)\">Psychic</span>",
+    "Bug": "<span class=\"type\" data-type=\"bug\" style=\"--tc:#A6B91A;background:var(--tc)\">Bug</span>",
+    "Rock": "<span class=\"type\" data-type=\"rock\" style=\"--tc:#B6A136;background:var(--tc)\">Rock</span>",
+    "Ghost": "<span class=\"type\" data-type=\"ghost\" style=\"--tc:#735797;background:var(--tc)\">Ghost</span>",
+    "Dragon": "<span class=\"type\" data-type=\"dragon\" style=\"--tc:#6F35FC;background:var(--tc)\">Dragon</span>",
+    "Dark": "<span class=\"type\" data-type=\"dark\" style=\"--tc:#705746;background:var(--tc)\">Dark</span>",
+    "Steel": "<span class=\"type\" data-type=\"steel\" style=\"--tc:#B7B7CE;background:var(--tc)\">Steel</span>",
+    "Fairy": "<span class=\"type\" data-type=\"fairy\" style=\"--tc:#D685AD;background:var(--tc)\">Fairy</span>"
+  },
+  "colors": {
+    "Normal": "#A8A77A",
+    "Fire": "#EE8130",
+    "Water": "#6390F0",
+    "Electric": "#F7D02C",
+    "Grass": "#7AC74C",
+    "Ice": "#96D9D6",
+    "Fighting": "#C22E28",
+    "Poison": "#A33EA1",
+    "Ground": "#E2BF65",
+    "Flying": "#A98FF3",
+    "Psychic": "#F95587",
+    "Bug": "#A6B91A",
+    "Rock": "#B6A136",
+    "Ghost": "#735797",
+    "Dragon": "#6F35FC",
+    "Dark": "#705746",
+    "Steel": "#B7B7CE",
+    "Fairy": "#D685AD"
+  },
+  "tokens": {
+    "--font": "\"Jersey 10\", system-ui, sans-serif",
+    "--font-title": "\"Jersey 15\", system-ui, sans-serif",
+    "--font-pixel": "\"Jersey 15\", system-ui, sans-serif",
+    "--bg": "#141826",
+    "--panel": "#1c2030",
+    "--panel-2": "#252a3d",
+    "--sunken": "#10131f",
+    "--text": "#eef1f8",
+    "--text-2": "#c3c9d8",
+    "--muted": "#9aa3bb",
+    "--line": "#333a52",
+    "--line-hover": "rgba(255,255,255,.3)",
+    "--ink": "#1b1b22",
+    "--mon-lines": "repeating-linear-gradient(0deg, rgba(0,0,0,.14) 0 1px, transparent 1px 3px)"
+  },
+  "screens": {
+    "team": {
+      ".map-head h2": {
+        "style": {
+          "fontFamily": "\"Jersey 15\", system-ui, sans-serif",
+          "fontSize": "28px",
+          "fontWeight": "700",
+          "lineHeight": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "textShadow": "oklab(0.379768 -0.00863768 -0.096536) 2px 2px 0px",
+          "opacity": "1"
+        },
+        "rect": {
+          "width": 53.9375,
+          "height": 28
+        },
+        "html": "<h2>Team</h2>"
+      },
+      ".slot.filled": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "20px",
+          "fontWeight": "500",
+          "lineHeight": "normal",
+          "color": "rgb(238, 241, 248)",
+          "backgroundColor": "rgb(37, 42, 61)",
+          "backgroundImage": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.06' stroke-width='2.5'%3E%3Ccircle cx='30' cy='30' r='26'/%3E%3Cpath d='M4 30h18M38 30h18'/%3E%3Ccircle cx='30' cy='30' r='8'/%3E%3C/g%3E%3C/svg%3E\"), none",
+          "borderTopColor": "rgb(51, 58, 82)",
+          "borderTopWidth": "2px",
+          "borderRadius": "10px 10px 10px 36px",
+          "boxShadow": "none",
+          "textShadow": "none",
+          "opacity": "1"
+        },
+        "rect": {
+          "width": 169.65625,
+          "height": 210
+        },
+        "html": "<div class=\"slot filled\" data-team-uid=\"mwiqwseut4bq29\" data-uid=\"mwiqwseut4bq29\">\n        <div class=\"slot-types\"><span class=\"type sm\" data-type=\"fire\" style=\"--tc:#EE8130;background:var(--tc)\">Fire</span></div>\n        <div class=\"w\" style=\"transform-origin:50% 100%;width:100%\"><div class=\"sprbox \" style=\"height:132px\"><img src=\"assets/pokemon/4.png\" alt=\"\" data-id=\"4\" data-k=\"3\" style=\"width:204px;height:168px;transform:translate(0px, -45px)\"></div></div>\n        <div class=\"name\">Charmander</div>\n        <div class=\"lv\">Lv. 20 · Incinerate</div>\n        <div class=\"xpbar\"><div style=\"width:100%\"></div></div>\n      </div>"
+      },
+      ".slot .name": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "20px",
+          "fontWeight": "700",
+          "lineHeight": "normal",
+          "color": "rgb(238, 241, 248)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none",
+          "borderTopColor": "rgb(238, 241, 248)",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "textShadow": "none",
+          "opacity": "1"
+        },
+        "rect": {
+          "width": 86.796875,
+          "height": 21
+        },
+        "html": "<div class=\"name\">Charmander</div>"
+      },
+      ".slot .lv": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "16px",
+          "fontWeight": "500",
+          "lineHeight": "normal",
+          "color": "rgb(154, 163, 187)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none",
+          "borderTopColor": "rgb(154, 163, 187)",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "textShadow": "none",
+          "opacity": "1"
+        },
+        "rect": {
+          "width": 97.71875,
+          "height": 17
+        },
+        "html": "<div class=\"lv\">Lv. 20 · Incinerate</div>"
+      },
+      ".slot .type": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "14px",
+          "fontWeight": "700",
+          "lineHeight": "16px",
+          "color": "oklch(0.292149 0.144817 52.6247)",
+          "backgroundColor": "rgb(238, 129, 48)",
+          "backgroundImage": "none",
+          "borderTopColor": "oklch(0.292149 0.144817 52.6247)",
+          "borderTopWidth": "0px",
+          "borderRadius": "6px",
+          "boxShadow": "oklch(0.552149 0.168953 52.6247) 0px 0px 0px 2px inset",
+          "textShadow": "none",
+          "opacity": "1"
+        },
+        "rect": {
+          "width": 34.75,
+          "height": 20
+        },
+        "html": "<span class=\"type sm\" data-type=\"fire\" style=\"--tc:#EE8130;background:var(--tc)\">Fire</span>"
+      },
+      ".pc-cell": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "20px",
+          "fontWeight": "500",
+          "lineHeight": "normal",
+          "color": "rgb(238, 241, 248)",
+          "backgroundColor": "rgb(28, 32, 48)",
+          "backgroundImage": "repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.14) 0px, rgba(0, 0, 0, 0.14) 1px, rgba(0, 0, 0, 0) 1px, rgba(0, 0, 0, 0) 3px), url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.06' stroke-width='2.5'%3E%3Ccircle cx='30' cy='30' r='26'/%3E%3Cpath d='M4 30h18M38 30h18'/%3E%3Ccircle cx='30' cy='30' r='8'/%3E%3C/g%3E%3C/svg%3E\")",
+          "borderTopColor": "rgb(51, 58, 82)",
+          "borderTopWidth": "2px",
+          "borderRadius": "10px 10px 10px 24px",
+          "boxShadow": "none",
+          "textShadow": "none",
+          "opacity": "1"
+        },
+        "rect": {
+          "width": 115.765625,
+          "height": 115.765625
+        },
+        "html": "<div class=\"pc-cell\" data-uid=\"mwiqwseuozaegb\" title=\"Rattata Lv. 20\"><i class=\"tglow t-common\" style=\"--tc:#9aa4b1\"></i>\n        <div class=\"sprbox \" style=\"height:76px\"><img src=\"assets/pokemon/19.png\" alt=\"\" data-id=\"19\" data-k=\"2\" style=\"width:136px;height:112px;transform:translate(0px, -28px)\"></div>\n        \n        <span class=\"lvl\">Lv. 20</span>\n        <div class=\"pc-xp\"><div style=\"width:100%\"></div></div></div>"
+      },
+      ".pc-cell .lvl": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "16px",
+          "fontWeight": "700",
+          "lineHeight": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "textShadow": "rgb(27, 27, 34) -1px -1px 0px, rgb(27, 27, 34) 1px -1px 0px, rgb(27, 27, 34) -1px 1px 0px, rgb(27, 27, 34) 1px 1px 0px, rgb(27, 27, 34) 0px 1px 0px, rgb(27, 27, 34) 0px -1px 0px, rgb(27, 27, 34) 1px 0px 0px, rgb(27, 27, 34) -1px 0px 0px",
+          "opacity": "1"
+        },
+        "rect": {
+          "width": 30.859375,
+          "height": 17
+        },
+        "html": "<span class=\"lvl\">Lv. 20</span>"
+      },
+      ".dex-cell.caught": null,
+      ".dex-cell.seen": null,
+      ".dex-cell.unknown": null,
+      ".dex-cell .nm": null,
+      ".dex-cell .num": null,
+      ".dex-ring": null,
+      ".dex-hero": null,
+      ".dex-hero-body": null,
+      ".pc-filters .chip": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "16px",
+          "fontWeight": "600",
+          "lineHeight": "normal",
+          "color": "rgb(238, 241, 248)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none",
+          "borderTopColor": "rgb(238, 241, 248)",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "textShadow": "none",
+          "opacity": "1"
+        },
+        "rect": {
+          "width": 88.0625,
+          "height": 40
+        },
+        "html": "<button class=\"chip btn small ghost\" id=\"pc-shiny\" title=\"Shinies\" aria-label=\"Shinies\"><i class=\"shiny-ico\"></i><span class=\"chip-l\"> Shinies</span></button>"
+      },
+      ".pc-filters input": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "18px",
+          "fontWeight": "400",
+          "lineHeight": "normal",
+          "color": "rgb(238, 241, 248)",
+          "backgroundColor": "rgb(37, 42, 61)",
+          "backgroundImage": "none",
+          "borderTopColor": "rgb(51, 58, 82)",
+          "borderTopWidth": "2px",
+          "borderRadius": "10px",
+          "boxShadow": "none",
+          "textShadow": "none",
+          "opacity": "1"
+        },
+        "rect": {
+          "width": 503.375,
+          "height": 40
+        },
+        "html": "<input type=\"search\" id=\"pc-search\" placeholder=\"Search a Pokémon…\" autocomplete=\"off\">"
+      }
+    },
+    "pokedex": {
+      ".map-head h2": {
+        "style": {
+          "fontFamily": "\"Jersey 15\", system-ui, sans-serif",
+          "fontSize": "28px",
+          "fontWeight": "700",
+          "lineHeight": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "textShadow": "oklab(0.394924 0.0876248 0.0321684) 2px 2px 0px",
+          "opacity": "1"
+        },
+        "rect": {
+          "width": 85.046875,
+          "height": 28
+        },
+        "html": "<h2>Pokédex</h2>"
+      },
+      ".slot.filled": null,
+      ".slot .name": null,
+      ".slot .lv": null,
+      ".slot .type": null,
+      ".pc-cell": null,
+      ".pc-cell .lvl": null,
+      ".dex-cell.caught": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "20px",
+          "fontWeight": "500",
+          "lineHeight": "normal",
+          "color": "rgb(238, 241, 248)",
+          "backgroundColor": "rgb(37, 42, 61)",
+          "backgroundImage": "repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.14) 0px, rgba(0, 0, 0, 0.14) 1px, rgba(0, 0, 0, 0) 1px, rgba(0, 0, 0, 0) 3px)",
+          "borderTopColor": "color(srgb 0.441569 0.220588 0.29)",
+          "borderTopWidth": "2px",
+          "borderRadius": "10px 10px 10px 24px",
+          "boxShadow": "none",
+          "textShadow": "none",
+          "opacity": "1"
+        },
+        "rect": {
+          "width": 131.25,
+          "height": 144
+        },
+        "html": "<div class=\"dex-cell caught\" data-id=\"1\"><i class=\"tglow t-rare\" style=\"--tc:#a855f7\"></i><span class=\"cnt\"></span><span class=\"new\">NEW</span><div class=\"sprbox \" style=\"height:96px\"><img loading=\"lazy\" src=\"assets/pokemon/1.png\" alt=\"\" data-id=\"1\" data-k=\"2\" style=\"width:136px;height:112px;transform:translate(0px, -30px)\"></div><div class=\"num\">No. 001</div><div class=\"nm\">Bulbasaur</div></div>"
+      },
+      ".dex-cell.seen": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "20px",
+          "fontWeight": "500",
+          "lineHeight": "normal",
+          "color": "rgb(238, 241, 248)",
+          "backgroundColor": "rgb(37, 42, 61)",
+          "backgroundImage": "repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.14) 0px, rgba(0, 0, 0, 0.14) 1px, rgba(0, 0, 0, 0) 1px, rgba(0, 0, 0, 0) 3px)",
+          "borderTopColor": "rgb(44, 49, 66)",
+          "borderTopWidth": "2px",
+          "borderRadius": "10px 10px 10px 24px",
+          "boxShadow": "none",
+          "textShadow": "none",
+          "opacity": "1"
+        },
+        "rect": {
+          "width": 131.25,
+          "height": 144
+        },
+        "html": "<div class=\"dex-cell seen\" data-id=\"2\"><i class=\"tglow t-rare\" style=\"--tc:#a855f7\"></i><span class=\"cnt\"></span><span class=\"new\">NEW</span><div class=\"sprbox \" style=\"height:96px\"><img loading=\"lazy\" src=\"assets/pokemon/2.png\" alt=\"\" data-id=\"2\" data-k=\"2\" style=\"width:136px;height:112px;transform:translate(0px, -30px)\"></div><div class=\"num\">No. 002</div><div class=\"nm\">Ivysaur</div></div>"
+      },
+      ".dex-cell.unknown": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "20px",
+          "fontWeight": "500",
+          "lineHeight": "normal",
+          "color": "rgb(238, 241, 248)",
+          "backgroundColor": "rgb(37, 42, 61)",
+          "backgroundImage": "repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.14) 0px, rgba(0, 0, 0, 0.14) 1px, rgba(0, 0, 0, 0) 1px, rgba(0, 0, 0, 0) 3px)",
+          "borderTopColor": "rgb(44, 49, 66)",
+          "borderTopWidth": "2px",
+          "borderRadius": "10px 10px 10px 24px",
+          "boxShadow": "none",
+          "textShadow": "none",
+          "opacity": "1"
+        },
+        "rect": {
+          "width": 131.25,
+          "height": 144
+        },
+        "html": "<div class=\"dex-cell unknown\" data-id=\"5\"><i class=\"tglow t-rare\" style=\"--tc:#a855f7\"></i><span class=\"cnt\"></span><span class=\"new\">NEW</span><div class=\"sprbox \" style=\"height:96px\"><img loading=\"lazy\" src=\"assets/pokemon/5.png\" alt=\"\" data-id=\"5\" data-k=\"2\" style=\"width:136px;height:112px;transform:translate(0px, -26px)\"></div><div class=\"num\">No. 005</div><div class=\"nm\">???</div></div>"
+      },
+      ".dex-cell .nm": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "16px",
+          "fontWeight": "500",
+          "lineHeight": "normal",
+          "color": "rgb(238, 241, 248)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none",
+          "borderTopColor": "rgb(238, 241, 248)",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "textShadow": "none",
+          "opacity": "1"
+        },
+        "rect": {
+          "width": 119.25,
+          "height": 17
+        },
+        "html": "<div class=\"nm\">Bulbasaur</div>"
+      },
+      ".dex-cell .num": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "14px",
+          "fontWeight": "500",
+          "lineHeight": "normal",
+          "color": "rgb(154, 163, 187)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none",
+          "borderTopColor": "rgb(154, 163, 187)",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "textShadow": "none",
+          "opacity": "1"
+        },
+        "rect": {
+          "width": 119.25,
+          "height": 15
+        },
+        "html": "<div class=\"num\">No. 001</div>"
+      },
+      ".dex-ring": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "20px",
+          "fontWeight": "500",
+          "lineHeight": "normal",
+          "color": "rgb(238, 241, 248)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "conic-gradient(from -90deg, rgb(227, 53, 59), rgb(255, 216, 74) 1.5%, rgb(51, 58, 82) 0deg)",
+          "borderTopColor": "rgb(238, 241, 248)",
+          "borderTopWidth": "0px",
+          "borderRadius": "50%",
+          "boxShadow": "none",
+          "textShadow": "none",
+          "opacity": "1"
+        },
+        "rect": {
+          "width": 128,
+          "height": 128
+        },
+        "html": "<div class=\"dex-ring\" id=\"dex-ring\" style=\"--p: 1.5;\"><div><b id=\"dex-pct\">1.5 %</b><small id=\"dex-count\">10 / 649</small></div></div>"
+      },
+      ".dex-hero": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "20px",
+          "fontWeight": "500",
+          "lineHeight": "normal",
+          "color": "rgb(238, 241, 248)",
+          "backgroundColor": "color(srgb 0.890196 0.207843 0.231373 / 0.1)",
+          "backgroundImage": "none",
+          "borderTopColor": "oklab(0.602285 0.190364 0.0874013 / 0.75)",
+          "borderTopWidth": "2px",
+          "borderRadius": "18px",
+          "boxShadow": "none",
+          "textShadow": "none",
+          "opacity": "1"
+        },
+        "rect": {
+          "width": 1134,
+          "height": 279
+        },
+        "html": "<div class=\"map-region dex-hero\" style=\"--c:#e3353b\">\n          <div class=\"map-head\"><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABtElEQVR4nO2VPUvDUBSGT6IIIlj8Ilu5IhSROkqto1Un5y4dHKSTIOju5A8QBKfi4OBS/AV2EoQqdrOUUhBCJ4NfVBRB1Mp721uS6k2aXJzMAyEhh+R9zuXkhigk5L+jqb6AMdaU1UzT1P5UgDHWvEotEU3PkHWU5/eMtXSnPnew7ymhK4VvbPJwqlbISMSpcVrktZNSiZ9Rd1shoCmFVyvOAmRs1DJblFmYdF0FLWh4ulim+TeLZgf6aXl8wiGBYBDbyZJ1WabVl1uphBY0HEAAXAwalP18cIrYqO3mpCuhq4RHhyP8ANfvH5R++qLC/Z2fnkhX6VwgZECub8whgu4jK8ngAswjvFtEABERbtVvggkwH+Hd5JPxTvj66JB0CHWv8ML5Wecehs0NUUc4NiavcKmA/TvHZGPC7SG/idSfG77DpQKAf8vtjQUS+RH9h4gIDdK5p0AEk1ut8EFyExES24sp3+GuAngRdjE3EeyCQTsXaLIC5uDw8ZVfG9Gp1jkR5yKx473Wf6C97fYy7b4FgPiTyUSASjjo6QGZCFAJ71lAJgJUwn0LdIsAlfCQkBCswDe/MhmAnRUJdgAAAABJRU5ErkJggg==\" alt=\"\"><h2>Pokédex</h2><button type=\"button\" class=\"info-tip\" aria-label=\"Info\">i<span class=\"bag-tip info-tip-box\" role=\"tooltip\"><b>Pokédex</b><p>A species counts as long as you keep one: once traded, it's back to \"no longer owned\". Catch every species of a region once, Mythical included, to double your Shiny odds in that region.</p></span></button><div class=\"map-sum\" id=\"dex-sum\"><span>Seen <b>11</b></span><span><i class=\"shiny-ico\"></i> Shinies <b>1</b></span><span>Regions complete <b>0/5</b></span></div></div>\n          <div class=\"dex-hero-body\">\n            <div class=\"dex-ring\" id=\"dex-ring\" style=\"--p: 1.5;\"><div><b id=\"dex-pct\">1.5 %</b><small id=\"dex-count\">10 / 649</small></div></div>\n            <div class=\"dex-hero-side\">\n              <div class=\"dex-reg-bars\" id=\"dex-reg-bars\"><div class=\"drb \" style=\"--rc:#e3353b\"><b>Kanto</b><span class=\"bar\"><i style=\"width:6.622516556291391%\"></i></span><small>10 / 151</small></div><div class=\"drb lk\" style=\"--rc:#c9a227\"><b>Johto</b><span class=\"bar\"><i style=\"width:0%\"></i></span><small><img class=\"lock-ic\" src=\"assets/ui/padlock.svg\" alt=\"\"></small></div><div class=\"drb lk\" style=\"--rc:#2f9e6e\"><b>Hoenn</b><span class=\"bar\"><i style=\"width:0%\">"
+      },
+      ".dex-hero-body": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "20px",
+          "fontWeight": "500",
+          "lineHeight": "normal",
+          "color": "rgb(238, 241, 248)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none",
+          "borderTopColor": "rgb(238, 241, 248)",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "textShadow": "none",
+          "opacity": "1"
+        },
+        "rect": {
+          "width": 1130,
+          "height": 223
+        },
+        "html": "<div class=\"dex-hero-body\">\n            <div class=\"dex-ring\" id=\"dex-ring\" style=\"--p: 1.5;\"><div><b id=\"dex-pct\">1.5 %</b><small id=\"dex-count\">10 / 649</small></div></div>\n            <div class=\"dex-hero-side\">\n              <div class=\"dex-reg-bars\" id=\"dex-reg-bars\"><div class=\"drb \" style=\"--rc:#e3353b\"><b>Kanto</b><span class=\"bar\"><i style=\"width:6.622516556291391%\"></i></span><small>10 / 151</small></div><div class=\"drb lk\" style=\"--rc:#c9a227\"><b>Johto</b><span class=\"bar\"><i style=\"width:0%\"></i></span><small><img class=\"lock-ic\" src=\"assets/ui/padlock.svg\" alt=\"\"></small></div><div class=\"drb lk\" style=\"--rc:#2f9e6e\"><b>Hoenn</b><span class=\"bar\"><i style=\"width:0%\"></i></span><small><img class=\"lock-ic\" src=\"assets/ui/padlock.svg\" alt=\"\"></small></div><div class=\"drb lk\" style=\"--rc:#6f7fd8\"><b>Sinnoh</b><span class=\"bar\"><i style=\"width:0%\"></i></span><small><img class=\"lock-ic\" src=\"assets/ui/padlock.svg\" alt=\"\"></small></div><div class=\"drb lk\" style=\"--rc:#4a5260\"><b>Unova</b><span class=\"bar\"><i style=\"width:0%\"></i></span><small><img class=\"lock-ic\" src=\"assets/ui/padlock.svg\" alt=\"\"></small></div></div>\n              <div class=\"dex-last\"><span>Latest catches</span><div id=\"dex-last\"><span class=\"dl\" title=\"Bulbasaur\" data-id=\"1\"><div class=\"sprbox \" style=\"height:50px\"><img src=\"assets/pokemon/1.png\" alt=\"\" data-id=\"1\" data-k=\"1\" style=\"width:68px;height:56px;transform:translate(0px, -15px)\"></div></span><span class=\"dl\" title=\"Venusaur\" data-id=\"3\"><div class=\"sprbox \" style=\"height:50px\"><img src=\"assets/pokemon/3.png\" alt=\"\" data-id=\"3\" data-k=\"1\" style=\"width:68px;height:56px;transform:translate(-1px, -6px)\"></div></span><span class=\"dl\" title=\"Charmander\" data-id=\"4\"><div class=\"sprbox \" style=\"height:50px\"><img src=\"assets/pokemon/4.png\" alt=\"\" data-id=\"4\" data-k=\"1\" style=\"width:68px;height:56px;transform:translate(0px, -15px)\"></div></span><span class=\"dl\" title=\"Squirtle\" data-id=\"7\"><div class=\"sprbox \" style=\"height:50px\"><img src=\"a"
+      },
+      ".pc-filters .chip": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "16px",
+          "fontWeight": "600",
+          "lineHeight": "normal",
+          "color": "rgb(238, 241, 248)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundImage": "none",
+          "borderTopColor": "rgb(238, 241, 248)",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "textShadow": "none",
+          "opacity": "1"
+        },
+        "rect": {
+          "width": 124,
+          "height": 40
+        },
+        "html": "<button class=\"chip btn small ghost\" id=\"dex-status-btn\">Status <span>▾</span></button>"
+      },
+      ".pc-filters input": {
+        "style": {
+          "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+          "fontSize": "18px",
+          "fontWeight": "400",
+          "lineHeight": "normal",
+          "color": "rgb(238, 241, 248)",
+          "backgroundColor": "rgb(37, 42, 61)",
+          "backgroundImage": "none",
+          "borderTopColor": "rgb(51, 58, 82)",
+          "borderTopWidth": "2px",
+          "borderRadius": "10px",
+          "boxShadow": "none",
+          "textShadow": "none",
+          "opacity": "1"
+        },
+        "rect": {
+          "width": 641.9375,
+          "height": 40
+        },
+        "html": "<input type=\"search\" id=\"dex-search\" placeholder=\"Name or number…\" autocomplete=\"off\" style=\"\">"
+      }
+    }
+  },
+  "shell": {
+    "header": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "20px",
+      "fontWeight": "500",
+      "lineHeight": "normal",
+      "color": "rgb(238, 241, 248)",
+      "backgroundColor": "rgb(28, 32, 48)",
+      "backgroundImage": "none",
+      "borderTopColor": "rgb(238, 241, 248)",
+      "borderTopWidth": "0px",
+      "borderRadius": "0px",
+      "boxShadow": "none",
+      "textShadow": "none",
+      "opacity": "1",
+      "borderImageSource": "none",
+      "borderImageSlice": "100%",
+      "borderImageWidth": "1",
+      "borderImageOutset": "0",
+      "borderImageRepeat": "stretch",
+      "clipPath": "none"
+    },
+    ".side-nav>button.active": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "20px",
+      "fontWeight": "600",
+      "lineHeight": "normal",
+      "color": "rgb(255, 255, 255)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "backgroundImage": "none",
+      "borderTopColor": "rgb(255, 255, 255)",
+      "borderTopWidth": "0px",
+      "borderRadius": "0px",
+      "boxShadow": "none",
+      "textShadow": "oklch(0.402285 0.230417 2.66113) 2px 2px 0px",
+      "opacity": "1",
+      "borderImageSource": "none",
+      "borderImageSlice": "100%",
+      "borderImageWidth": "1",
+      "borderImageOutset": "0",
+      "borderImageRepeat": "stretch",
+      "clipPath": "none"
+    },
+    ".side-nav>button:not(.active)": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "20px",
+      "fontWeight": "600",
+      "lineHeight": "normal",
+      "color": "rgb(195, 201, 216)",
+      "backgroundColor": "color(srgb 0.145098 0.164706 0.239216 / 0.6)",
+      "backgroundImage": "none",
+      "borderTopColor": "rgba(0, 0, 0, 0)",
+      "borderTopWidth": "2px",
+      "borderRadius": "10px",
+      "boxShadow": "none",
+      "textShadow": "none",
+      "opacity": "1",
+      "borderImageSource": "none",
+      "borderImageSlice": "100%",
+      "borderImageWidth": "1",
+      "borderImageOutset": "0",
+      "borderImageRepeat": "stretch",
+      "clipPath": "none"
+    }
+  },
+  "frames": {
+    ".side-nav>button.active": {
+      "::before": {
+        "content": "\"\"",
+        "position": "absolute",
+        "inset": "4px -4px -4px 4px",
+        "background": "oklch(0.397508 0.27231 352.661 / 0.5) none repeat scroll 0% 0% / auto padding-box border-box",
+        "borderImage": "none",
+        "boxShadow": "none",
+        "clipPath": "none",
+        "maskImage": "repeating-conic-gradient(rgb(0, 0, 0) 0deg, rgb(0, 0, 0) 25%, rgba(0, 0, 0, 0) 0deg, rgba(0, 0, 0, 0) 50%), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px)",
+        "maskSize": "4px 4px, calc(100% - 12px) 100%, calc(100% - 4px) calc(100% - 4px), 100% calc(100% - 12px)",
+        "maskRepeat": "repeat, no-repeat, no-repeat, no-repeat",
+        "zIndex": "-1",
+        "pointerEvents": "none",
+        "opacity": "1"
+      },
+      "::after": {
+        "content": "\"\"",
+        "position": "absolute",
+        "inset": "0px",
+        "background": "linear-gradient(rgb(227, 53, 59) 0px, rgb(227, 53, 59) 0px) no-repeat scroll 6px 4px / calc(100% - 12px) calc(100% - 10px) padding-box border-box, linear-gradient(rgb(227, 53, 59) 0px, rgb(227, 53, 59) 0px) no-repeat scroll 4px 6px / calc(100% - 8px) calc(100% - 14px) padding-box border-box, linear-gradient(rgb(227, 53, 59) 0px, rgb(227, 53, 59) 0px) no-repeat scroll 2px 8px / calc(100% - 4px) calc(100% - 18px) padding-box border-box, linear-gradient(oklch(0.702285 0.20947 32.6611) 0px, oklch(0.702285 0.20947 32.6611) 0px) no-repeat scroll 6px 2px / calc(100% - 12px) calc(100% - 8px) padding-box border-box, linear-gradient(oklch(0.702285 0.20947 32.6611) 0px, oklch(0.702285 0.20947 32.6611) 0px) no-repeat scroll 4px 4px / calc(100% - 8px) calc(100% - 12px) padding-box border-box, linear-gradient(oklch(0.702285 0.20947 32.6611) 0px, oklch(0.702285 0.20947 32.6611) 0px) no-repeat scroll 2px 6px / calc(100% - 4px) calc(100% - 16px) padding-box border-box, linear-gradient(oklch(0.402285 0.230417 2.66113) 0px, oklch(0.402285 0.230417 2.66113) 0px) no-repeat scroll 6px 2px / calc(100% - 12px) calc(100% - 4px) padding-box border-box, linear-gradient(oklch(0.402285 0.230417 2.66113) 0px, oklch(0.402285 0.230417 2.66113) 0px) no-repeat scroll 4px 4px / calc(100% - 8px) calc(100% - 8px) padding-box border-box, linear-gradient(oklch(0.402285 0.230417 2.66113) 0px, oklch(0.402285 0.230417 2.66113) 0px) no-repeat scroll 2px 6px / calc(100% - 4px) calc(100% - 12px) padding-box border-box, rgb(27, 27, 34) none repeat scroll 0% 0% / auto padding-box border-box",
+        "borderImage": "none",
+        "boxShadow": "none",
+        "clipPath": "polygon(evenodd, -48px -48px, -2px -2px, 6px -2px, 6px 2px, 2px 2px, 2px 4px, 2px 4px, 2px 6px, -2px 6px, -2px -2px, -48px -48px, calc(100% + 48px) -48px, calc(100% + 2px) -2px, calc(100% - 6px) -2px, calc(100% - 6px) 2px, calc(100% - 2px) 2px, calc(100% - 2px) 4px, calc(100% - 2px) 4px, calc(100% - 2px) 6px, calc(100% + 2px) 6px, calc(100% + 2px) -2px, calc(100% + 48px) -48px, calc(100% + 48px) calc(100% + 48px), calc(100% + 2px) calc(100% + 2px), calc(100% - 6px) calc(100% + 2px), calc(100% - 6px) calc(100% - 2px), calc(100% - 2px) calc(100% - 2px), calc(100% - 2px) calc(100% - 4px), calc(100% - 2px) calc(100% - 4px), calc(100% - 2px) calc(100% - 6px), calc(100% + 2px) calc(100% - 6px), calc(100% + 2px) calc(100% + 2px), calc(100% + 48px) calc(100% + 48px), -48px calc(100% + 48px), -2px calc(100% + 2px), 6px calc(100% + 2px), 6px calc(100% - 2px), 2px calc(100% - 2px), 2px calc(100% - 4px), 2px calc(100% - 4px), 2px calc(100% - 6px), -2px calc(100% - 6px), -2px calc(100% + 2px), -48px calc(100% + 48px))",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "maskRepeat": "repeat",
+        "zIndex": "-1",
+        "pointerEvents": "none",
+        "opacity": "1"
+      }
+    },
+    ".pc-filters .chip": {
+      "::before": {
+        "content": "\"\"",
+        "position": "absolute",
+        "inset": "4px -4px -4px 4px",
+        "background": "rgba(0, 0, 0, 0.9) none repeat scroll 0% 0% / auto padding-box border-box",
+        "borderImage": "none",
+        "boxShadow": "none",
+        "clipPath": "none",
+        "maskImage": "repeating-conic-gradient(rgb(0, 0, 0) 0deg, rgb(0, 0, 0) 25%, rgba(0, 0, 0, 0) 0deg, rgba(0, 0, 0, 0) 50%), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px), linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 0px)",
+        "maskSize": "4px 4px, calc(100% - 12px) 100%, calc(100% - 4px) calc(100% - 4px), 100% calc(100% - 12px)",
+        "maskRepeat": "repeat, no-repeat, no-repeat, no-repeat",
+        "zIndex": "-1",
+        "pointerEvents": "none",
+        "opacity": "1"
+      },
+      "::after": {
+        "content": "\"\"",
+        "position": "absolute",
+        "inset": "0px",
+        "background": "linear-gradient(rgb(37, 42, 61) 0px, rgb(37, 42, 61) 0px) no-repeat scroll 6px 4px / calc(100% - 12px) calc(100% - 10px) padding-box border-box, linear-gradient(rgb(37, 42, 61) 0px, rgb(37, 42, 61) 0px) no-repeat scroll 4px 6px / calc(100% - 8px) calc(100% - 14px) padding-box border-box, linear-gradient(rgb(37, 42, 61) 0px, rgb(37, 42, 61) 0px) no-repeat scroll 2px 8px / calc(100% - 4px) calc(100% - 18px) padding-box border-box, linear-gradient(oklch(0.349097 0.0355916 272.673) 0px, oklch(0.349097 0.0355916 272.673) 0px) no-repeat scroll 6px 2px / calc(100% - 12px) calc(100% - 8px) padding-box border-box, linear-gradient(oklch(0.349097 0.0355916 272.673) 0px, oklch(0.349097 0.0355916 272.673) 0px) no-repeat scroll 4px 4px / calc(100% - 8px) calc(100% - 12px) padding-box border-box, linear-gradient(oklch(0.349097 0.0355916 272.673) 0px, oklch(0.349097 0.0355916 272.673) 0px) no-repeat scroll 2px 6px / calc(100% - 4px) calc(100% - 16px) padding-box border-box, linear-gradient(oklch(0.169097 0.0355916 272.673) 0px, oklch(0.169097 0.0355916 272.673) 0px) no-repeat scroll 6px 2px / calc(100% - 12px) calc(100% - 4px) padding-box border-box, linear-gradient(oklch(0.169097 0.0355916 272.673) 0px, oklch(0.169097 0.0355916 272.673) 0px) no-repeat scroll 4px 4px / calc(100% - 8px) calc(100% - 8px) padding-box border-box, linear-gradient(oklch(0.169097 0.0355916 272.673) 0px, oklch(0.169097 0.0355916 272.673) 0px) no-repeat scroll 2px 6px / calc(100% - 4px) calc(100% - 12px) padding-box border-box, rgb(27, 27, 34) none repeat scroll 0% 0% / auto padding-box border-box",
+        "borderImage": "none",
+        "boxShadow": "none",
+        "clipPath": "polygon(evenodd, -48px -48px, -2px -2px, 6px -2px, 6px 2px, 2px 2px, 2px 4px, 2px 4px, 2px 6px, -2px 6px, -2px -2px, -48px -48px, calc(100% + 48px) -48px, calc(100% + 2px) -2px, calc(100% - 6px) -2px, calc(100% - 6px) 2px, calc(100% - 2px) 2px, calc(100% - 2px) 4px, calc(100% - 2px) 4px, calc(100% - 2px) 6px, calc(100% + 2px) 6px, calc(100% + 2px) -2px, calc(100% + 48px) -48px, calc(100% + 48px) calc(100% + 48px), calc(100% + 2px) calc(100% + 2px), calc(100% - 6px) calc(100% + 2px), calc(100% - 6px) calc(100% - 2px), calc(100% - 2px) calc(100% - 2px), calc(100% - 2px) calc(100% - 4px), calc(100% - 2px) calc(100% - 4px), calc(100% - 2px) calc(100% - 6px), calc(100% + 2px) calc(100% - 6px), calc(100% + 2px) calc(100% + 2px), calc(100% + 48px) calc(100% + 48px), -48px calc(100% + 48px), -2px calc(100% + 2px), 6px calc(100% + 2px), 6px calc(100% - 2px), 2px calc(100% - 2px), 2px calc(100% - 4px), 2px calc(100% - 4px), 2px calc(100% - 6px), -2px calc(100% - 6px), -2px calc(100% + 2px), -48px calc(100% + 48px))",
+        "maskImage": "none",
+        "maskSize": "auto",
+        "maskRepeat": "repeat",
+        "zIndex": "-1",
+        "pointerEvents": "none",
+        "opacity": "1"
+      }
+    }
+  },
+  "types": {
+    "normal": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "oklch(0.297794 0.0554886 106.754)",
+      "backgroundColor": "rgb(168, 167, 122)",
+      "backgroundImage": "none",
+      "borderTopColor": "oklch(0.297794 0.0554886 106.754)",
+      "borderTopWidth": "0px",
+      "borderRadius": "6px",
+      "boxShadow": "oklch(0.557794 0.0647367 106.754) 0px 0px 0px 2px inset",
+      "textShadow": "none",
+      "opacity": "1"
+    },
+    "fire": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "oklch(0.292149 0.144817 52.6247)",
+      "backgroundColor": "rgb(238, 129, 48)",
+      "backgroundImage": "none",
+      "borderTopColor": "oklch(0.292149 0.144817 52.6247)",
+      "borderTopWidth": "0px",
+      "borderRadius": "6px",
+      "boxShadow": "oklch(0.552149 0.168953 52.6247) 0px 0px 0px 2px inset",
+      "textShadow": "none",
+      "opacity": "1"
+    },
+    "water": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "oklch(0.245353 0.13617 263.833)",
+      "backgroundColor": "rgb(99, 144, 240)",
+      "backgroundImage": "none",
+      "borderTopColor": "oklch(0.245353 0.13617 263.833)",
+      "borderTopWidth": "0px",
+      "borderRadius": "6px",
+      "boxShadow": "oklch(0.505353 0.158864 263.833) 0px 0px 0px 2px inset",
+      "textShadow": "none",
+      "opacity": "1"
+    },
+    "electric": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "oklch(0.446273 0.151322 94.2283)",
+      "backgroundColor": "rgb(247, 208, 44)",
+      "backgroundImage": "none",
+      "borderTopColor": "oklch(0.446273 0.151322 94.2283)",
+      "borderTopWidth": "0px",
+      "borderRadius": "6px",
+      "boxShadow": "oklch(0.706273 0.176542 94.2283) 0px 0px 0px 2px inset",
+      "textShadow": "none",
+      "opacity": "1"
+    },
+    "grass": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "oklch(0.333915 0.157507 135.595)",
+      "backgroundColor": "rgb(122, 199, 76)",
+      "backgroundImage": "none",
+      "borderTopColor": "oklch(0.333915 0.157507 135.595)",
+      "borderTopWidth": "0px",
+      "borderRadius": "6px",
+      "boxShadow": "oklch(0.593915 0.183758 135.595) 0px 0px 0px 2px inset",
+      "textShadow": "none",
+      "opacity": "1"
+    },
+    "ice": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "oklch(0.419803 0.0607833 192.404)",
+      "backgroundColor": "rgb(150, 217, 214)",
+      "backgroundImage": "none",
+      "borderTopColor": "oklch(0.419803 0.0607833 192.404)",
+      "borderTopWidth": "0px",
+      "borderRadius": "6px",
+      "boxShadow": "oklch(0.679803 0.0709139 192.404) 0px 0px 0px 2px inset",
+      "textShadow": "none",
+      "opacity": "1"
+    },
+    "fighting": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "oklch(0.1161 0.167028 27.8195)",
+      "backgroundColor": "rgb(194, 46, 40)",
+      "backgroundImage": "none",
+      "borderTopColor": "oklch(0.1161 0.167028 27.8195)",
+      "borderTopWidth": "0px",
+      "borderRadius": "6px",
+      "boxShadow": "oklch(0.3761 0.194866 27.8195) 0px 0px 0px 2px inset",
+      "textShadow": "none",
+      "opacity": "1"
+    },
+    "poison": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "oklch(0.119863 0.160593 328.502)",
+      "backgroundColor": "rgb(163, 62, 161)",
+      "backgroundImage": "none",
+      "borderTopColor": "oklch(0.119863 0.160593 328.502)",
+      "borderTopWidth": "0px",
+      "borderRadius": "6px",
+      "boxShadow": "oklch(0.379863 0.187358 328.502) 0px 0px 0px 2px inset",
+      "textShadow": "none",
+      "opacity": "1"
+    },
+    "ground": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "oklch(0.396912 0.104756 88.4421)",
+      "backgroundColor": "rgb(226, 191, 101)",
+      "backgroundImage": "none",
+      "borderTopColor": "oklch(0.396912 0.104756 88.4421)",
+      "borderTopWidth": "0px",
+      "borderRadius": "6px",
+      "boxShadow": "oklch(0.656912 0.122215 88.4421) 0px 0px 0px 2px inset",
+      "textShadow": "none",
+      "opacity": "1"
+    },
+    "flying": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "oklch(0.294062 0.129618 294.445)",
+      "backgroundColor": "rgb(169, 143, 243)",
+      "backgroundImage": "none",
+      "borderTopColor": "oklch(0.294062 0.129618 294.445)",
+      "borderTopWidth": "0px",
+      "borderRadius": "6px",
+      "boxShadow": "oklch(0.554062 0.151221 294.445) 0px 0px 0px 2px inset",
+      "textShadow": "none",
+      "opacity": "1"
+    },
+    "psychic": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "oklch(0.263327 0.181817 5.62625)",
+      "backgroundColor": "rgb(249, 85, 135)",
+      "backgroundImage": "none",
+      "borderTopColor": "oklch(0.263327 0.181817 5.62625)",
+      "borderTopWidth": "0px",
+      "borderRadius": "6px",
+      "boxShadow": "oklch(0.523327 0.212119 5.62625) 0px 0px 0px 2px inset",
+      "textShadow": "none",
+      "opacity": "1"
+    },
+    "bug": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "oklch(0.325667 0.149533 117.039)",
+      "backgroundColor": "rgb(166, 185, 26)",
+      "backgroundImage": "none",
+      "borderTopColor": "oklch(0.325667 0.149533 117.039)",
+      "borderTopWidth": "0px",
+      "borderRadius": "6px",
+      "boxShadow": "oklch(0.585667 0.174455 117.039) 0px 0px 0px 2px inset",
+      "textShadow": "none",
+      "opacity": "1"
+    },
+    "rock": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "oklch(0.287965 0.113331 97.873)",
+      "backgroundColor": "rgb(182, 161, 54)",
+      "backgroundImage": "none",
+      "borderTopColor": "oklch(0.287965 0.113331 97.873)",
+      "borderTopWidth": "0px",
+      "borderRadius": "6px",
+      "boxShadow": "oklch(0.547965 0.132219 97.873) 0px 0px 0px 2px inset",
+      "textShadow": "none",
+      "opacity": "1"
+    },
+    "ghost": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "oklch(0.09271 0.0924571 303.142)",
+      "backgroundColor": "rgb(115, 87, 151)",
+      "backgroundImage": "none",
+      "borderTopColor": "oklch(0.09271 0.0924571 303.142)",
+      "borderTopWidth": "0px",
+      "borderRadius": "6px",
+      "boxShadow": "oklch(0.35271 0.107867 303.142) 0px 0px 0px 2px inset",
+      "textShadow": "none",
+      "opacity": "1"
+    },
+    "dragon": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "oklch(0.117399 0.240057 286.681)",
+      "backgroundColor": "rgb(111, 53, 252)",
+      "backgroundImage": "none",
+      "borderTopColor": "oklch(0.117399 0.240057 286.681)",
+      "borderTopWidth": "0px",
+      "borderRadius": "6px",
+      "boxShadow": "oklch(0.377399 0.280066 286.681) 0px 0px 0px 2px inset",
+      "textShadow": "none",
+      "opacity": "1"
+    },
+    "dark": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "oklch(0.0576952 0.038098 55.6788)",
+      "backgroundColor": "rgb(112, 87, 70)",
+      "backgroundImage": "none",
+      "borderTopColor": "oklch(0.0576952 0.038098 55.6788)",
+      "borderTopWidth": "0px",
+      "borderRadius": "6px",
+      "boxShadow": "oklch(0.317695 0.0444477 55.6788) 0px 0px 0px 2px inset",
+      "textShadow": "none",
+      "opacity": "1"
+    },
+    "steel": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "oklch(0.36674 0.0291355 285.7)",
+      "backgroundColor": "rgb(183, 183, 206)",
+      "backgroundImage": "none",
+      "borderTopColor": "oklch(0.36674 0.0291355 285.7)",
+      "borderTopWidth": "0px",
+      "borderRadius": "6px",
+      "boxShadow": "oklch(0.62674 0.0339914 285.7) 0px 0px 0px 2px inset",
+      "textShadow": "none",
+      "opacity": "1"
+    },
+    "fairy": {
+      "fontFamily": "\"Jersey 10\", system-ui, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "color": "oklch(0.292893 0.0996521 349.269)",
+      "backgroundColor": "rgb(214, 133, 173)",
+      "backgroundImage": "none",
+      "borderTopColor": "oklch(0.292893 0.0996521 349.269)",
+      "borderTopWidth": "0px",
+      "borderRadius": "6px",
+      "boxShadow": "oklch(0.552893 0.116261 349.269) 0px 0px 0px 2px inset",
+      "textShadow": "none",
+      "opacity": "1"
+    }
+  },
+  "source": {
+    "app": "app.c0081498f2.js",
+    "css": "app.3e06fa8ed6.css",
+    "appSha256": "c0081498f217061d529fb18ecc4833e9490c93e0b425fc3d04b713d990fdda11",
+    "cssSha256": "3e06fa8ed6cfcca3070da71b03fe5758d6b786faba9accdb4b680590f6cc525b"
+  }
+}

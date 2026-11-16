@@ -1,0 +1,118 @@
+{
+  "date": "2026-11-15",
+  "baseline": "v0.4.103 / BUILD5598c5890a",
+  "coreTests": {
+    "passed": 48,
+    "total": 48
+  },
+  "fullBrowserRun": {
+    "passed": 30,
+    "total": 30
+  },
+  "targetedAfterLastChange": {
+    "passed": 2,
+    "total": 2
+  },
+  "build": "passed; existing chunk >500kB warning",
+  "maxMeasuredDeltaMs": 3,
+  "timing": [
+    {
+      "move": "tackle",
+      "speed": 1,
+      "referenceMs": 344,
+      "localMs": 341,
+      "deltaMs": -3
+    },
+    {
+      "move": "tackle",
+      "speed": 2,
+      "referenceMs": 174,
+      "localMs": 173,
+      "deltaMs": -1
+    },
+    {
+      "move": "tackle",
+      "speed": 3,
+      "referenceMs": 118,
+      "localMs": 118,
+      "deltaMs": 0
+    },
+    {
+      "move": "scratch",
+      "speed": 1,
+      "referenceMs": 202,
+      "localMs": 201,
+      "deltaMs": -1
+    },
+    {
+      "move": "scratch",
+      "speed": 2,
+      "referenceMs": 104,
+      "localMs": 103,
+      "deltaMs": -1
+    },
+    {
+      "move": "scratch",
+      "speed": 3,
+      "referenceMs": 69,
+      "localMs": 69,
+      "deltaMs": 0
+    },
+    {
+      "move": "fire-spin",
+      "speed": 1,
+      "referenceMs": 341,
+      "localMs": 340,
+      "deltaMs": -1
+    },
+    {
+      "move": "fire-spin",
+      "speed": 2,
+      "referenceMs": 175,
+      "localMs": 173,
+      "deltaMs": -2
+    },
+    {
+      "move": "fire-spin",
+      "speed": 3,
+      "referenceMs": 117,
+      "localMs": 118,
+      "deltaMs": 1
+    }
+  ],
+  "walkthroughs": [
+    {
+      "speed": 1,
+      "chapter": "kanto-2",
+      "money": 6197,
+      "videoBytes": 18781044,
+      "fixture": "trained Squirtle, Butterfree, Pikachu, level 20; real native effects; no Skip or forced completions"
+    },
+    {
+      "speed": 2,
+      "chapter": "kanto-2",
+      "money": 6197,
+      "videoBytes": 10325037,
+      "fixture": "trained Squirtle, Butterfree, Pikachu, level 20; real native effects; no Skip or forced completions"
+    },
+    {
+      "speed": 3,
+      "chapter": "kanto-2",
+      "money": 6197,
+      "videoBytes": 7770026,
+      "fixture": "trained Squirtle, Butterfree, Pikachu, level 20; real native effects; no Skip or forced completions"
+    }
+  ],
+  "sourceHashes": {
+    "src/store/useGameStore.ts": "383a948a4c7d939016d92e3125c040bef18f61f74d18dd887965f8246064c528",
+    "src/game/domain/chapterOne.ts": "9472475374047670ef6dc80ab4ae142165b381dc8c81fcfa575e512ec91d595c",
+    "src/game/domain/status.ts": "28f4a084a7eaf4ebd8e06a5898b9c8ba19a3058618e765c8f908ab63e40e82ec",
+    "src/game/systems/battle.ts": "0fe27bc455c917b97381cf3e601b94eff876ccf931ec9d9c57dcf231063dd23c",
+    "src/game/systems/capture.ts": "62f573b1f0dcee2700eaba035ed1c9853bbd1fde8f4f4839835bae3ffab4b388",
+    "src/game/systems/rewards.ts": "b1f839a3ac6d978ffd44ac39e5bac9be86a0a3be607507191a36371983242896",
+    "src/game/systems/encounter.ts": "657e8fa4ce2a7c66d22bd5b5548f50037c57c6e64c7e0f6fc59d8a32baa7bd1f",
+    "src/utils/battleFxEngine.ts": "e7793a8301bedba6fab97010fcd21b6633454a9c566eac440e728be1fd9760cb",
+    "src/game/presentation/useArenaEffects.ts": "96dadb6230441c4160ee7e3a9b513dd9e8a9e5e5526d0b0265850e83934a72c4",
+    "src/data/chapterOneReference.json": "fcb7ba1fd076409dbfd6e3e5d9a659a96361c1cfb12f3cc339ffe14ed89e0bca"
+  }
+}

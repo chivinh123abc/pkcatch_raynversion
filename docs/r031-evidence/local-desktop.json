@@ -1,0 +1,170 @@
+{
+  "scrollWidth": 1430,
+  "metrics": {
+    ".battle-stage": {
+      "x": 280,
+      "y": 108,
+      "width": 798,
+      "height": 448.875,
+      "font": "20px / 30px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "normal",
+      "grid": "none",
+      "borderRadius": "16px"
+    },
+    ".battle-team-rail": {
+      "x": 291,
+      "y": 121,
+      "width": 60,
+      "height": 422.875,
+      "font": "20px / 30px \"Jersey 10\", sans-serif",
+      "padding": "38px 0px 0px",
+      "gap": "5px",
+      "grid": "none",
+      "borderRadius": "0px"
+    },
+    ".tr-row": {
+      "x": 291,
+      "y": 159,
+      "width": 60,
+      "height": 60,
+      "font": "20px / 30px \"Jersey 10\", sans-serif",
+      "padding": "0px 0px 8px",
+      "gap": "normal",
+      "grid": "none",
+      "borderRadius": "7px 7px 7px 16px"
+    },
+    ".tr-lv": {
+      "x": 310.5,
+      "y": 193.609375,
+      "width": 21,
+      "height": 15.390625,
+      "font": "700 14px / 15.4px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "normal",
+      "grid": "none",
+      "borderRadius": "0px"
+    },
+    ".tr-hp": {
+      "x": 293,
+      "y": 209,
+      "width": 56,
+      "height": 4,
+      "font": "20px / 30px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "normal",
+      "grid": "none",
+      "borderRadius": "0px"
+    },
+    ".tr-xp": {
+      "x": 293,
+      "y": 213,
+      "width": 56,
+      "height": 4,
+      "font": "20px / 30px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "normal",
+      "grid": "none",
+      "borderRadius": "0px"
+    },
+    ".battle-panels": {
+      "x": 1094,
+      "y": 72,
+      "width": 320,
+      "height": 812,
+      "font": "500 20px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "12px",
+      "grid": "none",
+      "borderRadius": "0px"
+    },
+    "[aria-label=\"Consumables\"]": {
+      "x": 1094,
+      "y": 72,
+      "width": 320,
+      "height": 122,
+      "font": "500 20px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "normal",
+      "grid": "none",
+      "borderRadius": "0px"
+    },
+    "[aria-label=\"Found here\"]": {
+      "x": 1094,
+      "y": 206,
+      "width": 320,
+      "height": 678,
+      "font": "500 20px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "normal",
+      "grid": "none",
+      "borderRadius": "0px"
+    },
+    ".zone-head": {
+      "x": 1112,
+      "y": 86,
+      "width": 284,
+      "height": 40,
+      "font": "500 20px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "8px",
+      "grid": "none",
+      "borderRadius": "0px"
+    },
+    ".bag-grid": {
+      "x": 1112,
+      "y": 136,
+      "width": 284,
+      "height": 44,
+      "font": "500 20px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "6px",
+      "grid": "52px 52px 52px 52px 52px",
+      "borderRadius": "0px"
+    },
+    ".bag-cell": {
+      "x": 1112,
+      "y": 136,
+      "width": 52,
+      "height": 44,
+      "font": "500 20px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "normal",
+      "grid": "48px",
+      "borderRadius": "10px"
+    },
+    ".zone-grid": {
+      "x": 1112,
+      "y": 254.796875,
+      "width": 284,
+      "height": 52,
+      "font": "500 20px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "4px",
+      "grid": "52px 52px 52px 52px 52px",
+      "borderRadius": "0px"
+    },
+    ".zone-cell": {
+      "x": 1112,
+      "y": 254.796875,
+      "width": 52,
+      "height": 52,
+      "font": "500 20px \"Jersey 10\", sans-serif",
+      "padding": "0px",
+      "gap": "0px",
+      "grid": "none",
+      "borderRadius": "7px 7px 7px 16px"
+    },
+    ".zone-pct": {
+      "x": 1116,
+      "y": 286.796875,
+      "width": 27.5,
+      "height": 16,
+      "font": "700 14px / 14px \"Jersey 10\", sans-serif",
+      "padding": "1px 4px",
+      "gap": "normal",
+      "grid": "none",
+      "borderRadius": "999px"
+    }
+  }
+}

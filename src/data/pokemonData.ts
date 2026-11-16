@@ -1282,9 +1282,10 @@ export function getPokemonSpecies(speciesId: number): PokemonSpecies {
   return POKEMON_SPECIES_MAP[speciesId] || POKEMON_SPECIES_MAP[1];
 }
 
-export function calculateStats(base: PokemonStats, level: number): PokemonStats {
-  const hp = Math.floor(((2 * base.hp + 31) * level) / 100) + level + 10;
-  const calcStat = (val: number) => Math.floor(((2 * val + 31) * level) / 100) + 5;
+export function calculateStats(base: PokemonStats, level: number, shiny = false): PokemonStats {
+  const bonus = shiny ? 1.1 : 1;
+  const hp = Math.floor(Math.floor((Math.floor(2 * base.hp * level / 100) + level + 10) * bonus) * Math.min(2.5, 1 + 1.5 * level / 100));
+  const calcStat = (val: number) => Math.floor((Math.floor(2 * val * level / 100) + 5) * bonus);
   return {
     hp,
     attack: calcStat(base.attack),
@@ -1294,6 +1295,8 @@ export function calculateStats(base: PokemonStats, level: number): PokemonStats 
     speed: calcStat(base.speed),
   };
 }
+
+import SHOWDOWN_SPRITES from './showdownSprites.json';
 
 export const POKESPRITE_BASE = 'https://raw.githubusercontent.com/msikma/pokesprite/master';
 
@@ -1306,8 +1309,8 @@ const POKESPRITE_SPECIAL_SLUGS: Record<number, string> = {
 
 export function getPokemonSpriteUrl(speciesId: number, isShiny: boolean = false): string {
   // Ưu tiên tải trực tiếp từ bộ sprite cục bộ trích xuất từ APK game gốc (1-556)
-  if (speciesId >= 1 && speciesId <= 556 && !isShiny) {
-    return `/assets/pokemon/${speciesId}.png`;
+  if (speciesId >= 1 && speciesId <= 556) {
+    return `/assets/pokemon/${isShiny ? 'shiny/' : ''}${speciesId}.png`;
   }
 
   const sub = isShiny ? 'shiny' : 'regular';
@@ -1330,8 +1333,11 @@ export function getPokemonSpriteUrl(speciesId: number, isShiny: boolean = false)
 }
 
 export function getPokemonAnimatedUrl(speciesId: number, isShiny: boolean): string {
-  const base = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated';
-  return isShiny ? `${base}/shiny/${speciesId}.gif` : `${base}/${speciesId}.gif`;
+  return getPokemonArtUrl(speciesId, isShiny);
+}
+
+export function getPokemonArtUrl(speciesId: number, isShiny = false): string {
+  return getPokemonBattleSpriteUrl(speciesId, isShiny, false);
 }
 
 /**
@@ -1343,23 +1349,18 @@ export function getPokemonBattleSpriteUrl(
   isShiny: boolean = false,
   isBack: boolean = false
 ): string {
-  const species = getPokemonSpecies(speciesId);
-  const slug = species.name
-    .toLowerCase()
-    .trim()
-    .replace(/♀/g, 'f')
-    .replace(/♂/g, 'm')
-    .replace(/['.\s-]/g, '');
+  const sprite = SHOWDOWN_SPRITES[speciesId];
+  if (!sprite) return getPokemonSpriteUrl(speciesId, isShiny);
 
   const sub = isShiny
     ? isBack
-      ? 'ani-back-shiny'
-      : 'ani-shiny'
+      ? 'gen5ani-back-shiny'
+      : 'gen5ani-shiny'
     : isBack
-    ? 'ani-back'
-    : 'ani';
+    ? 'gen5ani-back'
+    : 'gen5ani';
 
-  return `https://play.pokemonshowdown.com/sprites/${sub}/${slug}.gif`;
+  return `/assets/pokemon/showdown/${sub}/${sprite.slug}.gif`;
 }
 
 export function getItemSpriteUrl(itemSlug: string): string {
@@ -1381,6 +1382,9 @@ export function getItemSpriteUrl(itemSlug: string): string {
   if (['golden-razz', 'golden-razz-berry', 'goldenrazz', 'goldenrazzberry'].includes(clean)) return '/assets/items/golden-razz-berry.png';
 
   // Exp Candies
+  if (['berry-oran','berry-pecha','berry-sitrus'].includes(clean)) return `/assets/ui/${clean}.png`;
+  if (['fire-stone','water-stone','thunder-stone','leaf-stone','moon-stone','dome-fossil','helix-fossil','old-amber'].includes(clean)) return `/assets/items/${clean}.png`;
+  if (/^exp-candy-(xs|s|m|l|xl)$/.test(clean) || clean === 'rare-candy') return `/assets/items/${clean}.png`;
   if (clean.includes('candy')) return '/assets/items/exp-candy-m.png';
   if (clean.includes('fossil')) return '/assets/items/dome-fossil.png';
   if (clean.includes('stone')) return '/assets/items/water-stone.png';
@@ -1399,6 +1403,7 @@ export interface MoveData {
 const move = (name: string, key: string, type: PokemonType, category: MoveData['category'], effectType: CombatEffect['type']): MoveData => ({ name, key, type, category, effectType });
 
 export const TYPE_MOVES_MAP: Record<PokemonType, MoveData[]> = {
+  Dark: [move('Bite', 'bite', 'Dark', 'physical', 'ghost'), move('Crunch', 'crunch', 'Dark', 'physical', 'ghost')],
   Normal: [move('Tackle', 'tackle', 'Normal', 'physical', 'impact'), move('Body Slam', 'body-slam', 'Normal', 'physical', 'impact'), move('Slash', 'slash', 'Normal', 'physical', 'slash'), move('Hyper Beam', 'hyper-beam', 'Normal', 'special', 'impact')],
   Fire: [move('Scratch', 'scratch', 'Normal', 'physical', 'slash'), move('Flamethrower', 'flamethrower', 'Fire', 'special', 'fire'), move('Fire Blast', 'fire-blast', 'Fire', 'special', 'fire'), move('Ember', 'ember', 'Fire', 'special', 'fire')],
   Water: [move('Tackle', 'tackle', 'Normal', 'physical', 'impact'), move('Hydro Pump', 'hydro-pump', 'Water', 'special', 'water'), move('Water Gun', 'water-gun', 'Water', 'special', 'water'), move('Surf', 'surf', 'Water', 'special', 'water'), move('Bubble Beam', 'bubble-beam', 'Water', 'special', 'water')],
